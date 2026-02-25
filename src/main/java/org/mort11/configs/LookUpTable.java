@@ -25,7 +25,7 @@ public class LookUpTable {
          } catch(Exception e){
             currentSpot=0;
         }
-        if (currentSpot > 0) {
+        if (currentSpot > 0 && independent==table[currentSpot][0]) {
             currentSpot--;
         }
         //These ifs may not be neccesary - Adam
@@ -42,9 +42,6 @@ public class LookUpTable {
         int currentSpot = 0;
         try{
             while(independent > table[currentSpot][0]) {
-                if(independent == table[currentSpot][0]){
-                    break;
-                }
                 currentSpot++;
             }
         } catch(Exception e){
