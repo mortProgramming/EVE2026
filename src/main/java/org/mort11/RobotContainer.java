@@ -28,6 +28,7 @@ import org.mort11.commands.actions.endeffector.manual.moveRightRoller;
 // import org.mort11.commands.actions.endeffector.manual.moveHood;
 import org.mort11.commands.actions.endeffector.manual.PercentShoot;
 import org.mort11.commands.actions.endeffector.pid.SetEvanHood;
+import org.mort11.commands.actions.endeffector.pid.SetHoodShooter;
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.commands.actions.endeffector.pid.SetSuperShooter;
 import org.mort11.commands.actions.endeffector.pid.SetTurret;
@@ -41,12 +42,21 @@ import org.mort11.commands.autons.apriltag.Angle2AprilTag;
 // import org.mort11.commands.autons.BasicCommands; commented out for now bc pathplanner errors
 import org.mort11.commands.autons.apriltag.LimelightTest;
 import org.mort11.commands.autons.timed.Taxi;
-import org.mort11.configs.constants.PhysicalConstants.Turret;
+import static org.mort11.configs.constants.PhysicalConstants.Turret.*;
 import org.mort11.configs.LookUpTable;
 import org.mort11.configs.constants.TunerConstants;
+import org.mort11.subsystems.Climber;
 import org.mort11.subsystems.CommandSwerveDrivetrain;
 import org.mort11.subsystems.EvanHood;
+import org.mort11.subsystems.Feeder;
+import org.mort11.subsystems.IntakeArmLeft;
+import org.mort11.subsystems.IntakeArmRight;
+import org.mort11.subsystems.IntakeRollerLeft;
+import org.mort11.subsystems.IntakeRollerRight;
+import org.mort11.subsystems.Shooter;
+import org.mort11.subsystems.Turret;
 import org.mort11.subsystems.Vision;
+
 import com.pathplanner.lib.path.PathPlannerPath;
 
 
@@ -99,6 +109,16 @@ public class RobotContainer {
         }
     
         private void configureBindings() {
+            Climber.getInstance();
+            EvanHood.getInstance();
+            Feeder.getInstance();
+            IntakeArmLeft.getInstance();
+            IntakeArmRight.getInstance();
+            IntakeRollerLeft.getInstance();
+            IntakeRollerRight.getInstance();
+            Shooter.getInstance();
+            Turret.getInstance();
+            Vision.getInstance();
             // Note that X is defined as forward according to WPILib convention,
             // and Y is defined as to the left according to WPILib convention.
             drivetrain.setDefaultCommand(
@@ -193,18 +213,33 @@ public class RobotContainer {
             endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new moveFeeder(-1));
 
             //Turret
-            manualController.pov(90).whileTrue(new MoveTurret(-Turret.MANUAL_SPEED));
-            manualController.pov(270).whileTrue(new MoveTurret(Turret.MANUAL_SPEED));
+            manualController.pov(90).whileTrue(new MoveTurret(-MANUAL_SPEED));
+            manualController.pov(270).whileTrue(new MoveTurret(MANUAL_SPEED));
             //endeffectorController.a().whileTrue(new SetTurret(45));
-            new Trigger(() -> endeffectorController.getRightX() > DEAD_BAND).whileTrue(new MoveTurret(endeffectorController.getRightX() * Turret.MANUAL_SPEED));
-            new Trigger(() -> endeffectorController.getRightX() < -DEAD_BAND).whileTrue(new MoveTurret(endeffectorController.getRightX() * Turret.MANUAL_SPEED));
+            new Trigger(() -> endeffectorController.getRightX() > DEAD_BAND)
+                .whileTrue(new MoveTurret(endeffectorController.getRightX() * MANUAL_SPEED));
+            new Trigger(() -> endeffectorController.getRightX() < -DEAD_BAND)
+                .whileTrue(new MoveTurret(endeffectorController.getRightX() * MANUAL_SPEED));
+
+            //hood
+            manualController.back().whileTrue(new MoveEvanHood(1));
+            manualController.start().whileTrue(new MoveEvanHood(-1));
 
             //Shooter
             manualController.y().whileTrue(new PercentShoot(0.25));
 
             endeffectorController.leftTrigger(TRIGGER_THRESHOLD).whileTrue(new SetShooter(2500));
-            endeffectorController.x().whileTrue(new SetShooter(3000));
+            // endeffectorController.x().whileTrue(new SetShooter(3000));
+            // LookUpTable.getNeededHoodAngle(-1);
             // LookUpTable.getNeededHoodAngle(3);
+            // LookUpTable.getNeededHoodAngle(300);
+
+            endeffectorController.x().whileTrue(
+                new SetHoodShooter(
+                    () -> LookUpTable.getNeededShooterRPM(3),
+                    () -> LookUpTable.getNeededHoodAngle(3)
+                )
+            );
             // endeffectorController.x().whileTrue(new SetSuperShooter(
             //     () -> LookUpTable.getNeededShooterRPM(3), 
             //     () -> 0, 
@@ -214,22 +249,6 @@ public class RobotContainer {
             //Climber
             manualController.leftBumper().whileTrue(new Climb(0.5));
             manualController.rightBumper().whileTrue(new Climb(-0.5));
-            
-            //set Hood
-            // manualController.leftStick().onTrue(new setHood(45)); //up
-            // manualController.rightStick().onTrue(new setHood(80)); //down
-          
-
-
-
-            // Test PID to 90 degrees while held, returns to 0 when released
-        
-            //manual hood control dont change is supposed to be weird
-            // new Trigger(() -> manualController.getLeftX() > DEAD_BAND).onTrue(new moveHood(-1)); //positive
-            // new Trigger(() -> manualController.getLeftX() < -DEAD_BAND).onTrue(new moveHood(1)); //negative
-
-            // new Trigger(() -> manualController.getRightX() > DEAD_BAND).onTrue(new Climb(1)); 
-            // new Trigger(() -> manualController.getRightX() < -DEAD_BAND).onTrue(new Climb(-1));
         }
         
         public Command getPathPlannerCommand(){

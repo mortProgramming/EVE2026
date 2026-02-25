@@ -8,17 +8,15 @@ public class SetSuperShooter extends SequentialCommandGroup {
     
     public SetSuperShooter(DoubleSupplier shooterRPM, DoubleSupplier turretDeg, DoubleSupplier hoodDeg) {
         addCommands(
-            new SetShooter(shooterRPM),
-            new SetTurret(turretDeg),
-            new SetEvanHood(hoodDeg)
+            new SetHoodShooter(shooterRPM, hoodDeg),
+            new SetTurret(turretDeg)
         );
     }
     
     public SetSuperShooter(double shooterRPM, double turretDeg, double hoodDeg) {
         addCommands(
-            new SetShooter(shooterRPM),
-            new SetTurret(turretDeg),
-            new SetEvanHood(hoodDeg)
+            new SetHoodShooter(shooterRPM, hoodDeg),
+            new SetTurret(turretDeg)
         );
     }
 }

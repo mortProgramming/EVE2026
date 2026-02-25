@@ -55,7 +55,7 @@ public final class PhysicalConstants {
 		public static final double DEG_PER_ROTATION = 360 / 18;
 		//The maximum inch displacement for every 0.02 sec cycle	
 		public static final double MAXIMUM_DEG_CHANGE = 5;
-		public static final double HOOD_DEG_OFFSET = 96;
+		public static final double HOOD_DEG_OFFSET = 89.5;
 
 		public static final double HOOD_START_HEIGHT = 80;
 
