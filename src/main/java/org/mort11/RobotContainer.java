@@ -11,6 +11,7 @@ import com.pathplanner.lib.commands.PathPlannerAuto;
 // import com.pathplanner.lib.commands.PathPlannerAuto; commented out bc pathplanner errors
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -236,8 +237,8 @@ public class RobotContainer {
 
             endeffectorController.x().whileTrue(
                 new SetHoodShooter(
-                    () -> LookUpTable.getNeededShooterRPM(3),
-                    () -> LookUpTable.getNeededHoodAngle(3)
+                    () -> LookUpTable.getNeededShooterRPM(Units.inchesToMeters(160)),
+                    () -> LookUpTable.getNeededHoodAngle(Units.inchesToMeters(160))
                 )
             );
             // endeffectorController.x().whileTrue(new SetSuperShooter(

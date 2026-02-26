@@ -25,15 +25,12 @@ public class LookUpTable {
          } catch(Exception e){
             currentSpot=0;
         }
-        if (currentSpot > 0 && independent==table[currentSpot][0]) {
+        if (currentSpot > 0) {
             currentSpot--;
         }
         //These ifs may not be neccesary - Adam
         if (currentSpot>=table.length){
             currentSpot=table.length-1;
-        }
-        if(currentSpot<0){
-            currentSpot=0;
         }
         return table[currentSpot];
     }
