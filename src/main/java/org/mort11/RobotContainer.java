@@ -29,8 +29,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import org.mort11.commands.actions.endeffector.manual.moveFeeder;
 import org.mort11.commands.actions.endeffector.manual.moveLeftIntake;
 import org.mort11.commands.actions.endeffector.manual.moveLeftRoller;
-import org.mort11.commands.actions.endeffector.manual.moveRightIntake;
-import org.mort11.commands.actions.endeffector.manual.moveRightRoller;
+//import org.mort11.commands.actions.endeffector.manual.moveRightIntake;
+//import org.mort11.commands.actions.endeffector.manual.moveRightRoller;
 // import org.mort11.commands.actions.endeffector.manual.moveHood;
 import org.mort11.commands.actions.endeffector.manual.PercentShoot;
 import org.mort11.commands.actions.endeffector.pid.SetEvanHood;
@@ -39,7 +39,7 @@ import org.mort11.commands.actions.endeffector.pid.SetSuperShooter;
 import org.mort11.commands.actions.endeffector.pid.SetTurret;
 // import org.mort11.commands.actions.endeffector.pid.setHood;
 import org.mort11.commands.actions.endeffector.pid.setIntakeLeft;
-import org.mort11.commands.actions.endeffector.pid.setIntakeRight;
+//import org.mort11.commands.actions.endeffector.pid.setIntakeRight;
 import org.mort11.commands.actions.endeffector.manual.MoveTurret;
 import org.mort11.commands.actions.endeffector.manual.Climb;
 import org.mort11.commands.actions.endeffector.manual.MoveEvanHood;
@@ -162,11 +162,12 @@ public class RobotContainer {
             new Trigger(() -> manualController.getLeftY() < -DEAD_BAND).whileTrue(new moveLeftIntake(manualController));
             new Trigger(() -> manualController.getLeftY() > DEAD_BAND).whileTrue(new moveLeftIntake(manualController));
 
-            new Trigger(() -> manualController.getRightY() > -DEAD_BAND).whileTrue(new moveRightIntake(manualController));
-            new Trigger(() -> manualController.getRightY() < DEAD_BAND).whileTrue(new moveRightIntake(manualController));
+            //new Trigger(() -> manualController.getRightY() > -DEAD_BAND).whileTrue(new moveRightIntake(manualController));
+            //new Trigger(() -> manualController.getRightY() < DEAD_BAND).whileTrue(new moveRightIntake(manualController));
 
-            endeffectorController.y().whileTrue(new moveRightIntake(-0.2));
-            endeffectorController.a().whileTrue(new moveRightIntake(0.2));
+            
+            //endeffectorController.y().whileTrue(new moveRightIntake(-0.2));
+            //endeffectorController.a().whileTrue(new moveRightIntake(0.2));
             endeffectorController.povUp().whileTrue(new moveLeftIntake(0.5));
             endeffectorController.povDown().whileTrue(new moveLeftIntake(-0.5));
         
@@ -176,10 +177,11 @@ public class RobotContainer {
             manualController.x().whileTrue(new moveLeftRoller(0.7));
             manualController.leftBumper().onTrue(new moveLeftRoller(0.5));
             endeffectorController.leftBumper().whileTrue(new moveLeftRoller(1));
-            //right
-            manualController.b().whileTrue(new moveRightRoller(-0.7));
-            manualController.rightBumper().whileTrue(new moveRightRoller(0.5));
-            endeffectorController.rightBumper().whileTrue(new moveRightRoller(-1));
+            endeffectorController.rightBumper().whileTrue(new moveLeftRoller(-1));
+
+            //right (no more right)
+            //manualController.b().whileTrue(new moveRightRoller(-0.7));
+            //anualController.rightBumper().whileTrue(new moveRightRoller(0.5));
 
             //Set Intake
             manualController.a().onTrue(setIntakeLeft.intake());
@@ -187,8 +189,8 @@ public class RobotContainer {
             //endeffectorController.pov(180).onTrue(setIntakeLeft.intake());
             //endeffectorController.pov(0).onTrue(setIntakeLeft.up());
 
-            manualController.x().onTrue(setIntakeRight.intake());
-            manualController.y().onTrue(setIntakeRight.up());
+            //manualController.x().onTrue(setIntakeRight.intake());
+            //manualController.y().onTrue(setIntakeRight.up());
          //endeffectorController.a().onTrue(setIntakeRight.intake());
             //endeffectorController.y().onTrue(setIntakeRight.up());
             
@@ -286,7 +288,7 @@ public class RobotContainer {
         autoChooser.addOption("Pathplanner ZigZag", new PathPlannerAuto("ZigZagAuto"));
         autoChooser.addOption("ShootThenHordeCenterBlue", new PathPlannerAuto("ShootThenHordeCenterBlue"));
         autoChooser.addOption("Timed Taxi", new Taxi());
-        autoChooser.addOption("Limelight Test", new LimelightTest(drivetrain, vision, 0));
+        //autoChooser.addOption("Limelight Test", new LimelightTest(drivetrain, vision, 0));
         autoChooser.addOption("test", new PathPlannerAuto("shoot"));
 
         autoChooser.addOption("Drive forward nopathplan",Commands.sequence(

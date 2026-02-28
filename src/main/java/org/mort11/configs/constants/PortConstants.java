@@ -22,7 +22,8 @@ public final class PortConstants {
 	}
 
     public static final class Feeder {
-        public static final int sparkFeeder = 10;
+        public static final int FEEDER_MOTOR = 10;
+        public static final int FEEDER_MOTOR_2 = 15; 
     }
 
     public static final class Hood {
@@ -50,13 +51,13 @@ public final class PortConstants {
         public static final int SHOOTER_FOLLOWER_B = 14;
     }
 
-    public static final class IntakeArmRight {        
-        public static final int sparkIntakeRight = 15;
-    }
+    // public static final class IntakeArmRight {        
+    //     public static final int sparkIntakeRight = 15;
+    // }
 
-    public static final class IntakeRollerRight {
-        public static final int sparkRollRight = 16;
-    }
+    // public static final class IntakeRollerRight {
+    //     public static final int sparkRollRight = 16;
+    // }
 
     public static final class IntakeArmLeft {
         public static final int sparkIntakeLeft = 17;
