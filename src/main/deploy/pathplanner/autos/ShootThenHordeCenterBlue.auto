@@ -5,15 +5,15 @@
     "data": {
       "commands": [
         {
-          "type": "named",
-          "data": {
-            "name": "Set Super Shooter 0 inches"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "DriveHorizontalCenter"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SetShooter"
           }
         },
         {

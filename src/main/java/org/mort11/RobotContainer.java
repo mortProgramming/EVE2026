@@ -286,7 +286,7 @@ public class RobotContainer {
         autoChooser.addOption("Pathplanner ZigZag", new PathPlannerAuto("ZigZagAuto"));
         autoChooser.addOption("ShootThenHordeCenterBlue", new PathPlannerAuto("ShootThenHordeCenterBlue"));
         autoChooser.addOption("Timed Taxi", new Taxi());
-        autoChooser.addOption("Limelight Test", new LimelightTest(drivetrain, vision, 0));
+        //autoChooser.addOption("Limelight Test", new LimelightTest(drivetrain, vision, 0));
         autoChooser.addOption("test", new PathPlannerAuto("shoot"));
 
         autoChooser.addOption("Drive forward nopathplan",Commands.sequence(

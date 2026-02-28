@@ -41,7 +41,7 @@ public class SetTurret extends Command {
 
     @Override
     public boolean isFinished() {
-        return false;
+        return turret.getPIDController().atGoal();
     }
 
     @Override
