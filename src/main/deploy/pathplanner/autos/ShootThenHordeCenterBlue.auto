@@ -1,0 +1,37 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "Set Super Shooter 0 inches"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "DriveHorizontalCenter"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "DriveToNeutralZone"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "DriveThroughTrenchBlueBottom"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

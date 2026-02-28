@@ -9,6 +9,12 @@
           "data": {
             "pathName": "DriveVertical"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SetShooter"
+          }
         }
       ]
     }

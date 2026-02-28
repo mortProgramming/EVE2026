@@ -18,6 +18,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -43,7 +44,7 @@ import org.mort11.commands.actions.endeffector.manual.MoveTurret;
 import org.mort11.commands.actions.endeffector.manual.Climb;
 import org.mort11.commands.actions.endeffector.manual.MoveEvanHood;
 import org.mort11.commands.autons.apriltag.Angle2AprilTag;
-// import org.mort11.commands.autons.BasicCommands; commented out for now bc pathplanner errors
+import org.mort11.commands.autons.pathplanner.BasicCommands;
 import org.mort11.commands.autons.apriltag.LimelightTest;
 import org.mort11.commands.autons.timed.Taxi;
 import org.mort11.configs.constants.PhysicalConstants.Turret;
@@ -274,12 +275,16 @@ public class RobotContainer {
     
         public void configureAuto() {
         final var idle = new SwerveRequest.Idle();
-        
+
+        BasicCommands.setCommands();
+
         autoChooser = new SendableChooser<Command>();
+        SmartDashboard.putData("autoChooser",autoChooser);
         autoChooser.setDefaultOption("nothing", null);
         autoChooser.addOption("Pathplanner Rotate", new PathPlannerAuto("RotationAuto"));
         autoChooser.addOption("Pathplanner Vertical", new PathPlannerAuto("DriveAuto"));
         autoChooser.addOption("Pathplanner ZigZag", new PathPlannerAuto("ZigZagAuto"));
+        autoChooser.addOption("ShootThenHordeCenterBlue", new PathPlannerAuto("ShootThenHordeCenterBlue"));
         autoChooser.addOption("Timed Taxi", new Taxi());
         autoChooser.addOption("Limelight Test", new LimelightTest(drivetrain, vision, 0));
         autoChooser.addOption("test", new PathPlannerAuto("shoot"));

@@ -21,9 +21,11 @@ public class BasicCommands {
         // NamedCommands.registerCommand("GoLimelight",new GoToAprilTag(drivetrain, vision, vision.getTagId()).withTimeout(5.0));
         // NamedCommands.registerCommand("AlignToTag", new AlignToTag(drivetrain, vision, 0));
         NamedCommands.registerCommand("Taxi", new Taxi()); 
+        NamedCommands.registerCommand("Set Super Shooter 0 inches", new SetSuperShooter(1750, 0, 73));
+        NamedCommands.registerCommand("Set Super Shooter 71 inches", new SetSuperShooter(1750, 0, 73));
         NamedCommands.registerCommand("SetTurret", new SetTurret(null));
         NamedCommands.registerCommand("SetEvanHood", new SetEvanHood(null));
-        NamedCommands.registerCommand("SetShooter", new SetShooter(null));
+        NamedCommands.registerCommand("SetShooter", new SetShooter(1750));
         NamedCommands.registerCommand("SetSuperShooter", new SetSuperShooter(null, null, null));
         NamedCommands.registerCommand("SetIntakeRight", new setIntakeRight(0));  
         
