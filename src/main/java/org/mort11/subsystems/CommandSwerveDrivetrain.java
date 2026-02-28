@@ -168,7 +168,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
 		aprilTagYController = new PIDController(1.1, 0, 0);
 		aprilTagYController.setTolerance(0.05);
 
-		aprilTagOmegaController = new PIDController(0.02, 0, 0);
+		aprilTagOmegaController = new PIDController(0.08, 0, 0);
 		aprilTagOmegaController.setTolerance(0.05);
     }
 
@@ -474,10 +474,9 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         setControl(request);
     }
 
-    public double calculateChangeRotateController(double wantedAngle) {
-        //need to be fixed to work 
-        return aprilTagOmegaController.calculate(getRotation2d().getDegrees(), wantedAngle);
-    }
+   public double calculateChangeRotateController(double tx) {
+    return aprilTagOmegaController.calculate(tx, 0);
+}
 
     public Rotation2d getRotation2d() {
         return getPose().getRotation();
