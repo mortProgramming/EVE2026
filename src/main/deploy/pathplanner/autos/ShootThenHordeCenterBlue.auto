@@ -5,15 +5,41 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "sequential",
           "data": {
-            "pathName": "DriveHorizontalCenter"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "SetSuperShooter0inches"
+                }
+              },
+              {
+                "type": "parallel",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "SetShooter"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Feeder"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         },
         {
-          "type": "named",
+          "type": "path",
           "data": {
-            "name": "SetShooter"
+            "pathName": "DriveHorizontalCenter"
           }
         },
         {
@@ -26,6 +52,18 @@
           "type": "path",
           "data": {
             "pathName": "DriveThroughTrenchBlueBottom"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Horde"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake"
           }
         }
       ]

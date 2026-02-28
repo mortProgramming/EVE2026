@@ -16,24 +16,19 @@
     },
     {
       "anchor": {
-        "x": 0.6750071326676177,
-        "y": 0.6127246790299581
+        "x": 0.7548571428571427,
+        "y": 0.5624857142857138
       },
       "prevControl": {
-        "x": 0.7419112382667518,
-        "y": 0.8536060619842659
+        "x": 0.8217612484562767,
+        "y": 0.8033670972400216
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "HumanPlayerStation"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 1.0,
-      "rotationDegrees": 180.0
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
@@ -47,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 90.0
   },
   "reversed": false,
   "folder": null,
