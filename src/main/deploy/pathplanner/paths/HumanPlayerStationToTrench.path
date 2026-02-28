@@ -3,34 +3,34 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.688,
-        "y": 0.5480313837375184
+        "x": 0.7548571428571427,
+        "y": 0.5624857142857138
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.710633936510628,
-        "y": 0.7970046853544445
+        "x": 2.258079063227778,
+        "y": 0.5624721773739085
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "HumanPlayerStation"
     },
     {
       "anchor": {
-        "x": 7.687760342368046,
-        "y": 7.327888730385164
+        "x": 4.297831669044222,
+        "y": 0.6127246790299581
       },
       "prevControl": {
-        "x": 7.723115681427373,
-        "y": 7.080401356969872
+        "x": 3.7445031782576157,
+        "y": 0.6006817710438671
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "ShootFromTrench"
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.07357357357357364,
+      "waypointRelativePos": 1.0,
       "rotationDegrees": 0.0
     }
   ],
@@ -39,7 +39,7 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 5.0,
-    "maxAcceleration": 1.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -53,7 +53,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": 90.0
   },
   "useDefaultConstraints": false
 }
