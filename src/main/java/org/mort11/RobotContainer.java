@@ -279,7 +279,7 @@ public class RobotContainer {
         final var idle = new SwerveRequest.Idle();
 
         BasicCommands.setCommands();
-
+  
         autoChooser = new SendableChooser<Command>();
         SmartDashboard.putData("autoChooser",autoChooser);
         autoChooser.setDefaultOption("nothing", null);
