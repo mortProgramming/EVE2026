@@ -12,7 +12,7 @@ public class SetSuperShooter extends ParallelCommandGroup {
     
     public SetSuperShooter(DoubleSupplier shooterRPM, DoubleSupplier turretDeg, DoubleSupplier hoodDeg) {
         addCommands(
-            new ParallelRaceGroup(
+            new ParallelCommandGroup(
                 new SetShooter(shooterRPM),
                 new SetTurret(turretDeg),
                 new SetEvanHood(hoodDeg)

@@ -238,23 +238,25 @@ public class RobotContainer {
             manualController.y().whileTrue(new PercentShoot(0.25));
 
             endeffectorController.leftTrigger(TRIGGER_THRESHOLD).whileTrue(new SetShooter(2500));
+
+            
             // endeffectorController.x().whileTrue(new SetShooter(3000));
             // LookUpTable.getNeededHoodAngle(-1);
             // LookUpTable.getNeededHoodAngle(3);
             // LookUpTable.getNeededHoodAngle(300);
 
-            endeffectorController.x().whileTrue(
-                new SetHoodShooter(
-                    () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()),
-                    () -> LookUpTable.getNeededHoodAngle(odometry.getDistanceToHub())
-                )
-            );
+            // endeffectorController.x().whileTrue(
+            //     new SetHoodShooter(
+            //         () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()),
+            //         () -> LookUpTable.getNeededHoodAngle(odometry.getDistanceToHub())
+            //     )
+            // );
             
-            // endeffectorController.x().whileTrue(new SetSuperShooter(
-            //     () -> LookUpTable.getNeededShooterRPM(3), 
-            //     () -> 0, 
-            //     () -> LookUpTable.getNeededHoodAngle(3)
-            // ));
+            endeffectorController.x().whileTrue(new SetSuperShooter(
+                () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()), 
+                () -> 0, 
+                () -> LookUpTable.getNeededHoodAngle(odometry.getDistanceToHub())
+            ));
 
             //Climber
             manualController.leftBumper().whileTrue(new Climb(0.5));
@@ -306,6 +308,8 @@ public class RobotContainer {
         autoChooser.addOption("Pathplanner Vertical", new PathPlannerAuto("DriveAuto"));
         autoChooser.addOption("Pathplanner ZigZag", new PathPlannerAuto("ZigZagAuto"));
         autoChooser.addOption("ShootThenHordeCenterBlue", new PathPlannerAuto("ShootThenHordeCenterBlue"));
+        autoChooser.addOption("ShootThenHumanPlayerStation", new PathPlannerAuto("ShootThenHumanPlayerStation"));
+
         autoChooser.addOption("Timed Taxi", new Taxi());
         //autoChooser.addOption("Limelight Test", new LimelightTest(drivetrain, vision, 0));
         autoChooser.addOption("test", new PathPlannerAuto("shoot"));

@@ -59,6 +59,7 @@ public class OdometryHelper extends SubsystemBase {
             "Distance To Target",
             getDistanceToTarget()
         );
+        SmartDashboard.putNumber("Distance from hub", getDistanceToHub());
     }
 
     private void addVisionMeasurements() {

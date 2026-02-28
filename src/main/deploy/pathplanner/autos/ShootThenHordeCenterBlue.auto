@@ -33,12 +33,6 @@
           "data": {
             "pathName": "Horde"
           }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": []
-          }
         }
       ]
     }
