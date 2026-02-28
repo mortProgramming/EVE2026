@@ -54,7 +54,7 @@ public class SetShooter extends Command {
 
     @Override
     public boolean isFinished() {
-        return Math.abs(shooter.getShooterRPM() - RPM.getAsDouble()) / RPM.getAsDouble() < SHOOTER_SPEED_BUZZ_TOLERANCE; 
+        return false; 
     }
     
 }
