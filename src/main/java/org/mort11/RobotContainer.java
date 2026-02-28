@@ -131,7 +131,7 @@ public class RobotContainer {
             ));
             driveController.R2().whileTrue(Commands.runOnce(() -> {
                 currentSpeed = 0.3 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
-                currentAngularRate = RotationsPerSecond.of(0.8).in(RadiansPerSecond);
+                currentAngularRate = RotationsPerSecond.of(1).in(RadiansPerSecond);
             }));
 
             driveController.triangle().onTrue(Commands.runOnce(() -> {
@@ -168,8 +168,8 @@ public class RobotContainer {
             
             //endeffectorController.y().whileTrue(new moveRightIntake(-0.2));
             //endeffectorController.a().whileTrue(new moveRightIntake(0.2));
-            endeffectorController.povUp().whileTrue(new moveLeftIntake(0.5));
-            endeffectorController.povDown().whileTrue(new moveLeftIntake(-0.5));
+            endeffectorController.povUp().whileTrue(new moveLeftIntake(1));
+            endeffectorController.povDown().whileTrue(new moveLeftIntake(-1));
         
             //Intake Roller
 
@@ -184,7 +184,7 @@ public class RobotContainer {
             //anualController.rightBumper().whileTrue(new moveRightRoller(0.5));
 
             //Set Intake
-            manualController.a().onTrue(setIntakeLeft.intake());
+           // manualController.a().onTrue(setIntakeLeft.intake());
             manualController.b().onTrue(setIntakeLeft.up());
             //endeffectorController.pov(180).onTrue(setIntakeLeft.intake());
             //endeffectorController.pov(0).onTrue(setIntakeLeft.up());
