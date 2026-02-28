@@ -5,35 +5,9 @@
     "data": {
       "commands": [
         {
-          "type": "sequential",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "SetSuperShooter0inches"
-                }
-              },
-              {
-                "type": "parallel",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "SetShooter"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Feeder"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
+            "name": "SetSuperShooter0inches"
           }
         },
         {
@@ -61,9 +35,9 @@
           }
         },
         {
-          "type": "named",
+          "type": "sequential",
           "data": {
-            "name": "Intake"
+            "commands": []
           }
         }
       ]

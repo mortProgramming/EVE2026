@@ -5,15 +5,15 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "DriveHorizontalCenter"
+            "name": "SetSuperShooter0inches"
           }
         },
         {
-          "type": "named",
+          "type": "path",
           "data": {
-            "name": "SetShooter"
+            "pathName": "DriveHorizontalCenter"
           }
         },
         {
@@ -32,12 +32,6 @@
           "type": "path",
           "data": {
             "pathName": "HumanPlayerStationToTrench"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "SetShooter"
           }
         }
       ]
