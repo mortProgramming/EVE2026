@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.smartdashboard.FieldObject2d;
 
 import static org.mort11.configs.constants.PhysicalConstants.Field.*;
 
@@ -42,7 +43,7 @@ public class Odometry extends SubsystemBase {
 
         // Get fused pose (AFTER vision updates)
         Pose2d robotPose = drivetrain.getState().Pose;
-
+        
         // Dashboard output
         SmartDashboard.putNumber("Robot X", robotPose.getX());
         SmartDashboard.putNumber("Robot Y", robotPose.getY());
@@ -127,15 +128,13 @@ public class Odometry extends SubsystemBase {
             return pose.getTranslation().getDistance(Redhub);
         }
     }
-    
+
     // Add hub markers to the Field2d
     public void setFieldObj(){
-        edu.wpi.first.wpilibj.smartdashboard.FieldObject2d redHub =
-            field.getObject("Red Hub");
+        FieldObject2d redHub = field.getObject("Red Hub");
         redHub.setPose(new Pose2d(RED_HUB_X, RED_HUB_Y, new Rotation2d()));
 
-        edu.wpi.first.wpilibj.smartdashboard.FieldObject2d blueHub =
-            field.getObject("Blue Hub");
+        FieldObject2d blueHub = field.getObject("Blue Hub");
         blueHub.setPose(new Pose2d(BLUE_HUB_X, BLUE_HUB_Y, new Rotation2d()));
     }
 }

@@ -54,7 +54,7 @@ public class SetShooter extends Command {
 
     @Override
     public boolean isFinished() {
-        return false; // Change this to true when the shooting action is complete
+        return false; 
     }
     
 }

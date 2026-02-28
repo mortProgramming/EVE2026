@@ -2,7 +2,7 @@ package org.mort11.configs.constants;
 
 public class VisionConstants {
         // Camera / Limelight Names
-        public static final String FRONT_CAMERA_NAME = "frontCamera";
+        public static final String FRONT_CAMERA_NAME = "limelight-one";
     
         // Field Dimensions (in meters)
         public static final double FIELD_LENGTH = 16.54;

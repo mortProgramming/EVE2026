@@ -4,6 +4,7 @@ import static org.mort11.configs.constants.VisionConstants.FRONT_CAMERA_NAME;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
@@ -18,16 +19,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Vision extends SubsystemBase {
     private static Vision instance;
 
-    private static HttpCamera cameraFeed;
+    private HttpCamera limelightOneFeed;
+    private HttpCamera limelightTwoFeed;
     private AprilTagFieldLayout fieldLayout;
     private NetworkTable cameraTable;
 
-    // Need to change names to what they are on limelight.local
     private static final String[] LIMELIGHTS = {
-        "limelight-uno",
-        "limelight-dos",
-        "limelight-tres",
-        "limelight-quatro"
+        "limelight-one",
+        "limelight-two"
     };
 
     public static String[] getLimelights() {
@@ -37,6 +36,12 @@ public class Vision extends SubsystemBase {
     public Vision() {
         fieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2026RebuiltWelded);
         cameraTable = NetworkTableInstance.getDefault().getTable(FRONT_CAMERA_NAME);
+
+        limelightOneFeed = new HttpCamera("limelight-one", "http://limelight-one.local:5800/stream.mjpeg");
+        limelightTwoFeed = new HttpCamera("limelight-two", "http://limelight-two.local:5800/stream.mjpeg");
+
+        CameraServer.addCamera(limelightOneFeed);
+        CameraServer.addCamera(limelightTwoFeed);
     }
 
     @Override
@@ -148,27 +153,12 @@ public class Vision extends SubsystemBase {
         return vm;
     }
 
-
-    public static void updateRobotOrientation(
-        CommandSwerveDrivetrain drivetrain
-    ) {
+    public static void updateRobotOrientation(CommandSwerveDrivetrain drivetrain) {
         double yaw = drivetrain.getPose().getRotation().getDegrees();
-
-        double yawRate =
-            Math.toDegrees(
-                drivetrain.getRobotRelativeSpeeds().omegaRadiansPerSecond
-            );
+        double yawRate = Math.toDegrees(drivetrain.getRobotRelativeSpeeds().omegaRadiansPerSecond);
 
         for (String name : LIMELIGHTS) {
-            LimelightHelpers.SetRobotOrientation(
-                name,
-                yaw,
-                yawRate,
-                0.0,
-                0.0,
-                0.0,
-                0.0
-            );
+            LimelightHelpers.SetRobotOrientation(name, yaw, yawRate, 0.0, 0.0, 0.0, 0.0);
         }
     }
 

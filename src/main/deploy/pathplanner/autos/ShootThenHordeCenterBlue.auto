@@ -7,13 +7,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "DriveVertical"
+            "pathName": "DriveHorizontalCenter"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "SetShooter"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "DriveToNeutralZone"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "DriveThroughTrenchBlueBottom"
           }
         }
       ]

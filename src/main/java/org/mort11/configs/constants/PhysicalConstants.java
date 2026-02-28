@@ -1,5 +1,8 @@
 package org.mort11.configs.constants;
+import static edu.wpi.first.units.Units.MetersPerSecond;
+
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.units.measure.LinearVelocity;
 
 public final class PhysicalConstants {
 
@@ -22,6 +25,7 @@ public final class PhysicalConstants {
 		// public static final double BACK_LEFT_OFFSET = 223.3;
 		// public static final double BACK_RIGHT_OFFSET = 255.5;
 
+		
 		public static final double FRONT_LEFT_OFFSET = 21.3 + 90 + 180;
 		public static final double FRONT_RIGHT_OFFSET = 3.08 + 90 + 180;
 		public static final double BACK_LEFT_OFFSET = 311.75 + 90 + 180;
@@ -30,7 +34,7 @@ public final class PhysicalConstants {
 		public static final int IMU_TO_ROBOT_FRONT_ANGLE = 270;
 
 		public static final double WHEEL_COEFFICIENT_OF_FRICTION = 1;
-		public static final double ROBOT_MASS = 47;
+		public static final double ROBOT_MASS = Units.lbsToKilograms(98); //98 lbs with the battery
 		public static final double ROBOT_MOMENT_OF_INERTIA = ROBOT_MASS * Math.pow(Units.inchesToMeters(Math.hypot(26, 28)), 2) / 2;
 		// public static final double ROBOT_MOMENT_OF_INERTIA = 1.25;
 
@@ -40,8 +44,8 @@ public final class PhysicalConstants {
 		public static final double DRIVE_REDUCTION = (16.0 / 50.0) * (28.0 / 16.0) * (15.0 / 45.0);
 		public static final double WHEEL_DIAMETER = Units.inchesToMeters(4);  //0.1014
 		public static final double ROTATIONS_TO_METERS = WHEEL_DIAMETER * Math.PI;
-		public static final double MAX_SPEED = DRIVE_REDUCTION * ROTATIONS_TO_METERS * (DRIVE_MOTOR_MAX_RPM / 60);
-
+		// public static final double MAX_SPEED = DRIVE_REDUCTION * ROTATIONS_TO_METERS * (DRIVE_MOTOR_MAX_RPM / 60);
+		public static final double MAX_SPEED = 11.71; //from tuner constants kSPeedAt12Volts
 		public static final double ODOMETRY_MULTIPLIER = 5.67;
 		// public static final double ODOMETRY_MULTIPLIER = 5.575;
     }
@@ -74,14 +78,14 @@ public final class PhysicalConstants {
     }
 
     public static final class IntakeRollerLeft {
-		public static final int ROLLER_LEFT_SMART_CURRENT_LIMIT = 40;
-    	public static final double ROLLER_LEFT_SECONDARY_CURRENT_LIMIT = 60;
+		public static final int ROLLER_LEFT_SMART_CURRENT_LIMIT = 60;
+    	public static final double ROLLER_LEFT_SECONDARY_CURRENT_LIMIT = 100;
 
     }
 
     public static final class IntakeRollerRight {
-		public static final int ROLLER_RIGHT_SMART_CURRENT_LIMIT = 40;
-    	public static final double ROLLER_RIGHT_SECONDARY_CURRENT_LIMIT = 60;
+		public static final int ROLLER_RIGHT_SMART_CURRENT_LIMIT = 60;
+    	public static final double ROLLER_RIGHT_SECONDARY_CURRENT_LIMIT = 100;
     }
 
 	public static final class Turret {

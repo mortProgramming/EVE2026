@@ -42,6 +42,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
+import com.pathplanner.lib.auto.NamedCommands;
 
 /**
  * Class that extends the Phoenix 6 SwerveDrivetrain class and implements
@@ -61,7 +62,6 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
 	private PIDController aprilTagOmegaController;      
 
 
-    private final static CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
     /* Blue alliance sees forward as 0 degrees (toward red alliance wall) */
     private static final Rotation2d kBlueAlliancePerspectiveRotation = Rotation2d.kZero;
     /* Red alliance sees forward as 180 degrees (toward blue alliance wall) */
@@ -70,7 +70,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     private boolean m_hasAppliedOperatorPerspective = false;
 
     //local max speed theoretical needs to be tuend
-    private double MAX_SPEED = 11.71/2; //from tuner constants linearvelocity in Meters per second PUT THIS IN CONSTANTS LATER
+     //from tuner constants linearvelocity in Meters per second PUT THIS IN CONSTANTS LATER
 
     /* Swerve requests to apply during SysId characterization */
     private final SwerveRequest.SysIdSwerveTranslation m_translationCharacterization = new SwerveRequest.SysIdSwerveTranslation();
@@ -168,7 +168,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
 		aprilTagYController = new PIDController(1.1, 0, 0);
 		aprilTagYController.setTolerance(0.05);
 
-		aprilTagOmegaController = new PIDController(0.02, 0, 0);
+		aprilTagOmegaController = new PIDController(0.08, 0, 0);
 		aprilTagOmegaController.setTolerance(0.05);
     }
 
@@ -391,16 +391,17 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     public ChassisSpeeds getRobotRelativeSpeeds() {
         return this.getState().Speeds;
     }
+   
     
     public void configureAutoBuilder(){
         Pose2d poseq = new Pose2d();// stupid test 
         AutoBuilder.configure(
-            () -> drivetrain.getPose(), // Robot pose supplier
-            (Pose2d pose) -> drivetrain.resetPose(pose), // Method to reset odometry (will be called if your auto has a starting pose)
-            () -> drivetrain.getRobotRelativeSpeeds(), // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
+            () -> this.getPose(), // Robot pose supplier
+            (Pose2d pose) -> this.resetPose(pose), // Method to reset odometry (will be called if your auto has a starting pose)
+            () -> this.getRobotRelativeSpeeds(), // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
             (ChassisSpeeds speeds) -> driveRelativeAutobuilder(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
             new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic drive trains
-                    new PIDConstants(0.1,0,0.0), // Translation PID constants (these are not known rn because robot isnt working?)
+                    new PIDConstants(5.0,0,0.0), // Translation PID constants (these are not known rn because robot isnt working?)
                     new PIDConstants(5.0, 0.0, 0) // Rotation PID constants
             ),
             new RobotConfig( //all of these are wrong fix them 
@@ -473,10 +474,9 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         setControl(request);
     }
 
-    public double calculateChangeRotateController(double wantedAngle) {
-        //need to be fixed to work 
-        return aprilTagOmegaController.calculate(getRotation2d().getDegrees(), wantedAngle);
-    }
+   public double calculateChangeRotateController(double tx) {
+    return aprilTagOmegaController.calculate(tx, 0);
+}
 
     public Rotation2d getRotation2d() {
         return getPose().getRotation();
