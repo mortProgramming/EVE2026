@@ -20,13 +20,13 @@ public class Vision extends SubsystemBase {
     private static Vision instance;
 
     private HttpCamera limelightOneFeed;
-    private HttpCamera limelightTwoFeed;
+    private HttpCamera limelightThreeFeed;
     private AprilTagFieldLayout fieldLayout;
     private NetworkTable cameraTable;
 
     private static final String[] LIMELIGHTS = {
         "limelight-one",
-        "limelight-two"
+        "limelight-three"
     };
 
     public static String[] getLimelights() {
@@ -38,10 +38,10 @@ public class Vision extends SubsystemBase {
         cameraTable = NetworkTableInstance.getDefault().getTable(FRONT_CAMERA_NAME);
 
         limelightOneFeed = new HttpCamera("limelight-one", "http://limelight-one.local:5800/stream.mjpeg");
-        limelightTwoFeed = new HttpCamera("limelight-two", "http://limelight-two.local:5800/stream.mjpeg");
+        limelightThreeFeed = new HttpCamera("limelight-three", "http://limelight-three.local:5800/stream.mjpeg");
 
         CameraServer.addCamera(limelightOneFeed);
-        CameraServer.addCamera(limelightTwoFeed);
+        CameraServer.addCamera(limelightThreeFeed);
     }
 
     @Override
