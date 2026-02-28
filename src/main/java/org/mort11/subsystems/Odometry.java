@@ -43,7 +43,7 @@ public class Odometry extends SubsystemBase {
 
         // Get fused pose (AFTER vision updates)
         Pose2d robotPose = drivetrain.getState().Pose;
-
+        
         // Dashboard output
         SmartDashboard.putNumber("Robot X", robotPose.getX());
         SmartDashboard.putNumber("Robot Y", robotPose.getY());
