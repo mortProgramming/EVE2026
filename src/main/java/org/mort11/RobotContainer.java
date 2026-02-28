@@ -16,6 +16,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.Odometry;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -57,9 +58,8 @@ import org.mort11.subsystems.CommandSwerveDrivetrain;
 import org.mort11.subsystems.EvanHood;
 import org.mort11.subsystems.Feeder;
 import org.mort11.subsystems.IntakeArmLeft;
-import org.mort11.subsystems.IntakeArmRight;
 import org.mort11.subsystems.IntakeRollerLeft;
-import org.mort11.subsystems.IntakeRollerRight;
+import org.mort11.subsystems.OdometryHelper;
 import org.mort11.subsystems.Shooter;
 import org.mort11.subsystems.Turret;
 import org.mort11.subsystems.Vision;
@@ -105,7 +105,7 @@ public class RobotContainer {
 
    
     private final Vision vision = Vision.getInstance();
-    
+    private final OdometryHelper odometry = new OdometryHelper(drivetrain);
     
     public static SendableChooser<Command> autoChooser;
 
@@ -122,9 +122,7 @@ public class RobotContainer {
             EvanHood.getInstance();
             Feeder.getInstance();
             IntakeArmLeft.getInstance();
-            IntakeArmRight.getInstance();
             IntakeRollerLeft.getInstance();
-            IntakeRollerRight.getInstance();
             Shooter.getInstance();
             Turret.getInstance();
             Vision.getInstance();
@@ -247,10 +245,11 @@ public class RobotContainer {
 
             endeffectorController.x().whileTrue(
                 new SetHoodShooter(
-                    () -> LookUpTable.getNeededShooterRPM(Units.inchesToMeters(160)),
-                    () -> LookUpTable.getNeededHoodAngle(Units.inchesToMeters(160))
+                    () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()),
+                    () -> LookUpTable.getNeededHoodAngle(odometry.getDistanceToHub())
                 )
             );
+            
             // endeffectorController.x().whileTrue(new SetSuperShooter(
             //     () -> LookUpTable.getNeededShooterRPM(3), 
             //     () -> 0, 

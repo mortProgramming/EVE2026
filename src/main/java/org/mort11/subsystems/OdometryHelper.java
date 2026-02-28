@@ -15,17 +15,19 @@ import edu.wpi.first.wpilibj.smartdashboard.FieldObject2d;
 
 import static org.mort11.configs.constants.PhysicalConstants.Field.*;
 
-public class Odometry extends SubsystemBase {
+public class OdometryHelper extends SubsystemBase {
+    private static OdometryHelper instance;
 
     private final CommandSwerveDrivetrain drivetrain;
     private final Field2d field;
 
+    
     // change to hub pose i
     private final Translation2d Redhub = new Translation2d(RED_HUB_X, RED_HUB_Y);
     private final Translation2d Bluehub = new Translation2d(BLUE_HUB_X, BLUE_HUB_Y);
 
 
-    public Odometry(CommandSwerveDrivetrain drivetrain) {
+    public OdometryHelper(CommandSwerveDrivetrain drivetrain) {
         this.drivetrain = drivetrain;
         this.field = new Field2d();
 
@@ -137,4 +139,10 @@ public class Odometry extends SubsystemBase {
         FieldObject2d blueHub = field.getObject("Blue Hub");
         blueHub.setPose(new Pose2d(BLUE_HUB_X, BLUE_HUB_Y, new Rotation2d()));
     }
+//     public static OdometryHelper getInstance() {
+//         if (instance == null) {
+//             instance = new OdometryHelper();
+//         }
+//         return instance;
+//     }
 }
