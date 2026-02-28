@@ -8,32 +8,37 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.1283142857142856,
-        "y": 3.9572571428571424
+        "x": 2.3401387332690944,
+        "y": 4.090036672221047
       },
       "isLocked": false,
       "linkedName": "a"
     },
     {
       "anchor": {
-        "x": 3.288801431127012,
-        "y": 0.5222003577817531
+        "x": 0.6750071326676177,
+        "y": 0.6127246790299581
       },
       "prevControl": {
-        "x": 2.288801431127012,
-        "y": 0.5222003577817532
+        "x": 0.7419112382667518,
+        "y": 0.8536060619842659
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "BeforeTrench"
+      "linkedName": "HumanPlayerStation"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.0,
+      "rotationDegrees": 180.0
+    }
+  ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 5.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -50,5 +55,5 @@
     "velocity": 0,
     "rotation": 180.0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }
