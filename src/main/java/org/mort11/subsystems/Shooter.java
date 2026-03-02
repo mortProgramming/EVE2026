@@ -93,6 +93,10 @@ public class Shooter extends SubsystemBase {
         return getShooterSpeedRPS() * 60.0;
     }
 
+    public boolean isAtTargetRPM(double targetRPM) {
+        return Math.abs(getShooterRPM() - targetRPM) / targetRPM < SHOOTER_SPEED_BUZZ_TOLERANCE;
+    }
+
     public static Shooter getInstance(){
         if (shooter == null){
             shooter = new Shooter();

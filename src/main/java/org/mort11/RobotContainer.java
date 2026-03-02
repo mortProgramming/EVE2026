@@ -10,14 +10,8 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.util.PathPlannerLogging;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
-// import com.pathplanner.lib.commands.PathPlannerAuto; commented out bc pathplanner errors
-// Add to your imports at the top
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableInstance;
 
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.Odometry;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -31,24 +25,16 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import org.mort11.commands.actions.endeffector.manual.moveFeeder;
 import org.mort11.commands.actions.endeffector.manual.moveLeftIntake;
 import org.mort11.commands.actions.endeffector.manual.moveLeftRoller;
-//import org.mort11.commands.actions.endeffector.manual.moveRightIntake;
-//import org.mort11.commands.actions.endeffector.manual.moveRightRoller;
-// import org.mort11.commands.actions.endeffector.manual.moveHood;
+
 import org.mort11.commands.actions.endeffector.manual.PercentShoot;
-import org.mort11.commands.actions.endeffector.pid.SetEvanHood;
-import org.mort11.commands.actions.endeffector.pid.SetHoodShooter;
+
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.commands.actions.endeffector.pid.SetSuperShooter;
-import org.mort11.commands.actions.endeffector.pid.SetTurret;
-// import org.mort11.commands.actions.endeffector.pid.setHood;
 import org.mort11.commands.actions.endeffector.pid.setIntakeLeft;
-//import org.mort11.commands.actions.endeffector.pid.setIntakeRight;
 import org.mort11.commands.actions.endeffector.manual.MoveTurret;
 import org.mort11.commands.actions.endeffector.manual.Climb;
 import org.mort11.commands.actions.endeffector.manual.MoveEvanHood;
-import org.mort11.commands.autons.apriltag.Angle2AprilTag;
 import org.mort11.commands.autons.pathplanner.BasicCommands;
-import org.mort11.commands.autons.apriltag.LimelightTest;
 import org.mort11.commands.autons.timed.Taxi;
 import static org.mort11.configs.constants.PhysicalConstants.Turret.*;
 import org.mort11.configs.LookUpTable;
@@ -66,15 +52,11 @@ import org.mort11.subsystems.Vision;
 
 import com.pathplanner.lib.path.PathPlannerPath;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-
 
 
 import static edu.wpi.first.units.Units.*;
 
 import static org.mort11.configs.constants.PortConstants.Controller.*;
-import static org.mort11.configs.constants.PhysicalConstants.*;
 
 public class RobotContainer {
     private double MaxSpeed = 1.0 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -99,12 +81,7 @@ public class RobotContainer {
     
     public final static CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
-    
-    // private PathPlannerPath pathPlannerTest = PathPlannerPath.fromPathFile("DriveVertical");
-    // private Command autonomousCommand = AutoBuilder.followPath(pathPlannerTest);
-
    
-    private final Vision vision = Vision.getInstance();
     private final OdometryHelper odometry = new OdometryHelper(drivetrain);
     
     public static SendableChooser<Command> autoChooser;
@@ -159,7 +136,6 @@ public class RobotContainer {
             }));
 
 
-            // uehheh ehfeuguuegeufuhehehfuef
             // Run SysId routines when holding back/start and X/Y.
             // Note that each routine should be run exactly once in a single log.
             // driveController.back().and(driveController.y()).whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
@@ -168,11 +144,11 @@ public class RobotContainer {
             // driveController.start().and(driveController.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
             
             // Reset the field-centric heading on left bumper press.
+
+            //field orient
             driveController.L1().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
-    
             drivetrain.registerTelemetry(logger::telemeterize);
             
-            driveController.square().whileTrue(new Angle2AprilTag(0));
 
 
 
@@ -181,45 +157,47 @@ public class RobotContainer {
             new Trigger(() -> manualController.getLeftY() < -DEAD_BAND).whileTrue(new moveLeftIntake(manualController));
             new Trigger(() -> manualController.getLeftY() > DEAD_BAND).whileTrue(new moveLeftIntake(manualController));
 
-            //new Trigger(() -> manualController.getRightY() > -DEAD_BAND).whileTrue(new moveRightIntake(manualController));
-            //new Trigger(() -> manualController.getRightY() < DEAD_BAND).whileTrue(new moveRightIntake(manualController));
-
             
-            //endeffectorController.y().whileTrue(new moveRightIntake(-0.2));
-            //endeffectorController.a().whileTrue(new moveRightIntake(0.2));
-            endeffectorController.povUp().whileTrue(new moveLeftIntake(1));
-            endeffectorController.povDown().whileTrue(new moveLeftIntake(-1));
-        
-            //Intake Roller
-
-            //left
-            manualController.x().whileTrue(new moveLeftRoller(0.7));
-            manualController.leftBumper().onTrue(new moveLeftRoller(0.5));
+            
+            //ENDEFFECTOR CONTROLLER
+            //intake rollers
             endeffectorController.leftBumper().whileTrue(new moveLeftRoller(1));
             endeffectorController.rightBumper().whileTrue(new moveLeftRoller(-1));
 
-            //right (no more right)
-            //manualController.b().whileTrue(new moveRightRoller(-0.7));
-            //anualController.rightBumper().whileTrue(new moveRightRoller(0.5));
+            //intake arms
+            endeffectorController.povUp().whileTrue(new moveLeftIntake(0.25));
+            endeffectorController.povDown().whileTrue(new moveLeftIntake(-0.25));
 
-            //Set Intake
-           // manualController.a().onTrue(setIntakeLeft.intake());
-            manualController.b().onTrue(setIntakeLeft.up());
-            //endeffectorController.pov(180).onTrue(setIntakeLeft.intake());
-            //endeffectorController.pov(0).onTrue(setIntakeLeft.up());
+            //feeder
+            endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new moveFeeder(-1));
 
-            //manualController.x().onTrue(setIntakeRight.intake());
-            //manualController.y().onTrue(setIntakeRight.up());
-         //endeffectorController.a().onTrue(setIntakeRight.intake());
-            //endeffectorController.y().onTrue(setIntakeRight.up());
+            //shooter
+            endeffectorController.leftTrigger(TRIGGER_THRESHOLD).whileTrue(new SetShooter(2500));
+
+            //shooter supersystem
+            endeffectorController.x().whileTrue(new SetSuperShooter(
+                () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()), 
+                () -> 0, 
+                () -> LookUpTable.getNeededHoodAngle(odometry.getDistanceToHub())
+            ));
+
+
+
+            
+            //left
+            manualController.x().whileTrue(new moveLeftRoller(0.7));
+            manualController.leftBumper().onTrue(new moveLeftRoller(0.5));
             
 
+          
+            //Set Intake
+            manualController.b().onTrue(setIntakeLeft.up());
+        
             
 
             //Feeder
             manualController.pov(0).whileTrue(new moveFeeder(0.5));
             manualController.pov(180).whileTrue(new moveFeeder(-1)); //moves the correct way
-            endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new moveFeeder(-1));
 
             //Turret
             manualController.pov(90).whileTrue(new MoveTurret(-MANUAL_SPEED));
@@ -237,7 +215,6 @@ public class RobotContainer {
             //Shooter
             manualController.y().whileTrue(new PercentShoot(0.25));
 
-            endeffectorController.leftTrigger(TRIGGER_THRESHOLD).whileTrue(new SetShooter(2500));
 
             
             // endeffectorController.x().whileTrue(new SetShooter(3000));
@@ -252,11 +229,7 @@ public class RobotContainer {
             //     )
             // );
             
-            endeffectorController.x().whileTrue(new SetSuperShooter(
-                () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()), 
-                () -> 0, 
-                () -> LookUpTable.getNeededHoodAngle(odometry.getDistanceToHub())
-            ));
+            
 
             //Climber
             manualController.leftBumper().whileTrue(new Climb(0.5));
