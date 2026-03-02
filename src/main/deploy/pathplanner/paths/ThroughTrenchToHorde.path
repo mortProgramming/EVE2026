@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.1283142857142856,
-        "y": 3.9572571428571424
+        "x": 5.745698795180723,
+        "y": 7.400734939759036
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.4039329155934896,
-        "y": 5.6766982056029835
+        "x": 6.745698795180723,
+        "y": 7.400734939759036
       },
       "isLocked": false,
-      "linkedName": "a"
+      "linkedName": "TopThroughTrenchEnd"
     },
     {
       "anchor": {
-        "x": 1.4027142857142858,
-        "y": 5.978571428571429
+        "x": 7.688,
+        "y": 7.324
       },
       "prevControl": {
-        "x": 2.151102832887204,
-        "y": 3.984576107089862
+        "x": 6.688,
+        "y": 7.324
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Depot"
+      "linkedName": "HordeTopStart"
     }
   ],
   "rotationTargets": [],
@@ -33,22 +33,22 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 10.0,
-    "maxAcceleration": 5.0,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 1.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0.0,
+    "velocity": 0,
     "rotation": 90.0
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Blue Side",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 90.0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

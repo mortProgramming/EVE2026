@@ -1,0 +1,128 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.560156626506024,
+        "y": 7.586506024096385
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.8182073320042007,
+        "y": 7.367561980206394
+      },
+      "isLocked": false,
+      "linkedName": "TopStart"
+    },
+    {
+      "anchor": {
+        "x": 5.756626506024096,
+        "y": 7.324
+      },
+      "prevControl": {
+        "x": 5.056578067132129,
+        "y": 7.457214847317712
+      },
+      "nextControl": {
+        "x": 7.013940259942032,
+        "y": 7.084741042400233
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.688,
+        "y": 7.324
+      },
+      "prevControl": {
+        "x": 6.456194203329869,
+        "y": 7.476447908138066
+      },
+      "nextControl": {
+        "x": 8.083694110187384,
+        "y": 7.2750290181100885
+      },
+      "isLocked": false,
+      "linkedName": "HordeTopStart"
+    },
+    {
+      "anchor": {
+        "x": 7.688,
+        "y": 5.357253012048193
+      },
+      "prevControl": {
+        "x": 7.629796319753828,
+        "y": 5.05539414361478
+      },
+      "nextControl": {
+        "x": 7.9640240963855415,
+        "y": 6.788783132530121
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.368807228915662,
+        "y": 7.324
+      },
+      "prevControl": {
+        "x": 5.822192771084336,
+        "y": 7.564650602409639
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "ShootFromTrenchTop"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.2522821576763157,
+      "rotationDegrees": 90.0
+    },
+    {
+      "waypointRelativePos": 2.0,
+      "rotationDegrees": 180.0
+    },
+    {
+      "waypointRelativePos": 2.7518672199169623,
+      "rotationDegrees": 180.0
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Intake",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": null
+    },
+    {
+      "name": "SetSuperShooter0inches",
+      "waypointRelativePos": 4.0,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 1.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -90.0
+  },
+  "reversed": false,
+  "folder": "Blue Side",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 90.0
+  },
+  "useDefaultConstraints": true
+}
