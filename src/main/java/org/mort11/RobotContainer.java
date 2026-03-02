@@ -207,20 +207,16 @@ public class RobotContainer {
             manualController.b().onTrue(setIntakeLeft.up());
             //endeffectorController.pov(180).onTrue(setIntakeLeft.intake());
             //endeffectorController.pov(0).onTrue(setIntakeLeft.up());
-
             //manualController.x().onTrue(setIntakeRight.intake());
             //manualController.y().onTrue(setIntakeRight.up());
-         //endeffectorController.a().onTrue(setIntakeRight.intake());
+            //endeffectorController.a().onTrue(setIntakeRight.intake());
             //endeffectorController.y().onTrue(setIntakeRight.up());
-            
-
-            
-
+        
             //Feeder
             manualController.pov(0).whileTrue(new moveFeeder(0.5));
             manualController.pov(180).whileTrue(new moveFeeder(-1)); //moves the correct way
             endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new moveFeeder(-1));
-
+        
             //Turret
             manualController.pov(90).whileTrue(new MoveTurret(-MANUAL_SPEED));
             manualController.pov(270).whileTrue(new MoveTurret(MANUAL_SPEED));
@@ -229,33 +225,35 @@ public class RobotContainer {
                 .whileTrue(new MoveTurret(endeffectorController.getRightX() * MANUAL_SPEED));
             new Trigger(() -> endeffectorController.getRightX() < -DEAD_BAND)
                 .whileTrue(new MoveTurret(endeffectorController.getRightX() * MANUAL_SPEED));
-
+        
             //hood
             manualController.back().whileTrue(new MoveEvanHood(1));
             manualController.start().whileTrue(new MoveEvanHood(-1));
-
+        
             //Shooter
             manualController.y().whileTrue(new PercentShoot(0.25));
-
+        
             endeffectorController.leftTrigger(TRIGGER_THRESHOLD).whileTrue(new SetShooter(2500));
+        
+            
             // endeffectorController.x().whileTrue(new SetShooter(3000));
             // LookUpTable.getNeededHoodAngle(-1);
             // LookUpTable.getNeededHoodAngle(3);
             // LookUpTable.getNeededHoodAngle(300);
-
-            endeffectorController.x().whileTrue(
-                new SetHoodShooter(
-                    () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()),
-                    () -> LookUpTable.getNeededHoodAngle(odometry.getDistanceToHub())
-                )
-            );
+        
+            // endeffectorController.x().whileTrue(
+            //     new SetHoodShooter(
+            //         () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()),
+            //         () -> LookUpTable.getNeededHoodAngle(odometry.getDistanceToHub())
+            //     )
+            // );
             
-            // endeffectorController.x().whileTrue(new SetSuperShooter(
-            //     () -> LookUpTable.getNeededShooterRPM(3), 
-            //     () -> 0, 
-            //     () -> LookUpTable.getNeededHoodAngle(3)
-            // ));
-
+            endeffectorController.x().whileTrue(new SetSuperShooter(
+                () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()), 
+                () -> odometry.getAngleForTurretDeg(),
+                () -> LookUpTable.getNeededHoodAngle(odometry.getDistanceToHub())
+            ));
+        
             //Climber
             manualController.leftBumper().whileTrue(new Climb(0.5));
             manualController.rightBumper().whileTrue(new Climb(-0.5));
@@ -306,6 +304,8 @@ public class RobotContainer {
         autoChooser.addOption("Pathplanner Vertical", new PathPlannerAuto("DriveAuto"));
         autoChooser.addOption("Pathplanner ZigZag", new PathPlannerAuto("ZigZagAuto"));
         autoChooser.addOption("ShootThenHordeCenterBlue", new PathPlannerAuto("ShootThenHordeCenterBlue"));
+        autoChooser.addOption("ShootThenHumanPlayerStation", new PathPlannerAuto("ShootThenHumanPlayerStation"));
+
         autoChooser.addOption("Timed Taxi", new Taxi());
         //autoChooser.addOption("Limelight Test", new LimelightTest(drivetrain, vision, 0));
         autoChooser.addOption("test", new PathPlannerAuto("shoot"));
