@@ -25,19 +25,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "DriveThroughTrenchBlueBottom"
+            "pathName": "DriveThroughTrenchBottom"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Horde"
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": []
+            "pathName": "HordeBot"
           }
         }
       ]

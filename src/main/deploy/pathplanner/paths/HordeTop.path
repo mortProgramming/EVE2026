@@ -3,42 +3,42 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.0,
-        "y": 7.0
+        "x": 7.688,
+        "y": 7.324
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.9987428571428572,
-        "y": 6.354328571428571
+        "x": 7.710633936510628,
+        "y": 7.572973301616926
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "HordeTopStart"
     },
     {
       "anchor": {
-        "x": 2.0,
-        "y": 3.9831714285714277
+        "x": 4.42344578313253,
+        "y": 7.324
       },
       "prevControl": {
-        "x": 1.9987428571428572,
-        "y": 4.566242857142857
+        "x": 4.458801122191857,
+        "y": 7.076512626584708
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "HordeTopEnd"
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.5,
-      "rotationDegrees": -94.73311972829465
+      "waypointRelativePos": 0.15518672199169942,
+      "rotationDegrees": 180.0
     }
   ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 5.0,
     "maxAcceleration": 1.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -47,13 +47,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -90.0
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Blue Side",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 90.0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }
