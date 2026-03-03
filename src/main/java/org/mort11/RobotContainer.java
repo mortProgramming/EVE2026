@@ -49,6 +49,7 @@ import org.mort11.subsystems.OdometryHelper;
 import org.mort11.subsystems.Shooter;
 import org.mort11.subsystems.Turret;
 import org.mort11.subsystems.Vision;
+import org.mort11.commands.autons.apriltag.RotateToHub;
 
 import com.pathplanner.lib.path.PathPlannerPath;
 
@@ -132,6 +133,8 @@ public class RobotContainer {
                 currentAngularRate = MaxAngularRate;
             }));
 
+            driveController.square().whileTrue(new RotateToHub(odometry));
+
 
             // Run SysId routines when holding back/start and X/Y.
             // Note that each routine should be run exactly once in a single log.
@@ -173,10 +176,8 @@ public class RobotContainer {
 
             //shooter supersystem
             endeffectorController.x().whileTrue(new SetSuperShooter(
-                () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()), 
-                () -> 0, 
-                () -> LookUpTable.getNeededHoodAngle(odometry.getDistanceToHub())
-            ));
+                () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()),
+                () -> LookUpTable.getNeededHoodAngle(odometry.getDistanceToHub())));
 
 
 
@@ -207,9 +208,6 @@ public class RobotContainer {
             //endeffectorController.y().onTrue(setIntakeRight.up());
         
             //Feeder
-            manualController.pov(0).whileTrue(new moveFeeder(0.5));
-            manualController.pov(180).whileTrue(new moveFeeder(-1)); //moves the correct way
-            endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new moveFeeder(-1));
         
             //Turret
             manualController.pov(90).whileTrue(new MoveTurret(-MANUAL_SPEED));
@@ -229,7 +227,6 @@ public class RobotContainer {
 
 
         
-            endeffectorController.leftTrigger(TRIGGER_THRESHOLD).whileTrue(new SetShooter(2500));
         
             
             // endeffectorController.x().whileTrue(new SetShooter(3000));

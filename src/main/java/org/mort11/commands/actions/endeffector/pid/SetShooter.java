@@ -35,16 +35,21 @@ public class SetShooter extends Command {
     }
 
     @Override
+    
     public void execute() {
+        if (RPM.getAsDouble() == 0) {
+            RobotContainer.getEndeffectorController().setRumble(RumbleType.kBothRumble, 0);
+            return;
+        }
         shooter.setShooterRPM(RPM.getAsDouble());
 
         if (Math.abs(shooter.getShooterRPM() - RPM.getAsDouble()) / RPM.getAsDouble() < SHOOTER_SPEED_BUZZ_TOLERANCE) {
             RobotContainer.getEndeffectorController().setRumble(RumbleType.kBothRumble, RUMBLE_AMOUNT);
-        }   else {
+        }
+        else{
             RobotContainer.getEndeffectorController().setRumble(RumbleType.kBothRumble, 0);
         }
-        
-    }
+}
 
     @Override
     public void end(boolean interrupted) {
