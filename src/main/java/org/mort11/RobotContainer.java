@@ -34,7 +34,7 @@ import org.mort11.commands.actions.endeffector.pid.setIntakeLeft;
 import org.mort11.commands.actions.endeffector.manual.MoveTurret;
 import org.mort11.commands.actions.endeffector.manual.Climb;
 import org.mort11.commands.actions.endeffector.manual.MoveEvanHood;
-import org.mort11.commands.autons.pathplanner.BasicCommands;
+//import org.mort11.commands.autons.pathplanner.BasicCommands;
 import org.mort11.commands.autons.timed.Taxi;
 import static org.mort11.configs.constants.PhysicalConstants.Turret.*;
 import org.mort11.configs.LookUpTable;
@@ -247,11 +247,11 @@ public class RobotContainer {
             //     )
             // );
             
-    endeffectorController.x().whileTrue(new SetSuperShooter(
-                () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()), 
-                () -> odometry.getAngleForTurretDeg(),
-                () -> LookUpTable.getNeededHoodAngle(odometry.getDistanceToHub())
-            ));
+    // endeffectorController.x().whileTrue(new SetSuperShooter(
+    //             () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()), 
+    //             () -> odometry.getAngleForTurretDeg(),
+    //             () -> LookUpTable.getNeededHoodAngle(odometry.getDistanceToHub())
+    //         ));
         
             //Climber
             manualController.leftBumper().whileTrue(new Climb(0.5));
@@ -294,7 +294,7 @@ public class RobotContainer {
         public void configureAuto() {
         final var idle = new SwerveRequest.Idle();
 
-        BasicCommands.setCommands();
+        //BasicCommands.setCommands();
   
         autoChooser = new SendableChooser<Command>();
         SmartDashboard.putData("autoChooser",autoChooser);

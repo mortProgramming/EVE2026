@@ -13,12 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.FieldObject2d;
 
-import static org.mort11.configs.constants.PhysicalConstants.Turret.*;
-import static org.mort11.configs.constants.PIDConstants.Turret.*;
-import static org.mort11.configs.constants.PortConstants.Turret.*;
-
-import org.mort11.configs.LookUpTable;
-
 import static org.mort11.configs.constants.PhysicalConstants.Field.*;
 
 public class OdometryHelper extends SubsystemBase {
@@ -65,14 +59,7 @@ public class OdometryHelper extends SubsystemBase {
             "Distance To Target",
             getDistanceToTarget()
         );
-
         SmartDashboard.putNumber("Distance from hub", getDistanceToHub());
-        SmartDashboard.putNumber("Turret Target", getAngleForTurretDeg());
-        SmartDashboard.putNumber("Corrected Turret Target", correctTurretAngle());
-        SmartDashboard.putNumber("Needed Hood Angle", LookUpTable.getNeededHoodAngle(getDistanceToHub()));
-        SmartDashboard.putNumber("Needed Shooter RPM", LookUpTable.getNeededShooterRPM(getDistanceToHub()));
-        SmartDashboard.putNumber("TX", Vision.getInstance().getTX());
-        SmartDashboard.putBoolean("Has Tag", Vision.getInstance().hasTag());
     }
 
     private void addVisionMeasurements() {
@@ -153,65 +140,10 @@ public class OdometryHelper extends SubsystemBase {
         FieldObject2d blueHub = field.getObject("Blue Hub");
         blueHub.setPose(new Pose2d(BLUE_HUB_X, BLUE_HUB_Y, new Rotation2d()));
     }
-
-    public double getAngleForTurretDeg() {
-        Pose2d pose = drivetrain.getState().Pose;
-        
-        Translation2d target = getHubTarget().getTranslation();
-
-        Translation2d robotToTarget =
-            target.minus(pose.getTranslation());
-
-        Rotation2d angleToTarget = robotToTarget.getAngle();
-
-        Rotation2d turretAngle =
-            angleToTarget.minus(pose.getRotation());
-
-        double angle = Math.IEEEremainder(turretAngle.getDegrees(), 360.0);
-
-        //Clamped it
-        angle = Math.max(TURRET_MIN_ANGLE,
-                Math.min(TURRET_MAX_ANGLE, angle));
-
-        return angle;
-    }
-
-    public boolean turretCanAim() {
-        Pose2d pose = drivetrain.getState().Pose;
-
-        Translation2d target = getHubTarget().getTranslation();
-
-        Translation2d robotToTarget =
-            target.minus(pose.getTranslation());
-
-        Rotation2d angleToTarget = robotToTarget.getAngle();
-
-        Rotation2d turretAngle =
-            angleToTarget.minus(pose.getRotation());
-
-        double angle = Math.IEEEremainder(turretAngle.getDegrees(), 360.0);
-
-        return angle >= TURRET_MIN_ANGLE &&
-            angle <= TURRET_MAX_ANGLE;
-    }
-
-    //Run if needed or run into problems with gyro only turret aiming
-    public double correctTurretAngle() {
-        double angle = getAngleForTurretDeg();
-
-        if (Vision.getInstance().hasTag()) {
-            angle -= Vision.getInstance().getTX();
-        }
-        
-        angle = Math.max(TURRET_MIN_ANGLE, Math.min(TURRET_MAX_ANGLE, angle));
-
-        return angle;
-    }
-
-    // public static OdometryHelper getInstance() {
-    //     if (instance == null) {
-    //         instance = new OdometryHelper();
-    //     }
-    //     return instance;
-    // }
+//     public static OdometryHelper getInstance() {
+//         if (instance == null) {
+//             instance = new OdometryHelper();
+//         }
+//         return instance;
+//     }
 }
