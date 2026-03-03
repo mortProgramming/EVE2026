@@ -1,19 +1,24 @@
 package org.mort11.subsystems;
 
+import static org.mort11.configs.constants.PhysicalConstants.Field.BLUE_HUB_X;
+import static org.mort11.configs.constants.PhysicalConstants.Field.BLUE_HUB_Y;
+import static org.mort11.configs.constants.PhysicalConstants.Field.RED_HUB_X;
+import static org.mort11.configs.constants.PhysicalConstants.Field.RED_HUB_Y;
+import static org.mort11.configs.constants.PhysicalConstants.Turret.TURRET_MAX_ANGLE;
+import static org.mort11.configs.constants.PhysicalConstants.Turret.TURRET_MIN_ANGLE;
+
+import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.Matrix;
-import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.math.numbers.N1;
+import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import edu.wpi.first.wpilibj.smartdashboard.FieldObject2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.smartdashboard.FieldObject2d;
-
-import static org.mort11.configs.constants.PhysicalConstants.Field.*;
 
 public class OdometryHelper extends SubsystemBase {
     private static OdometryHelper instance;
@@ -34,6 +39,7 @@ public class OdometryHelper extends SubsystemBase {
         SmartDashboard.putData("Field", field);
     }
     
+    // Can replace methods in here for camera table ones
     @Override
     public void periodic() {
         setFieldObj();
@@ -118,6 +124,46 @@ public class OdometryHelper extends SubsystemBase {
             return new Pose2d(RED_HUB_X, RED_HUB_Y, new Rotation2d());
         }
     }
+
+    // public double getAngleForTurretDeg() {
+    //     Pose2d pose = drivetrain.getState().Pose;
+        
+    //     if (drivetrain == null) {
+    //         System.out.println("DRIVETRAIN IS NULL");
+    //     }
+        
+    //     Translation2d target = getHubTarget().getTranslation();
+
+    //     Translation2d robotToTarget = target.minus(pose.getTranslation());
+
+    //     Rotation2d angleToTarget = robotToTarget.getAngle();
+
+    //     Rotation2d turretAngle = angleToTarget.minus(pose.getRotation());
+
+    //     double angle = Math.IEEEremainder(turretAngle.getDegrees(), 360.0);
+
+    //     //Clamped it
+    //     angle = Math.max(TURRET_MIN_ANGLE, Math.min(TURRET_MAX_ANGLE, angle));
+
+    //     return angle;
+    // }
+
+    // public boolean turretCanAim() {
+    //     Pose2d pose = drivetrain.getState().Pose;
+
+    //     Translation2d target = getHubTarget().getTranslation();
+
+    //     Translation2d robotToTarget = target.minus(pose.getTranslation());
+
+    //     Rotation2d angleToTarget = robotToTarget.getAngle();
+
+    //     Rotation2d turretAngle = angleToTarget.minus(pose.getRotation());
+
+    //     double angle = Math.IEEEremainder(turretAngle.getDegrees(), 360.0);
+
+    //     return angle >= TURRET_MIN_ANGLE &&
+    //         angle <= TURRET_MAX_ANGLE;
+    // }
 
     // Make values for target pass
     // Pose2d getPassTarget(){

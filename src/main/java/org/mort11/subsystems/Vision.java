@@ -25,7 +25,9 @@ public class Vision extends SubsystemBase {
     private HttpCamera limelightFourFeed;
 
     private AprilTagFieldLayout fieldLayout;
-    private NetworkTable cameraTable;
+
+    private NetworkTable cameraTableOne;
+    private NetworkTable cameraTableThree;
 
     private static final String[] LIMELIGHTS = {
         "limelight-one",
@@ -40,7 +42,11 @@ public class Vision extends SubsystemBase {
 
     public Vision() {
         fieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2026RebuiltWelded);
-        cameraTable = NetworkTableInstance.getDefault().getTable(FRONT_CAMERA_NAME);
+        
+        // For if the MegaTag2 support doesn't work use camera table methods for robot pose
+        cameraTableOne = NetworkTableInstance.getDefault().getTable("limelight-one");
+        cameraTableThree = NetworkTableInstance.getDefault().getTable("limelight-three");
+
 
         limelightOneFeed = new HttpCamera("limelight-one", "http://limelight-one.local:5800/stream.mjpeg");
         limelightTwoFeed = new HttpCamera("limelight-two", "http://limelight-two.local:5800/stream.mjpeg");
@@ -61,23 +67,44 @@ public class Vision extends SubsystemBase {
     // ---------- Camera / Limelight Methods ----------
 
     public boolean hasTag() {
-        return cameraTable.getEntry("tv").getDouble(0) == 1;
+        return cameraTableOne.getEntry("tv").getDouble(0) == 1 
+        || cameraTableThree.getEntry("tv").getDouble(0) == 1;
     }
 
     public int getTagId() {
-        return hasTag() ? (int) cameraTable.getEntry("tid").getInteger(-1) : -1;
+        if (cameraTableOne.getEntry("tv").getDouble(0) == 1) {
+            return (int) cameraTableOne.getEntry("tid").getInteger(-1);
+        } else if (cameraTableThree.getEntry("tv").getDouble(0) == 1) {
+            return (int) cameraTableThree.getEntry("tid").getInteger(-1);
+        }
+        return -1;
     }
 
     public double getTX() {
-        return cameraTable.getEntry("tx").getDouble(0);
+        if (cameraTableOne.getEntry("tv").getDouble(0) == 1) {
+            return cameraTableOne.getEntry("tx").getDouble(0);
+        } else if (cameraTableThree.getEntry("tv").getDouble(0) == 1) {
+            return cameraTableThree.getEntry("tx").getDouble(0);
+        }
+        return 0;
     }
 
     public double getTY() {
-        return cameraTable.getEntry("ty").getDouble(0);
+        if (cameraTableOne.getEntry("tv").getDouble(0) == 1) {
+            return cameraTableOne.getEntry("ty").getDouble(0);
+        } else if (cameraTableThree.getEntry("tv").getDouble(0) == 1) {
+            return cameraTableThree.getEntry("ty").getDouble(0);
+        }
+        return 0;
     }
 
     public double getTA() {
-        return cameraTable.getEntry("ta").getDouble(0);
+        if (cameraTableOne.getEntry("tv").getDouble(0) == 1) {
+            return cameraTableOne.getEntry("ta").getDouble(0);
+        } else if (cameraTableThree.getEntry("tv").getDouble(0) == 1) {
+            return cameraTableThree.getEntry("ta").getDouble(0);
+        }
+        return 0;
     }
 
     public double[] getCameraPosition() {
@@ -89,7 +116,10 @@ public class Vision extends SubsystemBase {
     }
 
     public Pose2d getRobotPosition() {
-        double[] poseNums = cameraTable.getEntry("botpose_orb_wpiblue").getDoubleArray(new double[6]);
+        double[] poseNums = cameraTableOne.getEntry("botpose_orb_wpiblue").getDoubleArray(new double[6]);
+        if (cameraTableThree.getEntry("botpose_orb_wpiblue").getDoubleArray(new double[6]).length > 0) {
+            poseNums = cameraTableThree.getEntry("botpose_orb_wpiblue").getDoubleArray(new double[6]);
+        }
         return new Pose2d(
             poseNums[0],
             poseNums[1],
@@ -98,7 +128,10 @@ public class Vision extends SubsystemBase {
     }
 
     public Pose2d getRelativeRobotPosition() {
-        double[] poseNums = cameraTable.getEntry("camerapose_targetspace").getDoubleArray(new double[6]);
+        double[] poseNums = cameraTableOne.getEntry("camerapose_targetspace").getDoubleArray(new double[6]);
+        if (cameraTableThree.getEntry("camerapose_targetspace").getDoubleArray(new double[6]).length > 0) {
+            poseNums = cameraTableThree.getEntry("camerapose_targetspace").getDoubleArray(new double[6]);
+        }
         return new Pose2d(
             poseNums[0],
             poseNums[2],
@@ -107,7 +140,10 @@ public class Vision extends SubsystemBase {
     }
 
     public Pose3d get3dRobotPosition() {
-        double[] poseNums = cameraTable.getEntry("botpose_orb_wpiblue").getDoubleArray(new double[6]);
+        double[] poseNums = cameraTableOne.getEntry("botpose_orb_wpiblue").getDoubleArray(new double[6]);
+        if (cameraTableThree.getEntry("botpose_orb_wpiblue").getDoubleArray(new double[6]).length > 0) {
+            poseNums = cameraTableThree.getEntry("botpose_orb_wpiblue").getDoubleArray(new double[6]);
+        }
         return new Pose3d(
             new Translation3d(poseNums[0], poseNums[1], poseNums[2]),
             new Rotation3d(
@@ -123,12 +159,14 @@ public class Vision extends SubsystemBase {
     }
 
     public void setLEDMode(int mode) {
-        cameraTable.getEntry("ledMode").setNumber(mode);
+        cameraTableOne.getEntry("ledMode").setNumber(mode);
+        cameraTableThree.getEntry("ledMode").setNumber(mode);
     }
 
     public void setRobotOrientation(double yaw, double yawRate) {
         double[] orientation = {yaw, yawRate, 0, 0, 0, 0};
-        cameraTable.getEntry("robot_orientation_set").setDoubleArray(orientation);
+        cameraTableOne.getEntry("robot_orientation_set").setDoubleArray(orientation);
+        cameraTableThree.getEntry("robot_orientation_set").setDoubleArray(orientation);
     }
 
     public double[] getPicturePosition() {

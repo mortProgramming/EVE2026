@@ -80,8 +80,6 @@ public class RobotContainer {
 
     
     public final static CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
-
-   
     private final OdometryHelper odometry = new OdometryHelper(drivetrain);
     
     public static SendableChooser<Command> autoChooser;
@@ -89,7 +87,6 @@ public class RobotContainer {
     public AutoBuilder autoBuilder;
         public RobotContainer() {
             drivetrain.configureAutoBuilder();
-
             configureBindings();
             configureAuto();
         }
