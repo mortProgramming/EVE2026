@@ -316,6 +316,7 @@ public class RobotContainer {
             autoChooser.addOption("TopCycle", new PathPlannerAuto("TopCycle"));
             autoChooser.addOption("IntakeTest", new PathPlannerAuto("IntakeTest"));
             autoChooser.addOption("RedShootSweepAuto", new PathPlannerAuto("RedShootSweepAuto"));
+            autoChooser.addOption("BlueCenterShootSweep", new PathPlannerAuto("BlueCenterShootSweep"));
 
             autoChooser.addOption("Timed Taxi", new Taxi());
             //autoChooser.addOption("Limelight Test", new LimelightTest(drivetrain, vision, 0));

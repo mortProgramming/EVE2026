@@ -11,9 +11,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "sequential",
           "data": {
-            "name": "SetShooter"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "SetShooter"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Feeder"
+                }
+              }
+            ]
           }
         },
         {

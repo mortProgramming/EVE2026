@@ -14,6 +14,8 @@ import org.mort11.subsystems.Shooter;
 import org.mort11.subsystems.Vision;
 
 import com.pathplanner.lib.auto.NamedCommands;
+
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 public class BasicCommands {
     // Remove all the static fields — pass what you need into setCommands()
     
@@ -28,10 +30,14 @@ public class BasicCommands {
             )
         );
 
-        NamedCommands.registerCommand("SetShooter", new SetShooter(1750));
+        NamedCommands.registerCommand("SetShooter", new SetShooter(1750).withTimeout(3));
 
         
-        NamedCommands.registerCommand("Feeder", new moveFeeder(-1).withTimeout(1.5));
+        NamedCommands.registerCommand("Feeder", 
+        new ParallelCommandGroup(
+            new moveFeeder(-1),
+            new SetShooter(2250)
+        ).withTimeout(5));
         NamedCommands.registerCommand("Intake", new moveLeftIntake(1));
     }
 }
