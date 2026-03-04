@@ -125,9 +125,9 @@ public class EvanHood extends SubsystemBase {
         return controller;
     }
 
-    public double getRelativeHoodPosition() {
-        return (getAbsoluteEncoderPositionRotations() * DEG_PER_ROTATION) + HOOD_START_HEIGHT;
-    }
+    // public double getRelativeHoodPosition() {
+    //     return (getAbsoluteEncoderPositionRotations() * DEG_PER_ROTATION) + HOOD_START_HEIGHT;
+    // }
 
     public static EvanHood getInstance() {
         if (hood == null) {

@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.586,
-        "y": 7.587
+        "x": 3.54922891566265,
+        "y": 0.4616385542168677
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.7023060318144516,
-        "y": 7.365701769181098
+        "x": 3.1464232435694273,
+        "y": 0.8679868070709185
       },
       "isLocked": false,
-      "linkedName": "TopStart"
+      "linkedName": "BotStart"
     },
     {
       "anchor": {
-        "x": 5.746,
-        "y": 7.400734939759036
+        "x": 0.751734939759036,
+        "y": 0.5709156626506025
       },
       "prevControl": {
-        "x": 5.508498539916914,
-        "y": 7.511172781133659
+        "x": 0.2452689518577973,
+        "y": 0.5360073586008867
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "TopThroughTrenchEnd"
+      "linkedName": "HumanPlayerStation"
     }
   ],
   "rotationTargets": [],
@@ -48,7 +48,7 @@
   "folder": "Blue Side",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 90.0
+    "rotation": -90.0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

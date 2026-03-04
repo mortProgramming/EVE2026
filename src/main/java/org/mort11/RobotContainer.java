@@ -27,7 +27,7 @@ import org.mort11.commands.actions.endeffector.manual.moveLeftIntake;
 import org.mort11.commands.actions.endeffector.manual.moveLeftRoller;
 
 import org.mort11.commands.actions.endeffector.manual.PercentShoot;
-
+import org.mort11.commands.actions.endeffector.pid.SetHoodShooter;
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.commands.actions.endeffector.pid.SetSuperShooter;
 import org.mort11.commands.actions.endeffector.pid.setIntakeLeft;
@@ -237,12 +237,12 @@ public class RobotContainer {
             // LookUpTable.getNeededHoodAngle(3);
             // LookUpTable.getNeededHoodAngle(300);
         
-            // endeffectorController.x().whileTrue(
-            //     new SetHoodShooter(
-            //         () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()),
-            //         () -> LookUpTable.getNeededHoodAngle(odometry.getDistanceToHub())
-            //     )
-            // );
+            endeffectorController.x().whileTrue(
+                new SetHoodShooter(
+                    () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()),
+                    () -> LookUpTable.getNeededHoodAngle(odometry.getDistanceToHub())
+                )
+            );
             
     // endeffectorController.x().whileTrue(new SetSuperShooter(
     //             () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()), 
@@ -301,6 +301,10 @@ public class RobotContainer {
         autoChooser.addOption("Pathplanner ZigZag", new PathPlannerAuto("ZigZagAuto"));
         autoChooser.addOption("ShootThenHordeCenterBlue", new PathPlannerAuto("ShootThenHordeCenterBlue"));
         autoChooser.addOption("ShootThenHumanPlayerStation", new PathPlannerAuto("ShootThenHumanPlayerStation"));
+        autoChooser.addOption("BottomStartToHPS", new PathPlannerAuto("BottomStartToHPS"));
+        autoChooser.addOption("TopCycle", new PathPlannerAuto("TopCycle"));
+        autoChooser.addOption("IntakeTest", new PathPlannerAuto("IntakeTest"));
+        autoChooser.addOption("RedShootSweepAuto", new PathPlannerAuto("RedShootSweepAuto"));
 
         autoChooser.addOption("Timed Taxi", new Taxi());
         //autoChooser.addOption("Limelight Test", new LimelightTest(drivetrain, vision, 0));

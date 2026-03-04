@@ -5,15 +5,15 @@
     "data": {
       "commands": [
         {
-          "type": "named",
-          "data": {
-            "name": "SetSuperShooter0inches"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "DriveHorizontalCenter"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SetSuperShooterdist"
           }
         },
         {
@@ -26,12 +26,6 @@
           "type": "path",
           "data": {
             "pathName": "DriveThroughTrenchBottom"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "HordeBot"
           }
         }
       ]
