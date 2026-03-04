@@ -1,0 +1,68 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RedDriveHorizontalCenter"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SetSuperShooter0inches"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RedDriveToBeforeTrench"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RedTopThroughTrench"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RedDriveToCenterNeutralZone"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Intake"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "RedScoopFromCenterNeutralZone"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

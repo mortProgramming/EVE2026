@@ -27,7 +27,7 @@ import org.mort11.commands.actions.endeffector.manual.moveLeftIntake;
 import org.mort11.commands.actions.endeffector.manual.moveLeftRoller;
 
 import org.mort11.commands.actions.endeffector.manual.PercentShoot;
-
+import org.mort11.commands.actions.endeffector.pid.SetHoodShooter;
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.commands.actions.endeffector.pid.SetSuperShooter;
 import org.mort11.commands.actions.endeffector.pid.setIntakeLeft;
@@ -235,12 +235,12 @@ public class RobotContainer {
             // LookUpTable.getNeededHoodAngle(3);
             // LookUpTable.getNeededHoodAngle(300);
         
-            // endeffectorController.x().whileTrue(
-            //     new SetHoodShooter(
-            //         () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()),
-            //         () -> LookUpTable.getNeededHoodAngle(odometry.getDistanceToHub())
-            //     )
-            // );
+            endeffectorController.x().whileTrue(
+                new SetHoodShooter(
+                    () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()),
+                    () -> LookUpTable.getNeededHoodAngle(odometry.getDistanceToHub())
+                )
+            );
             
     // endeffectorController.x().whileTrue(new SetSuperShooter(
     //             () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()), 
@@ -287,7 +287,7 @@ public class RobotContainer {
         }
     
         public void configureAuto() {
-        final var idle = new SwerveRequest.Idle();
+            final var idle = new SwerveRequest.Idle();
 
         //BasicCommands.setCommands();
   
@@ -302,12 +302,26 @@ public class RobotContainer {
         autoChooser.addOption("BlueCenterShootSweep", new PathPlannerAuto("BlueCenterShootSweep"));
 
 
+            //BasicCommands.setCommands();
+    
+            autoChooser = new SendableChooser<Command>();
+            SmartDashboard.putData("autoChooser",autoChooser);
+            autoChooser.setDefaultOption("nothing", null);
+            autoChooser.addOption("Pathplanner Rotate", new PathPlannerAuto("RotationAuto"));
+            autoChooser.addOption("Pathplanner Vertical", new PathPlannerAuto("DriveAuto"));
+            autoChooser.addOption("Pathplanner ZigZag", new PathPlannerAuto("ZigZagAuto"));
+            autoChooser.addOption("ShootThenHordeCenterBlue", new PathPlannerAuto("ShootThenHordeCenterBlue"));
+            autoChooser.addOption("ShootThenHumanPlayerStation", new PathPlannerAuto("ShootThenHumanPlayerStation"));
+            autoChooser.addOption("BottomStartToHPS", new PathPlannerAuto("BottomStartToHPS"));
+            autoChooser.addOption("TopCycle", new PathPlannerAuto("TopCycle"));
+            autoChooser.addOption("IntakeTest", new PathPlannerAuto("IntakeTest"));
+            autoChooser.addOption("RedShootSweepAuto", new PathPlannerAuto("RedShootSweepAuto"));
 
-        autoChooser.addOption("Timed Taxi", new Taxi());
-        //autoChooser.addOption("Limelight Test", new LimelightTest(drivetrain, vision, 0));
-        autoChooser.addOption("test", new PathPlannerAuto("shoot"));
+            autoChooser.addOption("Timed Taxi", new Taxi());
+            //autoChooser.addOption("Limelight Test", new LimelightTest(drivetrain, vision, 0));
+            autoChooser.addOption("test", new PathPlannerAuto("shoot"));
 
-        autoChooser.addOption("Drive forward nopathplan",Commands.sequence(
+            autoChooser.addOption("Drive forward nopathplan",Commands.sequence(
                 // Reset our field centric heading to match the robot
                 // facing away from our alliance station wall (0 deg).
                 drivetrain.runOnce(() -> drivetrain.seedFieldCentric(Rotation2d.kZero)),
