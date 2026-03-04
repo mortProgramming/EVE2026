@@ -2,6 +2,7 @@ package org.mort11.commands.autons.pathplanner;
 
 import org.mort11.commands.actions.endeffector.manual.moveFeeder;
 import org.mort11.commands.actions.endeffector.manual.moveLeftIntake;
+import org.mort11.commands.actions.endeffector.manual.moveLeftRoller;
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.commands.actions.endeffector.pid.SetSuperShooter;
 import org.mort11.commands.actions.endeffector.pid.SetTurret;
@@ -39,6 +40,7 @@ public class BasicCommands {
             new moveFeeder(-1),
             new SetShooter(2250)
         ).withTimeout(5));
-        NamedCommands.registerCommand("Intake", new moveLeftIntake(1));
+        NamedCommands.registerCommand("Intake", new moveLeftIntake(-0.25).withTimeout(0.75));
+        NamedCommands.registerCommand("Intake Roller", new moveLeftRoller(1).withTimeout(5));
     }
 }

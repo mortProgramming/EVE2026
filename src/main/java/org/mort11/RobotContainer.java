@@ -290,18 +290,6 @@ public class RobotContainer {
             final var idle = new SwerveRequest.Idle();
 
         //BasicCommands.setCommands();
-  
-        autoChooser = new SendableChooser<Command>();
-        SmartDashboard.putData("autoChooser",autoChooser);
-        autoChooser.setDefaultOption("nothing", null);
-        autoChooser.addOption("Pathplanner Rotate", new PathPlannerAuto("RotationAuto"));
-        autoChooser.addOption("Pathplanner Vertical", new PathPlannerAuto("DriveAuto"));
-        autoChooser.addOption("Pathplanner ZigZag", new PathPlannerAuto("ZigZagAuto"));
-        autoChooser.addOption("ShootThenHordeCenterBlue", new PathPlannerAuto("ShootThenHordeCenterBlue"));
-        autoChooser.addOption("ShootThenHumanPlayerStation", new PathPlannerAuto("ShootThenHumanPlayerStation"));
-        autoChooser.addOption("BlueCenterShootSweep", new PathPlannerAuto("BlueCenterShootSweep"));
-
-
             //BasicCommands.setCommands();
     
             autoChooser = new SendableChooser<Command>();
@@ -317,6 +305,9 @@ public class RobotContainer {
             autoChooser.addOption("IntakeTest", new PathPlannerAuto("IntakeTest"));
             autoChooser.addOption("RedShootSweepAuto", new PathPlannerAuto("RedShootSweepAuto"));
             autoChooser.addOption("BlueCenterShootSweep", new PathPlannerAuto("BlueCenterShootSweep"));
+            autoChooser.addOption("BlueBottomStartToHumanPlayerStationToShoot", new PathPlannerAuto("BlueBottomStartToHumanPlayerStationToShoot"));
+            autoChooser.addOption("BlueShootThenHumanPlayerStationThenShoot", new PathPlannerAuto("BlueShootThenHumanPlayerStationThenShoot"));
+
 
             autoChooser.addOption("Timed Taxi", new Taxi());
             //autoChooser.addOption("Limelight Test", new LimelightTest(drivetrain, vision, 0));

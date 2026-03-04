@@ -15,6 +15,18 @@
           "data": {
             "pathName": "HumanPlayerStationToShoot"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SetShooter"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Feeder"
+          }
         }
       ]
     }

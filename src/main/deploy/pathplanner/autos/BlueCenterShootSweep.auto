@@ -42,15 +42,34 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "Intake"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "BlueBotDriveToCenterNeutralZone"
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "BlueScoopFromCenterNeutralZone"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Intake Roller"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "BlueScoopFromCenterNeutralZone"
+                }
+              }
+            ]
           }
         }
       ]
