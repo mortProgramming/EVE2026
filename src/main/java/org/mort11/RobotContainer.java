@@ -32,14 +32,14 @@ import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.commands.actions.endeffector.pid.SetSuperShooter;
 import org.mort11.commands.actions.endeffector.pid.setIntakeLeft;
 import org.mort11.commands.actions.endeffector.manual.MoveTurret;
-import org.mort11.commands.actions.endeffector.manual.Climb;
+//import org.mort11.commands.actions.endeffector.manual.Climb;
 import org.mort11.commands.actions.endeffector.manual.MoveEvanHood;
 import org.mort11.commands.autons.pathplanner.BasicCommands;
 import org.mort11.commands.autons.timed.Taxi;
 import static org.mort11.configs.constants.PhysicalConstants.Turret.*;
 import org.mort11.configs.LookUpTable;
 import org.mort11.configs.constants.TunerConstants;
-import org.mort11.subsystems.Climber;
+//import org.mort11.subsystems.Climber;
 import org.mort11.subsystems.CommandSwerveDrivetrain;
 import org.mort11.subsystems.EvanHood;
 import org.mort11.subsystems.Feeder;
@@ -94,7 +94,7 @@ public class RobotContainer {
         }
     
         private void configureBindings() {
-            Climber.getInstance();
+            //Climber.getInstance();
             EvanHood.getInstance();
             Feeder.getInstance();
             IntakeArmLeft.getInstance();
@@ -249,8 +249,8 @@ public class RobotContainer {
     //         ));
         
             //Climber
-            manualController.leftBumper().whileTrue(new Climb(0.5));
-            manualController.rightBumper().whileTrue(new Climb(-0.5));
+            // manualController.leftBumper().whileTrue(new Climb(0.5));
+            // manualController.rightBumper().whileTrue(new Climb(-0.5));
         }
         
         public Command getPathPlannerCommand(){
@@ -299,6 +299,9 @@ public class RobotContainer {
         autoChooser.addOption("Pathplanner ZigZag", new PathPlannerAuto("ZigZagAuto"));
         autoChooser.addOption("ShootThenHordeCenterBlue", new PathPlannerAuto("ShootThenHordeCenterBlue"));
         autoChooser.addOption("ShootThenHumanPlayerStation", new PathPlannerAuto("ShootThenHumanPlayerStation"));
+        autoChooser.addOption("BlueCenterShootSweep", new PathPlannerAuto("BlueCenterShootSweep"));
+
+
 
         autoChooser.addOption("Timed Taxi", new Taxi());
         //autoChooser.addOption("Limelight Test", new LimelightTest(drivetrain, vision, 0));

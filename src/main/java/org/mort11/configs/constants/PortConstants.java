@@ -68,7 +68,7 @@ public final class PortConstants {
         public static final int sparkRollLeft = 18;
     }
 
-    public static final class Climber{
-        public static final int CLIMBER_MOTOR = 19;
-    }
+    // public static final class Climber{
+    //     public static final int CLIMBER_MOTOR = 19;
+    // }
 }
