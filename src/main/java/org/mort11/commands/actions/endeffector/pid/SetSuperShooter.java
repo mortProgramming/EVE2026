@@ -14,19 +14,19 @@ public class SetSuperShooter extends ParallelCommandGroup {
     public SetSuperShooter(DoubleSupplier shooterRPM, DoubleSupplier hoodDeg) {
         addCommands(
             new SetShooter(shooterRPM),
-            new ParallelCommandGroup(
-                new SetEvanHood(hoodDeg),
+            new SetEvanHood(hoodDeg),          
+            new SequentialCommandGroup(        
                 new WaitUntilCommand(() -> Shooter.getInstance().isAtTargetRPM(shooterRPM.getAsDouble())),
                 new moveFeeder(-1).withTimeout(1.0)
             )
         );
     }
-    
+
     public SetSuperShooter(double shooterRPM, double hoodDeg) {
         addCommands(
             new SetShooter(shooterRPM),
-            new ParallelCommandGroup(
-                new SetEvanHood(hoodDeg),
+            new SetEvanHood(hoodDeg),
+            new SequentialCommandGroup(
                 new WaitUntilCommand(() -> Shooter.getInstance().isAtTargetRPM(shooterRPM)),
                 new moveFeeder(-1).withTimeout(1.0)
             )

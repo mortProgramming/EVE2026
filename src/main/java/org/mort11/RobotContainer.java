@@ -34,7 +34,7 @@ import org.mort11.commands.actions.endeffector.pid.setIntakeLeft;
 import org.mort11.commands.actions.endeffector.manual.MoveTurret;
 import org.mort11.commands.actions.endeffector.manual.Climb;
 import org.mort11.commands.actions.endeffector.manual.MoveEvanHood;
-//import org.mort11.commands.autons.pathplanner.BasicCommands;
+import org.mort11.commands.autons.pathplanner.BasicCommands;
 import org.mort11.commands.autons.timed.Taxi;
 import static org.mort11.configs.constants.PhysicalConstants.Turret.*;
 import org.mort11.configs.LookUpTable;
@@ -88,6 +88,7 @@ public class RobotContainer {
     public AutoBuilder autoBuilder;
         public RobotContainer() {
             drivetrain.configureAutoBuilder();
+            BasicCommands.setCommands(odometry);
             configureBindings();
             configureAuto();
         }
