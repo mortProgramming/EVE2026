@@ -38,10 +38,10 @@ public final class PIDConstants {
 		public final static double ROT_KI = 0;
 		public final static double ROT_KD = 0.01; // try 0.1, 0.15, 0.2
 
-		public final static Constraints ROT_CONSTRAINTS = new Constraints(1000, 100);
+		public final static Constraints ROT_CONSTRAINTS = new Constraints(100, 200);
 
-        public final static double ROT_TOLERANCE = 0.1;
-        public final static double ROT_SPEED_TOLERANCE = 2;
+        public final static double ROT_TOLERANCE = 2.0;
+        public final static double ROT_SPEED_TOLERANCE = 10.0;
     }
 
     public static final class Turret {
