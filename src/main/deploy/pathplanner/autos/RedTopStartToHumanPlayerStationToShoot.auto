@@ -7,7 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BottomStartToHPS"
+            "pathName": "RedTopStartToHPS"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RedHumanPlayerStationToShoot"
           }
         }
       ]

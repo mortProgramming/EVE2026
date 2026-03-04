@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.701065411410229,
-        "y": 4.090036672221047
+        "x": 2.7010654114102297,
+        "y": 4.090036672221048
       },
       "isLocked": false,
       "linkedName": "a"
@@ -30,7 +30,7 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.5,
+      "waypointRelativePos": 0.732780082987567,
       "rotationDegrees": 90.0
     }
   ],
@@ -53,7 +53,7 @@
   "folder": "Blue Side",
   "idealStartingState": {
     "velocity": 0.0,
-    "rotation": 180.0
+    "rotation": 0.0
   },
   "useDefaultConstraints": false
 }

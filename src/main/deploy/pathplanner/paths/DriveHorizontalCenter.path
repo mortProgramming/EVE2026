@@ -12,7 +12,7 @@
         "y": 3.9575046986642586
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "BlueCenter"
     },
     {
       "anchor": {
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0.0,
-    "rotation": 180.0
+    "rotation": 0.0
   },
   "reversed": false,
   "folder": "Blue Side",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -179.22805391267906
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }

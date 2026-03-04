@@ -8,30 +8,30 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 14.696686746990354,
-        "y": 7.063686746993485
+        "x": 16.032872640327092,
+        "y": 7.619779529363906
       },
       "isLocked": false,
       "linkedName": "RedHPS"
     },
     {
       "anchor": {
-        "x": 13.209325301204817,
-        "y": 7.400734939759036
+        "x": 14.017975903614456,
+        "y": 4.035
       },
       "prevControl": {
-        "x": 14.662594517754103,
-        "y": 7.217346931545699
+        "x": 14.08488000921359,
+        "y": 4.275881382954309
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "RedBeforeTrench"
+      "linkedName": "RedCenter"
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.5,
-      "rotationDegrees": 90.0
+      "waypointRelativePos": 0.732780082987567,
+      "rotationDegrees": 180.0
     }
   ],
   "constraintZones": [],
@@ -47,12 +47,12 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 90.0
+    "rotation": 180.0
   },
   "reversed": false,
   "folder": "Red Side",
   "idealStartingState": {
-    "velocity": 0,
+    "velocity": 0.0,
     "rotation": -90.0
   },
   "useDefaultConstraints": false

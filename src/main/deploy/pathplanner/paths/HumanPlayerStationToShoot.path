@@ -3,35 +3,35 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 15.821048192772285,
-        "y": 7.487
+        "x": 0.751734939759036,
+        "y": 0.5709156626506025
       },
       "prevControl": null,
       "nextControl": {
-        "x": 14.696686746990354,
-        "y": 7.063686746993485
+        "x": 0.9635593873138444,
+        "y": 0.703695192014508
       },
       "isLocked": false,
-      "linkedName": "RedHPS"
+      "linkedName": "HumanPlayerStation"
     },
     {
       "anchor": {
-        "x": 13.209325301204817,
-        "y": 7.400734939759036
+        "x": 2.4892409638554214,
+        "y": 3.9572571428571424
       },
       "prevControl": {
-        "x": 14.662594517754103,
-        "y": 7.217346931545699
+        "x": 2.556145069454555,
+        "y": 4.198138525811451
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "RedBeforeTrench"
+      "linkedName": "a"
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.5,
-      "rotationDegrees": 90.0
+      "waypointRelativePos": 0.732780082987567,
+      "rotationDegrees": 180.0
     }
   ],
   "constraintZones": [],
@@ -47,13 +47,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 90.0
+    "rotation": 0.0
   },
   "reversed": false,
-  "folder": "Red Side",
+  "folder": "Blue Side",
   "idealStartingState": {
-    "velocity": 0,
-    "rotation": -90.0
+    "velocity": 0.0,
+    "rotation": 90.0
   },
   "useDefaultConstraints": false
 }

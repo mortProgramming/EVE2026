@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.1464232435694273,
-        "y": 0.8679868070709185
+        "x": 3.407168674698795,
+        "y": 1.2484337349397594
       },
       "isLocked": false,
       "linkedName": "BotStart"
@@ -20,15 +20,20 @@
         "y": 0.5709156626506025
       },
       "prevControl": {
-        "x": 0.2452689518577973,
-        "y": 0.5360073586008867
+        "x": 1.1451325301204818,
+        "y": 1.1719397590361438
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "HumanPlayerStation"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.5,
+      "rotationDegrees": 90.0
+    }
+  ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],

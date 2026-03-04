@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "DriveHorizontalCenter"
+            "pathName": "RedDriveHorizontalCenter"
           }
         },
         {
@@ -17,9 +17,15 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "Feeder"
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "DriveToHumanPlayerStation"
+            "pathName": "RedDriveToHumanPlayerStation"
           }
         },
         {
@@ -31,7 +37,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "HumanPlayerStationToTrench"
+            "pathName": "RedHumanPlayerStationToShoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SetShooter"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Feeder"
           }
         }
       ]

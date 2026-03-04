@@ -40,6 +40,18 @@
           "data": {
             "pathName": "DriveThroughTrenchBottom"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BlueBotDriveToCenterNeutralZone"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BlueScoopFromCenterNeutralZone"
+          }
         }
       ]
     }

@@ -3,37 +3,32 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 15.821048192772285,
-        "y": 7.487
+        "x": 5.746,
+        "y": 7.400734939759036
       },
       "prevControl": null,
       "nextControl": {
-        "x": 14.696686746990354,
-        "y": 7.063686746993485
+        "x": 5.7784819277108435,
+        "y": 5.368180722891566
       },
       "isLocked": false,
-      "linkedName": "RedHPS"
+      "linkedName": "TopThroughTrenchEnd"
     },
     {
       "anchor": {
-        "x": 13.209325301204817,
-        "y": 7.400734939759036
+        "x": 7.679,
+        "y": 4.341
       },
       "prevControl": {
-        "x": 14.662594517754103,
-        "y": 7.217346931545699
+        "x": 6.3795060240963855,
+        "y": 4.51865060240964
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "RedBeforeTrench"
+      "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.5,
-      "rotationDegrees": 90.0
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
@@ -46,14 +41,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0,
-    "rotation": 90.0
+    "velocity": 0.0,
+    "rotation": 0.0
   },
   "reversed": false,
-  "folder": "Red Side",
+  "folder": "Blue Side",
   "idealStartingState": {
-    "velocity": 0,
-    "rotation": -90.0
+    "velocity": 0.0,
+    "rotation": 90.0
   },
   "useDefaultConstraints": false
 }

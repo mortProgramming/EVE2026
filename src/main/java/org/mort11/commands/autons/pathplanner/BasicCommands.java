@@ -31,6 +31,7 @@ public class BasicCommands {
         );
 
         NamedCommands.registerCommand("SetShooter", new SetShooter(1750).withTimeout(3));
+        NamedCommands.registerCommand("IntakeArmDown", new SetShooter(1750).withTimeout(3));
 
         
         NamedCommands.registerCommand("Feeder", 
