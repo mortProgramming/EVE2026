@@ -31,7 +31,7 @@ public class BasicCommands {
             )
         );
 
-        NamedCommands.registerCommand("SetShooter", new SetShooter(1750).withTimeout(3));
+        NamedCommands.registerCommand("SetShooter", new SetShooter(1750).withTimeout(1));
         NamedCommands.registerCommand("IntakeArmDown", new SetShooter(1750).withTimeout(3));
 
         
@@ -39,8 +39,9 @@ public class BasicCommands {
         new ParallelCommandGroup(
             new moveFeeder(-1),
             new SetShooter(2250)
-        ).withTimeout(5));
-        NamedCommands.registerCommand("Intake", new moveLeftIntake(-0.25).withTimeout(0.75));
+        ).withTimeout(3));
+        NamedCommands.registerCommand("Intake", new moveLeftIntake(-0.25).withTimeout(0.9));
         NamedCommands.registerCommand("Intake Roller", new moveLeftRoller(1).withTimeout(5));
+        
     }
 }

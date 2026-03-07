@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.4888142857142856,
-        "y": 3.9572571428571424
+        "x": 3.54922891566265,
+        "y": 0.4616385542168677
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.238814408282071,
-        "y": 3.9575046986642586
+        "x": 2.701304872503727,
+        "y": 0.5082187937295727
       },
       "isLocked": false,
-      "linkedName": "BlueCenter"
+      "linkedName": "BotStart"
     },
     {
       "anchor": {
-        "x": 2.4892409638554214,
-        "y": 3.9572571428571424
+        "x": 0.4676144578313255,
+        "y": 0.6474096385542167
       },
       "prevControl": {
-        "x": 2.769295421417042,
-        "y": 3.9570308839557464
+        "x": 1.5089086778700307,
+        "y": 0.6131674218951365
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "a"
+      "linkedName": "HumanPlayerStation"
     }
   ],
   "rotationTargets": [],
@@ -41,11 +41,11 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0.0,
-    "rotation": 0.0
+    "velocity": 0,
+    "rotation": 180.0
   },
   "reversed": false,
-  "folder": "Blue Side",
+  "folder": null,
   "idealStartingState": {
     "velocity": 0,
     "rotation": 0.0

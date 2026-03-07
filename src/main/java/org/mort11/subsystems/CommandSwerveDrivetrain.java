@@ -42,7 +42,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
-import com.pathplanner.lib.auto.NamedCommands;
 
 /**
  * Class that extends the Phoenix 6 SwerveDrivetrain class and implements
@@ -402,7 +401,8 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
             (ChassisSpeeds speeds) -> driveRelativeAutobuilder(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
             new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic drive trains
                     new PIDConstants(5.0,0,0.0), // Translation PID constants (these are not known rn because robot isnt working?)
-                    new PIDConstants(5.0, 0.0, 0) // Rotation PID constants
+                    //previously 5 but we changed it to 2.5
+                    new PIDConstants(2.5, 0.0, 0) // Rotation PID constants
             ),
             new RobotConfig( //all of these are wrong fix them 
                 ROBOT_MASS,
@@ -477,6 +477,9 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
    public double calculateChangeRotateController(double tx) {
     return aprilTagOmegaController.calculate(tx, 0);
 }
+    public void resetOperatorPerspective() {
+        m_hasAppliedOperatorPerspective = false;
+    }
 
     public Rotation2d getRotation2d() {
         return getPose().getRotation();

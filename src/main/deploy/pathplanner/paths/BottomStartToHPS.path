@@ -8,38 +8,33 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.407168674698795,
-        "y": 1.2484337349397594
+        "x": 1.8653637660485018,
+        "y": 1.0008844507845933
       },
       "isLocked": false,
       "linkedName": "BotStart"
     },
     {
       "anchor": {
-        "x": 0.7267617689015686,
-        "y": 0.6127246790299581
+        "x": 0.4676144578313255,
+        "y": 0.6474096385542167
       },
       "prevControl": {
-        "x": 1.1201593592630144,
-        "y": 1.2137487754154994
+        "x": 1.5146296883411507,
+        "y": 0.6034640771091673
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "HumanPlayerStation"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.5,
-      "rotationDegrees": 90.0
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 0.3,
-    "maxAcceleration": 0.2,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 1.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -47,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 90.0
+    "rotation": 180.0
   },
   "reversed": false,
   "folder": "Blue Side",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": 0.0
   },
   "useDefaultConstraints": false
 }
