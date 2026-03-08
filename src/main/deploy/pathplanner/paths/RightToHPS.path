@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 13.012626506024096,
-        "y": 4.035
+        "x": 3.54922891566265,
+        "y": 0.4616385542168677
       },
       "prevControl": null,
       "nextControl": {
-        "x": 12.76262662859188,
-        "y": 4.035247555807117
+        "x": 2.701304872503727,
+        "y": 0.5082187937295727
       },
       "isLocked": false,
-      "linkedName": "RedAllignedToHub"
+      "linkedName": "BotStart"
     },
     {
       "anchor": {
-        "x": 14.017975903614456,
-        "y": 4.035
+        "x": 0.4676144578313255,
+        "y": 0.6474096385542167
       },
       "prevControl": {
-        "x": 14.298030361176076,
-        "y": 4.034773741098604
+        "x": 1.5089086778700307,
+        "y": 0.6131674218951365
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "RedCenter"
+      "linkedName": "HumanPlayerStation"
     }
   ],
   "rotationTargets": [],
@@ -34,21 +34,21 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
-    "maxAcceleration": 1.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0.0,
+    "velocity": 0,
     "rotation": 180.0
   },
   "reversed": false,
-  "folder": "Red Side",
+  "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -179.22805391267906
+    "rotation": 0.0
   },
   "useDefaultConstraints": false
 }

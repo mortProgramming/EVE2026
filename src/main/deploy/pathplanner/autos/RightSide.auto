@@ -5,33 +5,33 @@
     "data": {
       "commands": [
         {
+          "type": "path",
+          "data": {
+            "pathName": "RightToHPS"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 3.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "HPSToBotShoot"
+          }
+        },
+        {
           "type": "named",
           "data": {
             "name": "SetShooter"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "DriveHorizontalCenter"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "DriveToBeforeTrench"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "DriveThroughTrenchBottom"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "HordeBot"
+            "name": "Feeder"
           }
         }
       ]

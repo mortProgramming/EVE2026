@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RedDriveHorizontalCenter"
+            "pathName": "DriveHorizontalCenter"
           }
         },
         {
@@ -32,25 +32,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RedDriveToBeforeTrench"
+            "pathName": "DriveToBeforeTrench"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "RedTopThroughTrench"
+            "pathName": "DriveThroughTrenchBottom"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "Intake"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "RedDriveToCenterNeutralZone"
           }
         },
         {
@@ -66,7 +60,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "RedScoopFromCenterNeutralZone"
+                  "pathName": "HordeBot"
                 }
               }
             ]

@@ -36,6 +36,8 @@ public class BasicCommands {
         NamedCommands.registerCommand("SetShooterFast", new SetShooter(1750).withTimeout(.5));
 
         // NamedCommands.registerCommand("IntakeArmDown", new SetShooter(1750).withTimeout(3));
+        NamedCommands.registerCommand("IntakeArmDown", new SetShooter(1750).withTimeout(3));
+
 
         
         NamedCommands.registerCommand("Feeder", 
@@ -58,5 +60,10 @@ public class BasicCommands {
         //Warren Hills stuff
         NamedCommands.registerCommand("StaticTrenchShoot",new SetShooter(0/*this rpm value must be the rpm needed to shooot from trench */));
         NamedCommands.registerCommand("StaticBumpShoot",new SetShooter(0/*this rpm value must be the rpm needed to shooot from bump */));
+            new SetShooter(2250)
+        .withTimeout(3);
+        NamedCommands.registerCommand("Intake", new moveLeftIntake(-0.25).withTimeout(0.9));
+        NamedCommands.registerCommand("Intake Roller", new moveLeftRoller(1).withTimeout(5));
+        
     }
 }
