@@ -65,6 +65,36 @@
               }
             ]
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "NeutralToTrench"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "DriveBackToBlueZone"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "DriveToShootPosition"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SetShooter"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Feeder"
+          }
         }
       ]
     }

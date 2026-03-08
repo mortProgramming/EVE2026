@@ -75,62 +75,14 @@
                     }
                   ]
                 }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "IntakeFeather"
+                }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "IntakeFeather"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "IntakeFeather"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.01
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "SetShooter"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Feeder"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.01
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "IntakeFeather"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "SetShooterFast"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Feeder"
           }
         }
       ]

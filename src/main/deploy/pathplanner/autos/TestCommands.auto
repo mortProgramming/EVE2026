@@ -11,15 +11,15 @@
           }
         },
         {
-          "type": "named",
+          "type": "wait",
           "data": {
-            "name": "IntakeRoller"
+            "waitTime": 3.0
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "IntakeArmUp"
+            "name": "IntakeFeather"
           }
         }
       ]

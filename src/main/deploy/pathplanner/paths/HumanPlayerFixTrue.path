@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.4892409638554214,
+        "x": 2.489,
         "y": 3.957
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.7284424480577547,
-        "y": 3.957
+        "x": 1.7739679727980633,
+        "y": 2.866735949089056
       },
       "isLocked": true,
       "linkedName": "a"
@@ -20,20 +20,15 @@
         "y": 0.9
       },
       "prevControl": {
-        "x": 1.01983119697694,
-        "y": 0.8999999999999999
+        "x": 0.7523452642247646,
+        "y": 1.2838038545768142
       },
       "nextControl": null,
       "isLocked": true,
       "linkedName": "ActualHumanPlayer"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 1.0,
-      "rotationDegrees": 0.0
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
@@ -52,7 +47,7 @@
   "reversed": false,
   "folder": "Blue Side",
   "idealStartingState": {
-    "velocity": 0,
+    "velocity": 0.0,
     "rotation": 0.0
   },
   "useDefaultConstraints": false

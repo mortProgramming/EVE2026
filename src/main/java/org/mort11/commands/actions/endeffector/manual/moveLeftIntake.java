@@ -40,4 +40,9 @@ public class moveLeftIntake extends Command {
     public boolean isFinished(){
         return false;
     }
+
+    public static Command IntakeFeather(){
+        
+        return new moveLeftIntake(0.45).withTimeout(0.1).repeatedly();
+    }
 }

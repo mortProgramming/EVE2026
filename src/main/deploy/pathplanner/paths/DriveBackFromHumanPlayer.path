@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.5,
-        "y": 0.8999999999999998
+        "x": 0.6816827013806708,
+        "y": 1.089874451498681
       },
       "isLocked": false,
       "linkedName": "ActualHumanPlayer"
     },
     {
       "anchor": {
-        "x": 2.4892409638554214,
+        "x": 2.489,
         "y": 3.957
       },
       "prevControl": {
-        "x": 1.4892409638554214,
-        "y": 3.957
+        "x": 2.3028660452397856,
+        "y": 3.762473596017678
       },
       "nextControl": null,
       "isLocked": false,

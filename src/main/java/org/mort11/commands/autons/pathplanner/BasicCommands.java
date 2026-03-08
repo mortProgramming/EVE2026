@@ -36,7 +36,7 @@ public class BasicCommands {
         NamedCommands.registerCommand("SetShooterFast", new SetShooter(1750).withTimeout(.5));
 
         // NamedCommands.registerCommand("IntakeArmDown", new SetShooter(1750).withTimeout(3));
-        NamedCommands.registerCommand("IntakeArmDown", new SetShooter(1750).withTimeout(3));
+        // NamedCommands.registerCommand("IntakeArmDown", new SetShooter(1750).withTimeout(3));
 
 
         
@@ -44,14 +44,20 @@ public class BasicCommands {
         new ParallelCommandGroup(
             new moveFeeder(-1),
          new SetShooter(2250)
-        ).withTimeout(5));
+        ).withTimeout(3));
         //feeder with rpm catch
-        // NamedCommands.registerCommand("FeederDifferent", new Sequential CommandGroup());
 
-        NamedCommands.registerCommand("IntakeArmDown", new moveLeftIntake(-0.25).withTimeout(0.4));
+        // NamedCommands.registerCommand("Feeder", 
+        // new ParallelCommandGroup(
+        //     new moveFeeder(-1),
+        //  new SetShooter(2250)
+        // ).until(it has been at target RPM for 3 seconds));
+
+        NamedCommands.registerCommand("IntakeArmDown", new moveLeftIntake(-0.25).withTimeout(2.25));
         NamedCommands.registerCommand("IntakeArmUp", new moveLeftIntake(0.25).withTimeout(0.7));
 
-        NamedCommands.registerCommand("IntakeFeather", new moveLeftIntake(0.25).withTimeout(0.3));
+        //This one runs repeateadly check IntakeFeather
+        NamedCommands.registerCommand("IntakeFeather", moveLeftIntake.IntakeFeather());
 
         
 

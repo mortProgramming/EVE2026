@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.2978915662650605,
+        "x": 3.298,
         "y": 0.647
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.297891566265063,
-        "y": 0.6469999999999985
+        "x": 4.298000000000003,
+        "y": 0.6470000000000002
       },
       "isLocked": false,
       "linkedName": "BeforeTrench"
@@ -41,13 +41,13 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0.0,
+    "velocity": 1.0,
     "rotation": 90.0
   },
   "reversed": false,
   "folder": "Blue Side",
   "idealStartingState": {
-    "velocity": 0.0,
+    "velocity": 2.0,
     "rotation": 90.0
   },
   "useDefaultConstraints": false
