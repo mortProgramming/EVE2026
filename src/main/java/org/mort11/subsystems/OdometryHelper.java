@@ -47,7 +47,7 @@ public class OdometryHelper extends SubsystemBase {
         Vision.updateRobotOrientation(drivetrain);
 
         // Add vision data from ALL cameras
-        //addVisionMeasurements();
+        addVisionMeasurements();
 
         // Get fused pose (AFTER vision updates)
         Pose2d robotPose = drivetrain.getState().Pose;

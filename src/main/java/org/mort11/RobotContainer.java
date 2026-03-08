@@ -180,7 +180,7 @@ public class RobotContainer {
                 () -> LookUpTable.getNeededShooterRPM(odometry.getDistanceToHub()),
                 () -> LookUpTable.getNeededHoodAngle(odometry.getDistanceToHub())));
 
-
+  
 
             
             //left
@@ -295,37 +295,44 @@ public class RobotContainer {
             autoChooser = new SendableChooser<Command>();
             SmartDashboard.putData("autoChooser",autoChooser);
             autoChooser.setDefaultOption("nothing", null);
-            autoChooser.addOption("Pathplanner Rotate", new PathPlannerAuto("RotationAuto"));
-            autoChooser.addOption("Pathplanner Vertical", new PathPlannerAuto("DriveAuto"));
-            autoChooser.addOption("Pathplanner ZigZag", new PathPlannerAuto("ZigZagAuto"));
-            autoChooser.addOption("ShootThenHordeCenterBlue", new PathPlannerAuto("ShootThenHordeCenterBlue"));
-            autoChooser.addOption("ShootThenHumanPlayerStation", new PathPlannerAuto("ShootThenHumanPlayerStation"));
-            autoChooser.addOption("BottomStartToHPS", new PathPlannerAuto("BottomStartToHPS"));
-            autoChooser.addOption("TopCycle", new PathPlannerAuto("TopCycle"));
-            autoChooser.addOption("IntakeTest", new PathPlannerAuto("IntakeTest"));
-            autoChooser.addOption("RedShootSweepAuto", new PathPlannerAuto("RedShootSweepAuto"));
+            // autoChooser.addOption("Pathplanner Rotate", new PathPlannerAuto("RotationAuto"));
+            // autoChooser.addOption("Pathplanner Vertical", new PathPlannerAuto("DriveAuto"));
+            // autoChooser.addOption("Pathplanner ZigZag", new PathPlannerAuto("ZigZagAuto"));
+            // autoChooser.addOption("ShootThenHordeCenterBlue", new PathPlannerAuto("ShootThenHordeCenterBlue"));
+            // autoChooser.addOption("ShootThenHumanPlayerStation", new PathPlannerAuto("ShootThenHumanPlayerStation"));
+            // autoChooser.addOption("BottomStartToHPS", new PathPlannerAuto("BottomStartToHPS"));
+            // autoChooser.addOption("TopCycle", new PathPlannerAuto("TopCycle"));
+            // autoChooser.addOption("IntakeTest", new PathPlannerAuto("IntakeTest"));
+            // autoChooser.addOption("RedShootSweepAuto", new PathPlannerAuto("RedShootSweepAuto"));
             autoChooser.addOption("BlueCenterShootSweep", new PathPlannerAuto("BlueCenterShootSweep"));
-            autoChooser.addOption("BlueBottomStartToHumanPlayerStationToShoot", new PathPlannerAuto("BlueBottomStartToHumanPlayerStationToShoot"));
-            autoChooser.addOption("BlueShootThenHumanPlayerStationThenShoot", new PathPlannerAuto("BlueShootThenHumanPlayerStationThenShoot"));
+            autoChooser.addOption("DO NOT USE", new PathPlannerAuto("TestCommands"));
+            autoChooser.addOption("Human Player station", new PathPlannerAuto("BlueCenterShootThenHuman"));
+            autoChooser.addOption("DriveHorizontalThenBack", new PathPlannerAuto("DriveHorizontalThenBack"));
+            autoChooser.addOption("BlueCenterShootIntake", new PathPlannerAuto("BlueCenterShootIntake"));
+
+            
+            
+            // autoChooser.addOption("BlueBottomStartToHumanPlayerStationToShoot", new PathPlannerAuto("BlueBottomStartToHumanPlayerStationToShoot"));
+            // autoChooser.addOption("BlueShootThenHumanPlayerStationThenShoot", new PathPlannerAuto("BlueShootThenHumanPlayerStationThenShoot"));
 
 
             autoChooser.addOption("Timed Taxi", new Taxi());
             //autoChooser.addOption("Limelight Test", new LimelightTest(drivetrain, vision, 0));
-            autoChooser.addOption("test", new PathPlannerAuto("shoot"));
+            // autoChooser.addOption("test", new PathPlannerAuto("shoot"));
 
-            autoChooser.addOption("Drive forward nopathplan",Commands.sequence(
-                // Reset our field centric heading to match the robot
-                // facing away from our alliance station wall (0 deg).
-                drivetrain.runOnce(() -> drivetrain.seedFieldCentric(Rotation2d.kZero)),
-                // Then slowly drive forward (away from us) for 5 seconds.
-                drivetrain.applyRequest(() ->
-                    drive.withVelocityX(0.5)
-                        .withVelocityY(0)
-                        .withRotationalRate(0)
-                )
-                .withTimeout(5.0),
-                // Finally idle for the rest of auton
-                drivetrain.applyRequest(() -> idle)));
+            // autoChooser.addOption("Drive forward nopathplan",Commands.sequence(
+            //     // Reset our field centric heading to match the robot
+            //     // facing away from our alliance station wall (0 deg).
+            //     drivetrain.runOnce(() -> drivetrain.seedFieldCentric(Rotation2d.kZero)),
+            //     // Then slowly drive forward (away from us) for 5 seconds.
+            //     drivetrain.applyRequest(() ->
+            //         drive.withVelocityX(0.5)
+            //             .withVelocityY(0)
+            //             .withRotationalRate(0)
+            //     )
+            //     .withTimeout(5.0),
+            //     // Finally idle for the rest of auton
+            //     drivetrain.applyRequest(() -> idle)));
 
         // Pathplanner autos WIP
         // autoChooser.addOption("LimelightTest", new PathPlannerAuto("Please Work")); 

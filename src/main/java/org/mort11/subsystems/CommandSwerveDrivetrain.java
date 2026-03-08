@@ -60,7 +60,20 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     private PIDController aprilTagXController;
 	private PIDController aprilTagYController;
 	private PIDController aprilTagOmegaController;      
-
+    /* Below is what we need to make vision measurements work
+     * NetworkTable limelight1 = NetworkTableInstance.getDefault.getTable(Limelight names)
+     * NetworkTable limelight2 = blah blah 
+     * Then make pose estimator object 
+     * SwerveDrivePoseEstimator pose = new SwerveDrivePoseEstimator(blah blah blah)
+     * in periodic
+     * use kalman filter confidence
+     * Get pigeon yaw as a double
+     * pose.update(pigeon rotation and modulePositions
+     * Set limelighthelpers positions withj SetRobotOrientation
+     * limelighthelpers pose estimates megatag2 method
+     * 
+     * look at mechanical advantage class for elastic widgets for driveteam 
+     */
 
     /* Blue alliance sees forward as 0 degrees (toward red alliance wall) */
     private static final Rotation2d kBlueAlliancePerspectiveRotation = Rotation2d.kZero;

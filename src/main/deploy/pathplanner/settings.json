@@ -4,9 +4,12 @@
   "holonomicMode": true,
   "pathFolders": [
     "Blue Side",
+    "BlueSideFlipped",
     "Red Side"
   ],
-  "autoFolders": [],
+  "autoFolders": [
+    "Competition Auto"
+  ],
   "defaultMaxVel": 0.3,
   "defaultMaxAccel": 0.2,
   "defaultMaxAngVel": 540.0,

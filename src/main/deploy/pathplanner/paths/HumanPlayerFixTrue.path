@@ -3,32 +3,37 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.4888142857142856,
-        "y": 3.9572571428571424
-      },
-      "prevControl": null,
-      "nextControl": {
-        "x": 3.238814408282071,
-        "y": 3.9575046986642586
-      },
-      "isLocked": false,
-      "linkedName": "BlueCenter"
-    },
-    {
-      "anchor": {
         "x": 2.4892409638554214,
         "y": 3.957
       },
-      "prevControl": {
-        "x": 2.769295512815484,
+      "prevControl": null,
+      "nextControl": {
+        "x": 0.7284424480577547,
         "y": 3.957
+      },
+      "isLocked": true,
+      "linkedName": "a"
+    },
+    {
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "prevControl": {
+        "x": 1.01983119697694,
+        "y": 0.8999999999999999
       },
       "nextControl": null,
       "isLocked": true,
-      "linkedName": "a"
+      "linkedName": "ActualHumanPlayer"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.0,
+      "rotationDegrees": 0.0
+    }
+  ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],

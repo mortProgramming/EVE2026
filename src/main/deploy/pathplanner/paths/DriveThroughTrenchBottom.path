@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 3.2978915662650605,
-        "y": 0.6474096385542167
+        "y": 0.647
       },
       "prevControl": null,
       "nextControl": {
         "x": 4.297891566265063,
-        "y": 0.6474096385542167
+        "y": 0.6469999999999985
       },
       "isLocked": false,
       "linkedName": "BeforeTrench"
@@ -34,7 +34,7 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 5.0,
-    "maxAcceleration": 1.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

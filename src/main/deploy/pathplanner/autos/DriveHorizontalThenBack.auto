@@ -32,38 +32,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "DriveToBeforeTrench"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "DriveThroughTrenchBottom"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "BlueBotDriveToCenterNeutralZone"
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "IntakeRoller"
-                }
-              },
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "BlueScoopFromCenterNeutralZone"
-                }
-              }
-            ]
+            "pathName": "DriveBackCenter"
           }
         }
       ]

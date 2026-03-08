@@ -38,13 +38,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "DriveThroughTrenchBottom"
+            "pathName": "DriveThroughTrenchBottomExtended"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "BlueBotDriveToCenterNeutralZone"
+            "name": "IntakeArmDown"
           }
         },
         {
@@ -60,7 +60,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "BlueScoopFromCenterNeutralZone"
+                  "pathName": "IntakeBalls"
                 }
               }
             ]

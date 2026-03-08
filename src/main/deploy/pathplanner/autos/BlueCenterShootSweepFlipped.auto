@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "DriveHorizontalCenter"
+            "pathName": "DriveHorizontalCenterFlipped"
           }
         },
         {
@@ -32,19 +32,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "DriveToBeforeTrench"
+            "pathName": "DriveToBeforeTrenchFlipped"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "DriveThroughTrenchBottom"
+            "pathName": "DriveThroughTrenchBottomFlipped"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "BlueBotDriveToCenterNeutralZone"
+            "pathName": "BlueBotDriveToCenterNeutralZoneFlipped"
           }
         },
         {
@@ -60,7 +60,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "BlueScoopFromCenterNeutralZone"
+                  "pathName": "BlueScoopFromCenterNeutralZoneFlipped"
                 }
               }
             ]

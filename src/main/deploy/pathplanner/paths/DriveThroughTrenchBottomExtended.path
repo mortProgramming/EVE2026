@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.4888142857142856,
-        "y": 3.9572571428571424
+        "x": 3.2978915662650605,
+        "y": 0.647
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.238814408282071,
-        "y": 3.9575046986642586
+        "x": 4.297891566265063,
+        "y": 0.6469999999999985
       },
       "isLocked": false,
-      "linkedName": "BlueCenter"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.4892409638554214,
-        "y": 3.957
+        "x": 7.675,
+        "y": 0.647
       },
       "prevControl": {
-        "x": 2.769295512815484,
-        "y": 3.957
+        "x": 6.675,
+        "y": 0.6470000000000001
       },
       "nextControl": null,
-      "isLocked": true,
-      "linkedName": "a"
+      "isLocked": false,
+      "linkedName": "BottomBalls"
     }
   ],
   "rotationTargets": [],
@@ -33,7 +33,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 5.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0.0,
-    "rotation": 0.0
+    "rotation": 90.0
   },
   "reversed": false,
   "folder": "Blue Side",
   "idealStartingState": {
-    "velocity": 0,
-    "rotation": 0.0
+    "velocity": 2.0,
+    "rotation": 90.0
   },
   "useDefaultConstraints": false
 }
