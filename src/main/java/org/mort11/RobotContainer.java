@@ -309,6 +309,8 @@ public class RobotContainer {
             autoChooser.addOption("Human Player station", new PathPlannerAuto("BlueCenterShootThenHuman"));
             autoChooser.addOption("DriveHorizontalThenBack", new PathPlannerAuto("DriveHorizontalThenBack"));
             autoChooser.addOption("New CenterShoot", new PathPlannerAuto("BlueCenterShootIntake"));
+            autoChooser.addOption("BlueCenterRotatePos", new PathPlannerAuto("BlueCenterRotatePos"));
+            // autoChooser.addOption("BlueCenterRotate-90", new PathPlannerAuto("BlueCenterShootIntake"));
 
             
             
