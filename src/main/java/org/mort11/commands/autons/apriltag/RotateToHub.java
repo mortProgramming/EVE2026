@@ -27,7 +27,6 @@ public class RotateToHub extends Command {
     public void execute() {
         Pose2d robotPose = odometryHelper.getPose();
 
-     
         Translation2d hubTarget = odometryHelper.getHubTarget().getTranslation();
 
         Translation2d robotToHub = hubTarget.minus(robotPose.getTranslation());
