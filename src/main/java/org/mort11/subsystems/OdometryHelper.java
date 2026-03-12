@@ -8,6 +8,7 @@ import static org.mort11.configs.constants.PhysicalConstants.Turret.TURRET_MAX_A
 import static org.mort11.configs.constants.PhysicalConstants.Turret.TURRET_MIN_ANGLE;
 
 import edu.wpi.first.math.Matrix;
+import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -25,8 +26,13 @@ public class OdometryHelper extends SubsystemBase {
 
     private final CommandSwerveDrivetrain drivetrain;
     private final Field2d field;
+    // private final SwerveDrivePoseEstimator poseEstimator;
 
-    
+    //Field dimensions in meters (for jumping problems)
+    private static final double FIELD_LENGTH = 16.54;
+    private static final double FIELD_WIDTH = 8.05;
+    private static final double MAX_VISION_POSE_ERROR = 2.0;
+
     // change to hub pose i
     private final Translation2d Redhub = new Translation2d(RED_HUB_X, RED_HUB_Y);
     private final Translation2d Bluehub = new Translation2d(BLUE_HUB_X, BLUE_HUB_Y);
@@ -35,7 +41,6 @@ public class OdometryHelper extends SubsystemBase {
     public OdometryHelper(CommandSwerveDrivetrain drivetrain) {
         this.drivetrain = drivetrain;
         this.field = new Field2d();
-
         SmartDashboard.putData("Field", field);
     }
     
@@ -47,7 +52,7 @@ public class OdometryHelper extends SubsystemBase {
         Vision.updateRobotOrientation(drivetrain);
 
         // Add vision data from ALL cameras
-        // addVisionMeasurements();
+        addVisionMeasurements();
 
         // Get fused pose (AFTER vision updates)
         Pose2d robotPose = drivetrain.getState().Pose;
@@ -69,22 +74,37 @@ public class OdometryHelper extends SubsystemBase {
     }
 
     private void addVisionMeasurements() {
+        Pose2d currentPose = drivetrain.getState().Pose;
+
         for (String name : Vision.getLimelights()) {
 
             Vision.VisionMeasurement vm = Vision.getMeasurement(name);
 
             if (vm == null) continue;
 
-            // Must see at least 1 tag
-            if (vm.tagCount == 0) continue;
-
+            // See at least 2 tags for better accuracy
+            if (vm.tagCount < 2) continue;
+            
             // Reject bad measurements
-            if (vm.avgTagDist > 6.0) continue;
+            if (vm.avgTagDist > 4.0) continue;
+
+            Pose2d visionPose = vm.pose;
+            
+            // Reject off-field solutions
+            if (!isPoseOnField(visionPose)) continue;
+
+            // Reject huge jumps from odometry
+            double poseError =
+                currentPose.getTranslation().getDistance(
+                    visionPose.getTranslation()
+                );
+
+            if (poseError > MAX_VISION_POSE_ERROR) continue;
 
             Matrix<N3, N1> stdDevs =
                 edu.wpi.first.math.VecBuilder.fill(
-                    0.5 + vm.avgTagDist * 0.2,  // X
-                    0.5 + vm.avgTagDist * 0.2,  // Y
+                    1.5 + vm.avgTagDist * 0.5,  // X
+                    1.5 + vm.avgTagDist * 0.5,  // Y
                     999999                     // ignore rotation
                 );
 
@@ -101,6 +121,11 @@ public class OdometryHelper extends SubsystemBase {
             SmartDashboard.putNumber(name + " Dist", vm.avgTagDist);
             SmartDashboard.putNumber(name + " Tags", vm.tagCount);
         }
+    }
+
+    private boolean isPoseOnField(Pose2d pose) {
+        return pose.getX() > 0 && pose.getX() < FIELD_LENGTH &&
+            pose.getY() > 0 && pose.getY() < FIELD_WIDTH;
     }
 
     // Distance calculation 
