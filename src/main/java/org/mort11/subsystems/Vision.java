@@ -215,9 +215,12 @@ public class Vision extends SubsystemBase {
     public static VisionMeasurement getMeasurement(String limelightName) {
         var estimate = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(limelightName);
 
-        if (!OdometryHelper.isBlue()) {
-            estimate = LimelightHelpers.getBotPoseEstimate_wpiRed_MegaTag2(limelightName);
+        if (!OdometryHelper.isBlue()){
+            estimate = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(limelightName);
         }
+
+        if (estimate == null)
+            return null;
 
         VisionMeasurement vm = new VisionMeasurement();
         vm.pose = estimate.pose;

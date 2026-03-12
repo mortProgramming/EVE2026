@@ -74,7 +74,7 @@ public class OdometryHelper extends SubsystemBase {
     }
 
     private void addVisionMeasurements() {
-        Pose2d currentPose = drivetrain.getState().Pose;
+        // Pose2d currentPose = drivetrain.getState().Pose;
 
         for (String name : Vision.getLimelights()) {
 
@@ -83,28 +83,29 @@ public class OdometryHelper extends SubsystemBase {
             if (vm == null) continue;
 
             // See at least 2 tags for better accuracy
-            if (vm.tagCount < 2) continue;
+            if (vm.tagCount == 0) continue;
             
             // Reject bad measurements
-            if (vm.avgTagDist > 4.0) continue;
+            if (vm.avgTagDist > 6.0) continue;
 
-            Pose2d visionPose = vm.pose;
+            // Pose2d visionPose = vm.pose;
             
             // Reject off-field solutions
-            if (!isPoseOnField(visionPose)) continue;
+            // if (!isPoseOnField(visionPose)) continue;
 
             // Reject huge jumps from odometry
-            double poseError =
-                currentPose.getTranslation().getDistance(
-                    visionPose.getTranslation()
-                );
 
-            if (poseError > MAX_VISION_POSE_ERROR) continue;
+            // double poseError =
+            //     currentPose.getTranslation().getDistance(
+            //         visionPose.getTranslation()
+            //     );
+
+            // if (poseError > MAX_VISION_POSE_ERROR) continue;
 
             Matrix<N3, N1> stdDevs =
                 edu.wpi.first.math.VecBuilder.fill(
-                    1.5 + vm.avgTagDist * 0.5,  // X
-                    1.5 + vm.avgTagDist * 0.5,  // Y
+                    0.5 + vm.avgTagDist * 0.4,  // X
+                    0.5 + vm.avgTagDist * 0.4,  // Y
                     999999                     // ignore rotation
                 );
 
@@ -123,10 +124,10 @@ public class OdometryHelper extends SubsystemBase {
         }
     }
 
-    private boolean isPoseOnField(Pose2d pose) {
-        return pose.getX() > 0 && pose.getX() < FIELD_LENGTH &&
-            pose.getY() > 0 && pose.getY() < FIELD_WIDTH;
-    }
+    // private boolean isPoseOnField(Pose2d pose) {
+    //     return pose.getX() > 0 && pose.getX() < FIELD_LENGTH &&
+    //         pose.getY() > 0 && pose.getY() < FIELD_WIDTH;
+    // }
 
     // Distance calculation 
     public double getDistanceToTarget() {
@@ -139,8 +140,8 @@ public class OdometryHelper extends SubsystemBase {
     }
 
     public static Boolean isBlue() {
-		return DriverStation.getAlliance().isPresent() ? DriverStation.getAlliance().get() == Alliance.Blue : true;
-	}
+        return DriverStation.getAlliance().isPresent() ? DriverStation.getAlliance().get() == Alliance.Blue : true;
+    }
 
     public Pose2d getHubTarget() {
         if (isBlue()) {
