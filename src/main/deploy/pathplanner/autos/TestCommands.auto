@@ -11,15 +11,28 @@
           }
         },
         {
-          "type": "wait",
+          "type": "path",
           "data": {
-            "waitTime": 3.0
+            "pathName": "DriveHorizontalCenter"
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "IntakeFeather"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TestRotate"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "IntakeRoller"
+                }
+              }
+            ]
           }
         }
       ]

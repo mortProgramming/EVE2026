@@ -1,0 +1,86 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "DriveHorizontalCenter"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SetShooter"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Feeder"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakeArmDown"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "DriveCenterToDepot"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "DepotIntake"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "IntakeRoller"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakeRoller"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "DepotToDriveCenter"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SetShooter"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Feeder"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "Competition Auto",
+  "choreoAuto": false
+}
