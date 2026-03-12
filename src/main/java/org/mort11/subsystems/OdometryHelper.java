@@ -62,6 +62,7 @@ public class OdometryHelper extends SubsystemBase {
         SmartDashboard.putNumber("Robot Y", robotPose.getY());
         SmartDashboard.putNumber("Robot Heading",
             robotPose.getRotation().getDegrees());
+        SmartDashboard.putString("Alliance", isBlue() ? "Blue" : "Red");
 
         field.setRobotPose(robotPose);
 
@@ -132,7 +133,11 @@ public class OdometryHelper extends SubsystemBase {
     // Distance calculation 
     public double getDistanceToTarget() {
         Pose2d pose = drivetrain.getState().Pose;
-        return pose.getTranslation().getDistance(Redhub);
+        if (isBlue()){
+            return pose.getTranslation().getDistance(Bluehub);
+        } else {
+            return pose.getTranslation().getDistance(Redhub);
+        }
     }
     
     public Pose2d getPose() {

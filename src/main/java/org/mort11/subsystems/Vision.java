@@ -61,6 +61,19 @@ public class Vision extends SubsystemBase {
         CameraServer.addCamera(limelightTwoFeed);
         CameraServer.addCamera(limelightThreeFeed);
         CameraServer.addCamera(limelightFourFeed);
+
+        // In the Vision constructor, after camera setup:
+        // Forward, side, up in meters (converted from inches).
+        // Replace 12.0, 0.0, 18.0 with your actual tape measure values in inches.
+        LimelightHelpers.setCameraPose_RobotSpace(
+            "limelight-three",
+            -24.0 * 0.0254,   // forward — replace 12.0 with your inches measurement
+            0.0  * 0.0254,   // side — replace 0.0 with your inches measurement
+            18.0 * 0.0254,   // up — replace 18.0 with your inches measurement
+            0.0,             // roll degrees
+            0.0,             // pitch degrees
+            180.0              // yaw degrees
+);
     }
 
     @Override
@@ -215,9 +228,12 @@ public class Vision extends SubsystemBase {
     public static VisionMeasurement getMeasurement(String limelightName) {
         var estimate = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(limelightName);
 
-        if (!OdometryHelper.isBlue()){
-            estimate = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(limelightName);
-        }
+        // ALWAYS USE THE BLUE ALLIANCE (EVEN IF ON THE RED ALLIANCE) — this is because 
+        //    the operator perspective offset is baked into the pose estimation, and using 
+        //    the Red alliance would corrupt the pose on Red alliance.
+        // if (!OdometryHelper.isBlue()){
+        //     estimate = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(limelightName);
+        // }
 
         if (estimate == null)
             return null;
@@ -232,8 +248,25 @@ public class Vision extends SubsystemBase {
     }
 
     public static void updateRobotOrientation(CommandSwerveDrivetrain drivetrain) {
-        double yaw = drivetrain.getPose().getRotation().getDegrees();
-        double yawRate = Math.toDegrees(drivetrain.getRobotRelativeSpeeds().omegaRadiansPerSecond);
+        // double yaw = drivetrain.getPose().getRotation().getDegrees();
+        // double yawRate = Math.toDegrees(drivetrain.getRobotRelativeSpeeds().omegaRadiansPerSecond);
+
+        // Use the raw Pigeon 2 (IMU - Inertial Measurement Unit) yaw directly.
+        // MegaTag2 needs the yaw in WPILib Blue-origin field coordinates:
+        // 0 degrees = robot facing the Red alliance wall.
+        // Do NOT use getPose().getRotation() here — that has the operator
+        // perspective offset baked in, which corrupts MegaTag2 on Red alliance.
+        double yaw = drivetrain.getPigeon2().getYaw().getValueAsDouble();
+        double yawRate = drivetrain.getPigeon2().getAngularVelocityZWorld().getValueAsDouble();
+
+        // MegaTag2 needs yaw in WPILib Blue-origin coordinates:
+        // 0 deg = robot facing the Red alliance wall.
+        // On Red alliance, the operator perspective has flipped "forward" by 180 deg,
+        // so we must correct for that when sending orientation to the Limelight.
+        if (!OdometryHelper.isBlue()) {
+            yaw += 180.0;
+        }
+
 
         for (String name : LIMELIGHTS) {
             LimelightHelpers.SetRobotOrientation(name, yaw, yawRate, 0.0, 0.0, 0.0, 0.0);
