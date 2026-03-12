@@ -45,7 +45,7 @@ public class Vision extends SubsystemBase {
     }
 
     public Vision() {
-        fieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2026RebuiltWelded);
+        fieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2026RebuiltAndymark);
 
         cameraTableOne   = NetworkTableInstance.getDefault().getTable("limelight-one");
         cameraTableTwo   = NetworkTableInstance.getDefault().getTable("limelight-two");
@@ -67,7 +67,7 @@ public class Vision extends SubsystemBase {
         // Replace 12.0, 0.0, 18.0 with your actual tape measure values in inches.
         LimelightHelpers.setCameraPose_RobotSpace(
             "limelight-three",
-            -24.0 * 0.0254,   // forward — replace 12.0 with your inches measurement
+            -30.0 * 0.0254,   // forward — replace 12.0 with your inches measurement
             0.0  * 0.0254,   // side — replace 0.0 with your inches measurement
             18.0 * 0.0254,   // up — replace 18.0 with your inches measurement
             0.0,             // roll degrees
