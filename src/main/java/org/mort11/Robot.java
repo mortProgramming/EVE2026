@@ -6,7 +6,9 @@ package org.mort11;
 
 import com.ctre.phoenix6.HootAutoReplay;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -42,6 +44,10 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
+        // Log alliance so we can confirm it matches our intent
+        var alliance = DriverStation.getAlliance();
+        SmartDashboard.putString("Auto Alliance", alliance.isPresent() ? alliance.get().toString() : "NOT PRESENT");
+
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }
