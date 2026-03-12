@@ -447,10 +447,12 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     }
 
     public void driveRelativeAutobuilder(ChassisSpeeds speeds) {
+        ChassisSpeeds discretized = ChassisSpeeds.discretize(speeds, 0.02);
+    
         SwerveRequest request = new SwerveRequest.RobotCentric()
-            .withVelocityX(speeds.vxMetersPerSecond)
-            .withVelocityY(speeds.vyMetersPerSecond)
-            .withRotationalRate(speeds.omegaRadiansPerSecond);
+            .withVelocityX(discretized.vxMetersPerSecond)
+            .withVelocityY(discretized.vyMetersPerSecond)
+            .withRotationalRate(discretized.omegaRadiansPerSecond);
         setControl(request);
     }
     public PIDController getAprilTagXController() {
