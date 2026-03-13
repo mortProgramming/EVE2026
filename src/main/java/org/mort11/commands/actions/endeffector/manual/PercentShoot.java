@@ -5,32 +5,26 @@ import org.mort11.subsystems.Shooter;
 
 public class PercentShoot extends Command {
     private final Shooter shooter;
-    private double percent;
+    private final double percent;
 
-        public PercentShoot(double percent) {
-            shooter = Shooter.getInstance();
-            this.percent = percent;
-            addRequirements(shooter);
-        }
-    
-    @Override
-    public void initialize() {
-        
+    public PercentShoot(Shooter shooter, double percent) {
+        this.shooter = shooter;
+        this.percent = percent;
+        addRequirements(shooter);
     }
 
     @Override
     public void execute() {
-        shooter.setShooterPercent(percent);
+        shooter.setPercentOutput(percent);
     }
 
     @Override
     public void end(boolean interrupted) {
-        shooter.setShooterPercent(0);
+        shooter.stop();
     }
 
     @Override
-    public boolean isFinished() {
-        return false; // Change this to true when the shooting action is complete
-    }
-    
+    public boolean isFinished() { 
+        return false;
+     }
 }

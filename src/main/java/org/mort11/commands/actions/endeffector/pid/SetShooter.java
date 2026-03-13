@@ -8,58 +8,49 @@ import java.util.function.DoubleSupplier;
 import org.mort11.RobotContainer;
 import org.mort11.subsystems.Shooter;
 
-import static org.mort11.configs.constants.PhysicalConstants.Shooter.*;
 import static org.mort11.configs.constants.PortConstants.Controller.*;
 
 public class SetShooter extends Command {
     private final Shooter shooter;
-    private DoubleSupplier RPM;
+    private final DoubleSupplier rpm;
 
-    public SetShooter(DoubleSupplier RPM) {
-        shooter = Shooter.getInstance();
-        this.RPM = RPM;
-
+    public SetShooter(Shooter shooter, DoubleSupplier rpm) {
+        this.shooter = shooter;
+        this.rpm = rpm;
         addRequirements(shooter);
     }
-    
-    public SetShooter(double RPM) {
-        shooter = Shooter.getInstance();
-        this.RPM = () -> RPM;
-            
-        addRequirements(shooter);
-    }
-    
-    @Override
-    public void initialize() {
-        
+
+    public SetShooter(Shooter shooter, double rpm) {
+        this(shooter, () -> rpm);
     }
 
     @Override
-    
     public void execute() {
-        if (RPM.getAsDouble() == 0) {
+        double targetRPM = rpm.getAsDouble();
+
+        if (targetRPM == 0) {
+            shooter.stop();
             RobotContainer.getEndeffectorController().setRumble(RumbleType.kBothRumble, 0);
             return;
         }
-        shooter.setShooterRPM(RPM.getAsDouble());
 
-        if (Math.abs(shooter.getShooterRPM() - RPM.getAsDouble()) / RPM.getAsDouble() < SHOOTER_SPEED_BUZZ_TOLERANCE) {
+        shooter.setRPM(targetRPM);
+
+        if (shooter.isVelocityWithinTolerance()) {
             RobotContainer.getEndeffectorController().setRumble(RumbleType.kBothRumble, RUMBLE_AMOUNT);
-        }
-        else{
+        } else {
             RobotContainer.getEndeffectorController().setRumble(RumbleType.kBothRumble, 0);
         }
-}
+    }
 
     @Override
     public void end(boolean interrupted) {
-        shooter.setShooterRPM(0);
+        shooter.stop();
         RobotContainer.getEndeffectorController().setRumble(RumbleType.kBothRumble, 0);
     }
 
     @Override
     public boolean isFinished() {
-        return false; 
+        return false;
     }
-    
 }

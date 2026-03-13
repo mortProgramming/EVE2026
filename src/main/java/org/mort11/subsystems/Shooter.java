@@ -1,108 +1,149 @@
 package org.mort11.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import edu.wpi.first.math.filter.MedianFilter;
-import edu.wpi.first.math.filter.SlewRateLimiter;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import static edu.wpi.first.units.Units.Amps;
+import static edu.wpi.first.units.Units.RPM;
+import static edu.wpi.first.units.Units.RotationsPerSecond;
+import static edu.wpi.first.units.Units.Volts;
 
-import static org.mort11.configs.constants.PhysicalConstants.ROBOT_VOLTAGE;
+import java.util.List;
 
-import static org.mort11.configs.constants.PhysicalConstants.Shooter.*;
-import static org.mort11.configs.constants.PortConstants.Shooter.*;
-import static org.mort11.configs.constants.PIDConstants.Shooter.*;
-
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.configs.MotorOutputConfigs;
+import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.configs.VoltageConfigs;
+import com.ctre.phoenix6.controls.VelocityVoltage;
+import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
-import com.ctre.phoenix6.signals.MotorAlignmentValue;
-import com.ctre.phoenix6.controls.Follower;
+import com.ctre.phoenix6.signals.InvertedValue;
+import com.ctre.phoenix6.signals.NeutralModeValue;
+
+import edu.wpi.first.units.measure.AngularVelocity;
+import edu.wpi.first.util.sendable.SendableBuilder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import org.mort11.configs.constants.PhysicalConstants.KrakenX60;
+import org.mort11.configs.constants.PIDConstants;
+import org.mort11.configs.constants.PhysicalConstants;
+import org.mort11.configs.constants.PortConstants;
 
 public class Shooter extends SubsystemBase {
-    private static Shooter shooter;
-    private final TalonFX shooterLeader;
-    private final TalonFX shooterFollowerA;
-    private final TalonFX shooterFollowerB;
+    private static final AngularVelocity kVelocityTolerance = RPM.of(PIDConstants.Shooter.VELOCITY_TOLERANCE_RPM);
 
-    private SimpleMotorFeedforward feedforward;
-    private SlewRateLimiter slewLimiter;
-    
-    private MedianFilter RPMAverager; 
+    private final TalonFX leftMotor, middleMotor, rightMotor;
+    private final List<TalonFX> motors;
+    private final VelocityVoltage velocityRequest = new VelocityVoltage(0).withSlot(0);
+    private final VoltageOut voltageRequest = new VoltageOut(0);
 
-    // private final VelocityVoltage velocityRequest =
-    //     new VelocityVoltage(0).withSlot(0);
-
-    private double shooterSpeed = 0;
+    private double dashboardTargetRPM = 0.0;
 
     public Shooter() {
-        shooterLeader = new TalonFX(SHOOTER_LEADER);
-        shooterFollowerA = new TalonFX(SHOOTER_FOLLOWER_A);
-        shooterFollowerB = new TalonFX(SHOOTER_FOLLOWER_B);
+        leftMotor = new TalonFX(PortConstants.Shooter.SHOOTER_LEFT);
+        middleMotor = new TalonFX(PortConstants.Shooter.SHOOTER_MIDDLE);
+        rightMotor = new TalonFX(PortConstants.Shooter.SHOOTER_RIGHT);
+        motors = List.of(leftMotor, middleMotor, rightMotor);
 
-        TalonFXConfiguration config = new TalonFXConfiguration();
-        // config.Slot0.kP = 0.15;
-        // config.Slot0.kI = 0.0;
-        // config.Slot0.kD = 0.01;
-        // config.Slot0.kV = 0.12;
+        //verify these inversions match physical robot wiring
+        configureMotor(leftMotor, InvertedValue.CounterClockwise_Positive);
+        configureMotor(middleMotor, InvertedValue.Clockwise_Positive);
+        configureMotor(rightMotor, InvertedValue.Clockwise_Positive);
 
-        shooterLeader.getConfigurator().apply(config);
-        shooterFollowerA.getConfigurator().apply(config);
-        shooterFollowerB.getConfigurator().apply(config);
+        SmartDashboard.putData(this);
+    }
 
-        shooterFollowerA.setControl(new Follower(SHOOTER_LEADER, MotorAlignmentValue.Opposed));
-        shooterFollowerB.setControl(new Follower(SHOOTER_LEADER, MotorAlignmentValue.Opposed));
+    private void configureMotor(TalonFX motor, InvertedValue invertDirection) {
+        final TalonFXConfiguration config = new TalonFXConfiguration()
+            .withMotorOutput(
+                new MotorOutputConfigs()
+                    .withInverted(invertDirection)
+                    .withNeutralMode(NeutralModeValue.Coast)
+            )
+            .withVoltage(
+                new VoltageConfigs()
+                    .withPeakReverseVoltage(Volts.of(0))
+            )
+            .withCurrentLimits(
+                new CurrentLimitsConfigs()
+                    .withStatorCurrentLimit(Amps.of(PhysicalConstants.Shooter.STATOR_CURRENT_LIMIT))
+                    .withStatorCurrentLimitEnable(true)
+                    .withSupplyCurrentLimit(Amps.of(PhysicalConstants.Shooter.SUPPLY_CURRENT_LIMIT))
+                    .withSupplyCurrentLimitEnable(true)
+            )
+            .withSlot0(
+                new Slot0Configs()
+                    .withKP(PIDConstants.Shooter.KP)
+                    .withKI(PIDConstants.Shooter.KI)
+                    .withKD(PIDConstants.Shooter.KD)
+                    .withKV(12.0 / KrakenX60.kFreeSpeed.in(RotationsPerSecond))
+            );
 
-        feedforward = new SimpleMotorFeedforward(RPM_KS, RPM_KV, RPM_KA);
-        slewLimiter = new SlewRateLimiter(SLEW_RATE_LIMIT);
+        motor.getConfigurator().apply(config);
+    }
 
-        RPMAverager = new MedianFilter(35);
+    public void setRPM(double rpm) {
+        for (final TalonFX motor : motors) {
+            motor.setControl(
+                velocityRequest.withVelocity(RPM.of(rpm))
+            );
+        }
+    }
+
+    public void setPercentOutput(double percentOutput) {
+        for (final TalonFX motor : motors) {
+            motor.setControl(
+                voltageRequest.withOutput(Volts.of(percentOutput * 12.0))
+            );
+        }
+    }
+
+    public void stop() {
+        setPercentOutput(0.0);
+    }
+
+    public double getRPM() {
+        // average across all three motors
+        return motors.stream()
+            .mapToDouble(m -> m.getVelocity().getValue().in(RPM))
+            .average()
+            .orElse(0.0);
+    }
+
+    public boolean isVelocityWithinTolerance() {
+        return motors.stream().allMatch(motor -> {
+            final boolean isInVelocityMode = motor.getAppliedControl().equals(velocityRequest);
+            final AngularVelocity currentVelocity = motor.getVelocity().getValue();
+            final AngularVelocity targetVelocity = velocityRequest.getVelocityMeasure();
+            return isInVelocityMode && currentVelocity.isNear(targetVelocity, kVelocityTolerance);
+        });
+    }
+
+    public Command spinUpCommand(double rpm) {
+        return runOnce(() -> setRPM(rpm))
+            .andThen(Commands.waitUntil(this::isVelocityWithinTolerance));
+    }
+
+    public Command dashboardSpinUpCommand() {
+        return defer(() -> spinUpCommand(dashboardTargetRPM));
+    }
+
+    private void initSendable(SendableBuilder builder, TalonFX motor, String name) {
+        builder.addDoubleProperty(name + " RPM", () -> motor.getVelocity().getValue().in(RPM), null);
+        builder.addDoubleProperty(name + " Stator Current", () -> motor.getStatorCurrent().getValue().in(Amps), null);
+        builder.addDoubleProperty(name + " Supply Current", () -> motor.getSupplyCurrent().getValue().in(Amps), null);
     }
 
     @Override
-    public void periodic() {
-        shooterLeader.setVoltage(slewLimitedSpeed(shooterSpeed) * ROBOT_VOLTAGE);
-
-        SmartDashboard.putNumber("Shooter Speed RPM", RPMAverager.calculate(getShooterRPM()));
-        
-    }
-
-    public double slewLimitedSpeed(double shooterSpeed) {
-        return slewLimiter.calculate(shooterSpeed);
-    }
-
-    // public void setShooterSpeed(double speed) {
-    //     velocityRequest.withVelocity(speed);
-    //     shooterLeader.setControl(velocityRequest);
-    //     shooterFollowerA.setControl(velocityRequest);
-    //     shooterFollowerB.setControl(velocityRequest);
-    // }
-
-    public void setShooterPercent(double percent) {
-        shooterSpeed = percent;
-    }
-
-    public void setShooterRPM(double RPM) {
-        shooterSpeed = (RPM / MAX_SHOOTER_RPM) + 
-        (feedforward.calculate(RPM) / ROBOT_VOLTAGE);
-    }
-
-    public double getShooterSpeedRPS() {
-        return shooterLeader.getVelocity().getValueAsDouble();
-    }
-
-    public double getShooterRPM() {
-        return getShooterSpeedRPS() * 60.0;
-    }
-
-   public boolean isAtTargetRPM(double targetRPM) {
-    if (targetRPM == 0) return true;
-    return Math.abs(getShooterRPM() - targetRPM) / targetRPM < SHOOTER_SPEED_BUZZ_TOLERANCE;
-}   
-
-    public static Shooter getInstance(){
-        if (shooter == null){
-            shooter = new Shooter();
-        }
-        return shooter;
+    public void initSendable(SendableBuilder builder) {
+        initSendable(builder, leftMotor, "Left");
+        initSendable(builder, middleMotor, "Middle");
+        initSendable(builder, rightMotor, "Right");
+        builder.addStringProperty("Command", () -> getCurrentCommand() != null ? getCurrentCommand().getName() : "null", null);
+        builder.addDoubleProperty("Dashboard RPM", () -> dashboardTargetRPM, value -> dashboardTargetRPM = value);
+        builder.addDoubleProperty("Target RPM", () -> velocityRequest.getVelocityMeasure().in(RPM), null);
+        builder.addDoubleProperty("Average RPM", this::getRPM, null);
+        builder.addBooleanProperty("At Target", this::isVelocityWithinTolerance, null);
     }
 }
-

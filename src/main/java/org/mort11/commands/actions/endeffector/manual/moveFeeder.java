@@ -1,33 +1,29 @@
 package org.mort11.commands.actions.endeffector.manual;
 
+import edu.wpi.first.wpilibj2.command.Command;
 import org.mort11.subsystems.Feeder;
 
-import edu.wpi.first.wpilibj2.command.Command;
+public class MoveFeeder extends Command {
 
-public class moveFeeder extends Command {
-    private Feeder feeder;
-    private double speed;
+    private final Feeder feeder;
 
-    public moveFeeder(double speed){
-        feeder = Feeder.getInstance();
-        this.speed = speed;
+    public MoveFeeder(Feeder feeder) {
+        this.feeder = feeder;
         addRequirements(feeder);
     }
 
-    public void initialize(){
+    @Override
+    public void initialize() {
+        feeder.set(Feeder.Speed.FEED);
     }
 
-    public void execute(){
-        feeder.setSpeed(speed);
+    @Override
+    public void end(boolean interrupted) {
+        feeder.stop();
     }
 
-    public void end(boolean interrupted){
-        feeder.setSpeed(0);
-    }
-    
-    public boolean isFinished(){
+    @Override
+    public boolean isFinished() {
         return false;
-    }   
+    }
 }
-
-

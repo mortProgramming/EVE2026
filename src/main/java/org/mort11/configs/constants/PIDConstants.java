@@ -7,32 +7,8 @@ public final class PIDConstants {
 
     }
     
-    public static final class Feeder {
-
-    }
-
-    public static final class IntakeArmLeft {
-        public final static double down = 0;
-        public final static double up = 0;
-
-    }
-
-    public static final class IntakeArmRight {
-        public final static double down = 0;
-        public final static double up = 0;
-
-    }
-
-    public static final class IntakeRollerLeft {
-
-    }
-
-    public static final class IntakeRollerRight {
-
-    }
 
     public static final class Hood {
-
 		//PID Rotational
 		public final static double ROT_KP = 0.25;
 		public final static double ROT_KI = 0;
@@ -44,28 +20,17 @@ public final class PIDConstants {
         public final static double ROT_SPEED_TOLERANCE = 10.0;
     }
 
-    public static final class Turret {
-        //all units deg - deg/sec ...
-        //FeedForward
-		public final static double ROT_KS = 0;
-		public final static double ROT_KV = 0;
-		public final static double ROT_KA = 0;
-
-		//PID Rotational
-		public final static double ROT_KP = 0.02;
-		public final static double ROT_KI = 0;
-		public final static double ROT_KD = 0;
-		public final static Constraints ROT_CONSTRAINTS = new Constraints(400, 800);
+    public static final class Shooter {
+        public static final double KP = 0.5;   // placeholder, tune on robot
+        public static final double KI = 0.0;   
+        public static final double KD = 0.0;
+    
+        public static final double VELOCITY_TOLERANCE_RPM = 100;
     }
 
-    public static final class Shooter {
-        public final static double RPM_KS = 0.23;
-		// public final static double RPM_KV = 0.00045;
-        public final static double RPM_KV = 0.000027;
-		public final static double RPM_KA = 0;
-
-        public final static double RPM_CHANGE_PER_SEC = 3000;
-
-        public static final double SLEW_RATE_LIMIT = RPM_CHANGE_PER_SEC / PhysicalConstants.Shooter.MAX_SHOOTER_RPM;
+    public static final class Intake {
+        public static final double KP = 300;
+        public static final double KI = 0;
+        public static final double KD = 0;
     }
 }
