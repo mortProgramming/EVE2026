@@ -53,7 +53,7 @@ public class BasicCommands {
         //  new SetShooter(2250)
         // ).until(it has been at target RPM for 3 seconds));
 
-        NamedCommands.registerCommand("IntakeArmDown", new moveLeftIntake(-0.25).withTimeout(2.25));
+        NamedCommands.registerCommand("IntakeArmDown", new moveLeftIntake(-0.25).withTimeout(1.5));
         NamedCommands.registerCommand("IntakeArmUp", new moveLeftIntake(0.25).withTimeout(0.7));
 
         //This one runs repeateadly check IntakeFeather

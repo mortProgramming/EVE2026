@@ -305,6 +305,7 @@ public class RobotContainer {
             // autoChooser.addOption("IntakeTest", new PathPlannerAuto("IntakeTest"));
             // autoChooser.addOption("RedShootSweepAuto", new PathPlannerAuto("RedShootSweepAuto"));
             autoChooser.addOption("BlueCenterShootSweep", new PathPlannerAuto("BlueCenterShootSweep"));
+            autoChooser.addOption("RedCenterShootSweep", new PathPlannerAuto("RedCenterShootSweep"));
             autoChooser.addOption("DO NOT USE", new PathPlannerAuto("TestCommands"));
             autoChooser.addOption("Human Player station", new PathPlannerAuto("BlueCenterShootThenHuman"));
             autoChooser.addOption("DriveHorizontalThenBack", new PathPlannerAuto("DriveHorizontalThenBack"));
@@ -342,7 +343,7 @@ public class RobotContainer {
         // Pathplanner autos WIP
         // autoChooser.addOption("LimelightTest", new PathPlannerAuto("Please Work")); 
     
-                // drivetrain.applyRequest(() -> idle)
+                // drivetrain.applyRequest(() -> idle)99+9+9
             // );
             SmartDashboard.putData("Auto Chooser", autoChooser);
 

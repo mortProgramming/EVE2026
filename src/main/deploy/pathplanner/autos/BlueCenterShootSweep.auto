@@ -42,6 +42,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "IntakeArmDown"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "BlueBotDriveToCenterNeutralZone"
