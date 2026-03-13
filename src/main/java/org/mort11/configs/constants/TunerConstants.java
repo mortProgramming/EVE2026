@@ -66,7 +66,12 @@ public class TunerConstants {
         );
     private static final CANcoderConfiguration encoderInitialConfigs = new CANcoderConfiguration();
     // Configs for the Pigeon 2; leave this null to skip applying Pigeon 2 configs
-    private static final Pigeon2Configuration pigeonConfigs = null;
+    private static final Pigeon2Configuration pigeonConfigs = null;   // commented out in favor of below. The Pigeon may be mounted 180 degrees off.
+    // Configs for the Pigeon 2 (IMU — Inertial Measurement Unit).
+    // The Pigeon is physically mounted rotated 180 degrees from the robot's
+    // actual forward direction, so we apply a mount pose yaw offset to correct it.
+    // private static final Pigeon2Configuration pigeonConfigs = new Pigeon2Configuration()
+    //     .withMountPose(new MountPoseConfigs().withMountPoseYaw(180));
 
     // CAN bus that the devices are located on;
     // All swerve devices must share the same CAN bus
