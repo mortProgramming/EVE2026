@@ -63,6 +63,7 @@ public class OdometryHelper extends SubsystemBase {
         SmartDashboard.putNumber("Robot Heading",
             robotPose.getRotation().getDegrees());
         SmartDashboard.putString("Alliance", isBlue() ? "Blue" : "Red");
+        SmartDashboard.putNumber("Raw Pigeon Yaw", drivetrain.getPigeon2().getYaw().getValueAsDouble());
 
         field.setRobotPose(robotPose);
 

@@ -67,7 +67,7 @@ public class Vision extends SubsystemBase {
         // Replace 12.0, 0.0, 18.0 with your actual tape measure values in inches.
         LimelightHelpers.setCameraPose_RobotSpace(
             "limelight-three",
-            -30.0 * 0.0254,   // forward — replace 12.0 with your inches measurement
+            -12.0 * 0.0254,   // forward — replace 12.0 with your inches measurement
             0.0  * 0.0254,   // side — replace 0.0 with your inches measurement
             18.0 * 0.0254,   // up — replace 18.0 with your inches measurement
             0.0,             // roll degrees
@@ -263,9 +263,9 @@ public class Vision extends SubsystemBase {
         // 0 deg = robot facing the Red alliance wall.
         // On Red alliance, the operator perspective has flipped "forward" by 180 deg,
         // so we must correct for that when sending orientation to the Limelight.
-        if (!OdometryHelper.isBlue()) {
-            yaw += 180.0;
-        }
+        // if (!OdometryHelper.isBlue()) {
+        //     yaw += 180.0;
+        // }
 
 
         for (String name : LIMELIGHTS) {
