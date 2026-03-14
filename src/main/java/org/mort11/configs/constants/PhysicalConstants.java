@@ -126,9 +126,8 @@ public final class PhysicalConstants {
 		public static final double BLUE_PASS_X = 0.0;
 		public static final double BLUE_PASS_Y = 0.0;
 	}
-	public static final class Climber{
-		public static final int CLIMBER_MOTOR = 0;//zero for now, will be updated when we get the new motor
-	}
+
+
 
 	
 

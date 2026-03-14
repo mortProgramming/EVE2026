@@ -25,21 +25,24 @@ public final class PortConstants {
     }
 
     public static final class Intake {
-        public static final int INTAKE_PIVOT = 0;  // replace with actual CAN ID
-        public static final int INTAKE_ROLLER = 1; // replace with actual CAN ID
+        public static final int INTAKE_PIVOT = 42;  // replace with actual CAN ID
+        public static final int INTAKE_ROLLER = 41; // replace with actual CAN ID
     }
 
     public static final class Feeder {
-        public static final int FEEDER_MOTOR = 10;    // replace with actual CAN ID
-        public static final int FEEDER_MOTOR_2 = 15; 
+        public static final int FEEDER_MOTOR = 40;    // replace with actual CAN ID
+        public static final int FEEDER_MOTOR_2 = 13; 
     }
 
     public static final class Shooter {
-        public static final int SHOOTER_LEFT = 0;   // replace with actual CAN IDs
-        public static final int SHOOTER_MIDDLE = 0;
-        public static final int SHOOTER_RIGHT = 0;
+        public static final int SHOOTER_LEFT = 14;   // replace with actual CAN IDs
+        public static final int SHOOTER_MIDDLE = 15;
+        public static final int SHOOTER_RIGHT = 16;
     }
     public static final class FloorConstants{
         public static final int FLOOR_MOTOR=0; //Replace with actual CAN IDs
     }
+    	public static final class Climber{
+		public static final int CLIMBER_MOTOR = 43;
+	}
 }
