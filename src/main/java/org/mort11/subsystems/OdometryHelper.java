@@ -8,9 +8,13 @@ import static org.mort11.configs.constants.PhysicalConstants.Turret.TURRET_MAX_A
 import static org.mort11.configs.constants.PhysicalConstants.Turret.TURRET_MIN_ANGLE;
 import static org.mort11.configs.constants.TunerConstants.*;
 
+import org.mort11.RobotContainer;
+import org.mort11.subsystems.LimelightHelpers.PoseEstimate;
+
 import com.ctre.phoenix6.swerve.SwerveDrivetrain.SwerveDriveState;
 
 import edu.wpi.first.math.Matrix;
+import edu.wpi.first.math.estimator.PoseEstimator;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -39,6 +43,15 @@ public class OdometryHelper extends SubsystemBase {
     private static final double FIELD_WIDTH = 8.05;
     private static final double MAX_VISION_POSE_ERROR = 2.0;
 
+    //stuff for vision measurements
+    private SwerveDriveKinematics visionKinematics = new SwerveDriveKinematics(frontLeftTranslation,frontRightTranslation,backLeftTranslation,backRightTranslation); //used meters from pathplanner
+    private Rotation2d gyroAngleRaw = RobotContainer.drivetrain.getPigeon2().getRotation2d();
+    private SwerveDriveState state = RobotContainer.drivetrain.getState();
+    private SwerveModulePosition[] modulePosition = state.ModulePositions;
+    //starting pose for this is something random
+    public SwerveDrivePoseEstimator poseEstimator;
+    NetworkTable limelight1 = LimelightHelpers.getLimelightNTTable("limelight-three");
+
     // change to hub pose i
     private final Translation2d Redhub = new Translation2d(RED_HUB_X, RED_HUB_Y);
     private final Translation2d Bluehub = new Translation2d(BLUE_HUB_X, BLUE_HUB_Y);
@@ -46,6 +59,7 @@ public class OdometryHelper extends SubsystemBase {
     public OdometryHelper(CommandSwerveDrivetrain drivetrain) {
         this.drivetrain = drivetrain;
         this.field = new Field2d();
+        this.poseEstimator = new SwerveDrivePoseEstimator(visionKinematics, gyroAngleRaw, modulePosition, new Pose2d(0.0,0.0,new Rotation2d()));
         SmartDashboard.putData("Field", field);
     }
     
@@ -61,7 +75,9 @@ public class OdometryHelper extends SubsystemBase {
 
         // Get fused pose (AFTER vision updates)
         Pose2d robotPose = drivetrain.getState().Pose;
-        
+        //experimenting in multiple places with pose estimator
+        SwerveDrivePoseEstimator poseEstimator = new SwerveDrivePoseEstimator(visionKinematics, gyroAngleRaw, modulePosition, drivetrain.getPose());
+        poseEstimator.update(gyroAngleRaw, modulePosition);
         // Dashboard output
         SmartDashboard.putNumber("Robot X", robotPose.getX());
         SmartDashboard.putNumber("Robot Y", robotPose.getY());
