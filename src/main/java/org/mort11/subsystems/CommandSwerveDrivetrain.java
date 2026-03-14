@@ -27,12 +27,17 @@ import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.estimator.PoseEstimator;
+import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.math.system.plant.DCMotor;
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Notifier;
@@ -58,10 +63,20 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
 
     private PIDController aprilTagXController;
 	private PIDController aprilTagYController;
-	private PIDController aprilTagOmegaController;      
+	private PIDController aprilTagOmegaController;  
+        //Below is what we need to make vision measurments:
+    private SwerveDriveKinematics visionKinematics = new SwerveDriveKinematics(frontLeftTranslation,frontRightTranslation,backLeftTranslation,backRightTranslation); //used meters from pathplanner
+    private Rotation2d gyroAngleRaw = getPigeon2().getRotation2d();
+    private SwerveDriveState state = getState();
+    private SwerveModulePosition[] modulePosition = state.ModulePositions;
+    //starting pose for this is something random
+    public SwerveDrivePoseEstimator poseEstimator = new SwerveDrivePoseEstimator(visionKinematics, gyroAngleRaw, modulePosition, new Pose2d(0.0,0.0,new Rotation2d()));
+    NetworkTable limelight1 = LimelightHelpers.getLimelightNTTable("limelight-three");
+    
     /* Below is what we need to make vision measurements work
      * NetworkTable limelight1 = NetworkTableInstance.getDefault.getTable(Limelight names)
      * NetworkTable limelight2 = blah blah 
+     * 
      * Then make pose estimator object 
      * SwerveDrivePoseEstimator pose = new SwerveDrivePoseEstimator(blah blah blah)
      * in periodic
@@ -72,8 +87,13 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
      * limelighthelpers pose estimates megatag2 method
      * 
      * look at mechanical advantage class for elastic widgets for driveteam 
-     */
+     * 
+     * To promote stability of the pose estimate and make it robust to bad vision data,
+     * we recommend only adding vision measurements that are already within one meter or so of the current pose estimate.
+     * SO add a thing that checks if vision measurements correction is less than one meter, correct it 
 
+     */
+    
     /* Blue alliance sees forward as 0 degrees (toward red alliance wall) */
     private static final Rotation2d kBlueAlliancePerspectiveRotation = Rotation2d.kZero;
     /* Red alliance sees forward as 180 degrees (toward blue alliance wall) */
@@ -498,5 +518,9 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
 
     public Rotation2d getRotation2d() {
         return getPose().getRotation();
+    }
+
+    public PoseEstimator poseEstimator(){
+        return poseEstimator;
     }
 }

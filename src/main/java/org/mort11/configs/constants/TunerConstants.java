@@ -12,6 +12,7 @@ import com.ctre.phoenix6.swerve.*;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants.*;
 
 import edu.wpi.first.math.Matrix;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.units.measure.*;
@@ -142,7 +143,8 @@ public class TunerConstants {
 
     private static final Distance kFrontLeftXPos = Inches.of(11.5);
     private static final Distance kFrontLeftYPos = Inches.of(10.25);
-
+    //for vision measurements ignore for now
+    public static Translation2d frontLeftTranslation = new Translation2d(kFrontLeftXPos,kFrontLeftYPos);
     // Front Right
     private static final int kFrontRightDriveMotorId = 4;
     private static final int kFrontRightSteerMotorId = 3;
@@ -153,7 +155,8 @@ public class TunerConstants {
 
     private static final Distance kFrontRightXPos = Inches.of(11.5);
     private static final Distance kFrontRightYPos = Inches.of(-10.25);
-
+    //for vision measurements ignore
+    public static Translation2d frontRightTranslation = new Translation2d(kFrontRightXPos,kFrontRightYPos);
     // Back Left
     private static final int kBackLeftDriveMotorId = 8;
     private static final int kBackLeftSteerMotorId = 7;
@@ -164,7 +167,8 @@ public class TunerConstants {
 
     private static final Distance kBackLeftXPos = Inches.of(-11.5);
     private static final Distance kBackLeftYPos = Inches.of(10.25);
-
+    //for vision measurements ignore
+    public static Translation2d backLeftTranslation = new Translation2d(kBackLeftXPos,kBackLeftYPos);
     // Back Right
     private static final int kBackRightDriveMotorId = 6;
     private static final int kBackRightSteerMotorId = 5;
@@ -175,7 +179,8 @@ public class TunerConstants {
 
     private static final Distance kBackRightXPos = Inches.of(-11.5);
     private static final Distance kBackRightYPos = Inches.of(-10.25);
-
+    //for vision measurements ignore
+    public static Translation2d backRightTranslation = new Translation2d(kBackRightXPos,kBackRightYPos);
 
     public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> FrontLeft =
         ConstantCreator.createModuleConstants(

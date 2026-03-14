@@ -4,23 +4,28 @@ import static org.mort11.configs.constants.VisionConstants.FRONT_CAMERA_NAME;
 
 import org.opencv.dnn.Net;
 
+import com.ctre.phoenix6.swerve.SwerveDrivetrain.SwerveDriveState;
+
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.HttpCamera;
+import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation3d;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Vision extends SubsystemBase {
     private static Vision instance;
-
     private HttpCamera limelightOneFeed;
     private HttpCamera limelightTwoFeed;
     private HttpCamera limelightThreeFeed;
@@ -219,7 +224,10 @@ public class Vision extends SubsystemBase {
     // ---------------- MEGATAG2 SUPPORT ----------------
 
     public static class VisionMeasurement {
+        // public Pose2d pose;
         public Pose2d pose;
+        //here is where the poseestimator object should be 
+        //addvisionmeasurements working all objects made are local move them later
         public double timestamp;
         public int tagCount;
         public double avgTagDist;
@@ -227,7 +235,7 @@ public class Vision extends SubsystemBase {
 
     public static VisionMeasurement getMeasurement(String limelightName) {
         var estimate = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(limelightName);
-
+ 
         // ALWAYS USE THE BLUE ALLIANCE (EVEN IF ON THE RED ALLIANCE) — this is because 
         //    the operator perspective offset is baked into the pose estimation, and using 
         //    the Red alliance would corrupt the pose on Red alliance.
