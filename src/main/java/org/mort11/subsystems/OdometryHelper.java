@@ -50,6 +50,7 @@ public class OdometryHelper extends SubsystemBase {
         // addVisionMeasurements();
 
         // Get fused pose (AFTER vision updates)
+        //Use poseestimator object instead of this so you can do it properly
         Pose2d robotPose = drivetrain.getState().Pose;
         
         // Dashboard output
