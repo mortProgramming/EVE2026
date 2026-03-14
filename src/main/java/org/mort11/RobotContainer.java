@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 
-import org.mort11.commands.actions.endeffector.manual.MoveFeeder;
 import org.mort11.commands.actions.endeffector.manual.MoveIntakeArm;
 import org.mort11.commands.actions.endeffector.manual.MoveIntakeRoller;
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
@@ -38,6 +37,12 @@ import org.mort11.subsystems.IntakeRoller;
 import org.mort11.subsystems.OdometryHelper;
 import org.mort11.subsystems.Shooter;
 import org.mort11.subsystems.Vision;
+import org.mort11.commands.actions.endeffector.manual.MoveFeeder;
+import org.mort11.commands.actions.endeffector.manual.MoveFloor;
+import org.mort11.commands.actions.endeffector.manual.MoveHood;
+import org.mort11.commands.actions.endeffector.manual.PercentShoot;
+import org.mort11.subsystems.Feeder;
+import org.mort11.subsystems.Floor;
 
 public class RobotContainer {
     private double MaxSpeed = 1.0 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
@@ -66,6 +71,8 @@ public class RobotContainer {
     private final IntakeArm intakeArm = new IntakeArm();
     private final IntakeRoller intakeRoller = new IntakeRoller();
     private final Vision vision = Vision.getInstance();
+    private final Feeder feeder = Feeder.getInstance();
+    private final Floor floor = Floor.getInstance();
     
 
     public static SendableChooser<Command> autoChooser;
@@ -116,6 +123,26 @@ public class RobotContainer {
         intakeArm.setDefaultCommand(new MoveIntakeArm(intakeArm, () -> -endeffectorController.getRightY()));
         
         endeffectorController.leftBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
+
+        // manual controller 
+        intakeArm.setDefaultCommand(new MoveIntakeArm(intakeArm, () -> -manualController.getRightY()));
+
+        manualController.rightBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
+
+        manualController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder(feeder));
+
+        manualController.leftTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFloor(0.8));
+        manualController.b().whileTrue(new MoveFloor(-0.8));
+
+        manualController.y().whileTrue(new SetShooter(shooter, 2500));
+        manualController.a().whileTrue(new PercentShoot(shooter, 0.4));
+
+        manualController.povUp().onTrue(new MoveHood(hood, 45.0)); // degrees/rotations 
+        manualController.povDown().onTrue(new MoveHood(hood, 0.0));
+
+        //floor and feeder tied together 9same as old spindexer feeder)
+        //michale climb button (30%)
+
     }
 
     public Command getPathPlannerCommand() {
