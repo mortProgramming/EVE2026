@@ -68,12 +68,12 @@ public class Vision extends SubsystemBase {
         LimelightHelpers.setCameraPose_RobotSpace(
             "limelight-three",
             -30.0 * 0.0254,   // forward — replace 12.0 with your inches measurement
-            0.0  * 0.0254,   // side — replace 0.0 with your inches measurement
+            100.0  * 0.0254,   // side — replace 0.0 with your inches measurement
             18.0 * 0.0254,   // up — replace 18.0 with your inches measurement
             0.0,             // roll degrees
             0.0,             // pitch degrees
-            180.0              // yaw degrees
-);
+            0.0              // yaw degrees
+        );
     }
 
     @Override
@@ -81,6 +81,19 @@ public class Vision extends SubsystemBase {
         SmartDashboard.putNumber("Tag ID", getTagId());
         SmartDashboard.putNumber("X Degrees", getTX());
         SmartDashboard.putBoolean("Tag Detected?", hasTag());
+
+        // Throttle cameras when disabled to reduce heat.
+        // Throttle value = number of frames to skip between processing.
+        // 100-200 is recommended by Limelight when disabled.
+        if (edu.wpi.first.wpilibj.RobotState.isDisabled()) {
+            for (String name : LIMELIGHTS) {
+                LimelightHelpers.SetThrottle(name, 100);
+            }
+        } else {
+            for (String name : LIMELIGHTS) {
+                LimelightHelpers.SetThrottle(name, 0); // 0 = full speed when enabled
+            }
+        }
     }
 
     // ---------- Camera / Limelight Methods ----------
