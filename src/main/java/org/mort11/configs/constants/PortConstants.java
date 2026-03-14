@@ -39,4 +39,7 @@ public final class PortConstants {
         public static final int SHOOTER_MIDDLE = 0;
         public static final int SHOOTER_RIGHT = 0;
     }
+    public static final class FloorConstants{
+        public static final int FLOOR_MOTOR=0; //Replace with actual CAN IDs
+    }
 }

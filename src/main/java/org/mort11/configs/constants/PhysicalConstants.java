@@ -121,4 +121,7 @@ public final class PhysicalConstants {
 		public static final double BLUE_PASS_X = 0.0;
 		public static final double BLUE_PASS_Y = 0.0;
 	}
+	public static final class FloorConfigs{
+		
+	}
 }
