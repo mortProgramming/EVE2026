@@ -2,8 +2,11 @@ package org.mort11.configs.constants;
 
 import static edu.wpi.first.units.Units.RotationsPerSecond;
 
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.units.measure.AngularVelocity;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 
 public final class PhysicalConstants {
 
@@ -45,7 +48,7 @@ public final class PhysicalConstants {
 	public static final class Feeder {
     	public static final double FEEDER_STATOR_CURRENT_LIMIT = 120;
     	public static final double FEEDER_SUPPLY_CURRENT_LIMIT = 50;
-		public static final double FEED_SPEED = 0.8;
+		public static final double FEED_SPEED = 0.3;
 	}
 
 	public static final class Hood {
@@ -78,7 +81,7 @@ public final class PhysicalConstants {
     	public static final double AGITATE_DEG = 20;
 
     //roller speed
-    	public static final double INTAKE_SPEED = 0.8;
+    	public static final double INTAKE_SPEED = 0.3;
 	}
 
   
@@ -120,5 +123,15 @@ public final class PhysicalConstants {
 
 		public static final double BLUE_PASS_X = 0.0;
 		public static final double BLUE_PASS_Y = 0.0;
+	}
+
+
+	public static class Landmarks {
+    	public static Translation2d hubPosition() {
+       		if (DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red) {
+            	return new Translation2d(Field.RED_HUB_X, Field.RED_HUB_Y);
+       			}
+        return new Translation2d(Field.BLUE_HUB_X, Field.BLUE_HUB_Y);
+		}
 	}
 }

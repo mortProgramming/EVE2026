@@ -13,7 +13,7 @@ public class MoveFeeder extends Command {
     }
 
     @Override
-    public void initialize() {
+    public void execute() {
         feeder.set(Feeder.Speed.FEED);
     }
 

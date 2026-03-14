@@ -18,6 +18,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 
 import org.mort11.commands.actions.endeffector.manual.MoveFeeder;
+import org.mort11.commands.actions.endeffector.manual.MoveIntakeArm;
+import org.mort11.commands.actions.endeffector.manual.MoveIntakeRoller;
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.commands.autons.pathplanner.BasicCommands;
 import org.mort11.commands.autons.timed.Taxi;
@@ -30,6 +32,9 @@ import static edu.wpi.first.units.Units.*;
 import static org.mort11.configs.constants.PortConstants.Controller.*;
 
 import org.mort11.subsystems.CommandSwerveDrivetrain;
+import org.mort11.subsystems.Hood;
+import org.mort11.subsystems.IntakeArm;
+import org.mort11.subsystems.IntakeRoller;
 import org.mort11.subsystems.OdometryHelper;
 import org.mort11.subsystems.Shooter;
 import org.mort11.subsystems.Vision;
@@ -57,7 +62,11 @@ public class RobotContainer {
     private final OdometryHelper odometry = new OdometryHelper(drivetrain);
 
     private final Shooter shooter = new Shooter();
+    private final Hood hood = new Hood();
+    private final IntakeArm intakeArm = new IntakeArm();
+    private final IntakeRoller intakeRoller = new IntakeRoller();
     private final Vision vision = Vision.getInstance();
+    
 
     public static SendableChooser<Command> autoChooser;
     public AutoBuilder autoBuilder;
@@ -83,6 +92,7 @@ public class RobotContainer {
             drivetrain.applyRequest(() -> idle).ignoringDisable(true)
         );
 
+        // drive controller
         driveController.cross().whileTrue(drivetrain.applyRequest(() -> brake));
         driveController.circle().whileTrue(drivetrain.applyRequest(() ->
             point.withModuleDirection(new Rotation2d(-driveController.getLeftY(), -driveController.getLeftX()))
@@ -99,8 +109,13 @@ public class RobotContainer {
         driveController.L1().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
         drivetrain.registerTelemetry(logger::telemeterize);
 
+        // endeffector controller
         endeffectorController.leftTrigger(TRIGGER_THRESHOLD).whileTrue(new SetShooter(shooter, 2500));
         //endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder());
+
+        intakeArm.setDefaultCommand(new MoveIntakeArm(intakeArm, () -> -endeffectorController.getRightY()));
+        
+        endeffectorController.leftBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
     }
 
     public Command getPathPlannerCommand() {
