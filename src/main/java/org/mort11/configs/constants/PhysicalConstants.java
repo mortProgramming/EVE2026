@@ -50,7 +50,7 @@ public final class PhysicalConstants {
 	public static final class Feeder {
     	public static final double FEEDER_STATOR_CURRENT_LIMIT = 120;
     	public static final double FEEDER_SUPPLY_CURRENT_LIMIT = 50;
-		public static final double FEED_SPEED = 0.3;
+		public static final double FEED_SPEED = 0.772;
 	}
 
 	public static final class Hood {
@@ -83,7 +83,8 @@ public final class PhysicalConstants {
     	public static final double AGITATE_DEG = 20;
 
     //roller speed
-    	public static final double INTAKE_SPEED = 0.3;
+    	public static final double INTAKE_SPEED = 1;
+		public static final double OUTTAKE_SPEED = -1;
 	}
 
 

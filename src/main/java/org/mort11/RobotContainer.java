@@ -40,6 +40,7 @@ import org.mort11.subsystems.Shooter;
 import org.mort11.subsystems.Vision;
 import org.mort11.commands.actions.endeffector.manual.MoveClimber;
 import org.mort11.commands.actions.endeffector.manual.MoveFeeder;
+import org.mort11.commands.actions.endeffector.manual.MoveFeederOuttake;
 import org.mort11.commands.actions.endeffector.manual.MoveFloor;
 import org.mort11.commands.actions.endeffector.manual.MoveHood;
 import org.mort11.commands.actions.endeffector.manual.PercentShoot;
@@ -151,15 +152,16 @@ public class RobotContainer {
 
         //roller
         endeffectorController.leftBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
-        endeffectorController.rightBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
 
 
         //feeder + floor
-        manualController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder(feeder, floor));
+        endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder(feeder, floor));
+        endeffectorController.rightBumper().whileTrue(new MoveFeederOuttake(feeder, floor));
 
         //shooter
-        manualController.leftBumper().whileTrue(new SetShooter(shooter, 4000));
-        manualController.a().whileTrue(new PercentShoot(shooter, 0.6));
+        //endeffectorController.leftTrigger().whileTrue(new SetShooter(shooter, 4000));
+        endeffectorController.leftTrigger().whileTrue(new PercentShoot(shooter, 0.8));
+
 
         //hood
         // manualController.povUp().onTrue(new MoveHood(hood, 45.0)); // degrees/rotations 
@@ -167,8 +169,8 @@ public class RobotContainer {
 
         //floor and feeder tied together 9same as old spindexer feeder)
         //michale climb button (30%)
-        manualController.povRight().whileTrue(new MoveClimber(0.3));
-        manualController.povLeft().whileTrue(new MoveClimber(-0.3));
+        manualController.povRight().whileTrue(new MoveClimber(-0.3));
+        manualController.povLeft().whileTrue(new MoveClimber(0.3));
 
         
         
