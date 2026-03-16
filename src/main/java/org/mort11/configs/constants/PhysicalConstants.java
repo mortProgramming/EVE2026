@@ -19,8 +19,8 @@ public final class PhysicalConstants {
 	}
 
     public static final class CommandSwerveDrivetrain {
-		public static final double DRIVETRAIN_TRACKWIDTH_METERS = Units.inchesToMeters(20.75);
-		public static final double DRIVETRAIN_WHEELBASE_METERS = Units.inchesToMeters(22.75);
+		public static final double DRIVETRAIN_TRACKWIDTH_METERS = Units.inchesToMeters(20.50);
+		public static final double DRIVETRAIN_WHEELBASE_METERS = Units.inchesToMeters(21.75);
 
 		public static final double DRIVEBASE_RADIUS_METERS = Math.hypot(
 			DRIVETRAIN_TRACKWIDTH_METERS / 2.0, DRIVETRAIN_WHEELBASE_METERS / 2.0
@@ -86,17 +86,6 @@ public final class PhysicalConstants {
     	public static final double INTAKE_SPEED = 0.3;
 	}
 
-  
-
-    public static final class IntakeRollerLeft {
-		public static final int ROLLER_LEFT_SMART_CURRENT_LIMIT = 60;
-    	public static final double ROLLER_LEFT_SECONDARY_CURRENT_LIMIT = 100;
-    }
-
-    public static final class IntakeRollerRight {
-		public static final int ROLLER_RIGHT_SMART_CURRENT_LIMIT = 60;
-    	public static final double ROLLER_RIGHT_SECONDARY_CURRENT_LIMIT = 100;
-    }
 
 	public static final class Turret {
 		public static final double MANUAL_SPEED = 0.15;
@@ -128,8 +117,6 @@ public final class PhysicalConstants {
 	}
 
 
-
-	
 
 	public static class Landmarks {
     	public static Translation2d hubPosition() {

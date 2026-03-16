@@ -18,9 +18,9 @@ public final class PortConstants {
     }
 
     public static final class Hood {
-        public static final int SERVO_HUB = 41; // CAN ID of your ServoHub
-        public static final ChannelId LEFT_SERVO_CHANNEL = ChannelId.kChannelId3;
-        public static final ChannelId RIGHT_SERVO_CHANNEL = ChannelId.kChannelId4;
+        public static final int SERVO_HUB = 17; // CAN ID of your ServoHub
+        public static final ChannelId LEFT_SERVO_CHANNEL = ChannelId.kChannelId2;
+        public static final ChannelId RIGHT_SERVO_CHANNEL = ChannelId.kChannelId1;
         public static final Bank SERVOBANK = ServoHub.Bank.kBank3_5;
     }
 
@@ -30,8 +30,7 @@ public final class PortConstants {
     }
 
     public static final class Feeder {
-        public static final int FEEDER_MOTOR = 40;    // replace with actual CAN ID
-        public static final int FEEDER_MOTOR_2 = 13; 
+        public static final int FEEDER_MOTOR = 13;    // replace with actual CAN ID
     }
 
     public static final class Shooter {
@@ -40,7 +39,7 @@ public final class PortConstants {
         public static final int SHOOTER_RIGHT = 16;
     }
     public static final class FloorConstants{
-        public static final int FLOOR_MOTOR=0; //Replace with actual CAN IDs
+        public static final int FLOOR_MOTOR = 40; //Replace with actual CAN IDs
     }
     	public static final class Climber{
 		public static final int CLIMBER_MOTOR = 43;

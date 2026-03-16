@@ -101,7 +101,7 @@ public class RobotContainer {
             drivetrain.applyRequest(() -> idle).ignoringDisable(true)
         );
 
-        // drive controller
+        //---------------------DRIVE CONTROLLER---------------------------
         driveController.cross().whileTrue(drivetrain.applyRequest(() -> brake));
         driveController.circle().whileTrue(drivetrain.applyRequest(() ->
             point.withModuleDirection(new Rotation2d(-driveController.getLeftY(), -driveController.getLeftX()))
@@ -118,28 +118,23 @@ public class RobotContainer {
         driveController.L1().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
         drivetrain.registerTelemetry(logger::telemeterize);
 
-        // endeffector controller
-        endeffectorController.leftTrigger(TRIGGER_THRESHOLD).whileTrue(new SetShooter(shooter, 2500));
-        //endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder());
-
-        intakeArm.setDefaultCommand(new MoveIntakeArm(intakeArm, () -> -endeffectorController.getRightY()));
+        driveController.povUp().whileTrue(new MoveClimber(0.3));
+        driveController.povDown().whileTrue(new MoveClimber(-0.3));
         
-        endeffectorController.leftBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
 
-        // manual controller 
+        //-----------------------------MANUAL CONTROLLER------------------------------- 
         //intakearm
-        intakeArm.setDefaultCommand(new MoveIntakeArm(intakeArm, () -> -manualController.getRightY()));
+        intakeArm.setDefaultCommand(new MoveIntakeArm(intakeArm, () -> -manualController.getRightY() * 0.3));
 
         //roller
         manualController.rightBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
-        //feeder
-        manualController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder(feeder));
-        //floor
-        manualController.leftTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFloor(0.8));
-        manualController.b().whileTrue(new MoveFloor(-0.8));
+        manualController.rightBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
+        //feeder + floor
+        manualController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder(feeder, floor));
+      
         //shooter
-        manualController.y().whileTrue(new SetShooter(shooter, 2500));
-        manualController.a().whileTrue(new PercentShoot(shooter, 0.4));
+        manualController.y().whileTrue(new SetShooter(shooter, 4000));
+        manualController.a().whileTrue(new PercentShoot(shooter, 0.6));
         //hood
         manualController.povUp().onTrue(new MoveHood(hood, 45.0)); // degrees/rotations 
         manualController.povDown().onTrue(new MoveHood(hood, 0.0));
@@ -148,6 +143,33 @@ public class RobotContainer {
         //michale climb button (30%)
         manualController.povRight().whileTrue(new MoveClimber(0.3));
         manualController.povLeft().whileTrue(new MoveClimber(-0.3));
+
+        //-----------------------END EFFECTOR CONTROLLER------------------------------------
+        //arm
+        endeffectorController.povUp().whileTrue(new MoveIntakeArm(intakeArm, () -> 0.3));
+        endeffectorController.povDown().whileTrue(new MoveIntakeArm(intakeArm, () -> -0.3));
+
+        //roller
+        endeffectorController.leftBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
+        endeffectorController.rightBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
+
+
+        //feeder + floor
+        manualController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder(feeder, floor));
+
+        //shooter
+        manualController.leftBumper().whileTrue(new SetShooter(shooter, 4000));
+        manualController.a().whileTrue(new PercentShoot(shooter, 0.6));
+
+        //hood
+        // manualController.povUp().onTrue(new MoveHood(hood, 45.0)); // degrees/rotations 
+        // manualController.povDown().onTrue(new MoveHood(hood, 0.0));
+
+        //floor and feeder tied together 9same as old spindexer feeder)
+        //michale climb button (30%)
+        manualController.povRight().whileTrue(new MoveClimber(0.3));
+        manualController.povLeft().whileTrue(new MoveClimber(-0.3));
+
         
         
 
