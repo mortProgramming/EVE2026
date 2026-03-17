@@ -146,9 +146,13 @@ public class RobotContainer {
         manualController.povLeft().whileTrue(new MoveClimber(-1));
 
         //-----------------------END EFFECTOR CONTROLLER------------------------------------
+
         //arm
-        //endeffectorController.povUp().whileTrue(new MoveIntakeArm(intakeArm, () -> 0.3));
-        //endeffectorController.povDown().whileTrue(new MoveIntakeArm(intakeArm, () -> -0.3));
+        endeffectorController.a().whileTrue(new AgitateArm(intakeArm));
+
+        endeffectorController.povUp().onTrue(Commands.runOnce(() -> intakeArm.setPivot(IntakeArm.Position.HOMED), intakeArm));
+        endeffectorController.povDown().onTrue(Commands.runOnce(() -> intakeArm.setPivot(IntakeArm.Position.INTAKE), intakeArm));
+
 
         //roller
         endeffectorController.leftBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
@@ -159,22 +163,15 @@ public class RobotContainer {
         endeffectorController.rightBumper().whileTrue(new MoveFeederOuttake(feeder, floor));
 
         //shooter
-        //endeffectorController.leftTrigger().whileTrue(new SetShooter(shooter, 4000));
         endeffectorController.leftTrigger().whileTrue(new PercentShoot(shooter, 0.8));
-        endeffectorController.x().whileTrue(new SetShooter(shooter, 4000));
-
+        endeffectorController.x().whileTrue(new SetShooter(shooter, 6000));
 
         //hood
-      
         endeffectorController.povLeft().whileTrue(new MoveHood(hood, 1.0));
         endeffectorController.povRight().whileTrue(new MoveHood(hood, -1.0));
 
 
-        //  arm agitate
-        endeffectorController.a().whileTrue(new AgitateArm(intakeArm));
-
-        endeffectorController.povUp().onTrue(Commands.runOnce(() -> intakeArm.setPivot(IntakeArm.Position.HOMED), intakeArm));
-        endeffectorController.povDown().onTrue(Commands.runOnce(() -> intakeArm.setPivot(IntakeArm.Position.INTAKE), intakeArm));
+        
 
 
        
@@ -201,12 +198,7 @@ public class RobotContainer {
         autoChooser = new SendableChooser<Command>();
         SmartDashboard.putData("autoChooser", autoChooser);
         autoChooser.setDefaultOption("nothing", null);
-        autoChooser.addOption("BlueCenterShootSweep", new PathPlannerAuto("BlueCenterShootSweep"));
-        autoChooser.addOption("DO NOT USE", new PathPlannerAuto("TestCommands"));
-        autoChooser.addOption("Human Player station", new PathPlannerAuto("BlueCenterShootThenHuman"));
-        autoChooser.addOption("DriveHorizontalThenBack", new PathPlannerAuto("DriveHorizontalThenBack"));
-        autoChooser.addOption("New CenterShoot", new PathPlannerAuto("BlueCenterShootIntake"));
-        autoChooser.addOption("Timed Taxi", new Taxi());
+        
 
         SmartDashboard.putData("Auto Chooser", autoChooser);
         SmartDashboard.putData("Field", m_field);
