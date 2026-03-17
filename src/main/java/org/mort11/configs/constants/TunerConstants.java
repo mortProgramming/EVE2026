@@ -66,7 +66,15 @@ public class TunerConstants {
         );
     private static final CANcoderConfiguration encoderInitialConfigs = new CANcoderConfiguration();
     // Configs for the Pigeon 2; leave this null to skip applying Pigeon 2 configs
-    private static final Pigeon2Configuration pigeonConfigs = null;
+    private static final Pigeon2Configuration pigeonConfigs = new Pigeon2Configuration()
+        .withMountPose(
+            new MountPoseConfigs()
+                // EVE 2.0: +X axis faces forward, +Z axis points up
+                // This matches the Pigeon 2.0 default, but we declare it explicitly
+                .withMountPoseYaw(0)    // degrees: 0 = +X faces robot forward
+                .withMountPosePitch(0)  // degrees: 0 = flat, +Z up
+                .withMountPoseRoll(0)   // degrees: no roll
+        );
 
     // CAN bus that the devices are located on;
     // All swerve devices must share the same CAN bus
