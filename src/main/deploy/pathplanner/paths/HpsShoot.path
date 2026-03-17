@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 0.7914550641940081,
+        "y": 0.6386019971469341
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 0.9972400007434421,
+        "y": 0.7805617093520012
+      },
+      "isLocked": false,
+      "linkedName": "Hps"
+    },
+    {
+      "anchor": {
+        "x": 3.418002853067047,
+        "y": 2.42413694721826
+      },
+      "prevControl": {
+        "x": 1.636954598614989,
+        "y": 1.6940330055112245
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "BotStart"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 1.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 52.82633702176464
+  },
+  "reversed": false,
+  "folder": "1.5 Autos",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "useDefaultConstraints": true
+}

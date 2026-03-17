@@ -136,12 +136,14 @@ public class RobotContainer {
         autoChooser = new SendableChooser<Command>();
         SmartDashboard.putData("autoChooser", autoChooser);
         autoChooser.setDefaultOption("nothing", null);
-        autoChooser.addOption("BlueCenterShootSweep", new PathPlannerAuto("BlueCenterShootSweep"));
-        autoChooser.addOption("DO NOT USE", new PathPlannerAuto("TestCommands"));
-        autoChooser.addOption("Human Player station", new PathPlannerAuto("BlueCenterShootThenHuman"));
-        autoChooser.addOption("DriveHorizontalThenBack", new PathPlannerAuto("DriveHorizontalThenBack"));
-        autoChooser.addOption("New CenterShoot", new PathPlannerAuto("BlueCenterShootIntake"));
-        autoChooser.addOption("Timed Taxi", new Taxi());
+        autoChooser.addOption("TopIntake", new PathPlannerAuto("TopIntake"));
+        autoChooser.addOption("RedTopIntake", new PathPlannerAuto("RedTopIntake"));
+        autoChooser.addOption("Depot", new PathPlannerAuto("Depot"));
+        autoChooser.addOption("RedDepot", new PathPlannerAuto("RedDepot"));
+        autoChooser.addOption("Hps", new PathPlannerAuto("Hps"));
+        autoChooser.addOption("RedHps", new PathPlannerAuto("RedHps"));
+        
+        
 
         SmartDashboard.putData("Auto Chooser", autoChooser);
         SmartDashboard.putData("Field", m_field);
