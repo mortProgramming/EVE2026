@@ -4,6 +4,9 @@
 
 package org.mort11;
 
+import org.mort11.subsystems.LimelightHelpers;
+import org.mort11.subsystems.Vision;
+
 import com.ctre.phoenix6.HootAutoReplay;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -35,10 +38,17 @@ public class Robot extends TimedRobot {
     public void disabledInit() {}
 
     @Override
-    public void disabledPeriodic() {}
+    public void disabledPeriodic() {
+        Vision.getInstance().updateLimelightThrottle(); // Throttle limelights if they get too hot while disabled
+    }
 
     @Override
-    public void disabledExit() {}
+    public void disabledExit() {
+        // Remove throttle when robot enables so vision is fully active during match
+        for (String name : Vision.getLimelights()) {
+            LimelightHelpers.SetThrottle(name, 0);
+        }
+    }
 
     @Override
     public void autonomousInit() {

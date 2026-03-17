@@ -85,7 +85,7 @@ public class RobotContainer {
 
     public RobotContainer() {
         drivetrain.configureAutoBuilder();
-        BasicCommands.setCommands(odometry, shooter);
+        BasicCommands.setCommands(odometry, shooter, intakeArm, intakeRoller, feeder, floor);
         configureBindings();
         configureAuto();
     }
@@ -198,6 +198,14 @@ public class RobotContainer {
         autoChooser = new SendableChooser<Command>();
         SmartDashboard.putData("autoChooser", autoChooser);
         autoChooser.setDefaultOption("nothing", null);
+        autoChooser.addOption("TopIntake", new PathPlannerAuto("TopIntake"));
+        autoChooser.addOption("RedTopIntake", new PathPlannerAuto("RedTopIntake"));
+        autoChooser.addOption("Depot", new PathPlannerAuto("Depot"));
+        autoChooser.addOption("RedDepot", new PathPlannerAuto("RedDepot"));
+        autoChooser.addOption("Hps", new PathPlannerAuto("Hps"));
+        autoChooser.addOption("RedHps", new PathPlannerAuto("RedHps"));
+        
+        
         
 
         SmartDashboard.putData("Auto Chooser", autoChooser);

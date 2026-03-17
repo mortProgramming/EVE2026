@@ -33,6 +33,14 @@ public class Vision extends SubsystemBase {
     private NetworkTable cameraTableThree;
     private NetworkTable cameraTableFour;
 
+    // Schmitt trigger state and thresholds for thermal throttling
+    private static final double LIMELIGHT_THROTTLE_ON_TEMP_C  = 60.0; // °C: throttle kicks in above this
+    private static final double LIMELIGHT_THROTTLE_OFF_TEMP_C = 45.0; // °C: throttle removed below this (hysteresis)
+    private static final int    LIMELIGHT_THROTTLE_VALUE      = 100;  // Numer of frames to skip (Value Range: 100 to 200. 200 means 100% throttling, 100 means 50% throttling)
+    private boolean limelightThrottled = false;
+
+    private static final String LL3_NAME = "limelight-three";
+
     private static final String[] LIMELIGHTS = {
         "limelight-one",
         "limelight-two",
@@ -61,6 +69,19 @@ public class Vision extends SubsystemBase {
         CameraServer.addCamera(limelightTwoFeed);
         CameraServer.addCamera(limelightThreeFeed);
         CameraServer.addCamera(limelightFourFeed);
+
+        // In the Vision constructor, after camera setup:
+        // Forward, side, up in meters (converted from inches).
+        // Replace 12.0, 0.0, 18.0 with your actual tape measure values in inches.
+        LimelightHelpers.setCameraPose_RobotSpace(
+            "limelight-three",
+            -3.0 * 0.0254,   // forward — replace 12.0 with your inches measurement
+            0.0  * 0.0254,   // side — replace 0.0 with your inches measurement
+            25.0 * 0.0254,   // up — replace 18.0 with your inches measurement
+            0.0,             // roll degrees
+            -15.0,               // pitch degrees
+            0.0              // yaw degrees
+        );
     }
 
     @Override
@@ -202,6 +223,37 @@ public class Vision extends SubsystemBase {
     public double[] getPicturePosition() {
         return new double[]{0.0, 0.0, 0.0};
     }
+
+    // ---------- End Camera / Limelight Methods ----------
+
+    // ---------- Limelight Throttle Methods ----------
+
+    private double getLimelightTemp(String limelightName) {
+        double[] hw = NetworkTableInstance.getDefault()
+            .getTable(limelightName)
+            .getEntry("hw")
+            .getDoubleArray(new double[0]);
+        return (hw.length >= 4) ? hw[3] : 0.0;
+    }
+
+    public void updateLimelightThrottle() {
+        for (String name : LIMELIGHTS) {
+            double temp = getLimelightTemp(name);
+            SmartDashboard.putNumber(name + " Temp (C)", temp);
+
+            // Schmitt trigger: latch ON above high threshold, latch OFF below low threshold
+            if (!limelightThrottled && temp > LIMELIGHT_THROTTLE_ON_TEMP_C) {
+                limelightThrottled = true;
+            } else if (limelightThrottled && temp < LIMELIGHT_THROTTLE_OFF_TEMP_C) {
+                limelightThrottled = false;
+            }
+
+            LimelightHelpers.SetThrottle(name,
+                limelightThrottled ? LIMELIGHT_THROTTLE_VALUE : 0);
+        }
+    }
+
+    // ---------- End Limelight Throttle Methods ----------
 
     // ---------------- MEGATAG2 SUPPORT ----------------
 
