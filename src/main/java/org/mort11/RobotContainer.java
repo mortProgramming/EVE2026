@@ -17,9 +17,10 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 
-import org.mort11.commands.actions.endeffector.manual.MoveFeeder;
 import org.mort11.commands.actions.endeffector.manual.MoveIntakeArm;
 import org.mort11.commands.actions.endeffector.manual.MoveIntakeRoller;
+import org.mort11.commands.actions.endeffector.pid.AgitateArm;
+import org.mort11.commands.actions.endeffector.pid.SetArm;
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.commands.autons.pathplanner.BasicCommands;
 import org.mort11.commands.autons.timed.Taxi;
@@ -31,6 +32,7 @@ import com.pathplanner.lib.path.PathPlannerPath;
 import static edu.wpi.first.units.Units.*;
 import static org.mort11.configs.constants.PortConstants.Controller.*;
 
+import org.mort11.subsystems.Climber;
 import org.mort11.subsystems.CommandSwerveDrivetrain;
 import org.mort11.subsystems.Hood;
 import org.mort11.subsystems.IntakeArm;
@@ -38,6 +40,14 @@ import org.mort11.subsystems.IntakeRoller;
 import org.mort11.subsystems.OdometryHelper;
 import org.mort11.subsystems.Shooter;
 import org.mort11.subsystems.Vision;
+import org.mort11.commands.actions.endeffector.manual.MoveClimber;
+import org.mort11.commands.actions.endeffector.manual.MoveFeeder;
+import org.mort11.commands.actions.endeffector.manual.MoveFeederOuttake;
+import org.mort11.commands.actions.endeffector.manual.MoveFloor;
+import org.mort11.commands.actions.endeffector.manual.MoveHood;
+import org.mort11.commands.actions.endeffector.manual.PercentShoot;
+import org.mort11.subsystems.Feeder;
+import org.mort11.subsystems.Floor;
 
 public class RobotContainer {
     private double MaxSpeed = 1.0 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
@@ -66,7 +76,9 @@ public class RobotContainer {
     private final IntakeArm intakeArm = new IntakeArm();
     private final IntakeRoller intakeRoller = new IntakeRoller();
     private final Vision vision = Vision.getInstance();
-    
+    private final Feeder feeder = Feeder.getInstance();
+    private final Floor floor = Floor.getInstance();
+    private final Climber climber = Climber.getInstance();
 
     public static SendableChooser<Command> autoChooser;
     public AutoBuilder autoBuilder;
@@ -92,7 +104,7 @@ public class RobotContainer {
             drivetrain.applyRequest(() -> idle).ignoringDisable(true)
         );
 
-        // drive controller
+        //---------------------DRIVE CONTROLLER---------------------------
         driveController.cross().whileTrue(drivetrain.applyRequest(() -> brake));
         driveController.circle().whileTrue(drivetrain.applyRequest(() ->
             point.withModuleDirection(new Rotation2d(-driveController.getLeftY(), -driveController.getLeftX()))
@@ -109,13 +121,66 @@ public class RobotContainer {
         driveController.L1().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
         drivetrain.registerTelemetry(logger::telemeterize);
 
-        // endeffector controller
-        endeffectorController.leftTrigger(TRIGGER_THRESHOLD).whileTrue(new SetShooter(shooter, 2500));
-        //endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder());
-
-        intakeArm.setDefaultCommand(new MoveIntakeArm(intakeArm, () -> -endeffectorController.getRightY()));
+        driveController.povUp().whileTrue(new MoveClimber(0.3));
+        driveController.povDown().whileTrue(new MoveClimber(-0.3));
         
+
+        //-----------------------------MANUAL CONTROLLER------------------------------- 
+
+        //roller
+        manualController.rightBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
+        manualController.rightBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
+        //feeder + floor
+        manualController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder(feeder, floor));
+      
+        //shooter
+        manualController.y().whileTrue(new SetShooter(shooter, 4000));
+        manualController.a().whileTrue(new PercentShoot(shooter, 0.6));
+        //hood
+        manualController.povUp().whileTrue(new MoveHood(hood, 1.0));
+        manualController.povDown().whileTrue(new MoveHood(hood, -1.0));
+
+        //floor and feeder tied together 9same as old spindexer feeder)
+        //michale climb button (30%)
+        manualController.povRight().whileTrue(new MoveClimber(1));
+        manualController.povLeft().whileTrue(new MoveClimber(-1));
+
+        //-----------------------END EFFECTOR CONTROLLER------------------------------------
+        //arm
+        //endeffectorController.povUp().whileTrue(new MoveIntakeArm(intakeArm, () -> 0.3));
+        //endeffectorController.povDown().whileTrue(new MoveIntakeArm(intakeArm, () -> -0.3));
+
+        //roller
         endeffectorController.leftBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
+        endeffectorController.b().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.OUTTAKE));
+
+        //feeder + floor
+        endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder(feeder, floor));
+        endeffectorController.rightBumper().whileTrue(new MoveFeederOuttake(feeder, floor));
+
+        //shooter
+        //endeffectorController.leftTrigger().whileTrue(new SetShooter(shooter, 4000));
+        endeffectorController.leftTrigger().whileTrue(new PercentShoot(shooter, 0.8));
+        endeffectorController.x().whileTrue(new SetShooter(shooter, 4000));
+
+
+        //hood
+      
+        endeffectorController.povLeft().whileTrue(new MoveHood(hood, 1.0));
+        endeffectorController.povRight().whileTrue(new MoveHood(hood, -1.0));
+
+
+        //  arm agitate
+        endeffectorController.a().whileTrue(new AgitateArm(intakeArm));
+
+        endeffectorController.povUp().onTrue(Commands.runOnce(() -> intakeArm.setPivot(IntakeArm.Position.HOMED), intakeArm));
+        endeffectorController.povDown().onTrue(Commands.runOnce(() -> intakeArm.setPivot(IntakeArm.Position.INTAKE), intakeArm));
+
+
+       
+        
+        
+
     }
 
     public Command getPathPlannerCommand() {

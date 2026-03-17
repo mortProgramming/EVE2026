@@ -19,8 +19,8 @@ public final class PhysicalConstants {
 	}
 
     public static final class CommandSwerveDrivetrain {
-		public static final double DRIVETRAIN_TRACKWIDTH_METERS = Units.inchesToMeters(20.75);
-		public static final double DRIVETRAIN_WHEELBASE_METERS = Units.inchesToMeters(22.75);
+		public static final double DRIVETRAIN_TRACKWIDTH_METERS = Units.inchesToMeters(20.50);
+		public static final double DRIVETRAIN_WHEELBASE_METERS = Units.inchesToMeters(21.75);
 
 		public static final double DRIVEBASE_RADIUS_METERS = Math.hypot(
 			DRIVETRAIN_TRACKWIDTH_METERS / 2.0, DRIVETRAIN_WHEELBASE_METERS / 2.0
@@ -50,7 +50,7 @@ public final class PhysicalConstants {
 	public static final class Feeder {
     	public static final double FEEDER_STATOR_CURRENT_LIMIT = 120;
     	public static final double FEEDER_SUPPLY_CURRENT_LIMIT = 50;
-		public static final double FEED_SPEED = 0.3;
+		public static final double FEED_SPEED = 0.8;
 	}
 
 	public static final class Hood {
@@ -77,34 +77,15 @@ public final class PhysicalConstants {
     	public static final double POSITION_TOLERANCE_DEG = 5.0;
 
     //pos in degrees
-    	public static final double HOMED_DEG = 110;
-    	public static final double STOWED_DEG = 100;
-    	public static final double INTAKE_DEG = -4;
-    	public static final double AGITATE_DEG = 20;
+    	public static final double HOMED_DEG = 5;
+    	public static final double STOWED_DEG = 5;
+    	public static final double INTAKE_DEG = -67.5;
+    	public static final double AGITATE_DEG = -30;
 
     //roller speed
-    	public static final double INTAKE_SPEED = 0.3;
+    	public static final double INTAKE_SPEED = 1;
+		public static final double OUTTAKE_SPEED = -1;
 	}
-
-  
-
-    public static final class IntakeRollerLeft {
-		public static final int ROLLER_LEFT_SMART_CURRENT_LIMIT = 60;
-    	public static final double ROLLER_LEFT_SECONDARY_CURRENT_LIMIT = 100;
-    }
-
-    public static final class IntakeRollerRight {
-		public static final int ROLLER_RIGHT_SMART_CURRENT_LIMIT = 60;
-    	public static final double ROLLER_RIGHT_SECONDARY_CURRENT_LIMIT = 100;
-    }
-
-	public static final class Turret {
-		public static final double MANUAL_SPEED = 0.15;
-		public static final double MOTOR_ROTATIONS_TO_TURRET_DEG = (1.0 / 15.0) * (24.0 / 150.0) * 360;
-		public static final double STARTING_POSITION_DEG = 0;
-		public final static double TURRET_MIN_ANGLE = -135;
-		public final static double TURRET_MAX_ANGLE = 135;
-    }
 
     public static final class Shooter {
 		public static final double STATOR_CURRENT_LIMIT = 120;
@@ -126,11 +107,8 @@ public final class PhysicalConstants {
 		public static final double BLUE_PASS_X = 0.0;
 		public static final double BLUE_PASS_Y = 0.0;
 	}
-	public static final class Climber{
-		public static final int CLIMBER_MOTOR = 0;//zero for now, will be updated when we get the new motor
-	}
 
-	
+
 
 	public static class Landmarks {
     	public static Translation2d hubPosition() {

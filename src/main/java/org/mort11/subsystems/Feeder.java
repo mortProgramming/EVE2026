@@ -30,7 +30,8 @@ public class Feeder extends SubsystemBase {
     }
 
     public enum Speed {
-        FEED(PhysicalConstants.Feeder.FEED_SPEED);
+        FEED(PhysicalConstants.Feeder.FEED_SPEED),
+        OUTTAKE(-PhysicalConstants.Feeder.FEED_SPEED);
 
         private final double percent;
 

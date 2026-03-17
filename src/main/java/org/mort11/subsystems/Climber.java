@@ -6,7 +6,7 @@ import static edu.wpi.first.units.Units.Rotations;
 import static edu.wpi.first.units.Units.RotationsPerSecond;
 import static edu.wpi.first.units.Units.Second;
 import static edu.wpi.first.units.Units.Volts;
-import static org.mort11.configs.constants.PhysicalConstants.Climber.CLIMBER_MOTOR;
+import static org.mort11.configs.constants.PortConstants.Climber.CLIMBER_MOTOR;
 import static org.mort11.configs.constants.PhysicalConstants.KrakenX60.*;
 
 import org.mort11.configs.constants.PhysicalConstants.KrakenX60;
@@ -64,6 +64,7 @@ public class Climber extends SubsystemBase {
     private final TalonFX motor;
     private final MotionMagicVoltage motionMagicRequest = new MotionMagicVoltage(0).withSlot(0);
     private final VoltageOut voltageRequest = new VoltageOut(0);
+    public static Climber instance;
 
     private boolean isHomed = false;
 
@@ -155,4 +156,13 @@ public class Climber extends SubsystemBase {
         builder.addDoubleProperty("Extension (inches)", () -> motorAngleToExtension(motor.getPosition().getValue()).in(Inches), null);
         builder.addDoubleProperty("Supply Current", () -> motor.getSupplyCurrent().getValue().in(Amps), null);
     }
+
+    public static Climber getInstance() {
+        if (instance == null) {
+            instance = new Climber();
+        }
+        return instance;
+    }
+
+
 }
