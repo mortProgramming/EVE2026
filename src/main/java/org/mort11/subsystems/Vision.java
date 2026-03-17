@@ -37,7 +37,7 @@ public class Vision extends SubsystemBase {
     private static final double LIMELIGHT_THROTTLE_ON_TEMP_C  = 60.0; // °C: throttle kicks in above this
     private static final double LIMELIGHT_THROTTLE_OFF_TEMP_C = 45.0; // °C: throttle removed below this (hysteresis)
     private static final int    LIMELIGHT_THROTTLE_VALUE      = 100;  // Numer of frames to skip (Value Range: 100 to 200. 200 means 100% throttling, 100 means 50% throttling)
-    private boolean limelightThrottled = false;
+    private boolean limelightThrottled = false; // Don't change this directly; use updateLimelightThrottle()
 
     private static final String LL3_NAME = "limelight-three";
 
@@ -239,7 +239,7 @@ public class Vision extends SubsystemBase {
     public void updateLimelightThrottle() {
         for (String name : LIMELIGHTS) {
             double temp = getLimelightTemp(name);
-            SmartDashboard.putNumber(name + " Temp (C)", temp);
+            SmartDashboard.putNumber(name + " Temp (°F)", temp);
 
             // Schmitt trigger: latch ON above high threshold, latch OFF below low threshold
             if (!limelightThrottled && temp > LIMELIGHT_THROTTLE_ON_TEMP_C) {
@@ -247,7 +247,6 @@ public class Vision extends SubsystemBase {
             } else if (limelightThrottled && temp < LIMELIGHT_THROTTLE_OFF_TEMP_C) {
                 limelightThrottled = false;
             }
-
             LimelightHelpers.SetThrottle(name,
                 limelightThrottled ? LIMELIGHT_THROTTLE_VALUE : 0);
         }
