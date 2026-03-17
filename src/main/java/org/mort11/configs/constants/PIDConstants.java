@@ -21,11 +21,16 @@ public final class PIDConstants {
     }
 
     public static final class Shooter {
-        public static final double KP = 0.01;   // placeholder, tune on robot
-        public static final double KI = 0.0;   
-        public static final double KD = 0.0;
-    
-        public static final double VELOCITY_TOLERANCE_RPM = 100;
+    public static final double KP = 0.0;
+    public static final double KI = 0.0;
+    public static final double KD = 0.0;
+
+    public static final double KV_LEFT   = 12.0 / (5950.0 / 60.0);  // fill in measured values
+    public static final double KV_MIDDLE = 12.0 / (6010.0 / 60.0);
+    public static final double KV_RIGHT  = 12.0 / (5980.0 / 60.0);
+
+    public static final double KS = 0.0; // tune after KV
+    public static final double VELOCITY_TOLERANCE_RPM = 100;
     }
 
     public static final class Intake {

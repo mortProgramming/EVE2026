@@ -47,14 +47,15 @@ public class Shooter extends SubsystemBase {
         motors = List.of(leftMotor, middleMotor, rightMotor);
 
         //verify these inversions match physical robot wiring
-        configureMotor(leftMotor, InvertedValue.Clockwise_Positive);
-        configureMotor(middleMotor, InvertedValue.CounterClockwise_Positive);
-        configureMotor(rightMotor, InvertedValue.CounterClockwise_Positive);
+        configureMotor(leftMotor,   InvertedValue.Clockwise_Positive, PIDConstants.Shooter.KV_LEFT);
+        configureMotor(middleMotor, InvertedValue.CounterClockwise_Positive, PIDConstants.Shooter.KV_MIDDLE);
+        configureMotor(rightMotor,  InvertedValue.CounterClockwise_Positive, PIDConstants.Shooter.KV_RIGHT);
 
-        SmartDashboard.putData(this);
+        SmartDashboard.
+        putData(this);
     }
 
-    private void configureMotor(TalonFX motor, InvertedValue invertDirection) {
+    private void configureMotor(TalonFX motor, InvertedValue invertDirection, double kV) {
         final TalonFXConfiguration config = new TalonFXConfiguration()
             .withMotorOutput(
                 new MotorOutputConfigs()
@@ -77,7 +78,8 @@ public class Shooter extends SubsystemBase {
                     .withKP(PIDConstants.Shooter.KP)
                     .withKI(PIDConstants.Shooter.KI)
                     .withKD(PIDConstants.Shooter.KD)
-                    .withKV(12.0 / KrakenX60.kFreeSpeed.in(RotationsPerSecond))
+                    .withKS(PIDConstants.Shooter.KS)   
+                    .withKV(kV)                         
             );
 
         motor.getConfigurator().apply(config);
