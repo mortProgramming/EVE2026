@@ -19,6 +19,8 @@ import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 
 import org.mort11.commands.actions.endeffector.manual.MoveIntakeArm;
 import org.mort11.commands.actions.endeffector.manual.MoveIntakeRoller;
+import org.mort11.commands.actions.endeffector.pid.AgitateArm;
+import org.mort11.commands.actions.endeffector.pid.SetArm;
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.commands.autons.pathplanner.BasicCommands;
 import org.mort11.commands.autons.timed.Taxi;
@@ -124,8 +126,6 @@ public class RobotContainer {
         
 
         //-----------------------------MANUAL CONTROLLER------------------------------- 
-        //intakearm
-        intakeArm.setDefaultCommand(new MoveIntakeArm(intakeArm, () -> -manualController.getRightY() * 0.3));
 
         //roller
         manualController.rightBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
@@ -147,8 +147,8 @@ public class RobotContainer {
 
         //-----------------------END EFFECTOR CONTROLLER------------------------------------
         //arm
-        endeffectorController.povUp().whileTrue(new MoveIntakeArm(intakeArm, () -> 0.3));
-        endeffectorController.povDown().whileTrue(new MoveIntakeArm(intakeArm, () -> -0.3));
+        //endeffectorController.povUp().whileTrue(new MoveIntakeArm(intakeArm, () -> 0.3));
+        //endeffectorController.povDown().whileTrue(new MoveIntakeArm(intakeArm, () -> -0.3));
 
         //roller
         endeffectorController.leftBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
@@ -162,12 +162,20 @@ public class RobotContainer {
         //endeffectorController.leftTrigger().whileTrue(new SetShooter(shooter, 4000));
         endeffectorController.leftTrigger().whileTrue(new PercentShoot(shooter, 0.8));
         endeffectorController.x().whileTrue(new SetShooter(shooter, 4000));
-        
+
 
         //hood
       
         endeffectorController.povLeft().whileTrue(new MoveHood(hood, 1.0));
         endeffectorController.povRight().whileTrue(new MoveHood(hood, -1.0));
+
+
+        //  arm agitate
+        endeffectorController.a().whileTrue(new AgitateArm(intakeArm));
+
+        endeffectorController.povUp().onTrue(Commands.runOnce(() -> intakeArm.setPivot(IntakeArm.Position.HOMED), intakeArm));
+        endeffectorController.povDown().onTrue(Commands.runOnce(() -> intakeArm.setPivot(IntakeArm.Position.INTAKE), intakeArm));
+
 
        
         
