@@ -113,6 +113,14 @@ public class Hood extends SubsystemBase {
             : Math.max(targetPosition, currentPosition - maxPercentageTraveled);
     }
 
+        public void adjustPosition(double delta) {
+            setPosition(targetPosition + delta);
+        }
+
+        public double getCurrentPosition() {
+            return currentPosition;
+        }
+
     @Override
     public void periodic() {
         updateCurrentPosition();

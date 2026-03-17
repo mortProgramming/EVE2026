@@ -18,7 +18,7 @@ public class MoveFeeder extends Command {
     @Override
     public void execute() {
         feeder.set(Feeder.Speed.FEED);
-        floor.setSpeed(0.3);
+        floor.setSpeed(0.8);
     }
 
     @Override

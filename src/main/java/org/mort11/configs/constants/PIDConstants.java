@@ -21,7 +21,7 @@ public final class PIDConstants {
     }
 
     public static final class Shooter {
-        public static final double KP = 0.5;   // placeholder, tune on robot
+        public static final double KP = 0.01;   // placeholder, tune on robot
         public static final double KI = 0.0;   
         public static final double KD = 0.0;
     

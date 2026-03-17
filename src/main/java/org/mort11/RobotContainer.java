@@ -137,13 +137,13 @@ public class RobotContainer {
         manualController.y().whileTrue(new SetShooter(shooter, 4000));
         manualController.a().whileTrue(new PercentShoot(shooter, 0.6));
         //hood
-        manualController.povUp().onTrue(new MoveHood(hood, 45.0)); // degrees/rotations 
-        manualController.povDown().onTrue(new MoveHood(hood, 0.0));
+        manualController.povUp().whileTrue(new MoveHood(hood, 1.0));
+        manualController.povDown().whileTrue(new MoveHood(hood, -1.0));
 
         //floor and feeder tied together 9same as old spindexer feeder)
         //michale climb button (30%)
-        manualController.povRight().whileTrue(new MoveClimber(0.3));
-        manualController.povLeft().whileTrue(new MoveClimber(-0.3));
+        manualController.povRight().whileTrue(new MoveClimber(1));
+        manualController.povLeft().whileTrue(new MoveClimber(-1));
 
         //-----------------------END EFFECTOR CONTROLLER------------------------------------
         //arm
@@ -152,7 +152,7 @@ public class RobotContainer {
 
         //roller
         endeffectorController.leftBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
-
+        endeffectorController.b().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.OUTTAKE));
 
         //feeder + floor
         endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder(feeder, floor));
@@ -161,17 +161,15 @@ public class RobotContainer {
         //shooter
         //endeffectorController.leftTrigger().whileTrue(new SetShooter(shooter, 4000));
         endeffectorController.leftTrigger().whileTrue(new PercentShoot(shooter, 0.8));
-
+        endeffectorController.x().whileTrue(new SetShooter(shooter, 4000));
+        
 
         //hood
-        // manualController.povUp().onTrue(new MoveHood(hood, 45.0)); // degrees/rotations 
-        // manualController.povDown().onTrue(new MoveHood(hood, 0.0));
+      
+        endeffectorController.povLeft().whileTrue(new MoveHood(hood, 1.0));
+        endeffectorController.povRight().whileTrue(new MoveHood(hood, -1.0));
 
-        //floor and feeder tied together 9same as old spindexer feeder)
-        //michale climb button (30%)
-        manualController.povRight().whileTrue(new MoveClimber(-0.3));
-        manualController.povLeft().whileTrue(new MoveClimber(0.3));
-
+       
         
         
 

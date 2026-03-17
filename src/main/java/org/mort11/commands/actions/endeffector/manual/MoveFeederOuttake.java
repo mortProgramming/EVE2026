@@ -18,7 +18,7 @@ public class MoveFeederOuttake extends Command {
     @Override
     public void execute() {
         feeder.set(Feeder.Speed.OUTTAKE);
-        floor.setSpeed(-0.3);
+        floor.setSpeed(-0.8);
     }
 
     @Override

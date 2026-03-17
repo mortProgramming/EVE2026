@@ -50,7 +50,7 @@ public final class PhysicalConstants {
 	public static final class Feeder {
     	public static final double FEEDER_STATOR_CURRENT_LIMIT = 120;
     	public static final double FEEDER_SUPPLY_CURRENT_LIMIT = 50;
-		public static final double FEED_SPEED = 0.772;
+		public static final double FEED_SPEED = 0.8;
 	}
 
 	public static final class Hood {
@@ -86,15 +86,6 @@ public final class PhysicalConstants {
     	public static final double INTAKE_SPEED = 1;
 		public static final double OUTTAKE_SPEED = -1;
 	}
-
-
-	public static final class Turret {
-		public static final double MANUAL_SPEED = 0.15;
-		public static final double MOTOR_ROTATIONS_TO_TURRET_DEG = (1.0 / 15.0) * (24.0 / 150.0) * 360;
-		public static final double STARTING_POSITION_DEG = 0;
-		public final static double TURRET_MIN_ANGLE = -135;
-		public final static double TURRET_MAX_ANGLE = 135;
-    }
 
     public static final class Shooter {
 		public static final double STATOR_CURRENT_LIMIT = 120;
