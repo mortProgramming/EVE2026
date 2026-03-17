@@ -1698,4 +1698,37 @@ public class LimelightHelpers {
 
         return results;
     }
+
+    /**
+     * Hardware status data returned from the Limelight's "hw" NetworkTables key.
+     */
+    public static class HWData {
+        public double fps        = 0.0;
+        public double cpuTempC   = 0.0;
+        public double ramUsagePct = 0.0;
+        public double tempC      = 0.0;
+
+        public HWData() {}
+
+        public HWData(double[] hw) {
+            if (hw != null && hw.length >= 4) {
+                this.fps         = hw[0];
+                this.cpuTempC    = hw[1];
+                this.ramUsagePct = hw[2];
+                this.tempC       = hw[3];
+            }
+        }
+    }
+
+    /**
+     * Gets hardware status data (FPS, CPU temp, RAM usage, board temp) from the Limelight.
+     * Array layout from NT key "hw": [fps, cpu_temp_C, ram_usage_pct, temp_C]
+     *
+     * @param limelightName Name/identifier of the Limelight
+     * @return HWData object, all zeros if unavailable
+     */
+    public static HWData getHWData(String limelightName) {
+        double[] hw = getLimelightNTDoubleArray(limelightName, "hw");
+        return new HWData(hw);
+    }
 }
