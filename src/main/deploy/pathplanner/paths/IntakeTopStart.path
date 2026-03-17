@@ -20,12 +20,12 @@
         "y": 4.041469329521995
       },
       "prevControl": {
-        "x": 9.333692659264887,
-        "y": 6.399506493909602
+        "x": 9.35684736091298,
+        "y": 6.228102710413695
       },
       "nextControl": {
-        "x": 8.780684682502992,
-        "y": 1.1531741259449726
+        "x": 8.783317546006357,
+        "y": 1.612553247531877
       },
       "isLocked": false,
       "linkedName": null
@@ -68,7 +68,20 @@
   ],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "IntakeDown",
+      "waypointRelativePos": 0.38892640108034027,
+      "endWaypointRelativePos": null,
+      "command": null
+    },
+    {
+      "name": "FeederIntake",
+      "waypointRelativePos": 0.4807562457798754,
+      "endWaypointRelativePos": 1.512491559756916,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 1.0,

@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 14.664605718305703,
-        "y": 6.238714896459237
+        "x": 14.655978310892367,
+        "y": 6.237283032070837
       },
       "isLocked": false,
       "linkedName": "RedTopStart"
@@ -20,8 +20,8 @@
         "y": 7.405520684736091
       },
       "prevControl": {
-        "x": 15.215776637078452,
-        "y": 7.194853502519348
+        "x": 15.237580694598888,
+        "y": 7.209580530777725
       },
       "nextControl": null,
       "isLocked": false,
@@ -31,7 +31,14 @@
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "IntakeDown",
+      "waypointRelativePos": 0.2970965563808245,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 1.0,
