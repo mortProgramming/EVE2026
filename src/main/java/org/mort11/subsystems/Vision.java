@@ -69,6 +69,19 @@ public class Vision extends SubsystemBase {
         CameraServer.addCamera(limelightTwoFeed);
         CameraServer.addCamera(limelightThreeFeed);
         CameraServer.addCamera(limelightFourFeed);
+
+        // In the Vision constructor, after camera setup:
+        // Forward, side, up in meters (converted from inches).
+        // Replace 12.0, 0.0, 18.0 with your actual tape measure values in inches.
+        LimelightHelpers.setCameraPose_RobotSpace(
+            "limelight-three",
+            -3.0 * 0.0254,   // forward — replace 12.0 with your inches measurement
+            0.0  * 0.0254,   // side — replace 0.0 with your inches measurement
+            25.0 * 0.0254,   // up — replace 18.0 with your inches measurement
+            0.0,             // roll degrees
+            -15.0,               // pitch degrees
+            0.0              // yaw degrees
+        );
     }
 
     @Override
