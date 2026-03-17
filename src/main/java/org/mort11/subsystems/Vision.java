@@ -289,6 +289,39 @@ public class Vision extends SubsystemBase {
         }
     }
 
+    /**
+     * Reads the onboard IMU (Inertial Measurement Unit) from each camera and publishes
+     * pitch, roll, yaw, and the accelerometer-derived mount pitch angle to SmartDashboard.
+     *
+     * Mount pitch is computed from the accelerometer using gravity as a reference,
+     * so it is valid even when the robot is not leveled — as long as the robot is stationary.
+     *
+     * Positive mount pitch = camera lens tilted upward (verify sign on your bench).
+     */
+    // private void updateCameraIMUTelemetry() {
+    //     for (String name : cameraNames) {
+    //         LimelightHelpers.IMUData imu = LimelightHelpers.getIMUData(name);
+
+    //         // Raw IMU angles reported by the Limelight firmware
+    //         SmartDashboard.putNumber(name + " IMU Pitch (deg)", imu.Pitch);
+    //         SmartDashboard.putNumber(name + " IMU Roll (deg)",  imu.Roll);
+    //         SmartDashboard.putNumber(name + " IMU Yaw (deg)",   imu.Yaw);
+
+    //         // Accelerometer-derived mount pitch — valid while stationary.
+    //         // Uses gravity vector to compute tilt of the camera's lens axis from horizontal.
+    //         double ax = imu.accelX;
+    //         double ay = imu.accelY;
+    //         double az = imu.accelZ;
+
+    //         double mountPitchDeg = 0.0;
+    //         if (ax != 0.0 || ay != 0.0 || az != 0.0) { // guard against all-zeros (disconnected)
+    //             mountPitchDeg = Math.toDegrees(Math.atan2(-ax, Math.sqrt(ay * ay + az * az)));
+    //         }
+
+    //         SmartDashboard.putNumber(name + " Mount Pitch (deg)", mountPitchDeg);
+    //     }
+    // }
+
     public static Vision getInstance() {
         if (instance == null) {
             instance = new Vision();
