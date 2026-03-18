@@ -24,7 +24,7 @@ public class Floor extends SubsystemBase{
         motor=new TalonFX(FloorConstants.FLOOR_MOTOR);
         motorConfigure=new TalonFXConfiguration().withMotorOutput(new MotorOutputConfigs()
         .withInverted(InvertedValue.Clockwise_Positive) //What direction of rotation should be positive for motor.
-        .withNeutralMode(NeutralModeValue.Brake))   //What the motor should do when 0 speed or disabled
+        .withNeutralMode(NeutralModeValue.Coast))   //What the motor should do when 0 speed or disabled
         .withCurrentLimits(new CurrentLimitsConfigs()
             .withStatorCurrentLimit(Amps.of(PhysicalConstants.Feeder.FEEDER_STATOR_CURRENT_LIMIT)) // reuse 120A, or add a Floor class
             .withStatorCurrentLimitEnable(true)

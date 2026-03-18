@@ -8,7 +8,7 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.7093418627470971,
+        "x": 0.7093418627470975,
         "y": 6.116946092153325
       },
       "isLocked": false,
@@ -73,13 +73,23 @@
       "name": "IntakeDown",
       "waypointRelativePos": 0.10533423362589825,
       "endWaypointRelativePos": null,
-      "command": null
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "IntakeDown"
+        }
+      }
     },
     {
       "name": "IntakeRollerIntake",
       "waypointRelativePos": 0.2997974341661087,
       "endWaypointRelativePos": 3.0,
-      "command": null
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "IntakeRollerIntake"
+        }
+      }
     }
   ],
   "globalConstraints": {
