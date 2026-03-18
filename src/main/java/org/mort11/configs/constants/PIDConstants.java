@@ -21,15 +21,15 @@ public final class PIDConstants {
     }
 
     public static final class Shooter {
-    public static final double KP = 0.5;
-    public static final double KI = 0.1;
-    public static final double KD = 0.05;
+    public static final double KP = 0.6;
+    public static final double KI = 2;
+    public static final double KD = 0;
 
-    public static final double KV_LEFT   = 12.0 / (5950.0 / 60.0);  // fill in measured values
-    public static final double KV_MIDDLE = 12.0 / (6010.0 / 60.0);
-    public static final double KV_RIGHT  = 12.0 / (5980.0 / 60.0);
+    public static final double KV_LEFT   = 0.121;  
+    public static final double KV_MIDDLE = 0.13;
+    public static final double KV_RIGHT  = 0.120;
 
-    public static final double KS = 0.0; // tune after KV
+    public static final double KS = 0.0; 
     public static final double VELOCITY_TOLERANCE_RPM = 100;
     }
  
@@ -37,5 +37,13 @@ public final class PIDConstants {
         public static final double KP = 300;
         public static final double KI = 0;
         public static final double KD = 0;
+    }
+
+    public static final class Feeder{
+        public static final double KP = 0;
+        public static final double KI = 0;
+        public static final double KD = 0;
+
+        public static final double KV = 0.12;
     }
 }

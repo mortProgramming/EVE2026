@@ -51,6 +51,7 @@ public final class PhysicalConstants {
     	public static final double FEEDER_STATOR_CURRENT_LIMIT = 120;
     	public static final double FEEDER_SUPPLY_CURRENT_LIMIT = 50;
 		public static final double FEED_SPEED = 0.8;
+		public static final double FEED_RPM = 4000;
 	}
 
 	public static final class Hood {

@@ -39,6 +39,7 @@ public class Shooter extends SubsystemBase {
     private final VoltageOut voltageRequest = new VoltageOut(0);
 
     private double dashboardTargetRPM = 0.0;
+    private static Shooter shooter;
 
     public Shooter() {
         leftMotor = new TalonFX(PortConstants.Shooter.SHOOTER_LEFT);
@@ -135,6 +136,13 @@ public class Shooter extends SubsystemBase {
         builder.addDoubleProperty(name + " RPM", () -> motor.getVelocity().getValue().in(RPM), null);
         builder.addDoubleProperty(name + " Stator Current", () -> motor.getStatorCurrent().getValue().in(Amps), null);
         builder.addDoubleProperty(name + " Supply Current", () -> motor.getSupplyCurrent().getValue().in(Amps), null);
+    }
+
+     public static Shooter getInstance(){
+        if (shooter == null){
+            shooter = new Shooter();
+        }
+        return shooter;
     }
 
     @Override

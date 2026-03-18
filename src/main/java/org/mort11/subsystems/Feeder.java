@@ -1,12 +1,12 @@
 package org.mort11.subsystems;
 
 import static edu.wpi.first.units.Units.Amps;
-import static edu.wpi.first.units.Units.Volts;
 
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
+import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
-import com.ctre.phoenix6.controls.VoltageOut;
+import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.mort11.configs.constants.PhysicalConstants;
 import org.mort11.configs.constants.PortConstants;
+import org.mort11.configs.constants.PIDConstants;
 
 public class Feeder extends SubsystemBase {
 
@@ -30,22 +31,22 @@ public class Feeder extends SubsystemBase {
     }
 
     public enum Speed {
-        FEED(PhysicalConstants.Feeder.FEED_SPEED),
-        OUTTAKE(-PhysicalConstants.Feeder.FEED_SPEED);
+        FEED(PhysicalConstants.Feeder.FEED_RPM),
+        OUTTAKE(-PhysicalConstants.Feeder.FEED_RPM);
 
-        private final double percent;
+        private final double rpm;
 
-        private Speed(double percent) {
-            this.percent = percent;
+        private Speed(double rpm) {
+            this.rpm = rpm;
         }
 
-        public double getPercent() {
-            return percent;
+        public double getRPM() {
+            return rpm;
         }
     }
 
     private final TalonFX motor;
-    private final VoltageOut voltageRequest = new VoltageOut(0);
+    private final VelocityVoltage velocityRequest = new VelocityVoltage(0).withSlot(0);
 
     private Feeder() {
         motor = new TalonFX(PortConstants.Feeder.FEEDER_MOTOR);
@@ -62,20 +63,35 @@ public class Feeder extends SubsystemBase {
                     .withStatorCurrentLimitEnable(true)
                     .withSupplyCurrentLimit(Amps.of(PhysicalConstants.Feeder.FEEDER_SUPPLY_CURRENT_LIMIT))
                     .withSupplyCurrentLimitEnable(true)
+            )
+            .withSlot0(
+                new Slot0Configs()
+                    .withKP(PIDConstants.Feeder.KP)
+                    .withKI(PIDConstants.Feeder.KI)
+                    .withKD(PIDConstants.Feeder.KD)
+                    .withKV(PIDConstants.Feeder.KV) 
             );
 
         motor.getConfigurator().apply(config);
         SmartDashboard.putData(this);
     }
 
+    /** Set feeder to a predefined Speed enum (RPM-based). */
     public void set(Speed speed) {
-        motor.setControl(
-            voltageRequest.withOutput(Volts.of(speed.getPercent() * PhysicalConstants.ROBOT_VOLTAGE))
-        );
+        setRPM(speed.getRPM());
+    }
+
+    public void setRPM(double rpm) {
+        double rps = rpm / 60.0; 
+        motor.setControl(velocityRequest.withVelocity(rps));
     }
 
     public void stop() {
-        motor.setControl(voltageRequest.withOutput(Volts.of(0)));
+        motor.setControl(velocityRequest.withVelocity(0));
+    }
+
+    public double getCurrentRPM() {
+        return motor.getVelocity().getValueAsDouble() * 60.0;
     }
 
     public Command feedCommand() {
@@ -85,6 +101,7 @@ public class Feeder extends SubsystemBase {
     @Override
     public void initSendable(SendableBuilder builder) {
         builder.addStringProperty("Command", () -> getCurrentCommand() != null ? getCurrentCommand().getName() : "null", null);
+        builder.addDoubleProperty("Current RPM", this::getCurrentRPM, null);
         builder.addDoubleProperty("Stator Current", () -> motor.getStatorCurrent().getValue().in(Amps), null);
         builder.addDoubleProperty("Supply Current", () -> motor.getSupplyCurrent().getValue().in(Amps), null);
     }

@@ -16,7 +16,7 @@ import com.pathplanner.lib.auto.NamedCommands;
 
 public class BasicCommands {
 
-    public static void setCommands(OdometryHelper odometry, Shooter shooter, IntakeArm intake, IntakeRoller intakeRoller, Feeder feeder, Floor floor) {
+    public static void setCommands(OdometryHelper odometry, Shooter shooter, IntakeArm intake, IntakeRoller intakeRoller) {
         // NamedCommands.registerCommand("Taxi", new Taxi());
         //IntakeArm commands
         NamedCommands.registerCommand("IntakeUp", new SetArm(intake, IntakeArm.Position.HOMED));
@@ -25,8 +25,8 @@ public class BasicCommands {
         //IntakeRoller/Feeder commands
         NamedCommands.registerCommand("IntakeRollerIntake", new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
         NamedCommands.registerCommand("IntakeRollerOuttake", new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.OUTTAKE));
-        NamedCommands.registerCommand("FeederIntake", new MoveFeeder(feeder, floor));
-        NamedCommands.registerCommand("FeederOuttake", new MoveFeeder(feeder, floor));
+        // NamedCommands.registerCommand("FeederIntake", new MoveFeeder(feeder, floor));
+        // NamedCommands.registerCommand("FeederOuttake", new MoveFeeder(feeder, floor));
         //
         //Shooter commands
         //NamedCommands.registerCommand("SetShooter", new SetShooter(shooter, 4000));
