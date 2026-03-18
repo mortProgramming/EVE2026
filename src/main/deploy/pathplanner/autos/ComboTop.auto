@@ -7,13 +7,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RedDepotTopStart"
+            "pathName": "DepotTopStart"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "RedDepotShoot"
+            "pathName": "DepotShoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "DepotShootToClimb"
           }
         }
       ]

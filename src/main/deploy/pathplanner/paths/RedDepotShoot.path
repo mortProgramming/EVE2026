@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.418002853067047,
-        "y": 2.42413694721826
+        "x": 15.360385164051355,
+        "y": 2.074793152639087
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.148266354744753,
-        "y": 2.037680718310722
+        "x": 14.609942938659055,
+        "y": 2.3886233951497866
       },
       "isLocked": false,
-      "linkedName": "BotStart"
+      "linkedName": "RedDepot"
     },
     {
       "anchor": {
-        "x": 0.7914550641940081,
-        "y": 0.6386019971469341
+        "x": 13.30313837375178,
+        "y": 3.3039657631954356
       },
       "prevControl": {
-        "x": 0.5512188401538372,
-        "y": 0.35484303624083485
+        "x": 14.079457917261054,
+        "y": 2.864051355206848
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Hps"
+      "linkedName": "RedEndDepotShoot"
     }
   ],
   "rotationTargets": [],
@@ -33,8 +33,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "IntakeDown",
-      "waypointRelativePos": 0.4564483457123445,
+      "name": "SetShooter",
+      "waypointRelativePos": 1.0,
       "endWaypointRelativePos": null,
       "command": null
     }
@@ -49,13 +49,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 151.95531305202516
   },
   "reversed": false,
   "folder": "1.5 Autos",
   "idealStartingState": {
-    "velocity": 0.0,
-    "rotation": 52.826337021764644
+    "velocity": 0,
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }

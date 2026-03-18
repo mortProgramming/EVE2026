@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.418002853067047,
-        "y": 2.42413694721826
+        "x": 3.1592296718972896,
+        "y": 4.843666191155493
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.148266354744753,
-        "y": 2.037680718310722
+        "x": 3.133352353780314,
+        "y": 4.351997146932953
       },
       "isLocked": false,
-      "linkedName": "BotStart"
+      "linkedName": "EndDepotShoot"
     },
     {
       "anchor": {
-        "x": 0.7914550641940081,
-        "y": 0.6386019971469341
+        "x": 1.5548359486447931,
+        "y": 3.7180028530670475
       },
       "prevControl": {
-        "x": 0.5512188401538372,
-        "y": 0.35484303624083485
+        "x": 2.7650675176554236,
+        "y": 3.7180028530670475
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Hps"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -33,10 +33,15 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "IntakeDown",
-      "waypointRelativePos": 0.4564483457123445,
+      "name": "Climb",
+      "waypointRelativePos": 1.0,
       "endWaypointRelativePos": null,
-      "command": null
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Climb"
+        }
+      }
     }
   ],
   "globalConstraints": {
@@ -54,8 +59,8 @@
   "reversed": false,
   "folder": "1.5 Autos",
   "idealStartingState": {
-    "velocity": 0.0,
-    "rotation": 52.826337021764644
+    "velocity": 0,
+    "rotation": -28.75236842721439
   },
   "useDefaultConstraints": true
 }
