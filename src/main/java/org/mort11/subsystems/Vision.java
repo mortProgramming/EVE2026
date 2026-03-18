@@ -261,50 +261,6 @@ public class Vision extends SubsystemBase {
         }
     }
 
-    // private double getLimelightTemp(String limelightName) {
-    //     double[] hw = NetworkTableInstance.getDefault()
-    //         .getTable(limelightName)
-    //         .getEntry("hw")
-    //         .getDoubleArray(new double[0]);
-    //     return (hw.length >= 4) ? hw[3] : 0.0;
-    // }
-
-    // public void updateLimelightThrottle() {
-    //     for (String name : LIMELIGHTS) {
-    //         LimelightHelpers.HWData hw = LimelightHelpers.getHWData(name);
-
-    //         // Publish hardware telemetry — visible on SmartDashboard even while disabled
-    //         SmartDashboard.putNumber(name + " Temp (°C)",     hw.tempC);
-    //         SmartDashboard.putNumber(name + " CPU Temp (°C)", hw.cpuTempC);
-    //         SmartDashboard.putNumber(name + " FPS",           hw.fps);
-    //         SmartDashboard.putNumber(name + " RAM Usage (%)", hw.ramUsagePct);
-
-    //         // Per-camera Schmitt trigger hysteresis
-    //         boolean currentlyThrottled = limelightThrottleState.getOrDefault(name, false);
-
-    //         if (!currentlyThrottled && hw.tempC > LIMELIGHT_THROTTLE_ON_TEMP_C) {
-    //             currentlyThrottled = true;
-    //         } else if (currentlyThrottled && hw.tempC < LIMELIGHT_THROTTLE_OFF_TEMP_C) {
-    //             currentlyThrottled = false;
-    //         }
-
-    //         limelightThrottleState.put(name, currentlyThrottled);
-
-    //         int throttleVal = currentlyThrottled ? LIMELIGHT_THROTTLE_VALUE : 0;
-    //         LimelightHelpers.SetThrottle(name, throttleVal);
-
-    //         // Change LED mode to blink when throttled (visible indicator while disabled)
-    //         // ledMode: 0=pipeline, 1=off, 2=blink, 3=on
-    //         if (currentlyThrottled) {
-    //             LimelightHelpers.setLEDMode_ForceBlink(name);
-    //         } else {
-    //             LimelightHelpers.setLEDMode_PipelineControl(name);
-    //         }
-
-    //         SmartDashboard.putBoolean(name + " Throttled", currentlyThrottled);
-    //     }
-    // }
-
     // ---------- End Limelight Throttle Methods ----------
 
     // ---------------- MEGATAG2 SUPPORT ----------------

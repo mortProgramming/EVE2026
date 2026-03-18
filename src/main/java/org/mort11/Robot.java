@@ -36,11 +36,6 @@ public class Robot extends TimedRobot {
 
     @Override
     public void disabledInit() {
-        // Force throttle on ALL limelights immediately when the robot is disabled.
-        // This fires before disabledPeriodic() runs its first cycle, so there is no gap.
-        // for (String name : Vision.getLimelights()) {
-        //     LimelightHelpers.SetThrottle(name, Vision.LIMELIGHT_THROTTLE_VALUE);
-        // }
         // Update telemetry and LEDs to show throttled state right away
         Vision.getInstance().updateLimelightTelemetry(true);
     }
@@ -49,25 +44,12 @@ public class Robot extends TimedRobot {
     public void disabledPeriodic() {
         // Keep telemetry live and LEDs blinking while disabled.
         Vision.getInstance().updateLimelightTelemetry(true); // true = throttled state
-
-        // Vision.getInstance().updateLimelightThrottle(); // Throttle limelights if they get too hot while disabled (Use: Schmitt Trigger)
     }
 
     @Override
     public void disabledExit() {
-        // Remove throttle from ALL limelights when the robot enables.
-        // Full camera speed is restored for autonomous and teleop.
-        // for (String name : Vision.getLimelights()) {
-        //     LimelightHelpers.SetThrottle(name, 0);
-        // }
         // Update telemetry and restore LEDs to pipeline control (not throttled)
         Vision.getInstance().updateLimelightTelemetry(false);
-        
-        // // Remove throttle when robot enables so vision is fully active during match
-        // for (String name : Vision.getLimelights()) {
-        //     LimelightHelpers.SetThrottle(name, 0);
-        //     LimelightHelpers.setLEDMode_PipelineControl(name); // restore LED to pipeline
-        // }
     }
 
     @Override
