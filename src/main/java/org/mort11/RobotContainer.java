@@ -86,7 +86,7 @@ public class RobotContainer {
 
     public RobotContainer() {
         drivetrain.configureAutoBuilder();
-        BasicCommands.setCommands(odometry, shooter, intakeArm, intakeRoller);
+        BasicCommands.setCommands(odometry, shooter, intakeArm, intakeRoller, feeder, floor); 
         configureBindings();
         configureAuto();
     }
