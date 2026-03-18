@@ -37,7 +37,7 @@ public class Vision extends SubsystemBase {
     private static final double LIMELIGHT_THROTTLE_ON_TEMP_C  = 60.0; // °C: throttle kicks in above this
     private static final double LIMELIGHT_THROTTLE_OFF_TEMP_C = 45.0; // °C: throttle removed below this (hysteresis)
     private static final int    LIMELIGHT_THROTTLE_VALUE      = 100;  // Numer of frames to skip (Value Range: 100 to 200. 200 means 100% throttling, 100 means 50% throttling)
-    private boolean limelightThrottled = false;
+    private boolean limelightThrottled = false; // Don't change this directly; use updateLimelightThrottle()
 
     private static final String LL3_NAME = "limelight-three";
 
@@ -239,7 +239,7 @@ public class Vision extends SubsystemBase {
     public void updateLimelightThrottle() {
         for (String name : LIMELIGHTS) {
             double temp = getLimelightTemp(name);
-            SmartDashboard.putNumber(name + " Temp (C)", temp);
+            SmartDashboard.putNumber(name + " Temp (°F)", temp);
 
             // Schmitt trigger: latch ON above high threshold, latch OFF below low threshold
             if (!limelightThrottled && temp > LIMELIGHT_THROTTLE_ON_TEMP_C) {
@@ -247,7 +247,6 @@ public class Vision extends SubsystemBase {
             } else if (limelightThrottled && temp < LIMELIGHT_THROTTLE_OFF_TEMP_C) {
                 limelightThrottled = false;
             }
-
             LimelightHelpers.SetThrottle(name,
                 limelightThrottled ? LIMELIGHT_THROTTLE_VALUE : 0);
         }
@@ -288,6 +287,39 @@ public class Vision extends SubsystemBase {
             LimelightHelpers.SetRobotOrientation(name, yaw, yawRate, 0.0, 0.0, 0.0, 0.0);
         }
     }
+
+    /**
+     * Reads the onboard IMU (Inertial Measurement Unit) from each camera and publishes
+     * pitch, roll, yaw, and the accelerometer-derived mount pitch angle to SmartDashboard.
+     *
+     * Mount pitch is computed from the accelerometer using gravity as a reference,
+     * so it is valid even when the robot is not leveled — as long as the robot is stationary.
+     *
+     * Positive mount pitch = camera lens tilted upward (verify sign on your bench).
+     */
+    // private void updateCameraIMUTelemetry() {
+    //     for (String name : cameraNames) {
+    //         LimelightHelpers.IMUData imu = LimelightHelpers.getIMUData(name);
+
+    //         // Raw IMU angles reported by the Limelight firmware
+    //         SmartDashboard.putNumber(name + " IMU Pitch (deg)", imu.Pitch);
+    //         SmartDashboard.putNumber(name + " IMU Roll (deg)",  imu.Roll);
+    //         SmartDashboard.putNumber(name + " IMU Yaw (deg)",   imu.Yaw);
+
+    //         // Accelerometer-derived mount pitch — valid while stationary.
+    //         // Uses gravity vector to compute tilt of the camera's lens axis from horizontal.
+    //         double ax = imu.accelX;
+    //         double ay = imu.accelY;
+    //         double az = imu.accelZ;
+
+    //         double mountPitchDeg = 0.0;
+    //         if (ax != 0.0 || ay != 0.0 || az != 0.0) { // guard against all-zeros (disconnected)
+    //             mountPitchDeg = Math.toDegrees(Math.atan2(-ax, Math.sqrt(ay * ay + az * az)));
+    //         }
+
+    //         SmartDashboard.putNumber(name + " Mount Pitch (deg)", mountPitchDeg);
+    //     }
+    // }
 
     public static Vision getInstance() {
         if (instance == null) {
