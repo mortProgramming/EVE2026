@@ -21,7 +21,7 @@ import org.mort11.commands.actions.endeffector.manual.MoveIntakeArm;
 import org.mort11.commands.actions.endeffector.manual.MoveIntakeRoller;
 import org.mort11.commands.actions.endeffector.pid.AgitateArm;
 import org.mort11.commands.actions.endeffector.pid.SetArm;
-import org.mort11.commands.actions.endeffector.pid.SetShooter;
+//import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.commands.autons.pathplanner.BasicCommands;
 import org.mort11.commands.autons.timed.Taxi;
 import org.mort11.commands.autons.apriltag.RotateToHub;
@@ -134,7 +134,7 @@ public class RobotContainer {
         manualController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder(feeder, floor));
       
         //shooter
-        manualController.y().whileTrue(new SetShooter(shooter, 4000));
+        //manualController.y().whileTrue(new SetShooter(shooter, 4000));
         manualController.a().whileTrue(new PercentShoot(shooter, 0.6));
         //hood
         manualController.povUp().whileTrue(new MoveHood(hood, 1.0));
@@ -164,7 +164,7 @@ public class RobotContainer {
 
         //shooter
         endeffectorController.leftTrigger().whileTrue(new PercentShoot(shooter, 0.8));
-        endeffectorController.x().whileTrue(new SetShooter(shooter, 6000));
+        //endeffectorController.leftTrigger().whileTrue(new SetShooter(shooter, 6000));
 
         //hood
         endeffectorController.povLeft().whileTrue(new MoveHood(hood, 1.0));
