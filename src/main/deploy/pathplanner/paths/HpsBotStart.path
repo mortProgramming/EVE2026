@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.418002853067047,
-        "y": 2.42413694721826
+        "x": 3.5864274570982824,
+        "y": 2.4714508580343204
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.148266354744753,
-        "y": 2.037680718310722
+        "x": 2.3166909587759883,
+        "y": 2.0849946291267822
       },
       "isLocked": false,
       "linkedName": "BotStart"
@@ -36,7 +36,12 @@
       "name": "IntakeDown",
       "waypointRelativePos": 0.4564483457123445,
       "endWaypointRelativePos": null,
-      "command": null
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "IntakeDown"
+        }
+      }
     }
   ],
   "globalConstraints": {
@@ -55,7 +60,7 @@
   "folder": "1.5 Autos",
   "idealStartingState": {
     "velocity": 0.0,
-    "rotation": 52.826337021764644
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }

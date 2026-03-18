@@ -1536,6 +1536,7 @@ public class LimelightHelpers {
      */
     public static void SetThrottle(String limelightName, int throttle) {
         setLimelightNTDouble(limelightName, "throttle_set", throttle);
+        Flush(); // Force NT to send immediately — critical during disabledPeriodic()
     }
 
     /**
