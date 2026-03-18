@@ -16,22 +16,33 @@
     },
     {
       "anchor": {
-        "x": 3.418002853067047,
-        "y": 2.42413694721826
+        "x": 3.091185647425896,
+        "y": 2.598798751950077
       },
       "prevControl": {
-        "x": 1.636954598614989,
-        "y": 1.6940330055112245
+        "x": 1.3101373929738376,
+        "y": 1.8686948102430412
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "BotStart"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
+    {
+      "name": "SetShooter",
+      "waypointRelativePos": 0.7886563133018276,
+      "endWaypointRelativePos": 0.991222147197831,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "SetShooter"
+        }
+      }
+    },
     {
       "name": "SetShooter",
       "waypointRelativePos": 1.0,
@@ -43,13 +54,13 @@
             {
               "type": "named",
               "data": {
-                "name": "FeederIntake"
+                "name": "SetShooter"
               }
             },
             {
               "type": "named",
               "data": {
-                "name": "SetShooter"
+                "name": "FeederIntake"
               }
             }
           ]
@@ -67,7 +78,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 52.826337021764644
+    "rotation": 43.90878377473744
   },
   "reversed": false,
   "folder": "1.5 Autos",
