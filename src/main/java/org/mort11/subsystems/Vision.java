@@ -74,12 +74,12 @@ public class Vision extends SubsystemBase {
         // Forward, side, up in meters (converted from inches).
         LimelightHelpers.setCameraPose_RobotSpace(
             "limelight-three",
-            -3.0 * 0.0254,   // forward — replace 12.0 with your inches measurement
-            0.0  * 0.0254,   // side — replace 0.0 with your inches measurement
-            25.0 * 0.0254,   // up — replace 18.0 with your inches measurement
-            0.0,             // roll degrees
-            -30.0,               // pitch degrees
-            0.0              // yaw degrees
+            -3.0 * 0.0254,   // forward — (measured about -3 inches)
+            0.0  * 0.0254,   // side — (should be at 0 inches)
+            25.0 * 0.0254,   // up — (about 25 inches off the floor)
+            0.0,             // roll degrees: (should be 0)
+            -16.0,               // pitch degrees: (rotating up) ==> negative rotation around Y-axis). Measured about -30 degrees from onboard IMU (http://limelight-three.local:5801/)
+            0.0              // yaw degrees: (should be 0)
         );
     }
 
@@ -250,6 +250,9 @@ public class Vision extends SubsystemBase {
             SmartDashboard.putNumber( name + " RAM (%)",      hw.ramUsagePct);
             SmartDashboard.putNumber( name + " Temp (C)",     hw.tempC);
             SmartDashboard.putBoolean(name + " Throttled",    throttled);
+
+            // Actually send the throttle command to the camera
+            LimelightHelpers.SetThrottle(name, throttled ? LIMELIGHT_THROTTLE_VALUE : 0);
 
             // Set the Limelight green LEDs to show throttle status visually:
             //   Throttled (disabled)  → Force Blink  — steady uniform blink, "I am throttled"
