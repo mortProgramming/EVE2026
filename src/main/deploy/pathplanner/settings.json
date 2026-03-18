@@ -1,6 +1,6 @@
 {
-  "robotWidth": 0.845,
-  "robotLength": 0.903,
+  "robotWidth": 0.8255,
+  "robotLength": 0.84455,
   "holonomicMode": true,
   "pathFolders": [
     "1.5 Autos"
@@ -11,24 +11,26 @@
   "defaultMaxAngVel": 540.0,
   "defaultMaxAngAccel": 720.0,
   "defaultNominalVoltage": 12.0,
-  "robotMass": 44.5,
-  "robotMOI": 20.95,
+  "robotMass": 60.0,
+  "robotMOI": 4.0,
   "robotTrackwidth": 0.546,
-  "driveWheelRadius": 0.051,
-  "driveGearing": 5.143,
-  "maxDriveSpeed": 11.71,
+  "driveWheelRadius": 0.0508,
+  "driveGearing": 6.03,
+  "maxDriveSpeed": 5.30352,
   "driveMotorType": "krakenX60",
   "driveCurrentLimit": 60.0,
-  "wheelCOF": 1.0,
-  "flModuleX": 0.288925,
-  "flModuleY": 0.264,
-  "frModuleX": 0.288925,
-  "frModuleY": -0.264,
-  "blModuleX": -0.288925,
-  "blModuleY": 0.264,
-  "brModuleX": -0.288925,
-  "brModuleY": -0.264,
+  "wheelCOF": 1.2,
+  "flModuleX": 0.276,
+  "flModuleY": 0.257,
+  "frModuleX": 0.276,
+  "frModuleY": -0.257,
+  "blModuleX": -0.276,
+  "blModuleY": 0.257,
+  "brModuleX": -0.276,
+  "brModuleY": -0.257,
   "bumperOffsetX": 0.0,
   "bumperOffsetY": 0.0,
-  "robotFeatures": []
+  "robotFeatures": [
+    "{\"name\":\"IntakeRoller\",\"type\":\"line\",\"data\":{\"start\":{\"x\":0.5715,\"y\":-0.273},\"end\":{\"x\":0.5715,\"y\":0.27305},\"strokeWidth\":0.0308}}"
+  ]
 }
