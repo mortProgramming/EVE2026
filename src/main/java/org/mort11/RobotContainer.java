@@ -86,7 +86,7 @@ public class RobotContainer {
 
     public RobotContainer() {
         drivetrain.configureAutoBuilder();
-        BasicCommands.setCommands(odometry, shooter, intakeArm, intakeRoller);
+        BasicCommands.setCommands(odometry, shooter, intakeArm, intakeRoller, feeder, floor);
         configureBindings();
         configureAuto();
     }
@@ -166,7 +166,7 @@ public class RobotContainer {
 
         //shooter
         //endeffectorController.leftTrigger().whileTrue(new PercentShoot(shooter, 0.8));
-        endeffectorController.leftTrigger().whileTrue(new SetShooter(4500));
+        endeffectorController.leftTrigger().whileTrue(new SetShooter(4000));
 
         //hood
         endeffectorController.povLeft().whileTrue(new MoveHood(hood, 1.0));
@@ -199,6 +199,8 @@ public class RobotContainer {
         autoChooser.addOption("RedDepot", new PathPlannerAuto("RedDepot"));
         autoChooser.addOption("Hps", new PathPlannerAuto("Hps"));
         autoChooser.addOption("RedHps", new PathPlannerAuto("RedHps"));
+        autoChooser.addOption("ComboTop", new PathPlannerAuto("ComboTop"));
+
         
         
         

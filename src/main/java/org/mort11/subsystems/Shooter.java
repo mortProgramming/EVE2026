@@ -47,7 +47,6 @@ public class Shooter extends SubsystemBase {
         rightMotor = new TalonFX(PortConstants.Shooter.SHOOTER_RIGHT);
         motors = List.of(leftMotor, middleMotor, rightMotor);
 
-        //verify these inversions match physical robot wiring
         configureMotor(leftMotor,   InvertedValue.Clockwise_Positive, PIDConstants.Shooter.KV_LEFT);
         configureMotor(middleMotor, InvertedValue.CounterClockwise_Positive, PIDConstants.Shooter.KV_MIDDLE);
         configureMotor(rightMotor,  InvertedValue.CounterClockwise_Positive, PIDConstants.Shooter.KV_RIGHT);
@@ -76,12 +75,12 @@ public class Shooter extends SubsystemBase {
             )
             .withSlot0(
                 new Slot0Configs()
-                    .withKP(PIDConstants.Shooter.KP)
-                    .withKI(PIDConstants.Shooter.KI)
-                    .withKD(PIDConstants.Shooter.KD)
-                    .withKS(PIDConstants.Shooter.KS)   
-                    .withKV(kV)                         
-            );
+                .withKP(PIDConstants.Shooter.KP)
+                .withKI(PIDConstants.Shooter.KI)
+                .withKD(PIDConstants.Shooter.KD)
+                .withKS(PIDConstants.Shooter.KS)
+                .withKV(kV)
+                .withKA(PIDConstants.Shooter.KA));
 
         motor.getConfigurator().apply(config);
     }

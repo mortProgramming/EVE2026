@@ -25,11 +25,12 @@ public final class PIDConstants {
     public static final double KI = 2;
     public static final double KD = 0;
 
-    public static final double KV_LEFT   = 0.121;  
-    public static final double KV_MIDDLE = 0.13;
-    public static final double KV_RIGHT  = 0.120;
+    public static final double KV_LEFT   = 0.37;  
+    public static final double KV_MIDDLE = 0.37;
+    public static final double KV_RIGHT  = 0.37;
 
     public static final double KS = 0.0; 
+    public static final double KA = 0.13;
     public static final double VELOCITY_TOLERANCE_RPM = 100;
     }
  
@@ -40,7 +41,7 @@ public final class PIDConstants {
     }
 
     public static final class Feeder{
-        public static final double KP = 0;
+        public static final double KP = 0.2;
         public static final double KI = 0;
         public static final double KD = 0;
 
