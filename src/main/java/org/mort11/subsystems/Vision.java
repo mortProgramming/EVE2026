@@ -37,7 +37,7 @@ public class Vision extends SubsystemBase {
     // private static final double LIMELIGHT_THROTTLE_ON_TEMP_C  = 60.0; // °C: throttle kicks in above this
     // private static final double LIMELIGHT_THROTTLE_OFF_TEMP_C = 45.0; // °C: throttle removed below this (hysteresis)
     public static final int    LIMELIGHT_THROTTLE_VALUE      = 100;  // Numer of frames to skip (Value Range: 100 to 200. 200 means 100% throttling, 100 means 50% throttling)
-    // private final java.util.Map<String, Boolean> limelightThrottleState = new java.util.HashMap<>(); // Don't change this directly; use updateLimelightThrottle()
+    // private final java.util.Map<String, Boolean> limelightThrottleState = new java.util.HashMap<>();
 
     private static final String LL3_NAME = "limelight-three";
 
@@ -78,7 +78,7 @@ public class Vision extends SubsystemBase {
             0.0  * 0.0254,   // side — replace 0.0 with your inches measurement
             25.0 * 0.0254,   // up — replace 18.0 with your inches measurement
             0.0,             // roll degrees
-            -15.0,               // pitch degrees
+            -30.0,               // pitch degrees
             0.0              // yaw degrees
         );
     }
@@ -88,6 +88,8 @@ public class Vision extends SubsystemBase {
         SmartDashboard.putNumber("Tag ID", getTagId());
         SmartDashboard.putNumber("X Degrees", getTX());
         SmartDashboard.putBoolean("Tag Detected?", hasTag());
+        
+        updateLimelightTelemetry(false); // Push limelight hardware telemetry while enabled (not throttled)
     }
 
     // ---------- Camera / Limelight Methods ----------
