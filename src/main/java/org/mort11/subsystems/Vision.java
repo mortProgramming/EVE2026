@@ -37,7 +37,7 @@ public class Vision extends SubsystemBase {
     private static final double LIMELIGHT_THROTTLE_ON_TEMP_C  = 60.0; // °C: throttle kicks in above this
     private static final double LIMELIGHT_THROTTLE_OFF_TEMP_C = 45.0; // °C: throttle removed below this (hysteresis)
     private static final int    LIMELIGHT_THROTTLE_VALUE      = 100;  // Numer of frames to skip (Value Range: 100 to 200. 200 means 100% throttling, 100 means 50% throttling)
-    private boolean limelightThrottled = false; // Don't change this directly; use updateLimelightThrottle()
+    private final java.util.Map<String, Boolean> limelightThrottleState = new java.util.HashMap<>(); // Don't change this directly; use updateLimelightThrottle()
 
     private static final String LL3_NAME = "limelight-three";
 
@@ -72,7 +72,6 @@ public class Vision extends SubsystemBase {
 
         // In the Vision constructor, after camera setup:
         // Forward, side, up in meters (converted from inches).
-        // Replace 12.0, 0.0, 18.0 with your actual tape measure values in inches.
         LimelightHelpers.setCameraPose_RobotSpace(
             "limelight-three",
             -3.0 * 0.0254,   // forward — replace 12.0 with your inches measurement
@@ -238,17 +237,37 @@ public class Vision extends SubsystemBase {
 
     public void updateLimelightThrottle() {
         for (String name : LIMELIGHTS) {
-            double temp = getLimelightTemp(name);
-            SmartDashboard.putNumber(name + " Temp (°F)", temp);
+            LimelightHelpers.HWData hw = LimelightHelpers.getHWData(name);
 
-            // Schmitt trigger: latch ON above high threshold, latch OFF below low threshold
-            if (!limelightThrottled && temp > LIMELIGHT_THROTTLE_ON_TEMP_C) {
-                limelightThrottled = true;
-            } else if (limelightThrottled && temp < LIMELIGHT_THROTTLE_OFF_TEMP_C) {
-                limelightThrottled = false;
+            // Publish hardware telemetry — visible on SmartDashboard even while disabled
+            SmartDashboard.putNumber(name + " Temp (°C)",     hw.tempC);
+            SmartDashboard.putNumber(name + " CPU Temp (°C)", hw.cpuTempC);
+            SmartDashboard.putNumber(name + " FPS",           hw.fps);
+            SmartDashboard.putNumber(name + " RAM Usage (%)", hw.ramUsagePct);
+
+            // Per-camera Schmitt trigger hysteresis
+            boolean currentlyThrottled = limelightThrottleState.getOrDefault(name, false);
+
+            if (!currentlyThrottled && hw.tempC > LIMELIGHT_THROTTLE_ON_TEMP_C) {
+                currentlyThrottled = true;
+            } else if (currentlyThrottled && hw.tempC < LIMELIGHT_THROTTLE_OFF_TEMP_C) {
+                currentlyThrottled = false;
             }
-            LimelightHelpers.SetThrottle(name,
-                limelightThrottled ? LIMELIGHT_THROTTLE_VALUE : 0);
+
+            limelightThrottleState.put(name, currentlyThrottled);
+
+            int throttleVal = currentlyThrottled ? LIMELIGHT_THROTTLE_VALUE : 0;
+            LimelightHelpers.SetThrottle(name, throttleVal);
+
+            // Change LED mode to blink when throttled (visible indicator while disabled)
+            // ledMode: 0=pipeline, 1=off, 2=blink, 3=on
+            if (currentlyThrottled) {
+                LimelightHelpers.setLEDMode_ForceBlink(name);
+            } else {
+                LimelightHelpers.setLEDMode_PipelineControl(name);
+            }
+
+            SmartDashboard.putBoolean(name + " Throttled", currentlyThrottled);
         }
     }
 

@@ -47,6 +47,7 @@ public class Robot extends TimedRobot {
         // Remove throttle when robot enables so vision is fully active during match
         for (String name : Vision.getLimelights()) {
             LimelightHelpers.SetThrottle(name, 0);
+            LimelightHelpers.setLEDMode_PipelineControl(name); // restore LED to pipeline
         }
     }
 
