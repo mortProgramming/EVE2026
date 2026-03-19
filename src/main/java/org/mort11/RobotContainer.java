@@ -176,7 +176,7 @@ public class RobotContainer {
         endeffectorController.povLeft().whileTrue(new MoveHood(hood, 1.0));
         endeffectorController.povRight().whileTrue(new MoveHood(hood, -1.0));
 
-    endeffectorController.y().whileTrue(new PrepareShotCommand(shooter, hood, odometry));        
+        endeffectorController.y().whileTrue(new PrepareShotCommand(shooter, hood, odometry));        
 
     }
 

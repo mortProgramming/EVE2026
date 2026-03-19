@@ -12,12 +12,12 @@ public final class LookUpTableConstants {
         // {Units.inchesToMeters(107), 2500, 73},
         // {Units.inchesToMeters(189), 3000, 73},
         // {Units.inchesToMeters(238), 3500, 73},
-        {1, 2450, 0.20},
-        {2, 2500, 0.20},
-        {3, 3500, 0.35},
-        {4, 4000, 0.40},
-        {5, 4500, 0.50},
-        {6, 6000, 0.77} //upper placholder
+        {1, 3990, 0.20},
+        {2, 4000, 0.20},
+        {3, 4100, 0.22},
+        {4, 4500, 0.30},
+        {5, 4700, 0.35},
+        {6, 5000, 0.77} //upper placholder
     };
 
     //distance in meters, time in air seconds
