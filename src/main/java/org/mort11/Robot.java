@@ -54,6 +54,9 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
+        // Set Limelight throttling to false
+        Vision.getInstance().updateLimelightTelemetry(false);
+
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }
