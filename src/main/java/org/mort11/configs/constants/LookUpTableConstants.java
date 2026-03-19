@@ -18,8 +18,8 @@ public final class LookUpTableConstants {
         {2.5, 4050, 0.21},
         {3, 4300, 0.20},
         {4, 4500, 0.215},
-        {5, 4700, 0.35},
-        {6, 5000, 0.77} //upper placholder
+        {5, 4900, 0.35},
+        {6, 6000, 0.77} //upper placholder
     };
 
     //distance in meters, time in air seconds
