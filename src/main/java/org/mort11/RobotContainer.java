@@ -138,8 +138,8 @@ public class RobotContainer {
         //manualController.y().whileTrue(new SetShooter(shooter, 4000));
         manualController.a().whileTrue(new PercentShoot(shooter, 0.6));
         //hood
-        manualController.povUp().whileTrue(new MoveHood(hood, 1.0));
-        manualController.povDown().whileTrue(new MoveHood(hood, -1.0));
+        manualController.povUp().whileTrue(new MoveIntakeArm(intakeArm, () -> 0.3));
+        manualController.povDown().whileTrue(new MoveIntakeArm(intakeArm, () -> -0.3));
 
         //floor and feeder tied together 9same as old spindexer feeder)
         //michale climb button (30%)
@@ -166,7 +166,7 @@ public class RobotContainer {
 
         //shooter
         //endeffectorController.leftTrigger().whileTrue(new PercentShoot(shooter, 0.8));
-        endeffectorController.leftTrigger().whileTrue(new SetShooter(4000));
+        endeffectorController.leftTrigger().whileTrue(new SetShooter(5000));
 
         //hood
         endeffectorController.povLeft().whileTrue(new MoveHood(hood, 1.0));
