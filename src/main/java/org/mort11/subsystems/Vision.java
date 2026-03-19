@@ -78,7 +78,7 @@ public class Vision extends SubsystemBase {
             0.0  * 0.0254,   // side — (should be at 0 inches)
             25.0 * 0.0254,   // up — (about 25 inches off the floor)
             0.0,             // roll degrees: (should be 0)
-            -16.0,               // pitch degrees: (rotating up) ==> negative rotation around Y-axis). Measured about -30 degrees from onboard IMU (http://limelight-three.local:5801/)
+            -16.0,               // pitch degrees: (rotating up) ==> negative rotation around Y-axis). Measured about -16 degrees from onboard IMU (http://limelight-three.local:5801/)
             0.0              // yaw degrees: (should be 0)
         );
     }
@@ -89,7 +89,13 @@ public class Vision extends SubsystemBase {
         SmartDashboard.putNumber("X Degrees", getTX());
         SmartDashboard.putBoolean("Tag Detected?", hasTag());
         
-        updateLimelightTelemetry(false); // Push limelight hardware telemetry while enabled (not throttled)
+        // Only push telemetry as "not throttled" when the robot is actually enabled.
+        // When disabled, disabledPeriodic() handles this with throttled=true.
+        // Without this guard, periodic() and disabledPeriodic() fight each other
+        // every loop cycle causing the Throttled boolean to flip rapidly.
+        if (edu.wpi.first.wpilibj.DriverStation.isEnabled()) {
+            updateLimelightTelemetry(false);
+        }
     }
 
     // ---------- Camera / Limelight Methods ----------
