@@ -1,6 +1,7 @@
 package org.mort11.subsystems;
 
 import static org.mort11.configs.constants.VisionConstants.FRONT_CAMERA_NAME;
+import static org.mort11.configs.constants.VisionConstants.LIMELIGHT_THROTTLE_VALUE;
 
 import org.opencv.dnn.Net;
 
@@ -36,7 +37,7 @@ public class Vision extends SubsystemBase {
     // Schmitt trigger state and thresholds for thermal throttling
     // private static final double LIMELIGHT_THROTTLE_ON_TEMP_C  = 60.0; // °C: throttle kicks in above this
     // private static final double LIMELIGHT_THROTTLE_OFF_TEMP_C = 45.0; // °C: throttle removed below this (hysteresis)
-    public static final int    LIMELIGHT_THROTTLE_VALUE      = 100;  // Numer of frames to skip (Value Range: 100 to 200. 200 means 100% throttling, 100 means 50% throttling)
+    public static final int    LIMELIGHT_THROTTLE_VALUE      = 200;  // Numer of frames to skip (Value Range: 100 to 200. 200 means 100% throttling, 100 means 50% throttling)
     // private final java.util.Map<String, Boolean> limelightThrottleState = new java.util.HashMap<>();
 
     private static final String LL3_NAME = "limelight-three";
