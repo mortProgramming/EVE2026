@@ -3,16 +3,32 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.6120827389443653,
-        "y": 2.6311554921540665
+        "x": 3.5473894436519258,
+        "y": 0.4703994293865924
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.4605420827364872,
-        "y": 2.5535235377981995
+        "x": 2.7450882447862908,
+        "y": 0.4703994293865925
       },
       "isLocked": false,
-      "linkedName": "BotStart"
+      "linkedName": "TrenchStart"
+    },
+    {
+      "anchor": {
+        "x": 1.9947503566333804,
+        "y": 0.6644793152639101
+      },
+      "prevControl": {
+        "x": 2.598432763544963,
+        "y": 0.6416988470785691
+      },
+      "nextControl": {
+        "x": 1.309001426533523,
+        "y": 0.6903566333808838
+      },
+      "isLocked": false,
+      "linkedName": null
     },
     {
       "anchor": {
@@ -20,8 +36,8 @@
         "y": 0.6644793152639101
       },
       "prevControl": {
-        "x": 0.3991298145506419,
-        "y": 0.6644793152639101
+        "x": 1.8142558831636426,
+        "y": 0.66447931526391
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,16 +46,27 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1.0,
+      "waypointRelativePos": 2.0,
       "rotationDegrees": 180.0
     }
   ],
   "constraintZones": [],
-  "pointTowardsZones": [],
+  "pointTowardsZones": [
+    {
+      "fieldPosition": {
+        "x": -0.3,
+        "y": 0.65
+      },
+      "rotationOffset": 0.0,
+      "minWaypointRelativePos": 0.5,
+      "maxWaypointRelativePos": 2.0,
+      "name": "Point Towards Zone"
+    }
+  ],
   "eventMarkers": [
     {
       "name": "IntakeDown",
-      "waypointRelativePos": 0.25,
+      "waypointRelativePos": 0.5,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
