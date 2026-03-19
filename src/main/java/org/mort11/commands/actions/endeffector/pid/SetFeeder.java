@@ -29,11 +29,11 @@ public class SetFeeder extends Command {
 
     // Backwards-compatible constructor — floor defaults to 0.8 like MoveFeeder
     public SetFeeder(DoubleSupplier rpmSupplier) {
-        this(rpmSupplier, 0.8);
+        this(rpmSupplier, 0.83);
     }
 
     public SetFeeder(double rpm) {
-        this(() -> rpm, 0.8);
+        this(() -> rpm, 0.83);
     }
 
     @Override

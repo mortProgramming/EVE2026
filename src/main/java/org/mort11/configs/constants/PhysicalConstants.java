@@ -22,9 +22,7 @@ public final class PhysicalConstants {
 		public static final double DRIVETRAIN_TRACKWIDTH_METERS = Units.inchesToMeters(20.50);
 		public static final double DRIVETRAIN_WHEELBASE_METERS = Units.inchesToMeters(21.75);
 
-		public static final double DRIVEBASE_RADIUS_METERS = Math.hypot(
-			DRIVETRAIN_TRACKWIDTH_METERS / 2.0, DRIVETRAIN_WHEELBASE_METERS / 2.0
-		);
+		public static final double DRIVEBASE_RADIUS_METERS = Math.hypot(DRIVETRAIN_TRACKWIDTH_METERS / 2.0, DRIVETRAIN_WHEELBASE_METERS / 2.0);
 
 		public static final double FRONT_LEFT_OFFSET = 21.3 + 90 + 180;
 		public static final double FRONT_RIGHT_OFFSET = 3.08 + 90 + 180;

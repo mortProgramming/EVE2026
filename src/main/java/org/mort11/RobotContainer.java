@@ -38,6 +38,7 @@ import org.mort11.subsystems.CommandSwerveDrivetrain;
 import org.mort11.subsystems.Hood;
 import org.mort11.subsystems.IntakeArm;
 import org.mort11.subsystems.IntakeRoller;
+import org.mort11.subsystems.Limelight;
 import org.mort11.subsystems.OdometryHelper;
 import org.mort11.subsystems.Shooter;
 import org.mort11.subsystems.Vision;
@@ -64,13 +65,15 @@ public class RobotContainer {
     private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
 
     private final Telemetry logger = new Telemetry(MaxSpeed);
+    private final Limelight limelightThree = new Limelight("limelight-three");
+
 
     private static final CommandPS5Controller driveController = new CommandPS5Controller(DRIVE_CONTROLLER);
     private static final CommandXboxController endeffectorController = new CommandXboxController(ENDEFFECTOR_CONTROLLER);
     private static final CommandXboxController manualController = new CommandXboxController(MANUAL_CONTROLLER);
 
     public final static CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
-    private final OdometryHelper odometry = new OdometryHelper(drivetrain);
+    private final OdometryHelper odometry = new OdometryHelper(drivetrain, limelightThree);
 
     private final Shooter shooter = new Shooter();
     private final Hood hood = new Hood();
@@ -86,7 +89,7 @@ public class RobotContainer {
 
     public RobotContainer() {
         drivetrain.configureAutoBuilder();
-        BasicCommands.setCommands(odometry, shooter, intakeArm, intakeRoller, feeder, floor);
+        BasicCommands.setCommands(odometry, shooter, intakeArm, intakeRoller, floor, feeder);
         configureBindings();
         configureAuto();
     }
@@ -138,8 +141,8 @@ public class RobotContainer {
         //manualController.y().whileTrue(new SetShooter(shooter, 4000));
         manualController.a().whileTrue(new PercentShoot(shooter, 0.6));
         //hood
-        manualController.povUp().whileTrue(new MoveHood(hood, 1.0));
-        manualController.povDown().whileTrue(new MoveHood(hood, -1.0));
+        manualController.povUp().whileTrue(new MoveIntakeArm(intakeArm, () -> 0.3));
+        manualController.povDown().whileTrue(new MoveIntakeArm(intakeArm, () -> -0.3));
 
         //floor and feeder tied together 9same as old spindexer feeder)
         //michale climb button (30%)
@@ -162,7 +165,7 @@ public class RobotContainer {
         //feeder + floor
         //endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder(feeder, floor));
         endeffectorController.rightBumper().whileTrue(new MoveFeederOuttake(feeder, floor));
-        endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new SetFeeder(4000));
+        endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new SetFeeder(5000));
 
         //shooter
         //endeffectorController.leftTrigger().whileTrue(new PercentShoot(shooter, 0.8));
