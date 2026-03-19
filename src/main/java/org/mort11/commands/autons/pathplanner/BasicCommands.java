@@ -6,6 +6,8 @@ import org.mort11.commands.actions.endeffector.manual.MoveIntakeArm;
 import org.mort11.commands.actions.endeffector.manual.MoveIntakeRoller;
 import org.mort11.commands.actions.endeffector.pid.AgitateArm;
 import org.mort11.commands.actions.endeffector.pid.SetArm;
+import org.mort11.commands.actions.endeffector.pid.SetFeeder;
+import org.mort11.commands.actions.endeffector.pid.SetShooter;
 //import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.subsystems.IntakeArm;
 import org.mort11.subsystems.IntakeRoller;
@@ -30,6 +32,8 @@ public class BasicCommands {
         //Climber commands
         NamedCommands.registerCommand("Climb", new MoveClimber(-1));
         //Shooter commands
+        NamedCommands.registerCommand("SetShooter" , new SetShooter(4000));
+        NamedCommands.registerCommand("FeederIntake", new SetFeeder(4000));
 
     }
 }
