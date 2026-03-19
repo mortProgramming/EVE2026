@@ -1,0 +1,114 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 13.044365192582024,
+        "y": 2.5405848787446508
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 14.725515018410945,
+        "y": 2.246520038461831
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 15.360385164051355,
+        "y": 2.074793152639087
+      },
+      "prevControl": {
+        "x": 15.088673323823109,
+        "y": 2.0877318116975756
+      },
+      "nextControl": {
+        "x": 15.74876075977849,
+        "y": 2.056299076652079
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 15.916747503566334,
+        "y": 2.074793152639087
+      },
+      "prevControl": {
+        "x": 15.667513316049032,
+        "y": 2.0943461517080277
+      },
+      "nextControl": {
+        "x": 16.16598169108363,
+        "y": 2.0552401535701463
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 15.360385164051355,
+        "y": 2.074793152639087
+      },
+      "prevControl": {
+        "x": 15.632267824633058,
+        "y": 2.074793152639087
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "RedDepot"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.5373134328357375,
+      "rotationDegrees": 0.0
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "IntakeDown",
+      "waypointRelativePos": 0.10533423362589825,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "IntakeDown"
+        }
+      }
+    },
+    {
+      "name": "IntakeRollerIntake",
+      "waypointRelativePos": 0.2997974341661087,
+      "endWaypointRelativePos": 3.0,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "IntakeRollerIntake"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 1.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 1.0,
+    "rotation": 0.0
+  },
+  "reversed": false,
+  "folder": "1.5 Autos",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "useDefaultConstraints": true
+}

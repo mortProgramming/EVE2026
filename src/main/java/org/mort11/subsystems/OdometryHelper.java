@@ -4,8 +4,6 @@ import static org.mort11.configs.constants.PhysicalConstants.Field.BLUE_HUB_X;
 import static org.mort11.configs.constants.PhysicalConstants.Field.BLUE_HUB_Y;
 import static org.mort11.configs.constants.PhysicalConstants.Field.RED_HUB_X;
 import static org.mort11.configs.constants.PhysicalConstants.Field.RED_HUB_Y;
-import static org.mort11.configs.constants.PhysicalConstants.Turret.TURRET_MAX_ANGLE;
-import static org.mort11.configs.constants.PhysicalConstants.Turret.TURRET_MIN_ANGLE;
 
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.geometry.Pose2d;

@@ -66,7 +66,15 @@ public class TunerConstants {
         );
     private static final CANcoderConfiguration encoderInitialConfigs = new CANcoderConfiguration();
     // Configs for the Pigeon 2; leave this null to skip applying Pigeon 2 configs
-    private static final Pigeon2Configuration pigeonConfigs = null;
+    private static final Pigeon2Configuration pigeonConfigs = new Pigeon2Configuration()
+        .withMountPose(
+            new MountPoseConfigs()
+                // EVE 2.0: +X axis faces forward, +Z axis points up
+                // This matches the Pigeon 2.0 default, but we declare it explicitly
+                .withMountPoseYaw(0)    // degrees: 0 = +X faces robot forward
+                .withMountPosePitch(0)  // degrees: 0 = flat, +Z up
+                .withMountPoseRoll(0)   // degrees: no roll
+        );
 
     // CAN bus that the devices are located on;
     // All swerve devices must share the same CAN bus
@@ -78,10 +86,10 @@ public class TunerConstants {
     
     // Every 1 rotation of the azimuth results in kCoupleRatio drive motor turns;
     // This may need to be tuned to your individual robot
-    private static final double kCoupleRatio = 3.375;
+    private static final double kCoupleRatio = 4.9090909;
 
-    private static final double kDriveGearRatio = 5.2734375;
-    private static final double kSteerGearRatio = 26.09090909090909;
+    private static final double kDriveGearRatio = 5.9090909090909;
+    private static final double kSteerGearRatio = 12.1;
     private static final Distance kWheelRadius = Inches.of(2);
 
     private static final boolean kInvertLeftSide = false;

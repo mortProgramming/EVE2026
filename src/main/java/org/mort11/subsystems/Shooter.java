@@ -39,6 +39,7 @@ public class Shooter extends SubsystemBase {
     private final VoltageOut voltageRequest = new VoltageOut(0);
 
     private double dashboardTargetRPM = 0.0;
+    private static Shooter shooter;
 
     public Shooter() {
         leftMotor = new TalonFX(PortConstants.Shooter.SHOOTER_LEFT);
@@ -46,15 +47,15 @@ public class Shooter extends SubsystemBase {
         rightMotor = new TalonFX(PortConstants.Shooter.SHOOTER_RIGHT);
         motors = List.of(leftMotor, middleMotor, rightMotor);
 
-        //verify these inversions match physical robot wiring
-        configureMotor(leftMotor, InvertedValue.CounterClockwise_Positive);
-        configureMotor(middleMotor, InvertedValue.Clockwise_Positive);
-        configureMotor(rightMotor, InvertedValue.Clockwise_Positive);
+        configureMotor(leftMotor,   InvertedValue.Clockwise_Positive, PIDConstants.Shooter.KV_LEFT);
+        configureMotor(middleMotor, InvertedValue.CounterClockwise_Positive, PIDConstants.Shooter.KV_MIDDLE);
+        configureMotor(rightMotor,  InvertedValue.CounterClockwise_Positive, PIDConstants.Shooter.KV_RIGHT);
 
-        SmartDashboard.putData(this);
+        SmartDashboard.
+        putData(this);
     }
 
-    private void configureMotor(TalonFX motor, InvertedValue invertDirection) {
+    private void configureMotor(TalonFX motor, InvertedValue invertDirection, double kV) {
         final TalonFXConfiguration config = new TalonFXConfiguration()
             .withMotorOutput(
                 new MotorOutputConfigs()
@@ -74,11 +75,12 @@ public class Shooter extends SubsystemBase {
             )
             .withSlot0(
                 new Slot0Configs()
-                    .withKP(PIDConstants.Shooter.KP)
-                    .withKI(PIDConstants.Shooter.KI)
-                    .withKD(PIDConstants.Shooter.KD)
-                    .withKV(12.0 / KrakenX60.kFreeSpeed.in(RotationsPerSecond))
-            );
+                .withKP(PIDConstants.Shooter.KP)
+                .withKI(PIDConstants.Shooter.KI)
+                .withKD(PIDConstants.Shooter.KD)
+                .withKS(PIDConstants.Shooter.KS)
+                .withKV(kV)
+                .withKA(PIDConstants.Shooter.KA));
 
         motor.getConfigurator().apply(config);
     }
@@ -133,6 +135,13 @@ public class Shooter extends SubsystemBase {
         builder.addDoubleProperty(name + " RPM", () -> motor.getVelocity().getValue().in(RPM), null);
         builder.addDoubleProperty(name + " Stator Current", () -> motor.getStatorCurrent().getValue().in(Amps), null);
         builder.addDoubleProperty(name + " Supply Current", () -> motor.getSupplyCurrent().getValue().in(Amps), null);
+    }
+
+     public static Shooter getInstance(){
+        if (shooter == null){
+            shooter = new Shooter();
+        }
+        return shooter;
     }
 
     @Override

@@ -19,6 +19,9 @@ import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 
 import org.mort11.commands.actions.endeffector.manual.MoveIntakeArm;
 import org.mort11.commands.actions.endeffector.manual.MoveIntakeRoller;
+import org.mort11.commands.actions.endeffector.pid.AgitateArm;
+import org.mort11.commands.actions.endeffector.pid.SetArm;
+import org.mort11.commands.actions.endeffector.pid.SetFeeder;
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.commands.autons.pathplanner.BasicCommands;
 import org.mort11.commands.autons.timed.Taxi;
@@ -40,6 +43,7 @@ import org.mort11.subsystems.Shooter;
 import org.mort11.subsystems.Vision;
 import org.mort11.commands.actions.endeffector.manual.MoveClimber;
 import org.mort11.commands.actions.endeffector.manual.MoveFeeder;
+import org.mort11.commands.actions.endeffector.manual.MoveFeederOuttake;
 import org.mort11.commands.actions.endeffector.manual.MoveFloor;
 import org.mort11.commands.actions.endeffector.manual.MoveHood;
 import org.mort11.commands.actions.endeffector.manual.PercentShoot;
@@ -82,7 +86,7 @@ public class RobotContainer {
 
     public RobotContainer() {
         drivetrain.configureAutoBuilder();
-        BasicCommands.setCommands(odometry, shooter);
+        BasicCommands.setCommands(odometry, shooter, intakeArm, intakeRoller, feeder, floor);
         configureBindings();
         configureAuto();
     }
@@ -101,7 +105,7 @@ public class RobotContainer {
             drivetrain.applyRequest(() -> idle).ignoringDisable(true)
         );
 
-        // drive controller
+        //---------------------DRIVE CONTROLLER---------------------------
         driveController.cross().whileTrue(drivetrain.applyRequest(() -> brake));
         driveController.circle().whileTrue(drivetrain.applyRequest(() ->
             point.withModuleDirection(new Rotation2d(-driveController.getLeftY(), -driveController.getLeftX()))
@@ -118,37 +122,55 @@ public class RobotContainer {
         driveController.L1().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
         drivetrain.registerTelemetry(logger::telemeterize);
 
-        // endeffector controller
-        endeffectorController.leftTrigger(TRIGGER_THRESHOLD).whileTrue(new SetShooter(shooter, 2500));
-        //endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder());
-
-        intakeArm.setDefaultCommand(new MoveIntakeArm(intakeArm, () -> -endeffectorController.getRightY()));
+        driveController.povUp().whileTrue(new MoveClimber(0.3));
+        driveController.povDown().whileTrue(new MoveClimber(-0.3));
         
-        endeffectorController.leftBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
 
-        // manual controller 
-        //intakearm
-        intakeArm.setDefaultCommand(new MoveIntakeArm(intakeArm, () -> -manualController.getRightY()));
+        //-----------------------------MANUAL CONTROLLER------------------------------- 
 
         //roller
         manualController.rightBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
-        //feeder
-        manualController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder(feeder));
-        //floor
-        manualController.leftTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFloor(0.8));
-        manualController.b().whileTrue(new MoveFloor(-0.8));
+        manualController.rightBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
+        //feeder + floor
+        manualController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder(feeder, floor));
+      
         //shooter
-        manualController.y().whileTrue(new SetShooter(shooter, 2500));
-        manualController.a().whileTrue(new PercentShoot(shooter, 0.4));
+        //manualController.y().whileTrue(new SetShooter(shooter, 4000));
+        manualController.a().whileTrue(new PercentShoot(shooter, 0.6));
         //hood
-        manualController.povUp().onTrue(new MoveHood(hood, 45.0)); // degrees/rotations 
-        manualController.povDown().onTrue(new MoveHood(hood, 0.0));
+        manualController.povUp().whileTrue(new MoveHood(hood, 1.0));
+        manualController.povDown().whileTrue(new MoveHood(hood, -1.0));
 
         //floor and feeder tied together 9same as old spindexer feeder)
         //michale climb button (30%)
-        manualController.povRight().whileTrue(new MoveClimber(0.3));
-        manualController.povLeft().whileTrue(new MoveClimber(-0.3));
-        
+        manualController.povRight().whileTrue(new MoveClimber(1));
+        manualController.povLeft().whileTrue(new MoveClimber(-1));
+
+        //-----------------------END EFFECTOR CONTROLLER------------------------------------
+
+        //arm
+        endeffectorController.a().whileTrue(new AgitateArm(intakeArm));
+
+        endeffectorController.povUp().onTrue(Commands.runOnce(() -> intakeArm.setPivot(IntakeArm.Position.HOMED), intakeArm));
+        endeffectorController.povDown().onTrue(Commands.runOnce(() -> intakeArm.setPivot(IntakeArm.Position.INTAKE), intakeArm));
+
+
+        //roller
+        endeffectorController.leftBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
+        endeffectorController.b().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.OUTTAKE));
+
+        //feeder + floor
+        //endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder(feeder, floor));
+        endeffectorController.rightBumper().whileTrue(new MoveFeederOuttake(feeder, floor));
+        endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new SetFeeder(5500));
+
+        //shooter
+        //endeffectorController.leftTrigger().whileTrue(new PercentShoot(shooter, 0.8));
+        endeffectorController.leftTrigger().whileTrue(new SetShooter(4000));
+
+        //hood
+        endeffectorController.povLeft().whileTrue(new MoveHood(hood, 1.0));
+        endeffectorController.povRight().whileTrue(new MoveHood(hood, -1.0));
         
 
     }
@@ -171,12 +193,17 @@ public class RobotContainer {
         autoChooser = new SendableChooser<Command>();
         SmartDashboard.putData("autoChooser", autoChooser);
         autoChooser.setDefaultOption("nothing", null);
-        autoChooser.addOption("BlueCenterShootSweep", new PathPlannerAuto("BlueCenterShootSweep"));
-        autoChooser.addOption("DO NOT USE", new PathPlannerAuto("TestCommands"));
-        autoChooser.addOption("Human Player station", new PathPlannerAuto("BlueCenterShootThenHuman"));
-        autoChooser.addOption("DriveHorizontalThenBack", new PathPlannerAuto("DriveHorizontalThenBack"));
-        autoChooser.addOption("New CenterShoot", new PathPlannerAuto("BlueCenterShootIntake"));
-        autoChooser.addOption("Timed Taxi", new Taxi());
+        autoChooser.addOption("TopIntake", new PathPlannerAuto("TopIntake"));
+        autoChooser.addOption("RedTopIntake", new PathPlannerAuto("RedTopIntake"));
+        autoChooser.addOption("Depot", new PathPlannerAuto("Depot"));
+        autoChooser.addOption("RedDepot", new PathPlannerAuto("RedDepot"));
+        autoChooser.addOption("Hps", new PathPlannerAuto("Hps"));
+        autoChooser.addOption("RedHps", new PathPlannerAuto("RedHps"));
+        autoChooser.addOption("ComboTop", new PathPlannerAuto("ComboTop"));
+
+        
+        
+        
 
         SmartDashboard.putData("Auto Chooser", autoChooser);
         SmartDashboard.putData("Field", m_field);

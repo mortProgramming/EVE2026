@@ -19,8 +19,8 @@ public final class PhysicalConstants {
 	}
 
     public static final class CommandSwerveDrivetrain {
-		public static final double DRIVETRAIN_TRACKWIDTH_METERS = Units.inchesToMeters(20.75);
-		public static final double DRIVETRAIN_WHEELBASE_METERS = Units.inchesToMeters(22.75);
+		public static final double DRIVETRAIN_TRACKWIDTH_METERS = Units.inchesToMeters(20.50);
+		public static final double DRIVETRAIN_WHEELBASE_METERS = Units.inchesToMeters(21.75);
 
 		public static final double DRIVEBASE_RADIUS_METERS = Math.hypot(
 			DRIVETRAIN_TRACKWIDTH_METERS / 2.0, DRIVETRAIN_WHEELBASE_METERS / 2.0
@@ -33,8 +33,8 @@ public final class PhysicalConstants {
 
 		public static final int IMU_TO_ROBOT_FRONT_ANGLE = 270;
 
-		public static final double WHEEL_COEFFICIENT_OF_FRICTION = 1;
-		public static final double ROBOT_MASS = Units.lbsToKilograms(98);
+		public static final double WHEEL_COEFFICIENT_OF_FRICTION = 1.200;
+		public static final double ROBOT_MASS = Units.lbsToKilograms(145);
 		public static final double ROBOT_MOMENT_OF_INERTIA = ROBOT_MASS * Math.pow(Units.inchesToMeters(Math.hypot(26, 28)), 2) / 2;
 
 		public static final double DRIVE_MOTOR_CURRENT_LIMIT = 60;
@@ -50,7 +50,8 @@ public final class PhysicalConstants {
 	public static final class Feeder {
     	public static final double FEEDER_STATOR_CURRENT_LIMIT = 120;
     	public static final double FEEDER_SUPPLY_CURRENT_LIMIT = 50;
-		public static final double FEED_SPEED = 0.3;
+		public static final double FEED_SPEED = 0.8;
+		public static final double FEED_RPM = 4000;
 	}
 
 	public static final class Hood {
@@ -77,40 +78,25 @@ public final class PhysicalConstants {
     	public static final double POSITION_TOLERANCE_DEG = 5.0;
 
     //pos in degrees
-    	public static final double HOMED_DEG = 110;
-    	public static final double STOWED_DEG = 100;
-    	public static final double INTAKE_DEG = -4;
-    	public static final double AGITATE_DEG = 20;
+    	public static final double HOMED_DEG = 1.5;
+    	public static final double STOWED_DEG = 5;
+    	public static final double INTAKE_DEG = -70;
+    	public static final double AGITATE_DEG = -30;
 
     //roller speed
-    	public static final double INTAKE_SPEED = 0.3;
+    	public static final double INTAKE_SPEED = 1;
+		public static final double OUTTAKE_SPEED = -1;
 	}
 
-  
-
-    public static final class IntakeRollerLeft {
-		public static final int ROLLER_LEFT_SMART_CURRENT_LIMIT = 60;
-    	public static final double ROLLER_LEFT_SECONDARY_CURRENT_LIMIT = 100;
-    }
-
-    public static final class IntakeRollerRight {
-		public static final int ROLLER_RIGHT_SMART_CURRENT_LIMIT = 60;
-    	public static final double ROLLER_RIGHT_SECONDARY_CURRENT_LIMIT = 100;
-    }
-
-	public static final class Turret {
-		public static final double MANUAL_SPEED = 0.15;
-		public static final double MOTOR_ROTATIONS_TO_TURRET_DEG = (1.0 / 15.0) * (24.0 / 150.0) * 360;
-		public static final double STARTING_POSITION_DEG = 0;
-		public final static double TURRET_MIN_ANGLE = -135;
-		public final static double TURRET_MAX_ANGLE = 135;
-    }
-
     public static final class Shooter {
-		public static final double STATOR_CURRENT_LIMIT = 120;
-		public static final double SUPPLY_CURRENT_LIMIT = 70;
-		public static final double VELOCITY_TOLERANCE_RPM = 100;
-		public static final double SHOOTER_SPEED_BUZZ_TOLERANCE = 0.05;
+	    public static final double STATOR_CURRENT_LIMIT = 140;
+    	public static final double SUPPLY_CURRENT_LIMIT = 80;
+    	//public static final double VELOCITY_TOLERANCE_RPM = 100;
+    	public static final double SHOOTER_SPEED_BUZZ_TOLERANCE = 0.05;
+
+    	public static final double MAX_SHOOTER_RPM = 6020;
+    	public static final double RPM_CHANGE_PER_SEC = 3000;
+		
     }
 
 	public static final class Field {
@@ -128,8 +114,6 @@ public final class PhysicalConstants {
 	}
 
 
-
-	
 
 	public static class Landmarks {
     	public static Translation2d hubPosition() {

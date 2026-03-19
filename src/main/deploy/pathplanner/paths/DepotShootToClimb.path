@@ -1,0 +1,66 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.1592296718972896,
+        "y": 4.843666191155493
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.133352353780314,
+        "y": 4.351997146932953
+      },
+      "isLocked": false,
+      "linkedName": "EndDepotShoot"
+    },
+    {
+      "anchor": {
+        "x": 1.5548359486447931,
+        "y": 3.7180028530670475
+      },
+      "prevControl": {
+        "x": 2.7650675176554236,
+        "y": 3.7180028530670475
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Climb",
+      "waypointRelativePos": 1.0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Climb"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 1.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "reversed": false,
+  "folder": "1.5 Autos",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -28.75236842721439
+  },
+  "useDefaultConstraints": true
+}

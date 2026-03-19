@@ -26,7 +26,9 @@ public class IntakeRoller extends SubsystemBase {
 
         STOP(0),
 
-        INTAKE(PhysicalConstants.Intake.INTAKE_SPEED);
+        INTAKE(PhysicalConstants.Intake.INTAKE_SPEED),
+        OUTTAKE(PhysicalConstants.Intake.OUTTAKE_SPEED); 
+
 
         private final double percentOutput;
 
@@ -63,7 +65,7 @@ public class IntakeRoller extends SubsystemBase {
             .withMotorOutput(
                 new MotorOutputConfigs()
                     .withInverted(InvertedValue.Clockwise_Positive)
-                    .withNeutralMode(NeutralModeValue.Brake)
+                    .withNeutralMode(NeutralModeValue.Coast)
             )
             .withCurrentLimits(
                 new CurrentLimitsConfigs()

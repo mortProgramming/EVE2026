@@ -4,12 +4,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import org.mort11.subsystems.Feeder;
 import org.mort11.subsystems.Floor;
 
-public class MoveFeeder extends Command {
+public class MoveFeederOuttake extends Command {
 
     private final Feeder feeder;
     private final Floor floor;
 
-    public MoveFeeder(Feeder feeder, Floor floor) {
+    public MoveFeederOuttake(Feeder feeder, Floor floor) {
         this.feeder = feeder;
         this.floor = floor;
         addRequirements(feeder, floor);
@@ -17,8 +17,8 @@ public class MoveFeeder extends Command {
 
     @Override
     public void execute() {
-        feeder.set(Feeder.Speed.FEED);
-        floor.setSpeed(0.8);
+        feeder.set(Feeder.Speed.OUTTAKE);
+        floor.setSpeed(-0.8);
     }
 
     @Override

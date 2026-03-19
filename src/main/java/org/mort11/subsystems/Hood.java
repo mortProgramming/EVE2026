@@ -47,12 +47,12 @@ public class Hood extends SubsystemBase {
         rightServo = servoHub.getServoChannel(PortConstants.Hood.RIGHT_SERVO_CHANNEL);
 
         ServoHubConfig config = new ServoHubConfig();
-        config.channel3.pulseRange(
+        config.channel1.pulseRange(
             PhysicalConstants.Hood.MIN_PULSE_WIDTH_SERVO,
             PhysicalConstants.Hood.MIDDLE_PULSE_WIDTH_SERVO,
             PhysicalConstants.Hood.MAX_PULSE_WIDTH_SERVO
         );
-        config.channel4.pulseRange(
+        config.channel2.pulseRange(
             PhysicalConstants.Hood.MIN_PULSE_WIDTH_SERVO,
             PhysicalConstants.Hood.MIDDLE_PULSE_WIDTH_SERVO,
             PhysicalConstants.Hood.MAX_PULSE_WIDTH_SERVO
@@ -69,6 +69,8 @@ public class Hood extends SubsystemBase {
         setPosition(currentPosition);
         SmartDashboard.putData(this);
     }
+
+    
 
     /** Expects a position between 0.0 and 1.0 */
     public void setPosition(double position) {
@@ -110,6 +112,14 @@ public class Hood extends SubsystemBase {
             ? Math.min(targetPosition, currentPosition + maxPercentageTraveled)
             : Math.max(targetPosition, currentPosition - maxPercentageTraveled);
     }
+
+        public void adjustPosition(double delta) {
+            setPosition(targetPosition + delta);
+        }
+
+        public double getCurrentPosition() {
+            return currentPosition;
+        }
 
     @Override
     public void periodic() {
