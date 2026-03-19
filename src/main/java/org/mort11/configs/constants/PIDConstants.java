@@ -41,9 +41,9 @@ public final class PIDConstants {
     }
 
     public static final class Feeder{
-        public static final double KP = 0.3;
+        public static final double KP = 1;
         public static final double KI = 0;
-        public static final double KD = 0.02;
+        public static final double KD = 0.0;
 
         public static final double KV = 0.12;
     }
