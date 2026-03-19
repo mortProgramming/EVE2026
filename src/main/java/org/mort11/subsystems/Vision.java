@@ -89,7 +89,13 @@ public class Vision extends SubsystemBase {
         SmartDashboard.putNumber("X Degrees", getTX());
         SmartDashboard.putBoolean("Tag Detected?", hasTag());
         
-        updateLimelightTelemetry(false); // Push limelight hardware telemetry while enabled (not throttled)
+        // Only push telemetry as "not throttled" when the robot is actually enabled.
+        // When disabled, disabledPeriodic() handles this with throttled=true.
+        // Without this guard, periodic() and disabledPeriodic() fight each other
+        // every loop cycle causing the Throttled boolean to flip rapidly.
+        if (edu.wpi.first.wpilibj.DriverStation.isEnabled()) {
+            updateLimelightTelemetry(false);
+        }
     }
 
     // ---------- Camera / Limelight Methods ----------
