@@ -1,6 +1,6 @@
 //LimelightHelpers v1.12 (REQUIRES LLOS 2025.0 OR LATER)
 
-package org.mort11.subsystems;
+package org.mort11;
 
 import edu.wpi.first.networktables.DoubleArrayEntry;
 import edu.wpi.first.networktables.NetworkTable;
@@ -31,8 +31,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.mort11.subsystems.LimelightHelpers.LimelightResults;
-import org.mort11.subsystems.LimelightHelpers.PoseEstimate;
+import org.mort11.LimelightHelpers.LimelightResults;
+import org.mort11.LimelightHelpers.PoseEstimate;
 
 /**
  * LimelightHelpers provides static methods and classes for interfacing with Limelight vision cameras in FRC.

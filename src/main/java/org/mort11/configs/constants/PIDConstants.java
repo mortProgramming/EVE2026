@@ -22,7 +22,7 @@ public final class PIDConstants {
 
     public static final class Shooter {
     public static final double KP = 0.5;
-    public static final double KI = 2;
+    public static final double KI = 0.01;
     public static final double KD = 0.0;
 
     public static final double KV_LEFT   = 0.12;  
@@ -41,7 +41,7 @@ public final class PIDConstants {
     }
 
     public static final class Feeder{
-        public static final double KP = 1;
+        public static final double KP = 0.2;
         public static final double KI = 0;
         public static final double KD = 0.0;
 
