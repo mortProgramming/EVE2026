@@ -6,7 +6,10 @@ import org.mort11.commands.actions.endeffector.manual.MoveIntakeArm;
 import org.mort11.commands.actions.endeffector.manual.MoveIntakeRoller;
 import org.mort11.commands.actions.endeffector.pid.AgitateArm;
 import org.mort11.commands.actions.endeffector.pid.SetArm;
+<<<<<<< HEAD
 import org.mort11.commands.actions.endeffector.pid.SetFeeder;
+=======
+>>>>>>> 411dbc273ed1e448467f2a9c1c0c19287f56b8bb
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
 //import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.subsystems.IntakeArm;
@@ -34,6 +37,7 @@ public class BasicCommands {
         //Shooter commands
         NamedCommands.registerCommand("SetShooter" , new SetShooter(4000));
         NamedCommands.registerCommand("FeederIntake", new SetFeeder(4000));
+
 
     }
 }
