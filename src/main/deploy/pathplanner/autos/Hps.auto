@@ -15,6 +15,25 @@
           "data": {
             "pathName": "HpsShoot"
           }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "SetShooter"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "FeederIntake"
+                }
+              }
+            ]
+          }
         }
       ]
     }

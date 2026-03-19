@@ -33,8 +33,8 @@ public final class PhysicalConstants {
 
 		public static final int IMU_TO_ROBOT_FRONT_ANGLE = 270;
 
-		public static final double WHEEL_COEFFICIENT_OF_FRICTION = 1;
-		public static final double ROBOT_MASS = Units.lbsToKilograms(98);
+		public static final double WHEEL_COEFFICIENT_OF_FRICTION = 1.200;
+		public static final double ROBOT_MASS = Units.lbsToKilograms(145);
 		public static final double ROBOT_MOMENT_OF_INERTIA = ROBOT_MASS * Math.pow(Units.inchesToMeters(Math.hypot(26, 28)), 2) / 2;
 
 		public static final double DRIVE_MOTOR_CURRENT_LIMIT = 60;
