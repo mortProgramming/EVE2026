@@ -29,7 +29,7 @@ public final class PIDConstants {
     public static final double KV_MIDDLE = 0.37;
     public static final double KV_RIGHT  = 0.37;
 
-    public static final double KS = 0.0; 
+    public static final double KS = 0.0; // 2026-03-19: test, try these: 0.15, 0.25, 0.40 
     public static final double KA = 0.13;
     public static final double VELOCITY_TOLERANCE_RPM = 100;
     }
