@@ -115,7 +115,7 @@ public class RobotContainer {
             point.withModuleDirection(new Rotation2d(-driveController.getLeftY(), -driveController.getLeftX()))
         ));
         driveController.R2().whileTrue(Commands.runOnce(() -> {
-            currentSpeed = 0.5 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
+            currentSpeed = 0.4 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
             currentAngularRate = RotationsPerSecond.of(1).in(RadiansPerSecond);
         }));
         driveController.triangle().onTrue(Commands.runOnce(() -> {
