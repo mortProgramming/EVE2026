@@ -6,16 +6,18 @@ public final class LookUpTableConstants {
 
     //distance in meters, shooter rpm, hood angle degrees (straight up = 90 deg)
     public static final double[][] SHOOTER_SUPERSYSTEM = {
-        {Units.inchesToMeters(0), 1750, 73}, //lower placeholder
+        {0, 1750, 0.0},
+         //lower placeholder
         // {Units.inchesToMeters(71), 2000, 73}, //found in mill
         // {Units.inchesToMeters(107), 2500, 73},
         // {Units.inchesToMeters(189), 3000, 73},
         // {Units.inchesToMeters(238), 3500, 73},
-        {Units.inchesToMeters(80), 2150, 73},
-        {Units.inchesToMeters(120), 2450, 73},
-        {Units.inchesToMeters(160), 2750, 73},
-        {Units.inchesToMeters(238), 3500, 73},
-        {Units.inchesToMeters(720), 6000, 50} //upper placholder
+        {1, 2450, 0.20},
+        {2, 2500, 0.20},
+        {3, 3500, 0.35},
+        {4, 4000, 0.40},
+        {5, 4500, 0.50},
+        {6, 6000, 0.77} //upper placholder
     };
 
     //distance in meters, time in air seconds

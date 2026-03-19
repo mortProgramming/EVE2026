@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import org.mort11.commands.actions.endeffector.manual.MoveIntakeArm;
 import org.mort11.commands.actions.endeffector.manual.MoveIntakeRoller;
 import org.mort11.commands.actions.endeffector.pid.AgitateArm;
+import org.mort11.commands.actions.endeffector.pid.PrepareShotCommand;
 import org.mort11.commands.actions.endeffector.pid.SetArm;
 import org.mort11.commands.actions.endeffector.pid.SetFeeder;
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
@@ -114,7 +115,7 @@ public class RobotContainer {
             point.withModuleDirection(new Rotation2d(-driveController.getLeftY(), -driveController.getLeftX()))
         ));
         driveController.R2().whileTrue(Commands.runOnce(() -> {
-            currentSpeed = 0.3 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
+            currentSpeed = 0.5 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
             currentAngularRate = RotationsPerSecond.of(1).in(RadiansPerSecond);
         }));
         driveController.triangle().onTrue(Commands.runOnce(() -> {
@@ -174,7 +175,8 @@ public class RobotContainer {
         //hood
         endeffectorController.povLeft().whileTrue(new MoveHood(hood, 1.0));
         endeffectorController.povRight().whileTrue(new MoveHood(hood, -1.0));
-        
+
+    endeffectorController.y().whileTrue(new PrepareShotCommand(shooter, hood, odometry));        
 
     }
 
