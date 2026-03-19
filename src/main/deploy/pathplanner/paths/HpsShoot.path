@@ -34,36 +34,12 @@
   "eventMarkers": [
     {
       "name": "SetShooter",
-      "waypointRelativePos": 0.7886563133018276,
-      "endWaypointRelativePos": 0.991222147197831,
+      "waypointRelativePos": 0.0,
+      "endWaypointRelativePos": 1.0,
       "command": {
         "type": "named",
         "data": {
           "name": "SetShooter"
-        }
-      }
-    },
-    {
-      "name": "SetShooter",
-      "waypointRelativePos": 1.0,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "SetShooter"
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "FeederIntake"
-              }
-            }
-          ]
         }
       }
     }

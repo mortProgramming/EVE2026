@@ -8,11 +8,27 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.3166909587759883,
-        "y": 2.0849946291267822
+        "x": 3.3364274570982824,
+        "y": 2.4714508580343204
       },
       "isLocked": false,
       "linkedName": "BotStart"
+    },
+    {
+      "anchor": {
+        "x": 2.806144578313253,
+        "y": 2.4714508580343204
+      },
+      "prevControl": {
+        "x": 2.9892748394641355,
+        "y": 2.641636954560475
+      },
+      "nextControl": {
+        "x": 2.4539831281106834,
+        "y": 2.144181174802744
+      },
+      "isLocked": false,
+      "linkedName": null
     },
     {
       "anchor": {
@@ -34,7 +50,7 @@
   "eventMarkers": [
     {
       "name": "IntakeDown",
-      "waypointRelativePos": 0.4564483457123445,
+      "waypointRelativePos": 0.9,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
