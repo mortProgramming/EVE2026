@@ -3,32 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.5864274570982824,
-        "y": 2.4714508580343204
+        "x": 3.6120827389443653,
+        "y": 1.9842225392296724
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.3364274570982824,
-        "y": 2.4714508580343204
+        "x": 2.7537251522993813,
+        "y": 1.6101162055728389
       },
       "isLocked": false,
       "linkedName": "BotStart"
-    },
-    {
-      "anchor": {
-        "x": 2.806144578313253,
-        "y": 2.4714508580343204
-      },
-      "prevControl": {
-        "x": 2.9892748394641355,
-        "y": 2.641636954560475
-      },
-      "nextControl": {
-        "x": 2.4539831281106834,
-        "y": 2.144181174802744
-      },
-      "isLocked": false,
-      "linkedName": null
     },
     {
       "anchor": {
@@ -36,8 +20,8 @@
         "y": 0.6644793152639101
       },
       "prevControl": {
-        "x": 0.4088935905104709,
-        "y": 0.3807203543578109
+        "x": 0.4102166864948992,
+        "y": 0.5554359449457457
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,7 +30,7 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1.99,
+      "waypointRelativePos": 0.5,
       "rotationDegrees": 180.0
     }
   ],
@@ -55,7 +39,7 @@
   "eventMarkers": [
     {
       "name": "IntakeDown",
-      "waypointRelativePos": 0.9,
+      "waypointRelativePos": 0.25,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",

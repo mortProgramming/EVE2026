@@ -33,7 +33,7 @@ public class BasicCommands {
         //Climber commands
         NamedCommands.registerCommand("Climb", new MoveClimber(-1));
         //Shooter commands
-        NamedCommands.registerCommand("SetShooter" , new SetShooter(4000));
+        NamedCommands.registerCommand("SetShooter" , new SetShooter(3000));
         NamedCommands.registerCommand("FeederIntake", new SetFeeder(4000));
 
 
