@@ -20,24 +20,24 @@
         "y": 0.6644793152639101
       },
       "prevControl": {
-        "x": 2.598432763544963,
-        "y": 0.6416988470785691
+        "x": 2.5569032189549916,
+        "y": 0.44326548764699814
       },
       "nextControl": {
-        "x": 1.309001426533523,
-        "y": 0.6903566333808838
+        "x": 1.299057142857143,
+        "y": 0.9382428571428566
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 0.5326818830242506,
-        "y": 0.6644793152639101
+        "x": 0.3402285714285712,
+        "y": 0.8086714285714276
       },
       "prevControl": {
-        "x": 1.6978079516372513,
-        "y": 0.66447931526391
+        "x": 1.5053546400415718,
+        "y": 0.8086714285714275
       },
       "nextControl": null,
       "isLocked": false,
@@ -51,18 +51,7 @@
     }
   ],
   "constraintZones": [],
-  "pointTowardsZones": [
-    {
-      "fieldPosition": {
-        "x": -0.3,
-        "y": 0.65
-      },
-      "rotationOffset": 0.0,
-      "minWaypointRelativePos": 0.5,
-      "maxWaypointRelativePos": 2.0,
-      "name": "Point Towards Zone"
-    }
-  ],
+  "pointTowardsZones": [],
   "eventMarkers": [
     {
       "name": "IntakeDown",

@@ -170,13 +170,13 @@ public class RobotContainer {
 
         //shooter
         //endeffectorController.leftTrigger().whileTrue(new PercentShoot(shooter, 0.8));
-        endeffectorController.leftTrigger().whileTrue(new SetShooter(4000));
+        endeffectorController.y().whileTrue(new SetShooter(4000));
 
         //hood
         endeffectorController.povLeft().whileTrue(new MoveHood(hood, 1.0));
         endeffectorController.povRight().whileTrue(new MoveHood(hood, -1.0));
 
-        endeffectorController.y().whileTrue(new PrepareShotCommand(shooter, hood, odometry));        
+        endeffectorController.leftTrigger().whileTrue(new PrepareShotCommand(shooter, hood, odometry));        
 
     }
 

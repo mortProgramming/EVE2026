@@ -12,7 +12,7 @@ public final class LookUpTableConstants {
         // {Units.inchesToMeters(107), 2500, 73},
         // {Units.inchesToMeters(189), 3000, 73},
         // {Units.inchesToMeters(238), 3500, 73},
-        {1, 3980, 0.19},
+        {1, 3950, 0.19},
         {1.5, 3990, 0.20},
         {2, 4000, 0.20},
         {2.5, 4050, 0.21},
