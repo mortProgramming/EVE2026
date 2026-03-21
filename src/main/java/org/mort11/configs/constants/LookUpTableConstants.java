@@ -12,6 +12,15 @@ public final class LookUpTableConstants {
         // {Units.inchesToMeters(107), 2500, 73},
         // {Units.inchesToMeters(189), 3000, 73},
         // {Units.inchesToMeters(238), 3500, 73},
+        // {1, 3950, 0.19}, saturday pids
+    
+        // {1.5, 3990, 0.20},
+        // {2, 4000, 0.20},
+        // {2.5, 4050, 0.21},
+        // {3, 4300, 0.20},
+        // {4, 4500, 0.215},
+        // {5, 4900, 0.35},
+        // {6, 6000, 0.77} //upper placholder
         {1, 3950, 0.19},
         {1.5, 3990, 0.20},
         {2, 4000, 0.20},
@@ -19,7 +28,7 @@ public final class LookUpTableConstants {
         {3, 4300, 0.20},
         {4, 4500, 0.215},
         {5, 4900, 0.35},
-        {6, 6000, 0.77} //upper placholder
+        {6, 5200, 0.77} //upper placholder
     };
 
     //distance in meters, time in air seconds

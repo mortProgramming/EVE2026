@@ -5,6 +5,7 @@ import org.mort11.commands.actions.endeffector.manual.MoveFeeder;
 import org.mort11.commands.actions.endeffector.manual.MoveIntakeArm;
 import org.mort11.commands.actions.endeffector.manual.MoveIntakeRoller;
 import org.mort11.commands.actions.endeffector.pid.AgitateArm;
+import org.mort11.commands.actions.endeffector.pid.PrepareShotCommand;
 import org.mort11.commands.actions.endeffector.pid.SetArm;
 import org.mort11.commands.actions.endeffector.pid.SetFeeder;
 
@@ -15,12 +16,13 @@ import org.mort11.subsystems.IntakeRoller;
 import org.mort11.subsystems.OdometryHelper;
 import org.mort11.subsystems.Shooter;
 import org.mort11.subsystems.Floor;
+import org.mort11.subsystems.Hood;
 import org.mort11.subsystems.Feeder;
 import com.pathplanner.lib.auto.NamedCommands;
 
 public class BasicCommands {
 
-    public static void setCommands(OdometryHelper odometry, Shooter shooter, IntakeArm intake, IntakeRoller intakeRoller, Floor floor, Feeder feeder) {
+    public static void setCommands(OdometryHelper odometry, Shooter shooter, IntakeArm intake, IntakeRoller intakeRoller, Floor floor, Feeder feeder, Hood hood) {
         // NamedCommands.registerCommand("Taxi", new Taxi());
         //IntakeArm commands
         NamedCommands.registerCommand("IntakeUp", new SetArm(intake, IntakeArm.Position.HOMED));
@@ -33,7 +35,8 @@ public class BasicCommands {
         //Climber commands
         NamedCommands.registerCommand("Climb", new MoveClimber(-1));
         //Shooter commands
-        NamedCommands.registerCommand("SetShooter" , new SetShooter(4000));
+        NamedCommands.registerCommand("SetShooter" , new SetShooter(3400));
+        NamedCommands.registerCommand("SetShooter" , new PrepareShotCommand(shooter, hood, odometry));
         NamedCommands.registerCommand("FeederIntake", new SetFeeder(4000));
 
 

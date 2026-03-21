@@ -39,11 +39,11 @@ public class PrepareShotCommand extends Command {
     private final Hood hood;
     private final OdometryHelper odometry;
 
-    public PrepareShotCommand(Shooter shooter, Hood hood, OdometryHelper odometry) {
+    public PrepareShotCommand(Shooter shooter, Hood hood2, OdometryHelper odometry) {
         this.shooter = shooter;
-        this.hood = hood;
+        this.hood = hood2;
         this.odometry = odometry;
-        addRequirements(shooter, hood);
+        addRequirements(shooter, hood2);
     }
 
     public boolean isReadyToShoot() {

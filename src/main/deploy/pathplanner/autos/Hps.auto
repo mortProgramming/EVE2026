@@ -19,6 +19,12 @@
         {
           "type": "path",
           "data": {
+            "pathName": "HpsMoveShoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
             "pathName": "HpsShoot"
           }
         },

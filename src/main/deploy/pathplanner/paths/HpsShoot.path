@@ -3,41 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.4421112696148356,
-        "y": 0.7679885877318122
+        "x": 1.5970714285714287,
+        "y": 0.7818067978533088
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.9171184022824534,
-        "y": 0.7809272467902997
+        "x": 1.8970714285714287,
+        "y": 0.7818067978533088
       },
       "isLocked": false,
-      "linkedName": "Hps"
+      "linkedName": "EndMoveShoot"
     },
     {
       "anchor": {
-        "x": 1.5322857142857145,
-        "y": 0.8475428571428563
+        "x": 2.5818142857142856,
+        "y": 2.013685714285714
       },
       "prevControl": {
-        "x": 1.3136827616099753,
-        "y": 0.7262467356819926
-      },
-      "nextControl": {
-        "x": 2.1840225667382462,
-        "y": 1.2091717896342917
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 2.369971469329529,
-        "y": 2.048915834522112
-      },
-      "prevControl": {
-        "x": 1.5102338013859269,
-        "y": 1.5476529679508277
+        "x": 1.9383830386177694,
+        "y": 1.602826902215908
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,17 +30,28 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.17574692442882248,
+      "waypointRelativePos": 0.312796208530806,
       "rotationDegrees": 180.0
     }
   ],
   "constraintZones": [],
-  "pointTowardsZones": [],
+  "pointTowardsZones": [
+    {
+      "fieldPosition": {
+        "x": 4.3,
+        "y": 4.0
+      },
+      "rotationOffset": 0.0,
+      "minWaypointRelativePos": 0.4448979591836736,
+      "maxWaypointRelativePos": 1.0,
+      "name": "Point Towards Zone"
+    }
+  ],
   "eventMarkers": [
     {
       "name": "SetShooter",
       "waypointRelativePos": 0.0,
-      "endWaypointRelativePos": 1.0,
+      "endWaypointRelativePos": 2.0,
       "command": {
         "type": "named",
         "data": {
@@ -75,7 +70,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 52.59464336859146
+    "rotation": 49.42955929897763
   },
   "reversed": false,
   "folder": "1.5 Autos",
