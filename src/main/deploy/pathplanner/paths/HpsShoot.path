@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.3402285714285712,
-        "y": 0.8086714285714276
+        "x": 0.4421112696148356,
+        "y": 0.7679885877318122
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.5429182806373314,
-        "y": 0.7769656554894675
+        "x": 1.9171184022824534,
+        "y": 0.7809272467902997
       },
       "isLocked": false,
       "linkedName": "Hps"
@@ -75,7 +75,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 55.142257704748886
+    "rotation": 52.59464336859146
   },
   "reversed": false,
   "folder": "1.5 Autos",
