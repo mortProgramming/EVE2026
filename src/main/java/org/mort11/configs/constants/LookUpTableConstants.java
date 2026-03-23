@@ -34,6 +34,11 @@ public final class LookUpTableConstants {
     //distance in meters, time in air seconds
     public static final double[][] timeInAir = {
         {0, 0},
-        {10, 10}
+        {1, 10},
+        {2 , 10},
+        {3 , 10},
+        {4 , 10},
+        {5, 10},
+        {6, 10}
     };
 }

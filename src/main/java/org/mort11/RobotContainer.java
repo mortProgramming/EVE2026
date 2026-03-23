@@ -26,7 +26,6 @@ import org.mort11.commands.actions.endeffector.pid.SetFeeder;
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.commands.autons.pathplanner.BasicCommands;
 import org.mort11.commands.autons.timed.Taxi;
-import org.mort11.commands.autons.apriltag.RotateToHub;
 import org.mort11.configs.constants.TunerConstants;
 
 import com.pathplanner.lib.path.PathPlannerPath;
@@ -122,7 +121,6 @@ public class RobotContainer {
             currentSpeed = MaxSpeed;
             currentAngularRate = MaxAngularRate;
         }));
-        driveController.square().whileTrue(new RotateToHub(odometry));
         driveController.L1().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
         drivetrain.registerTelemetry(logger::telemeterize);
 
