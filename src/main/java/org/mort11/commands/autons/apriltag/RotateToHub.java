@@ -27,11 +27,8 @@ public class RotateToHub extends Command {
     public void execute() {
         Pose2d robotPose = odometryHelper.getPose();
 
-     
         Translation2d hubTarget = odometryHelper.getHubTarget().getTranslation();
-
         Translation2d robotToHub = hubTarget.minus(robotPose.getTranslation());
-
         Rotation2d fieldAngleToHub = robotToHub.getAngle();
 
         double headingErrorDeg = fieldAngleToHub
@@ -42,7 +39,20 @@ public class RotateToHub extends Command {
 
         double rotationSpeed = drivetrain.calculateChangeRotateController(headingErrorDeg);
 
-        drivetrain.setDrive(new ChassisSpeeds(0, 0, -rotationSpeed));
+        // Read driver input for translation while keeping rotation locked to hub
+        double xSpeed = -RobotContainer.getDriverController().getLeftY()
+            * RobotContainer.getSwerveDrivetrain().getState().Speeds.vxMetersPerSecond;
+        double ySpeed = -RobotContainer.getDriverController().getLeftX()
+            * RobotContainer.getSwerveDrivetrain().getState().Speeds.vyMetersPerSecond;
+
+        // Pull max speed from TunerConstants via the drivetrain's current speed scaling
+        double maxSpeed = org.mort11.configs.constants.TunerConstants.kSpeedAt12Volts
+            .in(edu.wpi.first.units.Units.MetersPerSecond);
+
+        xSpeed = -RobotContainer.getDriverController().getLeftY() * maxSpeed;
+        ySpeed = -RobotContainer.getDriverController().getLeftX() * maxSpeed;
+
+        drivetrain.setDrive(new ChassisSpeeds(xSpeed, ySpeed, -rotationSpeed));
 
         SmartDashboard.putNumber("Heading Error to Hub (deg)", headingErrorDeg);
         SmartDashboard.putNumber("Field Angle to Hub (deg)", fieldAngleToHub.getDegrees());
@@ -50,7 +60,7 @@ public class RotateToHub extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        drivetrain.setDrive(new ChassisSpeeds(0, 0, 0)); 
+        drivetrain.setDrive(new ChassisSpeeds(0, 0, 0));
     }
 
     @Override

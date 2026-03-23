@@ -6,6 +6,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.util.PathPlannerLogging;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import org.mort11.commands.autons.apriltag.RotateToHub;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -122,6 +123,7 @@ public class RobotContainer {
             currentAngularRate = MaxAngularRate;
         }));
         driveController.L1().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
+        driveController.R1().whileTrue(new RotateToHub(odometry));
         drivetrain.registerTelemetry(logger::telemeterize);
 
         driveController.povUp().whileTrue(new MoveClimber(0.3));
