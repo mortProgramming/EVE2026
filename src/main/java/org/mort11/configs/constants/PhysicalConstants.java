@@ -22,9 +22,7 @@ public final class PhysicalConstants {
 		public static final double DRIVETRAIN_TRACKWIDTH_METERS = Units.inchesToMeters(20.50);
 		public static final double DRIVETRAIN_WHEELBASE_METERS = Units.inchesToMeters(21.75);
 
-		public static final double DRIVEBASE_RADIUS_METERS = Math.hypot(
-			DRIVETRAIN_TRACKWIDTH_METERS / 2.0, DRIVETRAIN_WHEELBASE_METERS / 2.0
-		);
+		public static final double DRIVEBASE_RADIUS_METERS = Math.hypot(DRIVETRAIN_TRACKWIDTH_METERS / 2.0, DRIVETRAIN_WHEELBASE_METERS / 2.0);
 
 		public static final double FRONT_LEFT_OFFSET = 21.3 + 90 + 180;
 		public static final double FRONT_RIGHT_OFFSET = 3.08 + 90 + 180;
@@ -68,8 +66,8 @@ public final class PhysicalConstants {
 	}
 
 	public static final class Intake {
-    	public static final double ARM_STATOR_CURRENT_LIMIT = 120; 
-    	public static final double ARM_SUPPLY_CURRENT_LIMIT = 70; 
+    	public static final double ARM_STATOR_CURRENT_LIMIT = 80; 
+    	public static final double ARM_SUPPLY_CURRENT_LIMIT = 30; 
 
 		public static final double ROLLER_STATOR_CURRENT_LIMIT = 120;
 		public static final double ROLLER_SUPPLY_CURRENT_LIMIT = 70;
@@ -89,8 +87,8 @@ public final class PhysicalConstants {
 	}
 
     public static final class Shooter {
-	    public static final double STATOR_CURRENT_LIMIT = 140;
-    	public static final double SUPPLY_CURRENT_LIMIT = 80;
+	    public static final double STATOR_CURRENT_LIMIT = 110;
+    	public static final double SUPPLY_CURRENT_LIMIT = 60;
     	//public static final double VELOCITY_TOLERANCE_RPM = 100;
     	public static final double SHOOTER_SPEED_BUZZ_TOLERANCE = 0.05;
 

@@ -3,41 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.572277691107643,
-        "y": 5.6268486739469585
+        "x": 3.5473894436519258,
+        "y": 0.4703994293865924
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.653632897955004,
-        "y": 5.6527259920639334
-      },
-      "isLocked": false,
-      "linkedName": "TopStart"
-    },
-    {
-      "anchor": {
-        "x": 0.30368174726988895,
-        "y": 5.956390870185448
-      },
-      "prevControl": {
-        "x": 0.5536627667881446,
-        "y": 5.95947143516828
-      },
-      "nextControl": {
-        "x": -0.028827660952375656,
-        "y": 5.952293291731669
+        "x": 2.7450882447862908,
+        "y": 0.4703994293865925
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 0.9262714508580328,
-        "y": 5.956390870185448
+        "x": 1.9947503566333804,
+        "y": 0.6644793152639101
       },
       "prevControl": {
-        "x": 0.6291263650546004,
-        "y": 5.952293291731669
+        "x": 2.5569032189549916,
+        "y": 0.44326548764699814
+      },
+      "nextControl": {
+        "x": 1.299057142857143,
+        "y": 0.9382428571428566
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 0.44935599284436445,
+        "y": 0.7818067978533088
+      },
+      "prevControl": {
+        "x": 1.6144820614573647,
+        "y": 0.7818067978533086
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,7 +46,7 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.25,
+      "waypointRelativePos": 2.0,
       "rotationDegrees": 180.0
     }
   ],
@@ -55,23 +55,12 @@
   "eventMarkers": [
     {
       "name": "IntakeDown",
-      "waypointRelativePos": 0.05,
+      "waypointRelativePos": 0.5,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
           "name": "IntakeDown"
-        }
-      }
-    },
-    {
-      "name": "IntakeRollerIntake",
-      "waypointRelativePos": 0.15,
-      "endWaypointRelativePos": 3.0,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "IntakeRollerIntake"
         }
       }
     }
@@ -85,13 +74,13 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 1.0,
+    "velocity": 0,
     "rotation": 180.0
   },
   "reversed": false,
   "folder": "1.5 Autos",
   "idealStartingState": {
-    "velocity": 0,
+    "velocity": 0.0,
     "rotation": 180.0
   },
   "useDefaultConstraints": true

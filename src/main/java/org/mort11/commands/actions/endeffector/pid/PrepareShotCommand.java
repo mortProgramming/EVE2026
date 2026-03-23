@@ -3,10 +3,6 @@ package org.mort11.commands.actions.endeffector.pid;
 import static edu.wpi.first.units.Units.Inches;
 import static edu.wpi.first.units.Units.Meters;
 
-import java.util.function.Supplier;
-
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.interpolation.InterpolatingTreeMap;
 import edu.wpi.first.math.interpolation.Interpolator;
 import edu.wpi.first.math.interpolation.InverseInterpolator;
@@ -15,8 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import org.mort11.configs.constants.LookUpTableConstants;
-import org.mort11.configs.constants.PhysicalConstants.Landmarks;
 import org.mort11.subsystems.Hood;
+import org.mort11.subsystems.OdometryHelper;
 import org.mort11.subsystems.Shooter;
 
 public class PrepareShotCommand extends Command {
@@ -41,13 +37,13 @@ public class PrepareShotCommand extends Command {
 
     private final Shooter shooter;
     private final Hood hood;
-    private final Supplier<Pose2d> robotPoseSupplier;
+    private final OdometryHelper odometry;
 
-    public PrepareShotCommand(Shooter shooter, Hood hood, Supplier<Pose2d> robotPoseSupplier) {
+    public PrepareShotCommand(Shooter shooter, Hood hood2, OdometryHelper odometry) {
         this.shooter = shooter;
-        this.hood = hood;
-        this.robotPoseSupplier = robotPoseSupplier;
-        addRequirements(shooter, hood);
+        this.hood = hood2;
+        this.odometry = odometry;
+        addRequirements(shooter, hood2);
     }
 
     public boolean isReadyToShoot() {
@@ -55,9 +51,7 @@ public class PrepareShotCommand extends Command {
     }
 
     private Distance getDistanceToHub() {
-        final Translation2d robotPosition = robotPoseSupplier.get().getTranslation();
-        final Translation2d hubPosition = Landmarks.hubPosition();
-        return Meters.of(robotPosition.getDistance(hubPosition));
+        return Meters.of(odometry.getDistanceToHub());
     }
 
     @Override

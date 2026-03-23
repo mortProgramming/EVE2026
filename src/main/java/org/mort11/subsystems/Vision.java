@@ -1,7 +1,9 @@
 package org.mort11.subsystems;
 
 import static org.mort11.configs.constants.VisionConstants.FRONT_CAMERA_NAME;
+import static org.mort11.configs.constants.VisionConstants.LIMELIGHT_THROTTLE_VALUE;
 
+import org.mort11.LimelightHelpers;
 import org.opencv.dnn.Net;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
@@ -36,7 +38,7 @@ public class Vision extends SubsystemBase {
     // Schmitt trigger state and thresholds for thermal throttling
     // private static final double LIMELIGHT_THROTTLE_ON_TEMP_C  = 60.0; // °C: throttle kicks in above this
     // private static final double LIMELIGHT_THROTTLE_OFF_TEMP_C = 45.0; // °C: throttle removed below this (hysteresis)
-    public static final int    LIMELIGHT_THROTTLE_VALUE      = 100;  // Numer of frames to skip (Value Range: 100 to 200. 200 means 100% throttling, 100 means 50% throttling)
+    public static final int    LIMELIGHT_THROTTLE_VALUE      = 200;  // Numer of frames to skip (Value Range: 100 to 200. 200 means 100% throttling, 100 means 50% throttling)
     // private final java.util.Map<String, Boolean> limelightThrottleState = new java.util.HashMap<>();
 
     private static final String LL3_NAME = "limelight-three";
@@ -78,7 +80,7 @@ public class Vision extends SubsystemBase {
             0.0  * 0.0254,   // side — (should be at 0 inches)
             25.0 * 0.0254,   // up — (about 25 inches off the floor)
             0.0,             // roll degrees: (should be 0)
-            -16.0,               // pitch degrees: (rotating up) ==> negative rotation around Y-axis). Measured about -30 degrees from onboard IMU (http://limelight-three.local:5801/)
+            -16.0,               // pitch degrees: (rotating up) ==> negative rotation around Y-axis). Measured about -16 degrees from onboard IMU (http://limelight-three.local:5801/)
             0.0              // yaw degrees: (should be 0)
         );
     }
@@ -89,7 +91,13 @@ public class Vision extends SubsystemBase {
         SmartDashboard.putNumber("X Degrees", getTX());
         SmartDashboard.putBoolean("Tag Detected?", hasTag());
         
-        updateLimelightTelemetry(false); // Push limelight hardware telemetry while enabled (not throttled)
+        // Only push telemetry as "not throttled" when the robot is actually enabled.
+        // When disabled, disabledPeriodic() handles this with throttled=true.
+        // Without this guard, periodic() and disabledPeriodic() fight each other
+        // every loop cycle causing the Throttled boolean to flip rapidly.
+        if (edu.wpi.first.wpilibj.DriverStation.isEnabled()) {
+            updateLimelightTelemetry(false);
+        }
     }
 
     // ---------- Camera / Limelight Methods ----------

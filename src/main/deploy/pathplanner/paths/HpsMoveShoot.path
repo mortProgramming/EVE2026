@@ -3,52 +3,35 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.6120827389443653,
-        "y": 2.6311554921540665
-      },
-      "prevControl": null,
-      "nextControl": {
-        "x": 2.4605420827364872,
-        "y": 2.5535235377981995
-      },
-      "isLocked": false,
-      "linkedName": "BotStart"
-    },
-    {
-      "anchor": {
         "x": 0.44935599284436445,
         "y": 0.7818067978533088
       },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.4493559928443644,
+        "y": 0.7818067978533083
+      },
+      "isLocked": false,
+      "linkedName": "Hps"
+    },
+    {
+      "anchor": {
+        "x": 1.5970714285714287,
+        "y": 0.7818067978533088
+      },
       "prevControl": {
-        "x": 0.19935599284436445,
+        "x": 1.3470714285714287,
         "y": 0.7818067978533088
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Hps"
+      "linkedName": "EndMoveShoot"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 1.0,
-      "rotationDegrees": 180.0
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [
-    {
-      "name": "IntakeDown",
-      "waypointRelativePos": 0.25,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "IntakeDown"
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 1.0,
@@ -64,7 +47,7 @@
   "reversed": false,
   "folder": "1.5 Autos",
   "idealStartingState": {
-    "velocity": 0.0,
+    "velocity": 0,
     "rotation": 180.0
   },
   "useDefaultConstraints": true

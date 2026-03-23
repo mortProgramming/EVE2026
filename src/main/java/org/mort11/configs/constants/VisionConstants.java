@@ -2,7 +2,10 @@ package org.mort11.configs.constants;
 
 public class VisionConstants {
         // Camera / Limelight Names
-        public static final String FRONT_CAMERA_NAME = "limelight-one";
+        public static final String FRONT_CAMERA_NAME = "limelight-three";
+
+        // Throttling settings for Limelight (Number of frames to skip when throttling is active)
+        public static final int LIMELIGHT_THROTTLE_VALUE = 200;
     
         // Field Dimensions (in meters)
         public static final double FIELD_LENGTH = 16.54;
