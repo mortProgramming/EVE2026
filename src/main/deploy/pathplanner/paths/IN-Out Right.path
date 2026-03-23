@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 13.323285714280912,
-        "y": 5.823085714282526
+        "x": 13.271457142857143,
+        "y": 5.810128571428571
       },
       "prevControl": null,
       "nextControl": {
-        "x": 11.570942243797905,
-        "y": 5.7906349092735825
+        "x": 11.519113672374136,
+        "y": 5.777677766419627
       },
       "isLocked": false,
       "linkedName": null
@@ -85,7 +85,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 3.5,
-    "maxAcceleration": 0.8,
+    "maxAcceleration": 2.1,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
