@@ -11,7 +11,7 @@
   "defaultMaxAngVel": 540.0,
   "defaultMaxAngAccel": 720.0,
   "defaultNominalVoltage": 12.0,
-  "robotMass": 66.2245,
+  "robotMass": 66.225,
   "robotMOI": 4.0,
   "robotTrackwidth": 0.546,
   "driveWheelRadius": 0.0508,
@@ -31,7 +31,7 @@
   "bumperOffsetX": 0.0,
   "bumperOffsetY": 0.0,
   "robotFeatures": [
-    "{\"name\":\"IntakeRoller\",\"type\":\"line\",\"data\":{\"start\":{\"x\":0.572,\"y\":-0.273},\"end\":{\"x\":0.572,\"y\":0.27305},\"strokeWidth\":0.0308}}",
+    "{\"name\":\"IntakeRoller\",\"type\":\"line\",\"data\":{\"start\":{\"x\":9.0,\"y\":-0.273},\"end\":{\"x\":0.572,\"y\":0.27305},\"strokeWidth\":0.031}}",
     "{\"name\":\"Hopper\",\"type\":\"rounded_rect\",\"data\":{\"center\":{\"x\":0.55,\"y\":0.0},\"size\":{\"width\":0.8,\"length\":0.2},\"borderRadius\":0.05,\"strokeWidth\":0.02,\"filled\":false}}"
   ]
 }
