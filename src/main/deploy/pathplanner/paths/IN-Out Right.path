@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 11.519113672374136,
-        "y": 5.777677766419627
+        "x": 10.770728571428572,
+        "y": 5.836042857142856
       },
       "isLocked": false,
       "linkedName": null
@@ -85,7 +85,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 3.5,
-    "maxAcceleration": 2.1,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -99,7 +99,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -141.07245640720782
+    "rotation": -157.8905516562483
   },
   "useDefaultConstraints": false
 }
