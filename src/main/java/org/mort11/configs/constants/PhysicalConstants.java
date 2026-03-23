@@ -57,7 +57,7 @@ public final class PhysicalConstants {
     	public static final double MAX_SERVO_SPEED_MM_PER_SEC = 20;
     	public static final double MIN_POSITION = 0.01;
     	public static final double MAX_POSITION = 0.77;
-    	public static final double POSITION_TOLERANCE = 0.01; // ADD THIS
+    	public static final double POSITION_TOLERANCE = 0.01;
 
     	public static final int MIN_PULSE_WIDTH_SERVO = 1000;
     	public static final int MIDDLE_PULSE_WIDTH_SERVO = 1500;

@@ -2,7 +2,6 @@ package org.mort11.commands.actions.endeffector.pid;
 
 import static edu.wpi.first.units.Units.Inches;
 import static edu.wpi.first.units.Units.Meters;
-import static org.mort11.configs.constants.PhysicalConstants.Shooter.SHOOTER_SPEED_BUZZ_TOLERANCE;
 
 import edu.wpi.first.math.interpolation.InterpolatingTreeMap;
 import edu.wpi.first.math.interpolation.Interpolator;
