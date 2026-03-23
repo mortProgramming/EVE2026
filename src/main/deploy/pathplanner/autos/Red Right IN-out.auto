@@ -11,6 +11,24 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 2.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakeDown"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakeRollerIntake"
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [
