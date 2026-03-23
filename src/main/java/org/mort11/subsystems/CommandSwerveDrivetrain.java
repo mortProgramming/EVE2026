@@ -162,7 +162,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
      * getters in the classes.
      *
      * @param drivetrainConstants   Drivetrain-wide constants for the swerve drive
-     * @param modules               Constants for each specific module
+     * @param modules               Constants for each specific modul
      */
     public CommandSwerveDrivetrain(
         SwerveDrivetrainConstants drivetrainConstants,
