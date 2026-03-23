@@ -80,6 +80,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     private static final Rotation2d kRedAlliancePerspectiveRotation = Rotation2d.k180deg;
     /* Keep track if we've ever applied the operator perspective before or not */
     private boolean m_hasAppliedOperatorPerspective = false;
+    
 
     //local max speed theoretical needs to be tuend
      //from tuner constants linearvelocity in Meters per second PUT THIS IN CONSTANTS LATER
@@ -438,7 +439,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
 
               var alliance = DriverStation.getAlliance();
               if (alliance.isPresent()) {
-                return alliance.get() == DriverStation.Alliance.Red;
+                return alliance.get() == DriverStation.Alliance.Blue;
               }
               return false;
             },

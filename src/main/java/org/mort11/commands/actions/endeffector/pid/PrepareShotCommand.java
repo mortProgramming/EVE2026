@@ -2,14 +2,17 @@ package org.mort11.commands.actions.endeffector.pid;
 
 import static edu.wpi.first.units.Units.Inches;
 import static edu.wpi.first.units.Units.Meters;
+import static org.mort11.configs.constants.PhysicalConstants.Shooter.SHOOTER_SPEED_BUZZ_TOLERANCE;
 
 import edu.wpi.first.math.interpolation.InterpolatingTreeMap;
 import edu.wpi.first.math.interpolation.Interpolator;
 import edu.wpi.first.math.interpolation.InverseInterpolator;
 import edu.wpi.first.units.measure.Distance;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
+import org.mort11.RobotContainer;
 import org.mort11.configs.constants.LookUpTableConstants;
 import org.mort11.subsystems.Hood;
 import org.mort11.subsystems.OdometryHelper;
@@ -39,11 +42,11 @@ public class PrepareShotCommand extends Command {
     private final Hood hood;
     private final OdometryHelper odometry;
 
-    public PrepareShotCommand(Shooter shooter, Hood hood2, OdometryHelper odometry) {
+    public PrepareShotCommand(Shooter shooter, Hood hood, OdometryHelper odometry) {
         this.shooter = shooter;
-        this.hood = hood2;
+        this.hood = hood;
         this.odometry = odometry;
-        addRequirements(shooter, hood2);
+        addRequirements(shooter, hood);
     }
 
     public boolean isReadyToShoot() {
@@ -61,6 +64,12 @@ public class PrepareShotCommand extends Command {
         shooter.setRPM(shot.shooterRPM);
         hood.setPosition(shot.hoodPosition);
         SmartDashboard.putNumber("Distance to Hub (inches)", distanceToHub.in(Inches));
+
+        if (isReadyToShoot()) {
+            RobotContainer.getEndeffectorController().setRumble(RumbleType.kBothRumble, 0.5);
+        } else {
+            RobotContainer.getEndeffectorController().setRumble(RumbleType.kBothRumble, 0);
+        }
     }
 
     @Override
@@ -71,6 +80,7 @@ public class PrepareShotCommand extends Command {
     @Override
     public void end(boolean interrupted) {
         shooter.stop();
+        RobotContainer.getEndeffectorController().setRumble(RumbleType.kBothRumble, 0);
     }
 
     public static class Shot {
