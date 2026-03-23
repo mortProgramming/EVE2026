@@ -63,12 +63,12 @@
   "rotationTargets": [],
   "constraintZones": [
     {
-      "name": "Constraints Zone",
+      "name": "Initial Run at bump",
       "minWaypointRelativePos": 0.04895104895104878,
       "maxWaypointRelativePos": 0.37062937062937407,
       "constraints": {
         "maxVelocity": 2.0,
-        "maxAcceleration": 0.8,
+        "maxAcceleration": 1.5,
         "maxAngularVelocity": 350.0,
         "maxAngularAcceleration": 500.0,
         "nominalVoltage": 12.0,
@@ -112,8 +112,8 @@
   "reversed": false,
   "folder": null,
   "idealStartingState": {
-    "velocity": 0,
-    "rotation": -143.0
+    "velocity": 2.0,
+    "rotation": 180.0
   },
   "useDefaultConstraints": false
 }
