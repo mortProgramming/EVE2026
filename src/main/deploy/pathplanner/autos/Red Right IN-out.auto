@@ -23,7 +23,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "SetShooter"
+                  "name": "PrepareShotCommand"
                 }
               }
             ]
@@ -38,7 +38,7 @@
       ]
     }
   },
-  "resetOdom": true,
+  "resetOdom": false,
   "folder": null,
   "choreoAuto": false
 }
