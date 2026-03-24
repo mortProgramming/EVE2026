@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 13.258499999997849,
-        "y": 5.552075134168158
+        "x": 12.97536672629696,
+        "y": 5.8279069767441865
       },
       "prevControl": null,
       "nextControl": {
-        "x": 10.498628571429203,
-        "y": 6.328414285714419
+        "x": 9.989892665474061,
+        "y": 6.168640429338105
       },
       "isLocked": false,
       "linkedName": null
@@ -64,7 +64,7 @@
   "constraintZones": [
     {
       "name": "Initial Run at bump",
-      "minWaypointRelativePos": 0.04895104895104878,
+      "minWaypointRelativePos": 0.05,
       "maxWaypointRelativePos": 0.37062937062937407,
       "constraints": {
         "maxVelocity": 2.5,
@@ -85,23 +85,23 @@
       "command": null
     },
     {
-      "name": "IntakeRollerIntake",
+      "name": "SetArm",
       "waypointRelativePos": 0.6927374301675936,
       "endWaypointRelativePos": 1.5195530726256972,
       "command": null
     },
     {
-      "name": "SetShooter",
-      "waypointRelativePos": 3,
+      "name": "PrepareShotCommand",
+      "waypointRelativePos": 3.0,
       "endWaypointRelativePos": null,
       "command": null
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 2.0,
-    "maxAcceleration": 3.0,
-    "maxAngularVelocity": 350.0,
-    "maxAngularAcceleration": 500.0,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 1.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
@@ -113,7 +113,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0.0,
-    "rotation": -146.65221764194723
+    "rotation": -88.91348616272485
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }
