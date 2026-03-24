@@ -85,7 +85,7 @@
       "command": null
     },
     {
-      "name": "SetArm",
+      "name": "IntakeRollerIntake",
       "waypointRelativePos": 0.6927374301675936,
       "endWaypointRelativePos": 1.5195530726256972,
       "command": null
@@ -99,7 +99,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 3.0,
-    "maxAcceleration": 1.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -113,7 +113,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0.0,
-    "rotation": -88.91348616272485
+    "rotation": -88.91348616272487
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }
