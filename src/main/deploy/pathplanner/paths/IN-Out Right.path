@@ -8,40 +8,40 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 9.989892665474061,
-        "y": 6.168640429338105
+        "x": 10.138638554210415,
+        "y": 5.532096385545166
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 8.257042857142858,
-        "y": 5.978571428571429
+        "x": 8.510409638547765,
+        "y": 7.11661445783432
       },
       "prevControl": {
-        "x": 8.24392784633923,
-        "y": 6.3720217526803475
+        "x": 9.12236144577668,
+        "y": 7.531867469882513
       },
       "nextControl": {
-        "x": 8.27326825964733,
-        "y": 5.491809353437261
+        "x": 8.107402106813366,
+        "y": 6.8431450613002625
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 10.330626118067977,
-        "y": 5.552075134168158
+        "x": 8.925662650595957,
+        "y": 4.876433734942754
       },
       "prevControl": {
-        "x": 9.071023032200356,
-        "y": 5.39996198568873
+        "x": 8.379330269270307,
+        "y": 4.517730656294601
       },
       "nextControl": {
-        "x": 11.590229203935598,
-        "y": 5.704188282647586
+        "x": 10.007506024089935,
+        "y": 5.586734939762032
       },
       "isLocked": false,
       "linkedName": null
@@ -52,15 +52,28 @@
         "y": 5.1
       },
       "prevControl": {
-        "x": 13.399660107334526,
-        "y": 5.18112701252236
+        "x": 13.482518072282701,
+        "y": 5.8708554216897415
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.0257261410788372,
+      "rotationDegrees": -90.0
+    },
+    {
+      "waypointRelativePos": 1.7775933609958519,
+      "rotationDegrees": -90.0
+    },
+    {
+      "waypointRelativePos": 2.449792531120334,
+      "rotationDegrees": -90.0
+    }
+  ],
   "constraintZones": [
     {
       "name": "Initial Run at bump",
@@ -76,7 +89,18 @@
       }
     }
   ],
-  "pointTowardsZones": [],
+  "pointTowardsZones": [
+    {
+      "fieldPosition": {
+        "x": 11.9,
+        "y": 4.05
+      },
+      "rotationOffset": 0.0,
+      "minWaypointRelativePos": 2.751364764267998,
+      "maxWaypointRelativePos": 3.0,
+      "name": "Point Towards Zone"
+    }
+  ],
   "eventMarkers": [
     {
       "name": "IntakeDown",
@@ -98,8 +122,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 2.0,
+    "maxAcceleration": 2.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
