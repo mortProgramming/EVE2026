@@ -3,24 +3,24 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 13.096119828815977,
-        "y": 5.632924393723252
+        "x": 12.966733238231097,
+        "y": 7.6125392296718974
       },
       "prevControl": null,
       "nextControl": {
-        "x": 14.655978310892367,
-        "y": 6.237283032070837
+        "x": 14.506433666191155,
+        "y": 7.056176890156919
       },
       "isLocked": false,
       "linkedName": "RedTopStart"
     },
     {
       "anchor": {
-        "x": 15.826176890156916,
+        "x": 15.890870185449355,
         "y": 7.405520684736091
       },
       "prevControl": {
-        "x": 15.237580694598888,
+        "x": 15.302273989891328,
         "y": 7.209580530777725
       },
       "nextControl": null,
@@ -55,7 +55,7 @@
   "folder": "1.5 Autos",
   "idealStartingState": {
     "velocity": 0.0,
-    "rotation": -126.27386422370125
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }
