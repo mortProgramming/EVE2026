@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 10.029359289026983,
-        "y": 5.422834962453478
+        "x": 10.357192771084337,
+        "y": 4.646951807228915
       },
       "isLocked": false,
       "linkedName": null
@@ -20,12 +20,12 @@
         "y": 7.2368192771084345
       },
       "prevControl": {
-        "x": 9.038089375426372,
-        "y": 7.876925738804548
+        "x": 8.72855942998536,
+        "y": 7.952402684787538
       },
       "nextControl": {
-        "x": 8.444843373493974,
-        "y": 6.6904337349397585
+        "x": 8.70710843373494,
+        "y": 6.493734939759036
       },
       "isLocked": false,
       "linkedName": null
@@ -44,7 +44,12 @@
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.9228215767634909,
+      "rotationDegrees": -90.0
+    }
+  ],
   "constraintZones": [
     {
       "name": "Initial Run at bump",
@@ -70,7 +75,7 @@
     },
     {
       "name": "IntakeRollerIntake",
-      "waypointRelativePos": 0.9607940446650205,
+      "waypointRelativePos": 0.6074441687344931,
       "endWaypointRelativePos": 2.0,
       "command": null
     }
