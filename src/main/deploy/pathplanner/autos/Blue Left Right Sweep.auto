@@ -29,22 +29,16 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "IntakeAgitate"
+                  "name": "FeederIntake"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "FeederIntake"
+                  "name": "IntakeAgitate"
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": null
           }
         }
       ]
