@@ -13,13 +13,13 @@
         {
           "type": "named",
           "data": {
-            "name": "PrepareShotCommand"
+            "name": "LockOn"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "LockOn"
+            "name": "WindUp"
           }
         },
         {
@@ -27,34 +27,9 @@
           "data": {
             "commands": [
               {
-                "type": "wait",
-                "data": {
-                  "waitTime": 5.0
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": "PrepareShotCommand"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "IntakeAgitate"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.5
                 }
               },
               {
@@ -66,13 +41,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "PrepareShotCommand"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 3.0
+                  "name": "IntakeAgitate"
                 }
               }
             ]
