@@ -60,6 +60,12 @@
               {
                 "type": "named",
                 "data": {
+                  "name": "FeederIntake"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
                   "name": "PrepareShotCommand"
                 }
               },
