@@ -11,15 +11,21 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "PrepareShotCommand"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "LockOn"
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "LockOn"
-                }
-              },
               {
                 "type": "named",
                 "data": {
