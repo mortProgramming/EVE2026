@@ -14,7 +14,6 @@ import org.mort11.configs.constants.LookUpTableConstants;
 import org.mort11.subsystems.Hood;
 import org.mort11.subsystems.OdometryHelper;
 import org.mort11.subsystems.Shooter;
-
 public class PrepareShotCommand extends Command {
     private static final InterpolatingTreeMap<Distance, Shot> distanceToShotMap = new InterpolatingTreeMap<>(
         (startValue, endValue, q) ->
