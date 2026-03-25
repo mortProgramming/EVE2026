@@ -80,6 +80,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     private static final Rotation2d kRedAlliancePerspectiveRotation = Rotation2d.k180deg;
     /* Keep track if we've ever applied the operator perspective before or not */
     private boolean m_hasAppliedOperatorPerspective = false;
+    
 
     //local max speed theoretical needs to be tuend
      //from tuner constants linearvelocity in Meters per second PUT THIS IN CONSTANTS LATER
@@ -161,7 +162,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
      * getters in the classes.
      *
      * @param drivetrainConstants   Drivetrain-wide constants for the swerve drive
-     * @param modules               Constants for each specific module
+     * @param modules               Constants for each specific modul
      */
     public CommandSwerveDrivetrain(
         SwerveDrivetrainConstants drivetrainConstants,
@@ -180,7 +181,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
 		aprilTagYController = new PIDController(1.1, 0, 0);
 		aprilTagYController.setTolerance(0.05);
 
-		aprilTagOmegaController = new PIDController(0.04, 0, 0);
+		aprilTagOmegaController = new PIDController(0.80, 0, 0.01);
 		aprilTagOmegaController.setTolerance(0.05);
     }
 
@@ -438,7 +439,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
 
               var alliance = DriverStation.getAlliance();
               if (alliance.isPresent()) {
-                return alliance.get() == DriverStation.Alliance.Red;
+                return alliance.get() == DriverStation.Alliance.Blue;
               }
               return false;
             },

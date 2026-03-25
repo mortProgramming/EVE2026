@@ -6,6 +6,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.util.PathPlannerLogging;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import org.mort11.commands.autons.apriltag.RotateToHub;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -26,7 +27,6 @@ import org.mort11.commands.actions.endeffector.pid.SetFeeder;
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.commands.autons.pathplanner.BasicCommands;
 import org.mort11.commands.autons.timed.Taxi;
-import org.mort11.commands.autons.apriltag.RotateToHub;
 import org.mort11.configs.constants.TunerConstants;
 
 import com.pathplanner.lib.path.PathPlannerPath;
@@ -122,8 +122,8 @@ public class RobotContainer {
             currentSpeed = MaxSpeed;
             currentAngularRate = MaxAngularRate;
         }));
-        driveController.square().whileTrue(new RotateToHub(odometry));
         driveController.L1().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
+        driveController.R1().whileTrue(new RotateToHub(odometry));
         drivetrain.registerTelemetry(logger::telemeterize);
 
         driveController.povUp().whileTrue(new MoveClimber(0.3));
@@ -166,7 +166,7 @@ public class RobotContainer {
         //feeder + floor
         //endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder(feeder, floor));
         endeffectorController.rightBumper().whileTrue(new MoveFeederOuttake(feeder, floor));
-        endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new SetFeeder(5000));
+        endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new SetFeeder(5100));
 
         //shooter
         //endeffectorController.leftTrigger().whileTrue(new PercentShoot(shooter, 0.8));
@@ -205,6 +205,14 @@ public class RobotContainer {
         autoChooser.addOption("Hps", new PathPlannerAuto("Hps"));
         autoChooser.addOption("RedHps", new PathPlannerAuto("RedHps"));
         autoChooser.addOption("ComboTop", new PathPlannerAuto("ComboTop"));
+        autoChooser.addOption("Blue Left Right Sweep", new PathPlannerAuto("Blue Left Right Sweep"));
+        autoChooser.addOption("Red LR Sweep", new PathPlannerAuto("Red LR Sweep"));
+        autoChooser.addOption("Red Right IN-out", new PathPlannerAuto("Red Right IN-out"));
+        autoChooser.addOption("Red Right IN", new PathPlannerAuto("Red Right IN"));
+        autoChooser.addOption("Blue Left Right Sweep", new PathPlannerAuto("Blue Left Right Sweep"));
+
+        
+
 
         
         

@@ -57,7 +57,7 @@ public final class PhysicalConstants {
     	public static final double MAX_SERVO_SPEED_MM_PER_SEC = 20;
     	public static final double MIN_POSITION = 0.01;
     	public static final double MAX_POSITION = 0.77;
-    	public static final double POSITION_TOLERANCE = 0.01; // ADD THIS
+    	public static final double POSITION_TOLERANCE = 0.01;
 
     	public static final int MIN_PULSE_WIDTH_SERVO = 1000;
     	public static final int MIDDLE_PULSE_WIDTH_SERVO = 1500;
@@ -76,9 +76,9 @@ public final class PhysicalConstants {
     	public static final double POSITION_TOLERANCE_DEG = 5.0;
 
     //pos in degrees
-    	public static final double HOMED_DEG = 1.5;
+    	public static final double HOMED_DEG = -11;
     	public static final double STOWED_DEG = 5;
-    	public static final double INTAKE_DEG = -70;
+    	public static final double INTAKE_DEG = -77;
     	public static final double AGITATE_DEG = -30;
 
     //roller speed

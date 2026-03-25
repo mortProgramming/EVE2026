@@ -7,13 +7,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "IntakeTopStart"
+            "pathName": "Sweep Right to Left"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SetShooter"
           }
         }
       ]
     }
   },
-  "resetOdom": true,
+  "resetOdom": false,
   "folder": null,
   "choreoAuto": false
 }

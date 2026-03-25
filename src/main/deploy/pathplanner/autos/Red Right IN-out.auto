@@ -7,25 +7,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "HpsTrenchStart"
+            "pathName": "IN-Out Right"
           }
         },
         {
-          "type": "wait",
+          "type": "named",
           "data": {
-            "waitTime": 3.0
+            "name": "IntakeDown"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "HpsMoveShoot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "HpsShoot"
+            "name": "IntakeRollerIntake"
           }
         },
         {
@@ -33,15 +27,9 @@
           "data": {
             "commands": [
               {
-                "type": "named",
-                "data": {
-                  "name": "PrepareShotCommand"
-                }
-              },
-              {
                 "type": "wait",
                 "data": {
-                  "waitTime": 7.0
+                  "waitTime": 5.0
                 }
               },
               {
@@ -53,16 +41,22 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "IntakeAgitate"
+                  "name": "SetShooter"
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Back to Middle Right"
           }
         }
       ]
     }
   },
-  "resetOdom": true,
+  "resetOdom": false,
   "folder": null,
   "choreoAuto": false
 }

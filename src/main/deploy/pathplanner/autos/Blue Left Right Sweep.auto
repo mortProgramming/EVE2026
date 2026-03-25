@@ -7,25 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "HpsTrenchStart"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 3.0
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "HpsMoveShoot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "HpsShoot"
+            "pathName": "Sweep left to Right"
           }
         },
         {
@@ -41,13 +23,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 7.0
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "FeederIntake"
+                  "waitTime": 3.0
                 }
               },
               {
@@ -55,8 +31,20 @@
                 "data": {
                   "name": "IntakeAgitate"
                 }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "FeederIntake"
+                }
               }
             ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": null
           }
         }
       ]

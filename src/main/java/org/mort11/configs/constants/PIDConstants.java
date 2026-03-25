@@ -30,7 +30,7 @@ public final class PIDConstants {
     public static final double KV_RIGHT  = 0.15;
 
     public static final double KS = 0.15; 
-    public static final double KA = 0.1;
+    public static final double KA = 0.2;
     public static final double VELOCITY_TOLERANCE_RPM = 75;
     }
  
