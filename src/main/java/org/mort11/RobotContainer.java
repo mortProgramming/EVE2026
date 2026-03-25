@@ -168,7 +168,7 @@ public class RobotContainer {
         //feeder + floor
         //endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder(feeder, floor));
         endeffectorController.rightBumper().whileTrue(new MoveFeederOuttake(feeder, floor));
-        endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new SetFeeder(5100));
+        endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new SetFeeder(5500));
 
         //shooter
         //endeffectorController.leftTrigger().whileTrue(new PercentShoot(shooter, 0.8));

@@ -181,7 +181,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
 		aprilTagYController = new PIDController(1.1, 0, 0);
 		aprilTagYController.setTolerance(0.05);
 
-		aprilTagOmegaController = new PIDController(0.80, 0, 0.01);
+		aprilTagOmegaController = new PIDController(0.70, 0, 0.01);
 		aprilTagOmegaController.setTolerance(0.05);
     }
 
