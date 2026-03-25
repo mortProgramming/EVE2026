@@ -7,6 +7,7 @@ import org.mort11.commands.autons.timed.TimedDrive;
 import org.mort11.commands.autons.timed.TimedFeed;
 import org.mort11.commands.autons.timed.TimedIntake;
 import org.mort11.commands.autons.timed.TimedIntakeArm;
+import org.mort11.commands.autons.timed.TimedRotateToHub;
 import org.mort11.commands.autons.timed.TimedShoot;
 import org.mort11.subsystems.Hood;
 import org.mort11.subsystems.IntakeArm;
@@ -21,7 +22,7 @@ drive back while intaking
 rotate + keep arm deployed
 sweep forward and back to collect balls
 rotate back to face hub
-intake arm while spinning up shooter (distance-based)
+intake arm while spinning up shooter 
 feed + shoot
 
  */
@@ -56,7 +57,7 @@ public class TaxiCenterDepot extends SequentialCommandGroup {
                         new TimedDrive(2, -0.75, 0, 0),
 
                         //rotate back toward hub
-                        new TimedDrive(2, 0, 0, 1),
+                        new TimedRotateToHub(2, odometry),
 
                         //arm down, spin up shooter, then feed
                         new ParallelCommandGroup(
@@ -65,7 +66,7 @@ public class TaxiCenterDepot extends SequentialCommandGroup {
                             new SequentialCommandGroup(
                                 //spin up shooter while rotating
                                 new ParallelCommandGroup(
-                                    new TimedDrive(2, 0, 0, 0.58),
+                                    new TimedRotateToHub(2, odometry),
                                     new TimedShoot(3, shooter, hood, odometry)
                                 ),
 
