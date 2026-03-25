@@ -10,6 +10,7 @@ import org.mort11.commands.actions.endeffector.pid.SetArm;
 import org.mort11.commands.actions.endeffector.pid.SetFeeder;
 
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
+import org.mort11.commands.autons.apriltag.RotateToHub;
 //import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.subsystems.IntakeArm;
 import org.mort11.subsystems.IntakeRoller;
@@ -39,6 +40,9 @@ public class BasicCommands {
         NamedCommands.registerCommand("SetShooter" , new PrepareShotCommand(shooter, hood, odometry));
         NamedCommands.registerCommand("FeederIntake", new SetFeeder(4000));
         NamedCommands.registerCommand("PrepareShotCommmand", new PrepareShotCommand(shooter, hood, odometry));
+
+        //drive commands
+        NamedCommands.registerCommand("LockOn",(new RotateToHub(odometry)));
 
 
     }
