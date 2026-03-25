@@ -76,9 +76,9 @@ public final class PhysicalConstants {
     	public static final double POSITION_TOLERANCE_DEG = 5.0;
 
     //pos in degrees
-    	public static final double HOMED_DEG = -11;
+    	public static final double HOMED_DEG = 12;
     	public static final double STOWED_DEG = 5;
-    	public static final double INTAKE_DEG = -77;
+    	public static final double INTAKE_DEG = -63;
     	public static final double AGITATE_DEG = -30;
 
     //roller speed

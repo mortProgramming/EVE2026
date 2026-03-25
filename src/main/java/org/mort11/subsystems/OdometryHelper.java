@@ -5,12 +5,9 @@ import static org.mort11.configs.constants.PhysicalConstants.Field.BLUE_HUB_Y;
 import static org.mort11.configs.constants.PhysicalConstants.Field.RED_HUB_X;
 import static org.mort11.configs.constants.PhysicalConstants.Field.RED_HUB_Y;
 
-import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.numbers.N1;
-import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
@@ -40,6 +37,10 @@ public class OdometryHelper extends SubsystemBase {
     public void periodic() {
         setFieldObj();
 
+        // FIX 1: Update limelight robot orientation BEFORE fusing vision measurements
+        // so MegaTag2 has the correct yaw when it estimates pose
+        Vision.updateRobotOrientation(drivetrain);
+
         limelightThree.getMeasurement(drivetrain.getState().Pose).ifPresent(measurement -> {
             drivetrain.addVisionMeasurement(
                 measurement.poseEstimate.pose,
@@ -60,9 +61,14 @@ public class OdometryHelper extends SubsystemBase {
         SmartDashboard.putNumber("Distance from hub", getDistanceToHub());
     }
 
+    // FIX 2: getDistanceToTarget() now respects alliance color instead of always using Red hub
     public double getDistanceToTarget() {
         Pose2d pose = drivetrain.getState().Pose;
-        return pose.getTranslation().getDistance(Redhub);
+        if (isBlue()) {
+            return pose.getTranslation().getDistance(Bluehub);
+        } else {
+            return pose.getTranslation().getDistance(Redhub);
+        }
     }
 
     public Pose2d getPose() {
