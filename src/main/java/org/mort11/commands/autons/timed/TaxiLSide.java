@@ -43,7 +43,7 @@ public class TaxiLSide extends SequentialCommandGroup {
                     new TimedIntakeArm(1.5, arm, IntakeArm.Position.INTAKE),
 
                     //drive left away from the hub
-                    new TimedDrive(2, 0, -1, 0),
+                    new TimedDrive(3, 0, -1, 0),
 
                     //rotate toward hub + spin up shooter simultaneously
                     new ParallelCommandGroup(
