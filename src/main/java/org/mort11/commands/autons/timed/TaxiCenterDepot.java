@@ -15,21 +15,15 @@ import org.mort11.subsystems.OdometryHelper;
 import org.mort11.subsystems.Shooter;
 
 /*
- * Sequence:
- *  1. Drive back while intaking
- *  2. Rotate + deploy intake arm
- *  3. Sweep forward and back to collect balls
- *  4. Rotate back to face hub
- *  5. Stow intake arm while spinning up shooter (distance-based)
- *  6. Feed + shoot
- *
- * Register in RobotContainer:
- *   new TaxiCenterDepot(m_intakeArm, m_intakeRoller, m_shooter, m_hood, m_odometryHelper)
- *
- * TUNE:
- *  - TimedDrive speeds/directions for your field side
- *  - TimedFeed RPM (currently PhysicalConstants.Feeder.FEED_RPM = 4800)
- *  - TimedIntakeArm durations — confirm arm reaches position in time given
+ 
+deploy arm down to INTAKE position first 
+drive back while intaking
+rotate + keep arm deployed
+sweep forward and back to collect balls
+rotate back to face hub
+intake arm while spinning up shooter (distance-based)
+feed + shoot
+
  */
 public class TaxiCenterDepot extends SequentialCommandGroup {
 
@@ -42,42 +36,40 @@ public class TaxiCenterDepot extends SequentialCommandGroup {
     ) {
         addCommands(
             new ParallelCommandGroup(
-                // Keep rolling intake throughout the entire drive sequence
+                // Intake rolls throughout the entire auton
                 new TimedIntake(20, roller, IntakeRoller.Speed.INTAKE),
 
                 new SequentialCommandGroup(
-                    // Step 1: Drive backwards away from the hub
+                    new TimedIntakeArm(1.5, arm, IntakeArm.Position.INTAKE),
+
+                    //drive backwards away from the hub
                     new TimedDrive(2, -1, -1, 0),
 
-                    // Step 2: Rotate to face depot + deploy intake arm simultaneously
-                    new ParallelCommandGroup(
-                        new TimedDrive(2, 0, 0, -1),
-                        new TimedIntakeArm(0.6, arm, IntakeArm.Position.INTAKE)
-                    ),
+                    //rotate to face depot, armalreadyyy down
+                    new TimedDrive(2, 0, 0, -1),
 
                     new SequentialCommandGroup(
-                        // Step 3a: Sweep forward to collect balls
+                        //sweep forward to collect balls
                         new TimedDrive(2, 0.75, 0, 0),
 
-                        // Step 3b: Sweep back
+                        //abck
                         new TimedDrive(2, -0.75, 0, 0),
 
-                        // Step 4: Rotate back toward hub
+                        //rotate back toward hub
                         new TimedDrive(2, 0, 0, 1),
 
-                        // Step 5 + 6: Stow arm, spin up shooter, then feed
+                        //arm down, spin up shooter, then feed
                         new ParallelCommandGroup(
-                            new TimedIntakeArm(0.6, arm, IntakeArm.Position.STOWED),
+                            new TimedIntakeArm(0.6, arm, IntakeArm.Position.HOMED),
 
                             new SequentialCommandGroup(
-                                // Spin up shooter while finishing the rotate
+                                //spin up shooter while rotating
                                 new ParallelCommandGroup(
                                     new TimedDrive(2, 0, 0, 0.58),
                                     new TimedShoot(3, shooter, hood, odometry)
                                 ),
 
-                                // Shoot — feeder + shooter running together
-                                // FEED_RPM = 4800 from PhysicalConstants.Feeder
+                                // feeder + shooter running together
                                 new ParallelCommandGroup(
                                     new TimedShoot(10, shooter, hood, odometry),
                                     new TimedFeed(10, 4800)
