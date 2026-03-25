@@ -147,13 +147,13 @@
       }
     },
     {
-      "name": "PrepareShotCommand",
-      "waypointRelativePos": 2.7981093855502883,
-      "endWaypointRelativePos": 4.234693877551011,
+      "name": "SetShooter",
+      "waypointRelativePos": 2.44159351789332,
+      "endWaypointRelativePos": 4.0,
       "command": {
         "type": "named",
         "data": {
-          "name": "PrepareShotCommand"
+          "name": "SetShooter"
         }
       }
     },
