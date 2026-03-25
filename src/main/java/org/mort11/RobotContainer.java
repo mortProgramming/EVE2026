@@ -209,6 +209,8 @@ public class RobotContainer {
         autoChooser.addOption("Red LR Sweep", new PathPlannerAuto("Red LR Sweep"));
         autoChooser.addOption("Red Right IN-out", new PathPlannerAuto("Red Right IN-out"));
         autoChooser.addOption("Red Right IN", new PathPlannerAuto("Red Right IN"));
+        autoChooser.addOption("Blue Left Right Sweep", new PathPlannerAuto("Blue Left Right Sweep"));
+
         
 
 

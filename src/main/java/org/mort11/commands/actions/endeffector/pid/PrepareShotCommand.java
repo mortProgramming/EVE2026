@@ -19,7 +19,6 @@ import org.mort11.subsystems.CommandSwerveDrivetrain;
 import org.mort11.subsystems.Hood;
 import org.mort11.subsystems.OdometryHelper;
 import org.mort11.subsystems.Shooter;
-
 public class PrepareShotCommand extends Command {
 
     //maps distance + RPM + hood position
