@@ -11,7 +11,7 @@ import org.mort11.subsystems.Feeder;
 import org.mort11.subsystems.Floor;
 
 public class SetFeeder extends Command {
-    private static final double SPIN_OUT_DURATION = 0.2; // seconds
+    private static final double SPIN_OUT_DURATION = 0.5; // seconds
 
     private final Feeder feeder;
     private final Floor floor;

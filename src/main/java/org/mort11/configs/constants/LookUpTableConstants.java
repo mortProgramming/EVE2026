@@ -12,7 +12,7 @@ public final class LookUpTableConstants {
         {2.5, 3650, 0.35},
         {3, 3750, 0.36},
         {4, 3900, 0.40},
-        {5, 4100, 0.50},
+        {5, 4150, 0.50},
         {6, 4300, 0.65} //upper placholder
     };
 
