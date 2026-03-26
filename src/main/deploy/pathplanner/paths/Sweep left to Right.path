@@ -48,16 +48,32 @@
     },
     {
       "anchor": {
+        "x": 8.645221112696147,
+        "y": 4.843666191155493
+      },
+      "prevControl": {
+        "x": 8.679108416547788,
+        "y": 5.662845042796007
+      },
+      "nextControl": {
+        "x": 8.611333808844506,
+        "y": 4.024487339514979
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
         "x": 8.4,
-        "y": 3.0322539229671905
+        "y": 2.7605420827389446
       },
       "prevControl": {
         "x": 8.800485021398002,
-        "y": 3.420413694721826
+        "y": 3.1487018544935803
       },
       "nextControl": {
         "x": 7.207892310852787,
-        "y": 1.8768343097415818
+        "y": 1.605122469513336
       },
       "isLocked": false,
       "linkedName": null
@@ -68,8 +84,8 @@
         "y": 2.7605420827389446
       },
       "prevControl": {
-        "x": 2.680499286733238,
-        "y": 3.265149786019972
+        "x": 2.8357631954350926,
+        "y": 2.825235378031384
       },
       "nextControl": null,
       "isLocked": false,
@@ -78,15 +94,15 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 2.05,
+      "waypointRelativePos": 2.1,
       "rotationDegrees": -90.0
     },
     {
-      "waypointRelativePos": 3.1215351812366694,
+      "waypointRelativePos": 4.12153518123667,
       "rotationDegrees": -90.0
     },
     {
-      "waypointRelativePos": 3.488272921108698,
+      "waypointRelativePos": 4.488272921108698,
       "rotationDegrees": 135.77159254312198
     }
   ],
@@ -107,7 +123,7 @@
     {
       "name": "Intaking",
       "minWaypointRelativePos": 1.4800810263335618,
-      "maxWaypointRelativePos": 3.4571235651586756,
+      "maxWaypointRelativePos": 4.457123565158676,
       "constraints": {
         "maxVelocity": 3.0,
         "maxAcceleration": 1.0,
@@ -144,7 +160,7 @@
     },
     {
       "name": "SetShooter",
-      "waypointRelativePos": 3.295070898041817,
+      "waypointRelativePos": 4.295070898041817,
       "endWaypointRelativePos": 4.0,
       "command": {
         "type": "named",
