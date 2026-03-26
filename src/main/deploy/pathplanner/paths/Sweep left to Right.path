@@ -152,17 +152,6 @@
           "name": "SetShooter"
         }
       }
-    },
-    {
-      "name": "LockOn",
-      "waypointRelativePos": 3.7596218771100682,
-      "endWaypointRelativePos": 4.0,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "LockOn"
-        }
-      }
     }
   ],
   "globalConstraints": {
