@@ -41,19 +41,19 @@ public class TaxiLSideAnnoy extends SequentialCommandGroup {
                     //deploy arm + drive forward simultaneously
                     new ParallelCommandGroup(
                         new TimedIntakeArm(2, arm, IntakeArm.Position.INTAKE),
-                        new TimedDrive(2, 0, 2.5, 0)
+                        new TimedDrive(3, 0, 3.5, 0)
                     ),
 
-                    new TimedDrive(2, 2.2, 0, 0),
+                    new TimedDrive(2, 3.0, 0, 0),
 
                     //arm, back left simultaneously
                     new ParallelCommandGroup(
                         new TimedIntakeArm(0.8, arm, IntakeArm.Position.HOMED),
-                        new TimedDrive(2, -2.2, 0, 0)
+                        new TimedDrive(3.0, -3.0, 0, 0)
                     ),
 
                     //drive back to starting position
-                    new TimedDrive(2, 0, -2.5, 0),
+                    new TimedDrive(3, 0, -3.5, 0),
 
                     //forward slightly
                     new TimedDrive(2, 0, 1, 0),
@@ -61,11 +61,11 @@ public class TaxiLSideAnnoy extends SequentialCommandGroup {
                     //deploy arm + rotate to hub + spin up shooter simultaneously
                     new ParallelCommandGroup(
                         new TimedIntakeArm(0.8, arm, IntakeArm.Position.INTAKE),
-                        new TimedRotateToHub(3, odometry),
+                        new TimedRotateToHub(1.5, odometry),
                         new TimedShoot(3, shooter, hood, odometry)
                     ),
 
-                    // Step 7: Feed + shoot
+                    //feed + shoot
                     new ParallelCommandGroup(
                         new TimedShoot(10, shooter, hood, odometry),
                         new TimedFeed(10, 4800)

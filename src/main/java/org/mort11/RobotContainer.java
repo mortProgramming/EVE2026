@@ -215,6 +215,7 @@ public class RobotContainer {
         autoChooser.addOption("Blue Left Right Sweep", new PathPlannerAuto("Blue Left Right Sweep"));
         autoChooser.addOption("Timed Center Depot", new TaxiCenterDepot(intakeArm, intakeRoller, shooter, hood, odometry));
         autoChooser.addOption("Taxi Left Side", new TaxiLSide(intakeArm, intakeRoller, shooter, hood, odometry));
+        autoChooser.addOption("beta thing", new TaxiLSideAnnoy(intakeArm, intakeRoller, shooter, hood, odometry));
 
         
 

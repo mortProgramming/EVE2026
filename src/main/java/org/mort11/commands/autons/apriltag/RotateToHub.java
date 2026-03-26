@@ -15,10 +15,16 @@ public class RotateToHub extends Command {
 
     private final CommandSwerveDrivetrain drivetrain;
     private final OdometryHelper odometryHelper;
+    private final boolean holdContinuously;
 
     public RotateToHub(OdometryHelper odometryHelper) {
+        this(odometryHelper, true);
+    }
+
+    public RotateToHub(OdometryHelper odometryHelper, boolean holdContinuously) {
         this.drivetrain = RobotContainer.getSwerveDrivetrain();
         this.odometryHelper = odometryHelper;
+        this.holdContinuously = holdContinuously;
 
         addRequirements(drivetrain);
     }
@@ -39,23 +45,17 @@ public class RotateToHub extends Command {
 
         double rotationSpeed = drivetrain.calculateChangeRotateController(headingErrorDeg);
 
-        // Read driver input for translation while keeping rotation locked to hub
-        double xSpeed = -RobotContainer.getDriverController().getLeftY()
-            * RobotContainer.getSwerveDrivetrain().getState().Speeds.vxMetersPerSecond;
-        double ySpeed = -RobotContainer.getDriverController().getLeftX()
-            * RobotContainer.getSwerveDrivetrain().getState().Speeds.vyMetersPerSecond;
-
-        // Pull max speed from TunerConstants via the drivetrain's current speed scaling
         double maxSpeed = org.mort11.configs.constants.TunerConstants.kSpeedAt12Volts
             .in(edu.wpi.first.units.Units.MetersPerSecond);
 
-        xSpeed = -RobotContainer.getDriverController().getLeftY() * maxSpeed;
-        ySpeed = -RobotContainer.getDriverController().getLeftX() * maxSpeed;
+        double xSpeed = -RobotContainer.getDriverController().getLeftY() * maxSpeed;
+        double ySpeed = -RobotContainer.getDriverController().getLeftX() * maxSpeed;
 
         drivetrain.setDrive(new ChassisSpeeds(xSpeed, ySpeed, -rotationSpeed));
 
         SmartDashboard.putNumber("Heading Error to Hub (deg)", headingErrorDeg);
         SmartDashboard.putNumber("Field Angle to Hub (deg)", fieldAngleToHub.getDegrees());
+        SmartDashboard.putNumber("Rotation Speed Output", rotationSpeed);
     }
 
     @Override
@@ -65,6 +65,18 @@ public class RotateToHub extends Command {
 
     @Override
     public boolean isFinished() {
-        return false;
+        if (holdContinuously) return false;
+
+        Pose2d robotPose = odometryHelper.getPose();
+        Translation2d hubTarget = odometryHelper.getHubTarget().getTranslation();
+        Translation2d robotToHub = hubTarget.minus(robotPose.getTranslation());
+        Rotation2d fieldAngleToHub = robotToHub.getAngle();
+
+        double headingErrorDeg = Math.IEEEremainder(
+            fieldAngleToHub.minus(robotPose.getRotation()).getDegrees(),
+            360.0
+        );
+
+        return Math.abs(headingErrorDeg) < 2.0;
     }
 }
