@@ -39,7 +39,7 @@ public class BasicCommands {
         NamedCommands.registerCommand("WindUp" , new SetShooter(3400).withTimeout(2));
         NamedCommands.registerCommand("SetShooter" , new SetShooter(3200));//was 3400
         NamedCommands.registerCommand("FeederIntake", new SetFeeder(4000));
-        NamedCommands.registerCommand("PrepareShotCommmand", new PrepareShotCommand(shooter, hood, odometry));
+        NamedCommands.registerCommand("PrepareShotCommand", new PrepareShotCommand(shooter, hood, odometry));
 
         //drive commands
         NamedCommands.registerCommand("LockOn",(new RotateToHub(odometry)).withTimeout(2));
