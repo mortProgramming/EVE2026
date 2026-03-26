@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.5862054208273886,
-        "y": 5.684679029957205
+        "x": 3.5473894436519258,
+        "y": 5.283580599144081
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.490714431835626,
-        "y": 5.596235125146183
+        "x": 4.451898454660163,
+        "y": 5.195136694333059
       },
       "isLocked": false,
       "linkedName": "BlueTopStart"
@@ -144,7 +144,7 @@
     },
     {
       "name": "SetShooter",
-      "waypointRelativePos": 2.44159351789332,
+      "waypointRelativePos": 3.295070898041817,
       "endWaypointRelativePos": 4.0,
       "command": {
         "type": "named",
@@ -157,7 +157,12 @@
       "name": "LockOn",
       "waypointRelativePos": 3.7596218771100682,
       "endWaypointRelativePos": 4.0,
-      "command": null
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "LockOn"
+        }
+      }
     }
   ],
   "globalConstraints": {
