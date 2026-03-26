@@ -20,6 +20,7 @@ import org.mort11.subsystems.Floor;
 import org.mort11.subsystems.Hood;
 import org.mort11.subsystems.Feeder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.FollowPathCommand;
 
 public class BasicCommands {
 
@@ -32,7 +33,7 @@ public class BasicCommands {
         //IntakeRoller/Feeder commands
         NamedCommands.registerCommand("IntakeRollerIntake", new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
         NamedCommands.registerCommand("IntakeRollerOuttake", new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.OUTTAKE));
-    
+        
         //Climber commands
         NamedCommands.registerCommand("Climb", new MoveClimber(-1));
         //Shooter commands
