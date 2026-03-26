@@ -35,6 +35,12 @@
               {
                 "type": "named",
                 "data": {
+                  "name": "IntakeAgitate"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
                   "name": "FeederIntake"
                 }
               }
