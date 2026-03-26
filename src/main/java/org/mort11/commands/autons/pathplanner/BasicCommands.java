@@ -43,7 +43,7 @@ public class BasicCommands {
         NamedCommands.registerCommand("PrepareShotCommmand", new PrepareShotCommand(shooter, hood, odometry));
 
         //drive commands
-        NamedCommands.registerCommand("LockOn",(new RotateToHub(odometry)).withTimeout(2));
+        NamedCommands.registerCommand("LockOn",(new RotateToHub(odometry)));
 
 
     }
