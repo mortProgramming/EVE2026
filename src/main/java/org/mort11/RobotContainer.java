@@ -27,9 +27,9 @@ import org.mort11.commands.actions.endeffector.pid.SetFeeder;
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.commands.autons.pathplanner.BasicCommands;
 import org.mort11.commands.autons.timed.Taxi;
-import org.mort11.commands.autons.timed.TaxiCenterDepot;
-import org.mort11.commands.autons.timed.TaxiLSide;
-import org.mort11.commands.autons.timed.TaxiLSideAnnoy;
+// import org.mort11.commands.autons.timed.TaxiCenterDepot;
+// import org.mort11.commands.autons.timed.TaxiLSide;
+// import org.mort11.commands.autons.timed.TaxiLSideAnnoy;
 import org.mort11.configs.constants.TunerConstants;
 
 import com.pathplanner.lib.path.PathPlannerPath;
@@ -208,14 +208,16 @@ public class RobotContainer {
         autoChooser.addOption("Hps", new PathPlannerAuto("Hps"));
         autoChooser.addOption("RedHps", new PathPlannerAuto("RedHps"));
         autoChooser.addOption("ComboTop", new PathPlannerAuto("ComboTop"));
-        autoChooser.addOption("Blue Left Right Sweep", new PathPlannerAuto("Blue Left Right Sweep"));
+
+
         autoChooser.addOption("Red LR Sweep", new PathPlannerAuto("Red LR Sweep"));
         autoChooser.addOption("Red Right IN-out", new PathPlannerAuto("Red Right IN-out"));
         autoChooser.addOption("Red Right IN", new PathPlannerAuto("Red Right IN"));
         autoChooser.addOption("Blue Left Right Sweep", new PathPlannerAuto("Blue Left Right Sweep"));
-        autoChooser.addOption("Timed Center Depot", new TaxiCenterDepot(intakeArm, intakeRoller, shooter, hood, odometry));
-        autoChooser.addOption("Taxi Left Side", new TaxiLSide(intakeArm, intakeRoller, shooter, hood, odometry));
-        autoChooser.addOption("beta thing", new TaxiLSideAnnoy(intakeArm, intakeRoller, shooter, hood, odometry));
+        autoChooser.addOption("Blue In-out", new PathPlannerAuto("Blue In-out"));
+        
+        // autoChooser.addOption("Timed Center Depot", new TaxiCenterDepot(intakeArm, intakeRoller, shooter, hood, odometry));
+        // autoChooser.addOption("Taxi Left Side", new TaxiLSide(intakeArm, intakeRoller, shooter, hood, odometry));
 
         
 

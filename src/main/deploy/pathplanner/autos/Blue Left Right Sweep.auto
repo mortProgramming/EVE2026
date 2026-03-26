@@ -13,13 +13,13 @@
         {
           "type": "named",
           "data": {
-            "name": "PrepareShotCommand"
+            "name": "LockOn"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "LockOn"
+            "name": "WindUp"
           }
         },
         {
@@ -27,46 +27,21 @@
           "data": {
             "commands": [
               {
-                "type": "wait",
+                "type": "named",
                 "data": {
-                  "waitTime": 5.0
+                  "name": "SetShooter"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "PrepareShotCommand"
+                  "name": "FeederIntake"
                 }
               },
               {
                 "type": "named",
                 "data": {
                   "name": "IntakeAgitate"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.5
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "PrepareShotCommand"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 3.0
                 }
               }
             ]

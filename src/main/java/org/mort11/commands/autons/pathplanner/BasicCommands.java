@@ -36,6 +36,7 @@ public class BasicCommands {
         //Climber commands
         NamedCommands.registerCommand("Climb", new MoveClimber(-1));
         //Shooter commands
+        NamedCommands.registerCommand("WindUp" , new SetShooter(3400).withTimeout(2));
         NamedCommands.registerCommand("SetShooter" , new SetShooter(3400));
         NamedCommands.registerCommand("FeederIntake", new SetFeeder(4000));
         NamedCommands.registerCommand("PrepareShotCommmand", new PrepareShotCommand(shooter, hood, odometry));
