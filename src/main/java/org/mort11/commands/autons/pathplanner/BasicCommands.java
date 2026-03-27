@@ -47,10 +47,10 @@ public class BasicCommands {
         PrepareShotCommand prepareShot = new PrepareShotCommand(shooter, hood, odometry);
         NamedCommands.registerCommand("PrepareAndShoot",
             new ParallelDeadlineGroup(
-                //wait until ready, then feed for 1 second. once feed is done, everything stops
+                //wait until ready, then feed 
                 new WaitUntilCommand(prepareShot::isReadyToShoot)
                     .withTimeout(1)
-                    .andThen(new SetFeeder(4000).withTimeout(3)),
+                    .andThen(new SetFeeder(5500).withTimeout(3)),
                 prepareShot  //shooter + hood active the entire time including during the feed
             )
         );

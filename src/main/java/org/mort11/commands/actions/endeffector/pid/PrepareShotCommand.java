@@ -114,7 +114,7 @@ public class PrepareShotCommand extends Command {
         SmartDashboard.putNumber("Distance to Hub (inches)", newDistance.in(Inches));
 
         if (isReadyToShoot()) {
-            RobotContainer.getEndeffectorController().setRumble(RumbleType.kBothRumble, 0.5);
+            RobotContainer.getEndeffectorController().setRumble(RumbleType.kBothRumble, 1);
         } else {
             RobotContainer.getEndeffectorController().setRumble(RumbleType.kBothRumble, 0);
         }

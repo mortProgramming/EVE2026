@@ -7,25 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "HpsTrenchStart"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 3.0
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "HpsMoveShoot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "HpsShoot"
+            "pathName": "Left To Right Our Side"
           }
         },
         {
@@ -57,6 +39,6 @@
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "Blue Side",
   "choreoAuto": false
 }

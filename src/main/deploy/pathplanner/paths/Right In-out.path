@@ -4,7 +4,7 @@
     {
       "anchor": {
         "x": 3.560328102710413,
-        "y": 2.9393580599154070
+        "y": 2.939358059915407
       },
       "prevControl": null,
       "nextControl": {
@@ -25,7 +25,7 @@
       },
       "nextControl": {
         "x": 7.286661911554923,
-        "y": 1.891326676176890
+        "y": 1.89132667617689
       },
       "isLocked": false,
       "linkedName": null
@@ -37,7 +37,7 @@
       },
       "prevControl": {
         "x": 8.305853528300952,
-        "y": 0.502793216011733
+        "y": 0.5027932160117323
       },
       "nextControl": {
         "x": 8.27,
@@ -57,7 +57,7 @@
       },
       "nextControl": {
         "x": 5.294108416547789,
-        "y": 3.211069900142652
+        "y": 3.2110699001426517
       },
       "isLocked": false,
       "linkedName": null
@@ -109,8 +109,8 @@
       "minWaypointRelativePos": 1.4800810263335618,
       "maxWaypointRelativePos": 3.4571235651586756,
       "constraints": {
-        "maxVelocity": 3.0,
-        "maxAcceleration": 1.0,
+        "maxVelocity": 3.5,
+        "maxAcceleration": 1.5,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -139,17 +139,6 @@
         "type": "named",
         "data": {
           "name": "IntakeRollerIntake"
-        }
-      }
-    },
-    {
-      "name": "SetShooter",
-      "waypointRelativePos": 2.44159351789332,
-      "endWaypointRelativePos": 3.9048723897911857,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "SetShooter"
         }
       }
     }

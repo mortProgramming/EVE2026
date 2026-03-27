@@ -20,7 +20,7 @@ public class RotateToHub extends Command {
   
     private static final double kP             = 0.3;  
     private static final double kD             = 0.001; 
-    private static final double MAX_ROT_SPEED  = 6.0;   
+    private static final double MAX_ROT_SPEED  = 7.0;   
     private static final double DEADBAND_DEG   = 1.5;  
 
     private double previousError = 0.0;
