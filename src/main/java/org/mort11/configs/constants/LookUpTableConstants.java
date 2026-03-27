@@ -6,8 +6,8 @@ public final class LookUpTableConstants {
     //distance in meters, shooter rpm, hood angle degrees (straight up = 90 deg)
     public static final double[][] SHOOTER_SUPERSYSTEM = {
         {0, 1700, 0.0},
-        {1, 3150, 0.19},
-        {1.5, 3300, 0.20},
+        {1, 3100, 0.19},
+        {1.5, 3250, 0.20},
         {2, 3550, 0.20},
         {2.5, 3650, 0.35},
         {3, 3750, 0.36},

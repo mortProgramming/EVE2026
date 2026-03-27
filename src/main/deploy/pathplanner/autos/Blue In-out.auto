@@ -17,25 +17,13 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "WindUp"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "named",
                 "data": {
-                  "name": "SetShooter"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "FeederIntake"
+                  "name": "PrepareAndShoot"
                 }
               },
               {
@@ -51,6 +39,6 @@
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "Blue Side",
   "choreoAuto": false
 }

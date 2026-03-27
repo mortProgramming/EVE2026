@@ -22,6 +22,9 @@ import org.mort11.subsystems.Feeder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.FollowPathCommand;
 
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
+
 public class BasicCommands {
 
     public static void setCommands(OdometryHelper odometry, Shooter shooter, IntakeArm intake, IntakeRoller intakeRoller, Floor floor, Feeder feeder, Hood hood) {
@@ -40,7 +43,17 @@ public class BasicCommands {
         NamedCommands.registerCommand("WindUp" , new SetShooter(3400).withTimeout(2));
         NamedCommands.registerCommand("SetShooter" , new SetShooter(3200));//was 3400
         NamedCommands.registerCommand("FeederIntake", new SetFeeder(4000));
-        NamedCommands.registerCommand("PrepareShotCommand", new PrepareShotCommand(shooter, hood, odometry));
+
+        PrepareShotCommand prepareShot = new PrepareShotCommand(shooter, hood, odometry);
+        NamedCommands.registerCommand("PrepareAndShoot",
+            new ParallelDeadlineGroup(
+                //wait until ready, then feed for 1 second. once feed is done, everything stops
+                new WaitUntilCommand(prepareShot::isReadyToShoot)
+                    .withTimeout(1)
+                    .andThen(new SetFeeder(4000).withTimeout(3)),
+                prepareShot  //shooter + hood active the entire time including during the feed
+            )
+        );
 
         //drive commands
         NamedCommands.registerCommand("LockOn",(new RotateToHub(odometry)).withTimeout(2));

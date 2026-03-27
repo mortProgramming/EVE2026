@@ -5,7 +5,10 @@
   "pathFolders": [
     "1.5 Autos"
   ],
-  "autoFolders": [],
+  "autoFolders": [
+    "Blue Side",
+    "Red Side"
+  ],
   "defaultMaxVel": 3.0,
   "defaultMaxAccel": 1.0,
   "defaultMaxAngVel": 540.0,

@@ -57,6 +57,6 @@
     }
   },
   "resetOdom": false,
-  "folder": null,
+  "folder": "Red Side",
   "choreoAuto": false
 }

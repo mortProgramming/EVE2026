@@ -201,20 +201,21 @@ public class RobotContainer {
         autoChooser = new SendableChooser<Command>();
         SmartDashboard.putData("autoChooser", autoChooser);
         autoChooser.setDefaultOption("nothing", null);
-        autoChooser.addOption("TopIntake", new PathPlannerAuto("TopIntake"));
-        autoChooser.addOption("RedTopIntake", new PathPlannerAuto("RedTopIntake"));
+        //autoChooser.addOption("TopIntake", new PathPlannerAuto("TopIntake"));
+        //autoChooser.addOption("RedTopIntake", new PathPlannerAuto("RedTopIntake"));
         autoChooser.addOption("Depot", new PathPlannerAuto("Depot"));
-        autoChooser.addOption("RedDepot", new PathPlannerAuto("RedDepot"));
+        
+        //autoChooser.addOption("RedDepot", new PathPlannerAuto("RedDepot"));
         autoChooser.addOption("Hps", new PathPlannerAuto("Hps"));
-        autoChooser.addOption("RedHps", new PathPlannerAuto("RedHps"));
-        autoChooser.addOption("ComboTop", new PathPlannerAuto("ComboTop"));
+        //autoChooser.addOption("RedHps", new PathPlannerAuto("RedHps"));
+        //autoChooser.addOption("ComboTop", new PathPlannerAuto("ComboTop"));
 
 
-        autoChooser.addOption("Red LR Sweep", new PathPlannerAuto("Red LR Sweep"));
-        autoChooser.addOption("Red Right IN-out", new PathPlannerAuto("Red Right IN-out"));
-        autoChooser.addOption("Red Right IN", new PathPlannerAuto("Red Right IN"));
-        autoChooser.addOption("Blue Left Right Sweep", new PathPlannerAuto("Blue Left Right Sweep"));
-        autoChooser.addOption("Blue In-out", new PathPlannerAuto("Blue In-out"));
+       //autoChooser.addOption("Red LR Sweep", new PathPlannerAuto("Red LR Sweep"));
+        //autoChooser.addOption("Red Right IN-out", new PathPlannerAuto("Red Right IN-out"));
+        //autoChooser.addOption("Red Right IN", new PathPlannerAuto("Red Right IN"));
+        autoChooser.addOption("Left Right Sweep", new PathPlannerAuto("Blue Left Right Sweep"));
+        autoChooser.addOption("Left In-out", new PathPlannerAuto("Blue In-out"));
         
         // autoChooser.addOption("Timed Center Depot", new TaxiCenterDepot(intakeArm, intakeRoller, shooter, hood, odometry));
         // autoChooser.addOption("Taxi Left Side", new TaxiLSide(intakeArm, intakeRoller, shooter, hood, odometry));
