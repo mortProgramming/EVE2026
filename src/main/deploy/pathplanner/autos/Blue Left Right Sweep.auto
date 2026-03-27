@@ -17,31 +17,19 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "WindUp"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "named",
                 "data": {
-                  "name": "SetShooter"
+                  "name": "PrepareAndShoot"
                 }
               },
               {
                 "type": "named",
                 "data": {
                   "name": "IntakeAgitate"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "FeederIntake"
                 }
               }
             ]

@@ -22,31 +22,31 @@ public final class PIDConstants {
 
     public static final class Shooter {
         // og
-    public static final double KP = 0.53;
-    public static final double KI = 0.01;
-    public static final double KD = 0.0;
-
-    public static final double KV_LEFT   = 0.15;  
-    public static final double KV_MIDDLE = 0.15;
-    public static final double KV_RIGHT  = 0.15;
-
-    public static final double KS = 0.15; 
-    public static final double KA = 0.2;
-    public static final double VELOCITY_TOLERANCE_RPM = 75;
-
-    // evan
-    // public static final double KP = 1;
-    // public static final double KI = 0;
+    // public static final double KP = 0.53;
+    // public static final double KI = 0.01;
     // public static final double KD = 0.0;
 
-    // public static final double KV = -0.006 + 0.12;
-    // public static final double KV_LEFT   = KV;  
-    // public static final double KV_MIDDLE = KV;
-    // public static final double KV_RIGHT  = KV;
+    // public static final double KV_LEFT   = 0.15;  
+    // public static final double KV_MIDDLE = 0.15;
+    // public static final double KV_RIGHT  = 0.15;
 
-    // public static final double KS = 0.145;
-    // public static final double KA = 0;
+    // public static final double KS = 0.15; 
+    // public static final double KA = 0.2;
     // public static final double VELOCITY_TOLERANCE_RPM = 75;
+
+    // evan
+    public static final double KP = 1;
+    public static final double KI = 0;
+    public static final double KD = 0.0;
+
+    public static final double KV = -0.006 + 0.12;
+    public static final double KV_LEFT   = KV;  
+    public static final double KV_MIDDLE = KV;
+    public static final double KV_RIGHT  = KV;
+
+    public static final double KS = 0.145;
+    public static final double KA = 0;
+    public static final double VELOCITY_TOLERANCE_RPM = 75;
     }
  
     public static final class Intake {
@@ -56,7 +56,7 @@ public final class PIDConstants {
     }
 
     public static final class Feeder{
-        public static final double KP = 0.2;
+        public static final double KP = 0.3;
         public static final double KI = 0;
         public static final double KD = 0.0;
 

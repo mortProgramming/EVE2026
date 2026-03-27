@@ -7,19 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "IN-Out Right"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "IntakeDown"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "IntakeRollerIntake"
+            "pathName": "Left In-out"
           }
         },
         {
@@ -46,17 +34,11 @@
               }
             ]
           }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Back to Middle Right"
-          }
         }
       ]
     }
   },
-  "resetOdom": false,
-  "folder": "Red Side",
+  "resetOdom": true,
+  "folder": "Blue Side",
   "choreoAuto": false
 }

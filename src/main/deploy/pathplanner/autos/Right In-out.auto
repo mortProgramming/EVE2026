@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Sweep Right to Left"
+            "pathName": "Right In-out"
           }
         },
         {
@@ -17,25 +17,13 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "WindUp"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "named",
                 "data": {
-                  "name": "SetShooter"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "FeederIntake"
+                  "name": "PrepareAndShoot"
                 }
               },
               {
@@ -50,7 +38,7 @@
       ]
     }
   },
-  "resetOdom": false,
-  "folder": "Red Side",
+  "resetOdom": true,
+  "folder": "Blue Side",
   "choreoAuto": false
 }
