@@ -50,7 +50,7 @@ public class BasicCommands {
                 //wait until ready, then feed 
                 new WaitUntilCommand(prepareShot::isReadyToShoot)
                     .withTimeout(1)
-                    .andThen(new SetFeeder(5500).withTimeout(3)),
+                    .andThen(new SetFeeder(5500).withTimeout(6)),
                 prepareShot  //shooter + hood active the entire time including during the feed
             )
         );

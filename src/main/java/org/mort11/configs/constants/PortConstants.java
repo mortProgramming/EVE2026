@@ -35,7 +35,7 @@ public final class PortConstants {
 
     public static final class Shooter {
         public static final int SHOOTER_LEFT = 14;  
-        public static final int SHOOTER_MIDDLE = 15;
+        public static final int SHOOTER_MIDDLE = 15; 
         public static final int SHOOTER_RIGHT = 16;
     }
     public static final class FloorConstants{
