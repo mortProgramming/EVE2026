@@ -4,6 +4,8 @@
 
 package org.mort11;
 
+import org.mort11.subsystems.LimelightRewindManager;
+import org.mort11.subsystems.LimelightRewindNT;
 import org.mort11.subsystems.Vision;
 
 import com.ctre.phoenix6.HootAutoReplay;
@@ -16,6 +18,11 @@ public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
 
     private final RobotContainer m_robotContainer;
+
+    // Use your Limelight NT table name:
+    // often "limelight" or "limelight-<name>" (e.g. "limelight-three")
+    private final LimelightRewindNT rewind = new LimelightRewindNT("limelight-three");
+    private final LimelightRewindManager rewindManager = new LimelightRewindManager(rewind);
 
     /* log and replay timestamp and joystick data */
     private final HootAutoReplay m_timeAndJoystickReplay = new HootAutoReplay()
