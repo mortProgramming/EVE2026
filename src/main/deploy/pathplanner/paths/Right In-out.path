@@ -134,7 +134,7 @@
     {
       "name": "IntakeRollerIntake",
       "waypointRelativePos": 1.5475638051044127,
-      "endWaypointRelativePos": 3.431554524361943,
+      "endWaypointRelativePos": 3.99,
       "command": {
         "type": "named",
         "data": {

@@ -87,8 +87,8 @@ public final class PhysicalConstants {
 	}
 
     public static final class Shooter {
-	    public static final double STATOR_CURRENT_LIMIT = 110;
-    	public static final double SUPPLY_CURRENT_LIMIT = 50;
+	    //public static final double STATOR_CURRENT_LIMIT = 110;
+    	//public static final double SUPPLY_CURRENT_LIMIT = 50;
     	//public static final double VELOCITY_TOLERANCE_RPM = 100;
     	public static final double SHOOTER_SPEED_BUZZ_TOLERANCE = 0.05;
 
