@@ -30,9 +30,14 @@ public class BasicCommands {
     public static void setCommands(OdometryHelper odometry, Shooter shooter, IntakeArm intake, IntakeRoller intakeRoller, Floor floor, Feeder feeder, Hood hood) {
         // NamedCommands.registerCommand("Taxi", new Taxi());
         //IntakeArm commands
+        PrepareShotCommand prepareShot = new PrepareShotCommand(shooter, hood, odometry); 
+
         NamedCommands.registerCommand("IntakeUp", new SetArm(intake, IntakeArm.Position.HOMED));
         NamedCommands.registerCommand("IntakeDown", new SetArm(intake, IntakeArm.Position.INTAKE));
         NamedCommands.registerCommand("IntakeAgitate", new AgitateArm(intake));
+        NamedCommands.registerCommand("WaitIntakeAgitate", new AgitateArm(intake).until(prepareShot::isReadyToShoot)); 
+        
+
         //IntakeRoller/Feeder commands
         NamedCommands.registerCommand("IntakeRollerIntake", new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
         NamedCommands.registerCommand("IntakeRollerOuttake", new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.OUTTAKE));
@@ -44,7 +49,6 @@ public class BasicCommands {
         NamedCommands.registerCommand("SetShooter" , new SetShooter(3200));//was 3400
         NamedCommands.registerCommand("FeederIntake", new SetFeeder(4000));
 
-        PrepareShotCommand prepareShot = new PrepareShotCommand(shooter, hood, odometry);
         NamedCommands.registerCommand("PrepareAndShoot",
             new ParallelDeadlineGroup(
                 //wait until ready, then feed 

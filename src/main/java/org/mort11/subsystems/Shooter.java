@@ -7,7 +7,7 @@ import static edu.wpi.first.units.Units.Volts;
 
 import java.util.List;
 
-//import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
@@ -64,13 +64,13 @@ public class Shooter extends SubsystemBase {
             .withVoltage(
                 new VoltageConfigs()
                     .withPeakReverseVoltage(Volts.of(0))
-            //)
-            // .withCurrentLimits(
-            //     new CurrentLimitsConfigs()
-            //         .withStatorCurrentLimit(Amps.of(PhysicalConstants.Shooter.STATOR_CURRENT_LIMIT))
-            //         .withStatorCurrentLimitEnable(true)
-            //         .withSupplyCurrentLimit(Amps.of(PhysicalConstants.Shooter.SUPPLY_CURRENT_LIMIT))
-            //         .withSupplyCurrentLimitEnable(true)
+            )
+            .withCurrentLimits(
+                new CurrentLimitsConfigs()
+                    .withStatorCurrentLimit(Amps.of(PhysicalConstants.Shooter.STATOR_CURRENT_LIMIT))
+                    .withStatorCurrentLimitEnable(true)
+                    .withSupplyCurrentLimit(Amps.of(PhysicalConstants.Shooter.SUPPLY_CURRENT_LIMIT))
+                    .withSupplyCurrentLimitEnable(true)
             )
             .withSlot0(
                 new Slot0Configs()
