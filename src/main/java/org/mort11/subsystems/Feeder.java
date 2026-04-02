@@ -76,7 +76,6 @@ public class Feeder extends SubsystemBase {
         SmartDashboard.putData(this);
     }
 
-    /** Set feeder to a predefined Speed enum (RPM-based). */
     public void set(Speed speed) {
         setRPM(speed.getRPM());
     }
