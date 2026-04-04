@@ -26,8 +26,8 @@ public final class PortConstants {
 
     public static final class Intake {
         public static final int INTAKE_PIVOT = 42;  
-        public static final int INTAKE_ROLLER_FOLLOWER = 41;
-        public static final int INTAKE_ROLLER_LEADER = 50; 
+        public static final int INTAKE_ROLLER_FOLLOWER = 41; // IntakeRollerRight
+        public static final int INTAKE_ROLLER_LEADER = 44; // IntakeRollerLeft // was 50
     }
 
     public static final class Feeder {
