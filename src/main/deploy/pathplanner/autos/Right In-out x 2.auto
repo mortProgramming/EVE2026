@@ -7,6 +7,12 @@
         {
           "type": "path",
           "data": {
+            "pathName": "Right In-out"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
             "pathName": "Right In-out x 2"
           }
         },

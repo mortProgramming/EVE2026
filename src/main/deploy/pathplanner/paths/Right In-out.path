@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.560328102710413,
-        "y": 2.939358059915407
+        "x": 1.4901426533523536,
+        "y": 2.680584878744651
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.268231098430811,
-        "y": 2.965235378031383
+        "x": 3.198045649072752,
+        "y": 2.7064621968606266
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "RightInOutEnd"
     },
     {
       "anchor": {
@@ -73,7 +73,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "RightInOutEnd"
+      "linkedName": null
     }
   ],
   "rotationTargets": [
@@ -92,25 +92,12 @@
   ],
   "constraintZones": [
     {
-      "name": "First Bump",
-      "minWaypointRelativePos": 0,
-      "maxWaypointRelativePos": 0.8642808912896622,
+      "name": "Intaking",
+      "minWaypointRelativePos": 1.5124915597569082,
+      "maxWaypointRelativePos": 2.960162052667117,
       "constraints": {
         "maxVelocity": 4.0,
-        "maxAcceleration": 4.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0,
-        "nominalVoltage": 12.0,
-        "unlimited": false
-      }
-    },
-    {
-      "name": "Intaking",
-      "minWaypointRelativePos": 1.4800810263335618,
-      "maxWaypointRelativePos": 3.4571235651586756,
-      "constraints": {
-        "maxVelocity": 3.5,
-        "maxAcceleration": 1.5,
+        "maxAcceleration": 3.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -134,18 +121,29 @@
     {
       "name": "IntakeRollerIntake",
       "waypointRelativePos": 1.5475638051044127,
-      "endWaypointRelativePos": 3.99,
+      "endWaypointRelativePos": 3.431554524361943,
       "command": {
         "type": "named",
         "data": {
           "name": "IntakeRollerIntake"
         }
       }
+    },
+    {
+      "name": "SetShooter",
+      "waypointRelativePos": 2.44159351789332,
+      "endWaypointRelativePos": 3.9048723897911857,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "SetShooter"
+        }
+      }
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 2.0,
+    "maxVelocity": 6.0,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -159,7 +157,7 @@
   "folder": "Blue Side Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 1.332219853869732
+    "rotation": 25.989233583833002
   },
   "useDefaultConstraints": false
 }
