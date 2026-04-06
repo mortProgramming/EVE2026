@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.480044830242888,
-        "y": 5.364235514178452
+        "x": 4.484794768423418,
+        "y": 5.270641940085593
       },
       "isLocked": false,
       "linkedName": "BlueTopStart"
@@ -73,7 +73,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "LeftRightEnd"
     }
   ],
   "rotationTargets": [

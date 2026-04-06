@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Right In-out x 2"
+            "pathName": "Left In-out"
           }
         },
         {
@@ -23,16 +23,22 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "PrepareAndShoot"
+                  "name": "IntakeAgitate"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "IntakeAgitate"
+                  "name": "PrepareAndShoot"
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Left In-out x 2"
           }
         }
       ]
