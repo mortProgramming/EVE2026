@@ -70,6 +70,8 @@ public class RobotContainer {
 
     private final Telemetry logger = new Telemetry(MaxSpeed);
     private final Limelight limelightThree = new Limelight("limelight-three");
+    private final Limelight limelightBack = new Limelight("limelight-back");
+
 
 
     private static final CommandPS5Controller driveController = new CommandPS5Controller(DRIVE_CONTROLLER);
@@ -77,13 +79,12 @@ public class RobotContainer {
     private static final CommandXboxController manualController = new CommandXboxController(MANUAL_CONTROLLER);
 
     public final static CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
-    private final OdometryHelper odometry = new OdometryHelper(drivetrain, limelightThree);
+    private final OdometryHelper odometry = new OdometryHelper(drivetrain, limelightThree, limelightBack);
 
     private final Shooter shooter = new Shooter();
     private final Hood hood = new Hood();
     private final IntakeArm intakeArm = new IntakeArm();
     private final IntakeRoller intakeRoller = new IntakeRoller();
-    private final Vision vision = Vision.getInstance();
     private final Feeder feeder = Feeder.getInstance();
     private final Floor floor = Floor.getInstance();
     private final Climber climber = Climber.getInstance();
