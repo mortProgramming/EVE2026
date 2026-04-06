@@ -78,7 +78,7 @@ public final class PhysicalConstants {
     //pos in degrees
     	public static final double HOMED_DEG = 0;
     	public static final double STOWED_DEG = 5;
-    	public static final double INTAKE_DEG = -77;
+    	public static final double INTAKE_DEG = -68;
     	public static final double AGITATE_DEG = -10;
 
     //roller speed
@@ -88,7 +88,7 @@ public final class PhysicalConstants {
 
     public static final class Shooter {
 	    public static final double STATOR_CURRENT_LIMIT = 110;
-    	public static final double SUPPLY_CURRENT_LIMIT = 60;
+    	public static final double SUPPLY_CURRENT_LIMIT = 50;
     	//public static final double VELOCITY_TOLERANCE_RPM = 100;
     	public static final double SHOOTER_SPEED_BUZZ_TOLERANCE = 0.05;
 

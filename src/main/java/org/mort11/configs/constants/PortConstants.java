@@ -26,7 +26,8 @@ public final class PortConstants {
 
     public static final class Intake {
         public static final int INTAKE_PIVOT = 42;  
-        public static final int INTAKE_ROLLER = 41; 
+        public static final int INTAKE_ROLLER_FOLLOWER = 41; // IntakeRollerRight
+        public static final int INTAKE_ROLLER_LEADER = 44; // IntakeRollerLeft // was 50
     }
 
     public static final class Feeder {
@@ -35,7 +36,7 @@ public final class PortConstants {
 
     public static final class Shooter {
         public static final int SHOOTER_LEFT = 14;  
-        public static final int SHOOTER_MIDDLE = 15;
+        public static final int SHOOTER_MIDDLE = 15; 
         public static final int SHOOTER_RIGHT = 16;
     }
     public static final class FloorConstants{

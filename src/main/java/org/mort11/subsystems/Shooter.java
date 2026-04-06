@@ -51,8 +51,7 @@ public class Shooter extends SubsystemBase {
         configureMotor(middleMotor, InvertedValue.CounterClockwise_Positive, PIDConstants.Shooter.KV_MIDDLE);
         configureMotor(rightMotor,  InvertedValue.CounterClockwise_Positive, PIDConstants.Shooter.KV_RIGHT);
 
-        SmartDashboard.
-        putData(this);
+        SmartDashboard.putData(this);
     }
 
     private void configureMotor(TalonFX motor, InvertedValue invertDirection, double kV) {
@@ -106,7 +105,6 @@ public class Shooter extends SubsystemBase {
     }
 
     public double getRPM() {
-        // average across all three motors
         return motors.stream()
             .mapToDouble(m -> m.getVelocity().getValue().in(RPM))
             .average()
@@ -115,7 +113,7 @@ public class Shooter extends SubsystemBase {
 
     public boolean isVelocityWithinTolerance() {
         return motors.stream().allMatch(motor -> {
-            final boolean isInVelocityMode = motor.getAppliedControl().equals(velocityRequest);
+            final boolean isInVelocityMode = motor.getAppliedControl() instanceof VelocityVoltage;
             final AngularVelocity currentVelocity = motor.getVelocity().getValue();
             final AngularVelocity targetVelocity = velocityRequest.getVelocityMeasure();
             return isInVelocityMode && currentVelocity.isNear(targetVelocity, kVelocityTolerance);
@@ -137,8 +135,8 @@ public class Shooter extends SubsystemBase {
         builder.addDoubleProperty(name + " Supply Current", () -> motor.getSupplyCurrent().getValue().in(Amps), null);
     }
 
-     public static Shooter getInstance(){
-        if (shooter == null){
+    public static Shooter getInstance() {
+        if (shooter == null) {
             shooter = new Shooter();
         }
         return shooter;

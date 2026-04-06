@@ -109,8 +109,8 @@
       "minWaypointRelativePos": 1.4800810263335618,
       "maxWaypointRelativePos": 3.4571235651586756,
       "constraints": {
-        "maxVelocity": 3.0,
-        "maxAcceleration": 1.0,
+        "maxVelocity": 3.5,
+        "maxAcceleration": 1.5,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -134,22 +134,11 @@
     {
       "name": "IntakeRollerIntake",
       "waypointRelativePos": 1.5475638051044127,
-      "endWaypointRelativePos": 3.431554524361943,
+      "endWaypointRelativePos": 3.99,
       "command": {
         "type": "named",
         "data": {
           "name": "IntakeRollerIntake"
-        }
-      }
-    },
-    {
-      "name": "SetShooter",
-      "waypointRelativePos": 2.44159351789332,
-      "endWaypointRelativePos": 3.9048723897911857,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "SetShooter"
         }
       }
     }
