@@ -7,7 +7,6 @@ import static edu.wpi.first.units.Units.Volts;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
-import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
@@ -20,7 +19,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import org.mort11.configs.constants.PhysicalConstants;
 import org.mort11.configs.constants.PortConstants;
-import com.ctre.phoenix6.signals.MotorAlignmentValue;
 
 public class IntakeRoller extends SubsystemBase {
 
@@ -44,21 +42,34 @@ public class IntakeRoller extends SubsystemBase {
     private final TalonFX rollerMotorLeader;
     private final TalonFX rollerMotorFollower;
 
-    private final VoltageOut rollerVoltageRequest = new VoltageOut(0);
-    private final Follower followerRequest;
+    private final VoltageOut leaderVoltageRequest   = new VoltageOut(0);
+    private final VoltageOut followerVoltageRequest = new VoltageOut(0).withEnableFOC(false);
 
     public IntakeRoller() {
         rollerMotorLeader   = new TalonFX(PortConstants.Intake.INTAKE_ROLLER_LEADER);
         rollerMotorFollower = new TalonFX(PortConstants.Intake.INTAKE_ROLLER_FOLLOWER);
 
-    followerRequest = new Follower(rollerMotorLeader.getDeviceID(), MotorAlignmentValue.Opposed); //change this if not spinning correcttly 
-    configureRollerMotors();
-
+        configureRollerMotors();
         SmartDashboard.putData(this);
     }
 
     private void configureRollerMotors() {
-        final TalonFXConfiguration config = new TalonFXConfiguration()
+        final TalonFXConfiguration leaderConfig = new TalonFXConfiguration()
+            .withMotorOutput(
+                new MotorOutputConfigs()
+                    .withInverted(InvertedValue.CounterClockwise_Positive)
+                    .withNeutralMode(NeutralModeValue.Coast)
+            )
+            .withCurrentLimits(
+                new CurrentLimitsConfigs()
+                    .withStatorCurrentLimit(Amps.of(PhysicalConstants.Intake.ROLLER_STATOR_CURRENT_LIMIT))
+                    .withStatorCurrentLimitEnable(true)
+                    .withSupplyCurrentLimit(Amps.of(PhysicalConstants.Intake.ROLLER_SUPPLY_CURRENT_LIMIT))
+                    .withSupplyCurrentLimitEnable(true)
+            );
+
+        // Inverted to match leader's physical spin direction (motors face opposite directions)
+        final TalonFXConfiguration followerConfig = new TalonFXConfiguration()
             .withMotorOutput(
                 new MotorOutputConfigs()
                     .withInverted(InvertedValue.Clockwise_Positive)
@@ -66,29 +77,23 @@ public class IntakeRoller extends SubsystemBase {
             )
             .withCurrentLimits(
                 new CurrentLimitsConfigs()
-                    .withStatorCurrentLimit(
-                        Amps.of(PhysicalConstants.Intake.ROLLER_STATOR_CURRENT_LIMIT)
-                    )
+                    .withStatorCurrentLimit(Amps.of(PhysicalConstants.Intake.ROLLER_STATOR_CURRENT_LIMIT))
                     .withStatorCurrentLimitEnable(true)
-                    .withSupplyCurrentLimit(
-                        Amps.of(PhysicalConstants.Intake.ROLLER_SUPPLY_CURRENT_LIMIT)
-                    )
+                    .withSupplyCurrentLimit(Amps.of(PhysicalConstants.Intake.ROLLER_SUPPLY_CURRENT_LIMIT))
                     .withSupplyCurrentLimitEnable(true)
             );
 
-        rollerMotorLeader.getConfigurator().apply(config);
-        rollerMotorFollower.getConfigurator().apply(config);
+        rollerMotorLeader.getConfigurator().apply(leaderConfig);
+        rollerMotorFollower.getConfigurator().apply(followerConfig);
     }
 
     @Override
     public void periodic() {
-        rollerMotorFollower.setControl(followerRequest);
     }
 
     public void setRoller(Speed speed) {
-        rollerMotorLeader.setControl(
-            rollerVoltageRequest.withOutput(speed.voltage())
-        );
+        rollerMotorLeader.setControl(leaderVoltageRequest.withOutput(speed.voltage()));
+        rollerMotorFollower.setControl(followerVoltageRequest.withOutput(speed.voltage()));
     }
 
     public void stop() {
@@ -100,9 +105,7 @@ public class IntakeRoller extends SubsystemBase {
 
         builder.addStringProperty(
             "Command",
-            () -> getCurrentCommand() != null
-                ? getCurrentCommand().getName()
-                : "null",
+            () -> getCurrentCommand() != null ? getCurrentCommand().getName() : "null",
             null
         );
 

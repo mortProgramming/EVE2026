@@ -5,6 +5,8 @@ import static org.mort11.configs.constants.PhysicalConstants.Field.BLUE_HUB_Y;
 import static org.mort11.configs.constants.PhysicalConstants.Field.RED_HUB_X;
 import static org.mort11.configs.constants.PhysicalConstants.Field.RED_HUB_Y;
 
+import java.util.Optional;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -20,14 +22,16 @@ public class OdometryHelper extends SubsystemBase {
 
     private final CommandSwerveDrivetrain drivetrain;
     private final Field2d field;
-    private final Limelight limelightThree;
+    private final Limelight limelightFront;
+    private final Limelight limelightBack;
 
     private final Translation2d Redhub = new Translation2d(RED_HUB_X, RED_HUB_Y);
     private final Translation2d Bluehub = new Translation2d(BLUE_HUB_X, BLUE_HUB_Y);
 
-    public OdometryHelper(CommandSwerveDrivetrain drivetrain, Limelight limelightThree) {
+    public OdometryHelper(CommandSwerveDrivetrain drivetrain, Limelight limelightFront, Limelight limelightBack) {
         this.drivetrain = drivetrain;
-        this.limelightThree = limelightThree;
+        this.limelightFront = limelightFront;
+        this.limelightBack = limelightBack;
         this.field = new Field2d();
 
         SmartDashboard.putData("Field", field);
@@ -37,19 +41,30 @@ public class OdometryHelper extends SubsystemBase {
     public void periodic() {
         setFieldObj();
 
-        // FIX 1: Update limelight robot orientation BEFORE fusing vision measurements
-        // so MegaTag2 has the correct yaw when it estimates pose
         Vision.updateRobotOrientation(drivetrain);
 
-        limelightThree.getMeasurement(drivetrain.getState().Pose).ifPresent(measurement -> {
-            drivetrain.addVisionMeasurement(
-                measurement.poseEstimate.pose,
-                measurement.poseEstimate.timestampSeconds,
-                measurement.standardDeviations
-            );
-        });
-
         Pose2d robotPose = drivetrain.getState().Pose;
+
+        Optional<Limelight.Measurement> frontMeasurement = limelightFront.getMeasurement(robotPose);
+
+        if (frontMeasurement.isPresent()) {
+            Limelight.Measurement m = frontMeasurement.get();
+            drivetrain.addVisionMeasurement(
+                m.poseEstimate.pose,
+                m.poseEstimate.timestampSeconds,
+                m.standardDeviations
+            );
+            SmartDashboard.putString("Active Limelight", "Front");
+        } else {
+            limelightBack.getMeasurement(robotPose).ifPresent(m -> {
+                drivetrain.addVisionMeasurement(
+                    m.poseEstimate.pose,
+                    m.poseEstimate.timestampSeconds,
+                    m.standardDeviations
+                );
+            });
+            SmartDashboard.putString("Active Limelight", "Back (fallback)");
+        }
 
         SmartDashboard.putNumber("Robot X", robotPose.getX());
         SmartDashboard.putNumber("Robot Y", robotPose.getY());
@@ -61,7 +76,6 @@ public class OdometryHelper extends SubsystemBase {
         SmartDashboard.putNumber("Distance from hub", getDistanceToHub());
     }
 
-    // FIX 2: getDistanceToTarget() now respects alliance color instead of always using Red hub
     public double getDistanceToTarget() {
         Pose2d pose = drivetrain.getState().Pose;
         if (isBlue()) {

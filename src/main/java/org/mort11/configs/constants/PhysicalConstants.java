@@ -78,12 +78,12 @@ public final class PhysicalConstants {
     //pos in degrees
     	public static final double HOMED_DEG = 0;
     	public static final double STOWED_DEG = 5;
-    	public static final double INTAKE_DEG = -68;
+    	public static final double INTAKE_DEG = -92;
     	public static final double AGITATE_DEG = -10;
 
     //roller speed
-    	public static final double INTAKE_SPEED = 1;
-		public static final double OUTTAKE_SPEED = -1;
+    	public static final double INTAKE_SPEED = -1;
+		public static final double OUTTAKE_SPEED = 1;
 	}
 
     public static final class Shooter {
