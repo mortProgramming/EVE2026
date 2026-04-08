@@ -64,16 +64,16 @@
     },
     {
       "anchor": {
-        "x": 1.4901426533523536,
-        "y": 5.529415121255349
+        "x": 2.6094457831325304,
+        "y": 5.302614457831326
       },
       "prevControl": {
-        "x": 4.489012048192771,
-        "y": 5.204265060240964
+        "x": 5.221168674698795,
+        "y": 5.073132530120482
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "LeftInOutEnd"
+      "linkedName": null
     }
   ],
   "rotationTargets": [
@@ -151,7 +151,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -25.989233583833002
+    "rotation": -31.78091509298342
   },
   "reversed": false,
   "folder": "Blue Side Paths",

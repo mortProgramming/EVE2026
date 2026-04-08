@@ -11,12 +11,6 @@
           }
         },
         {
-          "type": "path",
-          "data": {
-            "pathName": "Right In-out x 2"
-          }
-        },
-        {
           "type": "named",
           "data": {
             "name": "LockOn"
@@ -39,6 +33,18 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Right In-out x 2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "LockOn"
           }
         }
       ]
