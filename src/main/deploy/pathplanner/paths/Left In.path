@@ -16,60 +16,76 @@
     },
     {
       "anchor": {
-        "x": 5.966918687589158,
-        "y": 4.960114122681883
+        "x": 6.419771754636234,
+        "y": 4.817788873038516
       },
       "prevControl": {
-        "x": 5.725727514620193,
-        "y": 5.557848768735406
+        "x": 6.178580581667269,
+        "y": 5.415523519092039
       },
       "nextControl": {
-        "x": 6.218256036986748,
-        "y": 4.337234604609595
+        "x": 6.671109104033825,
+        "y": 4.194909354966228
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.105520684736091,
-        "y": 3.0969472182596305
+        "x": 7.830085592011411,
+        "y": 2.462952924393724
       },
       "prevControl": {
-        "x": 6.001821889555367,
-        "y": 2.9767423989825224
+        "x": 6.7263867968306865,
+        "y": 2.3427481051166157
       },
       "nextControl": {
-        "x": 8.58869294784083,
-        "y": 3.258480831073017
+        "x": 9.31325785511615,
+        "y": 2.6244865372071104
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.532496433666189,
-        "y": 5.814065620542083
-      },
-      "prevControl": {
-        "x": 8.037448197891043,
-        "y": 5.802844470225976
-      },
-      "nextControl": {
-        "x": 6.057255469810766,
-        "y": 5.8468487530722015
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 2.6094457831325304,
-        "y": 5.302614457831326
-      },
-      "prevControl": {
-        "x": 5.138844507845934,
+        "x": 9.408601997146931,
         "y": 5.529415121255349
+      },
+      "prevControl": {
+        "x": 9.631175638315641,
+        "y": 5.076024370726495
+      },
+      "nextControl": {
+        "x": 9.059258202567758,
+        "y": 6.241041369472182
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.02416547788873,
+        "y": 6.422182596291013
+      },
+      "prevControl": {
+        "x": 8.903994293865905,
+        "y": 6.745649072753211
+      },
+      "nextControl": {
+        "x": 6.9910730420103295,
+        "y": 6.042369200747483
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.02416547788873,
+        "y": 4.080285306704707
+      },
+      "prevControl": {
+        "x": 7.209029957203994,
+        "y": 4.85660485021398
       },
       "nextControl": null,
       "isLocked": false,
@@ -116,20 +132,9 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "IntakeDown",
-      "waypointRelativePos": 0.6049966239027796,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "IntakeDown"
-        }
-      }
-    },
-    {
       "name": "IntakeRollerIntake",
-      "waypointRelativePos": 0.615800135043907,
-      "endWaypointRelativePos": 3.431554524361943,
+      "waypointRelativePos": 0.5131667792032406,
+      "endWaypointRelativePos": 5.0,
       "command": {
         "type": "named",
         "data": {
@@ -138,13 +143,13 @@
       }
     },
     {
-      "name": "SetShooter",
-      "waypointRelativePos": 2.44159351789332,
-      "endWaypointRelativePos": 3.9048723897911857,
+      "name": "IntakeDown",
+      "waypointRelativePos": 0.6049966239027796,
+      "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "SetShooter"
+          "name": "IntakeDown"
         }
       }
     }
@@ -159,7 +164,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -31.78091509298342
+    "rotation": -99.76177477504228
   },
   "reversed": false,
   "folder": "Blue Side Paths",
