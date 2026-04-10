@@ -182,7 +182,7 @@ public class RobotContainer {
         endeffectorController.leftTrigger().whileTrue(new PrepareShotCommand(shooter, hood, odometry));        
 
     }
-
+        
     public Command getPathPlannerCommand() {
         try {
             PathPlannerPath path = PathPlannerPath.fromPathFile("DriveVertical");
