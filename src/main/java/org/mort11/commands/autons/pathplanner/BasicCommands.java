@@ -35,6 +35,7 @@ public class BasicCommands {
         NamedCommands.registerCommand("IntakeUp", new SetArm(intake, IntakeArm.Position.HOMED));
         NamedCommands.registerCommand("IntakeDown", new SetArm(intake, IntakeArm.Position.INTAKE));
         NamedCommands.registerCommand("IntakeAgitate", new AgitateArm(intake));
+        NamedCommands.registerCommand("IntakeAgitateShort", new AgitateArm(intake).withTimeout(3.5));
         NamedCommands.registerCommand("WaitIntakeAgitate", new AgitateArm(intake).until(prepareShot::isReadyToShoot)); 
         
 
@@ -54,13 +55,13 @@ public class BasicCommands {
                 //wait until ready, then feed 
                 new WaitUntilCommand(prepareShot::isReadyToShoot)
                     .withTimeout(1)
-                    .andThen(new SetFeeder(5500).withTimeout(6)),
+                    .andThen(new SetFeeder(5500).withTimeout(4)),
                 prepareShot  //shooter + hood active the entire time including during the feed
             )
         );
 
         //drive commands
-        NamedCommands.registerCommand("LockOn",(new RotateToHub(odometry)).withTimeout(2));
+        NamedCommands.registerCommand("LockOn",(new RotateToHub(odometry)).withTimeout(2.1));
 
 
     }

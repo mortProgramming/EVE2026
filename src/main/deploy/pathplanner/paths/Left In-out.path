@@ -128,10 +128,21 @@
           "name": "IntakeRollerIntake"
         }
       }
+    },
+    {
+      "name": "SetShooter",
+      "waypointRelativePos": 3.3071960297766725,
+      "endWaypointRelativePos": 4.0,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "SetShooter"
+        }
+      }
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 6.0,
+    "maxVelocity": 5.0,
     "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
