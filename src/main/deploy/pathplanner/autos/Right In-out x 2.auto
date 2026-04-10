@@ -25,12 +25,6 @@
                 "data": {
                   "name": "PrepareAndShoot"
                 }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "IntakeAgitate"
-                }
               }
             ]
           }

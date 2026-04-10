@@ -105,7 +105,7 @@ public class Vision extends SubsystemBase {
     public void periodic() {
         SmartDashboard.putNumber("Tag ID", getTagId());
         SmartDashboard.putNumber("X Degrees", getTX());
-        SmartDashboard.putBoolean("Tag Detected?", hasTag());
+            SmartDashboard.putBoolean("Tag Detected?", hasTag());
         
         // Only push telemetry as "not throttled" when the robot is actually enabled.
         // When disabled, disabledPeriodic() handles this with throttled=true.

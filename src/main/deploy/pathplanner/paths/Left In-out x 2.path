@@ -3,19 +3,31 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.4901426533523536,
-        "y": 5.529415121255349
+        "x": 2.3471807228915655,
+        "y": 5.44467469879518
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.636650602409638,
-        "y": 5.597662650602409
+        "x": 4.49368867194885,
+        "y": 5.51292222814224
       },
       "isLocked": false,
       "linkedName": "LeftInOutEnd"
     },
     {
       "anchor": {
+<<<<<<< HEAD
+        "x": 6.536219686162624,
+        "y": 5.089500713266761
+      },
+      "prevControl": {
+        "x": 6.2950285131936585,
+        "y": 5.687235359320284
+      },
+      "nextControl": {
+        "x": 6.787557035560214,
+        "y": 4.466621195194473
+=======
         "x": 5.966918687589158,
         "y": 4.960114122681883
       },
@@ -26,12 +38,25 @@
       "nextControl": {
         "x": 6.218256036986748,
         "y": 4.337234604609595
+>>>>>>> 2f09beb009774c3912b6cbd951a878f6d82a6830
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
+<<<<<<< HEAD
+        "x": 7.4548644793152645,
+        "y": 3.4074750356633388
+      },
+      "prevControl": {
+        "x": 6.35116568413454,
+        "y": 3.2872702163862306
+      },
+      "nextControl": {
+        "x": 8.938036742420003,
+        "y": 3.5690086484767254
+=======
         "x": 7.105520684736091,
         "y": 3.0969472182596305
       },
@@ -42,12 +67,25 @@
       "nextControl": {
         "x": 8.58869294784083,
         "y": 3.258480831073017
+>>>>>>> 2f09beb009774c3912b6cbd951a878f6d82a6830
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
+<<<<<<< HEAD
+        "x": 7.752453637660485,
+        "y": 5.839942938659058
+      },
+      "prevControl": {
+        "x": 8.235286569579774,
+        "y": 5.691704757806645
+      },
+      "nextControl": {
+        "x": 6.2774465049928665,
+        "y": 6.292796005706134
+=======
         "x": 7.532496433666189,
         "y": 5.814065620542083
       },
@@ -58,6 +96,7 @@
       "nextControl": {
         "x": 6.057255469810766,
         "y": 5.8468487530722015
+>>>>>>> 2f09beb009774c3912b6cbd951a878f6d82a6830
       },
       "isLocked": false,
       "linkedName": null
@@ -68,8 +107,13 @@
         "y": 5.302614457831326
       },
       "prevControl": {
+<<<<<<< HEAD
+        "x": 5.177660485021397,
+        "y": 5.5811697574893016
+=======
         "x": 5.138844507845934,
         "y": 5.529415121255349
+>>>>>>> 2f09beb009774c3912b6cbd951a878f6d82a6830
       },
       "nextControl": null,
       "isLocked": false,
@@ -111,10 +155,34 @@
         "nominalVoltage": 12.0,
         "unlimited": false
       }
+    },
+    {
+      "name": "Bump 1",
+      "minWaypointRelativePos": 0.2758620689655161,
+      "maxWaypointRelativePos": 0.8369374634716555,
+      "constraints": {
+        "maxVelocity": 3.0,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
     }
   ],
   "pointTowardsZones": [],
   "eventMarkers": [
+    {
+      "name": "IntakeRollerIntake",
+      "waypointRelativePos": 0.668614845119822,
+      "endWaypointRelativePos": 3.431554524361943,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "IntakeRollerIntake"
+        }
+      }
+    },
     {
       "name": "IntakeDown",
       "waypointRelativePos": 0.6049966239027796,
@@ -127,6 +195,8 @@
       }
     },
     {
+<<<<<<< HEAD
+=======
       "name": "IntakeRollerIntake",
       "waypointRelativePos": 0.615800135043907,
       "endWaypointRelativePos": 3.431554524361943,
@@ -138,6 +208,7 @@
       }
     },
     {
+>>>>>>> 2f09beb009774c3912b6cbd951a878f6d82a6830
       "name": "SetShooter",
       "waypointRelativePos": 2.44159351789332,
       "endWaypointRelativePos": 3.9048723897911857,
@@ -165,7 +236,7 @@
   "folder": "Blue Side Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -25.989233583833002
+    "rotation": -43.879834202401746
   },
   "useDefaultConstraints": false
 }
