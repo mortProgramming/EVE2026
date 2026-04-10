@@ -88,7 +88,7 @@ public class OdometryHelper extends SubsystemBase {
         SmartDashboard.putNumber("Distance To Target", getDistanceToTarget());
         SmartDashboard.putNumber("Distance from hub", getDistanceToHub());
     }
-}
+
 
     public double getDistanceToTarget() {
         Pose2d pose = drivetrain.getState().Pose;
