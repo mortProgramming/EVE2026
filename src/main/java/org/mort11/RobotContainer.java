@@ -25,6 +25,7 @@ import org.mort11.commands.actions.endeffector.pid.PrepareShotCommand;
 import org.mort11.commands.actions.endeffector.pid.SetArm;
 import org.mort11.commands.actions.endeffector.pid.SetFeeder;
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
+import org.mort11.commands.actions.endeffector.pid.ShootFar;
 import org.mort11.commands.autons.pathplanner.BasicCommands;
 import org.mort11.commands.autons.timed.Taxi;
 // import org.mort11.commands.autons.timed.TaxiCenterDepot;
@@ -174,14 +175,14 @@ public class RobotContainer {
 
         //shooter
         //endeffectorController.leftTrigger().whileTrue(new PercentShoot(shooter, 0.8));
-        endeffectorController.y().whileTrue(new SetShooter(4000));
+        //endeffectorController.y().whileTrue(new SetShooter(4000));
 
         //hood
         endeffectorController.povLeft().whileTrue(new MoveHood(hood, 1.0));
         endeffectorController.povRight().whileTrue(new MoveHood(hood, -1.0));
 
-        endeffectorController.leftTrigger().whileTrue(new PrepareShotCommand(shooter, hood, odometry));        
-
+        endeffectorController.leftTrigger().whileTrue(new PrepareShotCommand(shooter, hood, odometry));   
+        endeffectorController.y().whileTrue(new ShootFar(hood, 5000, 0.10));
     }
 
     public Command getPathPlannerCommand() {
