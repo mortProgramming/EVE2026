@@ -47,6 +47,8 @@ public class OdometryHelper extends SubsystemBase {
 
         Optional<Limelight.Measurement> frontMeasurement = limelightFront.getMeasurement(robotPose);
 
+        Optional<Limelight.Measurement> backMeasurement = limelightBack.getMeasurement(robotPose);
+
         if (frontMeasurement.isPresent()) {
             Limelight.Measurement m = frontMeasurement.get();
             drivetrain.addVisionMeasurement(
@@ -55,16 +57,27 @@ public class OdometryHelper extends SubsystemBase {
                 m.standardDeviations
             );
             SmartDashboard.putString("Active Limelight", "Front");
-        } else {
-            limelightBack.getMeasurement(robotPose).ifPresent(m -> {
-                drivetrain.addVisionMeasurement(
-                    m.poseEstimate.pose,
-                    m.poseEstimate.timestampSeconds,
-                    m.standardDeviations
-                );
-            });
-            SmartDashboard.putString("Active Limelight", "Back (fallback)");
-        }
+        } 
+        // else {
+        //     Limelight.Measurement m = backMeasurement.get();
+        //     drivetrain.addVisionMeasurement(
+        //         m.poseEstimate.pose,
+        //         m.poseEstimate.timestampSeconds,
+        //         m.standardDeviations
+        //     );
+        //     SmartDashboard.putString("Active Limelight", "Back (fallback)");
+        // }
+        //below is original else (wasnt working)
+        // else {
+        //     limelightBack.getMeasurement(robotPose).ifPresent(m -> {
+        //         drivetrain.addVisionMeasurement(
+        //             m.poseEstimate.pose,
+        //             m.poseEstimate.timestampSeconds,
+        //             m.standardDeviations
+        //         );
+        //     });
+        //     SmartDashboard.putString("Active Limelight", "Back (fallback)");
+        // }  commented out to see if the auto thing breaks here cause the other pose method for limelight back is commented out
 
         SmartDashboard.putNumber("Robot X", robotPose.getX());
         SmartDashboard.putNumber("Robot Y", robotPose.getY());

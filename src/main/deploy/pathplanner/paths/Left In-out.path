@@ -16,60 +16,76 @@
     },
     {
       "anchor": {
-        "x": 6.549158345221112,
-        "y": 5.917574893009986
+        "x": 6.704422253922965,
+        "y": 5.788188302425108
       },
       "prevControl": {
-        "x": 5.9829211968723435,
-        "y": 5.609621356188726
+        "x": 6.086790900439805,
+        "y": 5.6038207342211805
       },
       "nextControl": {
-        "x": 7.286661911554923,
-        "y": 6.31867332382311
+        "x": 7.571312410841653,
+        "y": 6.046961483594864
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 8.3,
-        "y": 7.4572753209700435
+        "x": 9.072196861626248,
+        "y": 5.788188302425108
       },
       "prevControl": {
-        "x": 8.305853528300952,
-        "y": 7.707206783988267
+        "x": 8.67404023027119,
+        "y": 6.368898108448367
       },
       "nextControl": {
-        "x": 8.27,
-        "y": 6.176348074179743
+        "x": 9.65215623559823,
+        "y": 4.942319945506272
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 8.3,
-        "y": 4.947175463623396
+        "x": 8.248144578313253,
+        "y": 3.1389277108433737
       },
       "prevControl": {
-        "x": 8.805001579895634,
-        "y": 4.9384804816723005
+        "x": 8.671622685351977,
+        "y": 2.863666941268204
       },
       "nextControl": {
-        "x": 5.294108416547789,
-        "y": 4.998930099857348
+        "x": 7.592481927710843,
+        "y": 3.56510843373494
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.4901426533523536,
-        "y": 5.529415121255349
+        "x": 6.445072289156626,
+        "y": 4.701590361445783
       },
       "prevControl": {
-        "x": 4.647175463623395,
-        "y": 6.202225392296718
+        "x": 7.067951807228916,
+        "y": 4.47210843373494
+      },
+      "nextControl": {
+        "x": 5.4402905859284845,
+        "y": 5.071773094214045
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.3471807228915655,
+        "y": 5.44467469879518
+      },
+      "prevControl": {
+        "x": 5.50421353316261,
+        "y": 6.117484969836549
       },
       "nextControl": null,
       "isLocked": false,
@@ -82,22 +98,35 @@
       "rotationDegrees": -90.0
     },
     {
-      "waypointRelativePos": 3.1215351812366694,
-      "rotationDegrees": -90.0
+      "waypointRelativePos": 4.35,
+      "rotationDegrees": -28.580818406288834
     },
     {
-      "waypointRelativePos": 3.488272921108698,
-      "rotationDegrees": 135.77159254312198
+      "waypointRelativePos": 4.703153988868267,
+      "rotationDegrees": -29.963866978057517
     }
   ],
   "constraintZones": [
     {
       "name": "Intaking",
       "minWaypointRelativePos": 1.4800810263335618,
-      "maxWaypointRelativePos": 3.0573936529372023,
+      "maxWaypointRelativePos": 3.1,
       "constraints": {
         "maxVelocity": 4.0,
         "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    },
+    {
+      "name": "Bump Back",
+      "minWaypointRelativePos": 4.258695652173918,
+      "maxWaypointRelativePos": 4.832608695652169,
+      "constraints": {
+        "maxVelocity": 3.0,
+        "maxAcceleration": 2.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -128,10 +157,21 @@
           "name": "IntakeRollerIntake"
         }
       }
+    },
+    {
+      "name": "SetShooter",
+      "waypointRelativePos": 3.2,
+      "endWaypointRelativePos": 3.99,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "SetShooter"
+        }
+      }
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 6.0,
+    "maxVelocity": 4.0,
     "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -140,7 +180,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -25.989233583833002
+    "rotation": -43.879834202401746
   },
   "reversed": false,
   "folder": "Blue Side Paths",

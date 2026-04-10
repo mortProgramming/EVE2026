@@ -209,7 +209,9 @@ public class RobotContainer {
         
         autoChooser.addOption("Left Sweep", new PathPlannerAuto("Blue Left Right Sweep"));
         autoChooser.addOption("Left In-out", new PathPlannerAuto("Left In-out"));
+        autoChooser.addOption("Left In-out x 2", new PathPlannerAuto("Left In-out x 2"));
         autoChooser.addOption("Right In-out", new PathPlannerAuto("Right In-out"));
+        autoChooser.addOption("Right In-out x 2", new PathPlannerAuto("Right In-out x 2"));
         autoChooser.addOption("Right Sweep", new PathPlannerAuto("Right Left Sweep"));
         autoChooser.addOption("Left Close Sweep", new PathPlannerAuto("Closer Left Sweep"));
         autoChooser.addOption("Right Close Sweep", new PathPlannerAuto("Closer Right Sweep"));
