@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 
-public class BasicCommands {
+public class PathplannerCommands {
 
     public static void setCommands(OdometryHelper odometry, Shooter shooter, IntakeArm intake, IntakeRoller intakeRoller, Floor floor, Feeder feeder, Hood hood) {
         // NamedCommands.registerCommand("Taxi", new Taxi());

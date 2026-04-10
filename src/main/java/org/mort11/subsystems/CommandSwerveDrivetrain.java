@@ -2,7 +2,7 @@ package org.mort11.subsystems;
 
 import static edu.wpi.first.units.Units.*;
 import static org.mort11.configs.constants.TunerConstants.*;
-import static org.mort11.configs.constants.PhysicalConstants.CommandSwerveDrivetrain.*;
+import static org.mort11.configs.constants.PhysicalConstants.CommandSwerveDrivetrainPhysicalConstants.*;
 
 import java.util.Optional;
 import java.util.function.Supplier;

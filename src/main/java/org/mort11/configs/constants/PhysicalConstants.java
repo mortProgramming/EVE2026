@@ -18,7 +18,7 @@ public final class PhysicalConstants {
 		public static final AngularVelocity kFreeSpeed = RotationsPerSecond.of(100.0); // 6000 RPM at 12V
 	}
 
-    public static final class CommandSwerveDrivetrain {
+    public static final class CommandSwerveDrivetrainPhysicalConstants {
 		public static final double DRIVETRAIN_TRACKWIDTH_METERS = Units.inchesToMeters(20.50);
 		public static final double DRIVETRAIN_WHEELBASE_METERS = Units.inchesToMeters(21.75);
 

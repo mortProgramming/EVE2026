@@ -3,7 +3,7 @@ package org.mort11.configs.constants;
 import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 
 public final class PIDConstants {
-    public static final class CommandSwerveDrivetrain {
+    public static final class CommandSwerveDrivetrainPIDConstants {
 
     }
     

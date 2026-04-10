@@ -26,7 +26,7 @@ import org.mort11.commands.actions.endeffector.pid.SetArm;
 import org.mort11.commands.actions.endeffector.pid.SetFeeder;
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.commands.actions.endeffector.pid.ShootFar;
-import org.mort11.commands.autons.pathplanner.BasicCommands;
+import org.mort11.commands.autons.pathplanner.PathplannerCommands;
 import org.mort11.commands.autons.timed.Taxi;
 // import org.mort11.commands.autons.timed.TaxiCenterDepot;
 // import org.mort11.commands.autons.timed.TaxiLSide;
@@ -79,7 +79,8 @@ public class RobotContainer {
     private static final CommandXboxController endeffectorController = new CommandXboxController(ENDEFFECTOR_CONTROLLER);
     private static final CommandXboxController manualController = new CommandXboxController(MANUAL_CONTROLLER);
 
-    public final static CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
+    public final static CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain(); //universal drivetrain instance
+    
     private final OdometryHelper odometry = new OdometryHelper(drivetrain, limelightThree, limelightBack);
 
     private final Shooter shooter = new Shooter();
@@ -95,7 +96,7 @@ public class RobotContainer {
 
     public RobotContainer() {
         drivetrain.configureAutoBuilder();
-        BasicCommands.setCommands(odometry, shooter, intakeArm, intakeRoller, floor, feeder, hood);
+        PathplannerCommands.setCommands(odometry, shooter, intakeArm, intakeRoller, floor, feeder, hood);
         configureBindings();
         configureAuto();
     }

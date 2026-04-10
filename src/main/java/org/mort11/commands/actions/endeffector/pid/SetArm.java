@@ -18,15 +18,11 @@ public class SetArm extends Command {
 
     @Override
     public void initialize() {
-
         arm.setPivot(position);
-
     }
 
     @Override
     public boolean isFinished() {
-
         return arm.isPositionWithinTolerance();
-
     }
 }
