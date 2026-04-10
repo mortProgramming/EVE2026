@@ -3,6 +3,7 @@
   "waypoints": [
     {
       "anchor": {
+<<<<<<< HEAD
         "x": 2.3471807228915655,
         "y": 5.44467469879518
       },
@@ -10,12 +11,22 @@
       "nextControl": {
         "x": 4.696638554216866,
         "y": 5.969204819277109
+=======
+        "x": 1.4901426533523536,
+        "y": 5.529415121255349
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.636650602409638,
+        "y": 5.597662650602409
+>>>>>>> 2f09beb009774c3912b6cbd951a878f6d82a6830
       },
       "isLocked": false,
       "linkedName": "LeftInOutEnd"
     },
     {
       "anchor": {
+<<<<<<< HEAD
         "x": 8.86009638554217,
         "y": 5.44467469879518
       },
@@ -26,12 +37,25 @@
       "nextControl": {
         "x": 9.647664117896381,
         "y": 4.717689099698985
+=======
+        "x": 6.419771754636234,
+        "y": 4.817788873038516
+      },
+      "prevControl": {
+        "x": 6.178580581667269,
+        "y": 5.415523519092039
+      },
+      "nextControl": {
+        "x": 6.671109104033825,
+        "y": 4.194909354966228
+>>>>>>> 2f09beb009774c3912b6cbd951a878f6d82a6830
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
+<<<<<<< HEAD
         "x": 8.86009638554217,
         "y": 2.2756385542168687
       },
@@ -42,12 +66,25 @@
       "nextControl": {
         "x": 8.266413093227305,
         "y": 1.3920169098412605
+=======
+        "x": 7.830085592011411,
+        "y": 2.462952924393724
+      },
+      "prevControl": {
+        "x": 6.7263867968306865,
+        "y": 2.3427481051166157
+      },
+      "nextControl": {
+        "x": 9.31325785511615,
+        "y": 2.6244865372071104
+>>>>>>> 2f09beb009774c3912b6cbd951a878f6d82a6830
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
+<<<<<<< HEAD
         "x": 7.723614457831324,
         "y": 2.9750120481927707
       },
@@ -58,30 +95,97 @@
       "nextControl": {
         "x": 7.483204819277106,
         "y": 3.9038674698795175
+=======
+        "x": 9.408601997146931,
+        "y": 5.529415121255349
+      },
+      "prevControl": {
+        "x": 9.631175638315641,
+        "y": 5.076024370726495
+      },
+      "nextControl": {
+        "x": 9.059258202567758,
+        "y": 6.241041369472182
+>>>>>>> 2f09beb009774c3912b6cbd951a878f6d82a6830
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
+<<<<<<< HEAD
         "x": 7.83289156626506,
         "y": 5.44467469879518
       },
       "prevControl": {
         "x": 7.428566265060241,
         "y": 4.450253012048193
+=======
+        "x": 8.02416547788873,
+        "y": 6.422182596291013
+      },
+      "prevControl": {
+        "x": 8.903994293865905,
+        "y": 6.745649072753211
+      },
+      "nextControl": {
+        "x": 6.9910730420103295,
+        "y": 6.042369200747483
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.02416547788873,
+        "y": 4.080285306704707
+      },
+      "prevControl": {
+        "x": 7.209029957203994,
+        "y": 4.85660485021398
+>>>>>>> 2f09beb009774c3912b6cbd951a878f6d82a6830
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
+<<<<<<< HEAD
   "rotationTargets": [],
   "constraintZones": [
     {
       "name": "Intaking",
       "minWaypointRelativePos": 1.25,
       "maxWaypointRelativePos": 1.8,
+=======
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.7164179104477534,
+      "rotationDegrees": -26.17699832907678
+    },
+    {
+      "waypointRelativePos": 1.321961620469077,
+      "rotationDegrees": -72.3400112321519
+    },
+    {
+      "waypointRelativePos": 2.2174840085287637,
+      "rotationDegrees": 63.73584588632965
+    },
+    {
+      "waypointRelativePos": 2.8912579957355704,
+      "rotationDegrees": 165.05719788116966
+    },
+    {
+      "waypointRelativePos": 3.6588486140724497,
+      "rotationDegrees": -175.20608924582297
+    }
+  ],
+  "constraintZones": [
+    {
+      "name": "Intaking",
+      "minWaypointRelativePos": 1.4800810263335618,
+      "maxWaypointRelativePos": 3.122214719783933,
+>>>>>>> 2f09beb009774c3912b6cbd951a878f6d82a6830
       "constraints": {
         "maxVelocity": 4.0,
         "maxAcceleration": 3.0,
@@ -90,6 +194,7 @@
         "nominalVoltage": 12.0,
         "unlimited": false
       }
+<<<<<<< HEAD
     },
     {
       "name": "Bump 1",
@@ -103,13 +208,31 @@
         "nominalVoltage": 12.0,
         "unlimited": false
       }
+=======
+>>>>>>> 2f09beb009774c3912b6cbd951a878f6d82a6830
     }
   ],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
+<<<<<<< HEAD
       "name": "IntakeDown",
       "waypointRelativePos": 0.3878260869565258,
+=======
+      "name": "IntakeRollerIntake",
+      "waypointRelativePos": 0.5131667792032406,
+      "endWaypointRelativePos": 5.0,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "IntakeRollerIntake"
+        }
+      }
+    },
+    {
+      "name": "IntakeDown",
+      "waypointRelativePos": 0.6049966239027796,
+>>>>>>> 2f09beb009774c3912b6cbd951a878f6d82a6830
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -117,6 +240,7 @@
           "name": "IntakeDown"
         }
       }
+<<<<<<< HEAD
     },
     {
       "name": "IntakeRollerIntake",
@@ -128,6 +252,8 @@
           "name": "IntakeRollerIntake"
         }
       }
+=======
+>>>>>>> 2f09beb009774c3912b6cbd951a878f6d82a6830
     }
   ],
   "globalConstraints": {
@@ -140,13 +266,21 @@
   },
   "goalEndState": {
     "velocity": 0,
+<<<<<<< HEAD
     "rotation": -31.78091509298342
+=======
+    "rotation": -99.76177477504228
+>>>>>>> 2f09beb009774c3912b6cbd951a878f6d82a6830
   },
   "reversed": false,
   "folder": "Blue Side Paths",
   "idealStartingState": {
     "velocity": 0,
+<<<<<<< HEAD
     "rotation": -43.879834202401746
+=======
+    "rotation": -25.989233583833002
+>>>>>>> 2f09beb009774c3912b6cbd951a878f6d82a6830
   },
   "useDefaultConstraints": false
 }

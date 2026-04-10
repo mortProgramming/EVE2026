@@ -27,6 +27,7 @@ public class Vision extends SubsystemBase {
     private HttpCamera limelightTwoFeed;
     private HttpCamera limelightThreeFeed;
     private HttpCamera limelightFourFeed;
+    private HttpCamera limelightBackFeed;
 
     private AprilTagFieldLayout fieldLayout;
 
@@ -34,6 +35,7 @@ public class Vision extends SubsystemBase {
     private NetworkTable cameraTableTwo;
     private NetworkTable cameraTableThree;
     private NetworkTable cameraTableFour;
+    private NetworkTable cameraTableBack;
 
     // Schmitt trigger state and thresholds for thermal throttling
     // private static final double LIMELIGHT_THROTTLE_ON_TEMP_C  = 60.0; // °C: throttle kicks in above this
@@ -47,7 +49,8 @@ public class Vision extends SubsystemBase {
         "limelight-one",
         "limelight-two",
         "limelight-three",
-        "limelight-four"
+        "limelight-four",
+        "limelight-back"
     };
 
     public static String[] getLimelights() {
@@ -61,16 +64,19 @@ public class Vision extends SubsystemBase {
         cameraTableTwo   = NetworkTableInstance.getDefault().getTable("limelight-two");
         cameraTableThree = NetworkTableInstance.getDefault().getTable("limelight-three");
         cameraTableFour  = NetworkTableInstance.getDefault().getTable("limelight-four");
+        cameraTableBack  = NetworkTableInstance.getDefault().getTable("limelight-back");
 
         limelightOneFeed   = new HttpCamera("limelight-one",   "http://limelight-one.local:5800/stream.mjpeg");
         limelightTwoFeed   = new HttpCamera("limelight-two",   "http://limelight-two.local:5800/stream.mjpeg");
         limelightThreeFeed = new HttpCamera("limelight-three", "http://limelight-three.local:5800/stream.mjpeg");
         limelightFourFeed  = new HttpCamera("limelight-four",  "http://limelight-four.local:5800/stream.mjpeg");
+        limelightBackFeed  = new HttpCamera("limelight-back", "http://limelight-back.local:5800/stream.mjpeg");
 
         CameraServer.addCamera(limelightOneFeed);
         CameraServer.addCamera(limelightTwoFeed);
         CameraServer.addCamera(limelightThreeFeed);
         CameraServer.addCamera(limelightFourFeed);
+        CameraServer.addCamera(limelightBackFeed);
 
         // In the Vision constructor, after camera setup:
         // Forward, side, up in meters (converted from inches).
@@ -116,7 +122,8 @@ public class Vision extends SubsystemBase {
         return cameraTableOne.getEntry("tv").getDouble(0) == 1
             || cameraTableTwo.getEntry("tv").getDouble(0) == 1
             || cameraTableThree.getEntry("tv").getDouble(0) == 1
-            || cameraTableFour.getEntry("tv").getDouble(0) == 1;
+            || cameraTableFour.getEntry("tv").getDouble(0) == 1
+            || cameraTableBack.getEntry("tv").getDouble(0) == 1;
     }
 
     public int getTagId() {
@@ -128,6 +135,8 @@ public class Vision extends SubsystemBase {
             return (int) cameraTableThree.getEntry("tid").getInteger(-1);
         } else if (cameraTableFour.getEntry("tv").getDouble(0) == 1) {
             return (int) cameraTableFour.getEntry("tid").getInteger(-1);
+        } else if (cameraTableBack.getEntry("tv").getDouble(0) == 1) {
+            return (int) cameraTableBack.getEntry("tid").getInteger(-1);
         }
         return -1;
     }
@@ -141,6 +150,8 @@ public class Vision extends SubsystemBase {
             return cameraTableThree.getEntry("tx").getDouble(0);
         } else if (cameraTableFour.getEntry("tv").getDouble(0) == 1) {
             return cameraTableFour.getEntry("tx").getDouble(0);
+        } else if (cameraTableBack.getEntry("tv").getDouble(0) == 1) {
+            return cameraTableBack.getEntry("tx").getDouble(0);
         }
         return 0;
     }
@@ -154,6 +165,8 @@ public class Vision extends SubsystemBase {
             return cameraTableThree.getEntry("ty").getDouble(0);
         } else if (cameraTableFour.getEntry("tv").getDouble(0) == 1) {
             return cameraTableFour.getEntry("ty").getDouble(0);
+        } else if (cameraTableBack.getEntry("tv").getDouble(0) == 1) {
+            return cameraTableBack.getEntry("ty").getDouble(0);
         }
         return 0;
     }
@@ -167,6 +180,8 @@ public class Vision extends SubsystemBase {
             return cameraTableThree.getEntry("ta").getDouble(0);
         } else if (cameraTableFour.getEntry("tv").getDouble(0) == 1) {
             return cameraTableFour.getEntry("ta").getDouble(0);
+        } else if (cameraTableBack.getEntry("tv").getDouble(0) == 1) {
+            return cameraTableBack.getEntry("ta").getDouble(0);
         }
         return 0;
     }
@@ -184,7 +199,8 @@ public class Vision extends SubsystemBase {
         if (cameraTableTwo.getEntry("tv").getDouble(0) == 1)   return cameraTableTwo;
         if (cameraTableThree.getEntry("tv").getDouble(0) == 1) return cameraTableThree;
         if (cameraTableFour.getEntry("tv").getDouble(0) == 1)  return cameraTableFour;
-        return cameraTableOne; // default fallback
+        if (cameraTableBack.getEntry("tv").getDouble(0) == 1)  return cameraTableBack;
+        return cameraTableThree; // default fallback
     }
 
     public Pose2d getRobotPosition() {
@@ -229,6 +245,7 @@ public class Vision extends SubsystemBase {
         cameraTableTwo.getEntry("ledMode").setNumber(mode);
         cameraTableThree.getEntry("ledMode").setNumber(mode);
         cameraTableFour.getEntry("ledMode").setNumber(mode);
+        cameraTableBack.getEntry("ledMode").setNumber(mode);
     }
 
     public void setRobotOrientation(double yaw, double yawRate) {
@@ -237,6 +254,7 @@ public class Vision extends SubsystemBase {
         cameraTableTwo.getEntry("robot_orientation_set").setDoubleArray(orientation);
         cameraTableThree.getEntry("robot_orientation_set").setDoubleArray(orientation);
         cameraTableFour.getEntry("robot_orientation_set").setDoubleArray(orientation);
+        cameraTableBack.getEntry("robot_orientation_set").setDoubleArray(orientation);
     }
 
     public double[] getPicturePosition() {
