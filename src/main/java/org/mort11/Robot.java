@@ -5,6 +5,7 @@
 package org.mort11;
 
 import org.mort11.subsystems.Vision;
+import org.mort11.subsystems.LimelightRewindManager;
 
 import com.ctre.phoenix6.HootAutoReplay;
 
@@ -17,6 +18,8 @@ public class Robot extends TimedRobot {
 
     private final RobotContainer m_robotContainer;
 
+    private final LimelightRewindManager m_limelightRewind;
+
     /* log and replay timestamp and joystick data */
     private final HootAutoReplay m_timeAndJoystickReplay = new HootAutoReplay()
         .withTimestampReplay()
@@ -24,12 +27,13 @@ public class Robot extends TimedRobot {
 
     public Robot() {
         m_robotContainer = new RobotContainer();
-        
+        m_limelightRewind = new LimelightRewindManager();
     }
 
     @Override
     public void robotPeriodic() {
         m_timeAndJoystickReplay.update();
+        m_limelightRewind.periodic();
         CommandScheduler.getInstance().run(); 
     }
 
@@ -77,6 +81,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        Vision.getInstance().updateLimelightTelemetry(false);
+
         if (m_autonomousCommand != null) {
         CommandScheduler.getInstance().cancel(m_autonomousCommand);
         }
