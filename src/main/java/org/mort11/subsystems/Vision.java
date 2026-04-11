@@ -86,7 +86,7 @@ public class Vision extends SubsystemBase {
             0.0  * 0.0254,   // side — (should be at 0 inches)
             25.0 * 0.0254,   // up — (about 25 inches off the floor)
             0.0,             // roll degrees: (should be 0)
-            -27.30,               // pitch degrees: (rotating up) ==> negative rotation around Y-axis). Measured about -16 degrees from onboard IMU (http://limelight-three.local:5801/)
+            -27.30,               // pitch degrees: (rotating up) ==> negative rotation around Y-axis). Read from onboard IMU (http://limelight-three.local:5801/)
             0.0              // yaw degrees: (should be 0)
         );
 
@@ -96,7 +96,7 @@ public class Vision extends SubsystemBase {
             0.0  * 0.0254,   // side — (should be at 0 inches)
             18.0 * 0.0254,   // up — (about 25 inches off the floor)
             0.0,             // roll degrees: (should be 0)
-            -24.90,             // pitch degrees: (rotating up) ==> negative rotation around Y-axis). Measured about -16 degrees from onboard IMU (http://limelight-three.local:5801/)
+            -24.90,             // pitch degrees: (rotating up) ==> negative rotation around Y-axis). Measured from onboard IMU (http://limelight-back.local:5801/)
             180
         );
     }
