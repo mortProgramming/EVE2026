@@ -1,5 +1,7 @@
+// AutoGenerator.java
 package org.mort11.commands.autons.pathplanner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -18,44 +20,48 @@ public class AutoGenerator extends SequentialCommandGroup {
         auto = new SequentialCommandGroup();
     }
 
-    public static Command generate(String autoName, Command... otherCommand) throws ClassNotFoundException {
+    public static Command generate(String autoName, Command... otherCommands) throws ClassNotFoundException {
+        return buildAuto(autoName, false, otherCommands);
+    }
+
+    public static Command generateMirrored(String autoName, Command... otherCommands) throws ClassNotFoundException {
+        return buildAuto(autoName, true, otherCommands);
+    }
+
+    private static Command buildAuto(String autoName, boolean mirror, Command... otherCommands) throws ClassNotFoundException {
         auto = new SequentialCommandGroup();
 
         try {
             paths = PathPlannerAuto.getPathGroupFromAutoFile(autoName);
+        } catch (Exception e) {
+            throw new ClassNotFoundException("Auto file not found: " + autoName);
         }
 
-        catch(Exception e) {
-            throw new ClassNotFoundException("spell your auto right");
+        if (mirror) {
+            List<PathPlannerPath> flippedPaths = new ArrayList<>();
+            for (PathPlannerPath path : paths) {
+                flippedPaths.add(path.flipPath());
+            }
+            paths = flippedPaths;
         }
 
-        int greaterLength = (otherCommand.length > paths.size() ? otherCommand.length : paths.size());
+        int greaterLength = (otherCommands.length > paths.size() ? otherCommands.length : paths.size());
 
-        for (int i = 0; i < greaterLength; i++){
-
-            //only pathcommands left
-        
-            if(otherCommand.length < (i + 1) && paths.size() >= (i)) {
+        for (int i = 0; i < greaterLength; i++) {
+            if (otherCommands.length < (i + 1) && paths.size() >= (i)) {
                 auto = new SequentialCommandGroup(
                     auto,
                     AutoBuilder.followPath(paths.get(i))
                 );
-                System.out.println("HELLO");
-            }
-
-            //only othercommands left
-
-            else if(otherCommand.length >= (i) && paths.size() < (i + 1)) {
-                auto = new SequentialCommandGroup(
-                    auto, 
-                    otherCommand[i]
-                );
-            }
-
-            else {
+            } else if (otherCommands.length >= (i) && paths.size() < (i + 1)) {
                 auto = new SequentialCommandGroup(
                     auto,
-                    otherCommand[i], 
+                    otherCommands[i]
+                );
+            } else {
+                auto = new SequentialCommandGroup(
+                    auto,
+                    otherCommands[i],
                     AutoBuilder.followPath(paths.get(i))
                 );
             }

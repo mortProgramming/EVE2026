@@ -76,7 +76,7 @@ public class BasicCommands {
             // ); //that time might not be correct and ignore naming same as two methods above
 
         //drive commands
-        NamedCommands.registerCommand("LockOn",(new RotateToHub(odometry)).withTimeout(2.1));
+        NamedCommands.registerCommand("LockOn",(new RotateToHub(odometry)).withTimeout(2.5));
 
 
     }

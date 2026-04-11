@@ -57,7 +57,7 @@ public class IntakeRoller extends SubsystemBase {
         final TalonFXConfiguration leaderConfig = new TalonFXConfiguration()
             .withMotorOutput(
                 new MotorOutputConfigs()
-                    .withInverted(InvertedValue.CounterClockwise_Positive)
+                    .withInverted(InvertedValue.Clockwise_Positive)
                     .withNeutralMode(NeutralModeValue.Coast)
             )
             .withCurrentLimits(
@@ -72,7 +72,7 @@ public class IntakeRoller extends SubsystemBase {
         final TalonFXConfiguration followerConfig = new TalonFXConfiguration()
             .withMotorOutput(
                 new MotorOutputConfigs()
-                    .withInverted(InvertedValue.Clockwise_Positive)
+                    .withInverted(InvertedValue.CounterClockwise_Positive)
                     .withNeutralMode(NeutralModeValue.Coast)
             )
             .withCurrentLimits(

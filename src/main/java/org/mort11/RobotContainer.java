@@ -26,6 +26,7 @@ import org.mort11.commands.actions.endeffector.pid.SetArm;
 import org.mort11.commands.actions.endeffector.pid.SetFeeder;
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.commands.actions.endeffector.pid.ShootFar;
+import org.mort11.commands.autons.pathplanner.AutoGenerator;
 import org.mort11.commands.autons.pathplanner.BasicCommands;
 import org.mort11.commands.autons.timed.Taxi;
 // import org.mort11.commands.autons.timed.TaxiCenterDepot;
@@ -166,11 +167,11 @@ public class RobotContainer {
 
         //roller
         endeffectorController.leftBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
-        endeffectorController.b().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.OUTTAKE));
+        endeffectorController.rightBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.OUTTAKE));
 
         //feeder + floor
         //endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder(feeder, floor));
-        endeffectorController.rightBumper().whileTrue(new MoveFeederOuttake(feeder, floor));
+        endeffectorController.b().whileTrue(new MoveFeederOuttake(feeder, floor));
         endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new SetFeeder(5800));
 
         //shooter
@@ -182,7 +183,7 @@ public class RobotContainer {
         endeffectorController.povRight().whileTrue(new MoveHood(hood, -1.0));
 
         endeffectorController.leftTrigger().whileTrue(new PrepareShotCommand(shooter, hood, odometry));   
-        endeffectorController.y().whileTrue(new ShootFar(hood, 5000, 0.10));
+        endeffectorController.y().whileTrue(new ShootFar(hood, 5000, 0.30));
     }
 
     public Command getPathPlannerCommand() {
@@ -199,41 +200,36 @@ public class RobotContainer {
         return autoChooser.getSelected();
     }
 
-    public void configureAuto() {
-        autoChooser = new SendableChooser<Command>();
-        SmartDashboard.putData("autoChooser", autoChooser);
-        autoChooser.setDefaultOption("nothing", null);
-       
-        //autoChooser.addOption("Depot", new PathPlannerAuto("Depot"));
-        
-        autoChooser.addOption("Hps", new PathPlannerAuto("Hps"));
-        
-        autoChooser.addOption("Left Sweep", new PathPlannerAuto("Blue Left Right Sweep"));
-        autoChooser.addOption("Left In-out", new PathPlannerAuto("Left In-out"));
-        autoChooser.addOption("Left In-Out-In", new PathPlannerAuto("Left In-Out-In"));
-        autoChooser.addOption("Left In-out x 2", new PathPlannerAuto("Left In-out x 2"));
-        autoChooser.addOption("Right In-out", new PathPlannerAuto("Right In-out"));
-        autoChooser.addOption("Right In-out x 2", new PathPlannerAuto("Right In-out x 2"));
-        autoChooser.addOption("Right Sweep", new PathPlannerAuto("Right Left Sweep"));
-        autoChooser.addOption("Left Close Sweep", new PathPlannerAuto("Closer Left Sweep"));
-        autoChooser.addOption("Right Close Sweep", new PathPlannerAuto("Closer Right Sweep"));
-        
-        // autoChooser.addOption("Timed Center Depot", new TaxiCenterDepot(intakeArm, intakeRoller, shooter, hood, odometry));
-        // autoChooser.addOption("Taxi Left Side", new TaxiLSide(intakeArm, intakeRoller, shooter, hood, odometry));
+   public void configureAuto() {
+    autoChooser = new SendableChooser<Command>();
+    SmartDashboard.putData("autoChooser", autoChooser);
+    autoChooser.setDefaultOption("nothing", null);
 
-        
+    autoChooser.addOption("Hps", new PathPlannerAuto("Hps"));
 
+    autoChooser.addOption("Left Sweep", new PathPlannerAuto("Blue Left Right Sweep"));
+    autoChooser.addOption("Left In-out", new PathPlannerAuto("Left In-out"));
+    autoChooser.addOption("Left In-Out-In", new PathPlannerAuto("Left In-Out-In"));
+    autoChooser.addOption("Left In-out x 2", new PathPlannerAuto("Left In-out x 2"));
+    autoChooser.addOption("Left In-out x 2", new PathPlannerAuto("Left In-out x 2 Flipped",true));
+    autoChooser.addOption("Right In-out", new PathPlannerAuto("Right In-out"));
+    autoChooser.addOption("Right In-out x 2", new PathPlannerAuto("Right In-out x 2"));
+    autoChooser.addOption("Right Sweep", new PathPlannerAuto("Right Left Sweep"));
+    autoChooser.addOption("Left Close Sweep", new PathPlannerAuto("Closer Left Sweep"));
+    autoChooser.addOption("Right Close Sweep", new PathPlannerAuto("Closer Right Sweep"));
 
-        
-        
-        
+    try {
+        autoChooser.addOption("Left In-out x 2 (mirrored right)", AutoGenerator.generateMirrored("Left In-out x 2"));
+    } catch (ClassNotFoundException e) {
+        DriverStation.reportError("Mirrored auto load failed: " + e.getMessage(), false);
+    }
 
-        SmartDashboard.putData("Auto Chooser", autoChooser);
-        SmartDashboard.putData("Field", m_field);
+    SmartDashboard.putData("Auto Chooser", autoChooser);
+    SmartDashboard.putData("Field", m_field);
 
-        PathPlannerLogging.setLogCurrentPoseCallback((pose) -> m_field.setRobotPose(pose));
-        PathPlannerLogging.setLogTargetPoseCallback((pose) -> m_field.getObject("target pose").setPose(pose));
-        PathPlannerLogging.setLogActivePathCallback((poses) -> m_field.getObject("path").setPoses(poses));
+    PathPlannerLogging.setLogCurrentPoseCallback((pose) -> m_field.setRobotPose(pose));
+    PathPlannerLogging.setLogTargetPoseCallback((pose) -> m_field.getObject("target pose").setPose(pose));
+    PathPlannerLogging.setLogActivePathCallback((poses) -> m_field.getObject("path").setPoses(poses));
     }
 
     public static CommandPS5Controller getDriverController() {
