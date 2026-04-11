@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "TestingOldPath"
+            "pathName": "Left In-out"
           }
         },
         {
@@ -23,7 +23,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "IntakeAgitate"
+                  "name": "IntakeAgitateShort"
                 }
               },
               {
@@ -33,6 +33,18 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Left In"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "LockOn"
           }
         }
       ]
