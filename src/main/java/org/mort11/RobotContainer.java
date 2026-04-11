@@ -121,7 +121,7 @@ public class RobotContainer {
             point.withModuleDirection(new Rotation2d(-driveController.getLeftY(), -driveController.getLeftX()))
         ));
         driveController.R2().whileTrue(Commands.runOnce(() -> {
-            currentSpeed = 0.4 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
+            currentSpeed = 0.5 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
             currentAngularRate = RotationsPerSecond.of(1).in(RadiansPerSecond);
         }));
         driveController.triangle().onTrue(Commands.runOnce(() -> {
@@ -211,7 +211,6 @@ public class RobotContainer {
     autoChooser.addOption("Left In-out", new PathPlannerAuto("Left In-out"));
     autoChooser.addOption("Left In-Out-In", new PathPlannerAuto("Left In-Out-In"));
     autoChooser.addOption("Left In-out x 2", new PathPlannerAuto("Left In-out x 2"));
-    autoChooser.addOption("Left In-out x 2", new PathPlannerAuto("Left In-out x 2 Flipped",true));
     autoChooser.addOption("Right In-out", new PathPlannerAuto("Right In-out"));
     autoChooser.addOption("Right In-out x 2", new PathPlannerAuto("Right In-out x 2"));
     autoChooser.addOption("Right Sweep", new PathPlannerAuto("Right Left Sweep"));

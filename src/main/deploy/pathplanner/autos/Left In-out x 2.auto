@@ -23,12 +23,6 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "IntakeAgitateShort"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
                   "name": "PrepareAndShootTest"
                 }
               }

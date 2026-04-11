@@ -128,17 +128,6 @@
           "name": "IntakeRollerIntake"
         }
       }
-    },
-    {
-      "name": "SetShooter",
-      "waypointRelativePos": 2.44159351789332,
-      "endWaypointRelativePos": 3.9048723897911857,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "SetShooter"
-        }
-      }
     }
   ],
   "globalConstraints": {
