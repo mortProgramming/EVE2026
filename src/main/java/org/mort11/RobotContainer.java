@@ -1,61 +1,58 @@
 package org.mort11;
 
-import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
-import com.ctre.phoenix6.swerve.SwerveRequest;
-import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.commands.PathPlannerAuto;
-import com.pathplanner.lib.util.PathPlannerLogging;
-import edu.wpi.first.wpilibj.smartdashboard.Field2d;
-import org.mort11.commands.autons.apriltag.RotateToHub;
+import static edu.wpi.first.units.Units.MetersPerSecond;
+import static edu.wpi.first.units.Units.RadiansPerSecond;
+import static edu.wpi.first.units.Units.RotationsPerSecond;
+import static org.mort11.configs.constants.PortConstants.Controller.DRIVE_CONTROLLER;
+import static org.mort11.configs.constants.PortConstants.Controller.ENDEFFECTOR_CONTROLLER;
+import static org.mort11.configs.constants.PortConstants.Controller.MANUAL_CONTROLLER;
+import static org.mort11.configs.constants.PortConstants.Controller.TRIGGER_THRESHOLD;
 
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
-import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
-
+import org.mort11.commands.actions.endeffector.manual.MoveClimber;
+import org.mort11.commands.actions.endeffector.manual.MoveFeeder;
+import org.mort11.commands.actions.endeffector.manual.MoveFeederOuttake;
+import org.mort11.commands.actions.endeffector.manual.MoveHood;
 import org.mort11.commands.actions.endeffector.manual.MoveIntakeArm;
 import org.mort11.commands.actions.endeffector.manual.MoveIntakeRoller;
+import org.mort11.commands.actions.endeffector.manual.PercentShoot;
 import org.mort11.commands.actions.endeffector.pid.AgitateArm;
 import org.mort11.commands.actions.endeffector.pid.PrepareShotCommand;
-import org.mort11.commands.actions.endeffector.pid.SetArm;
 import org.mort11.commands.actions.endeffector.pid.SetFeeder;
-import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.commands.actions.endeffector.pid.ShootFar;
-import org.mort11.commands.autons.pathplanner.AutoGenerator;
+import org.mort11.commands.autons.apriltag.RotateToHub;
 import org.mort11.commands.autons.pathplanner.BasicCommands;
-import org.mort11.commands.autons.timed.Taxi;
 // import org.mort11.commands.autons.timed.TaxiCenterDepot;
 // import org.mort11.commands.autons.timed.TaxiLSide;
 // import org.mort11.commands.autons.timed.TaxiLSideAnnoy;
 import org.mort11.configs.constants.TunerConstants;
-
-import com.pathplanner.lib.path.PathPlannerPath;
-
-import static edu.wpi.first.units.Units.*;
-import static org.mort11.configs.constants.PortConstants.Controller.*;
-
 import org.mort11.subsystems.Climber;
 import org.mort11.subsystems.CommandSwerveDrivetrain;
+import org.mort11.subsystems.Feeder;
+import org.mort11.subsystems.Floor;
 import org.mort11.subsystems.Hood;
 import org.mort11.subsystems.IntakeArm;
 import org.mort11.subsystems.IntakeRoller;
 import org.mort11.subsystems.Limelight;
 import org.mort11.subsystems.OdometryHelper;
 import org.mort11.subsystems.Shooter;
-import org.mort11.subsystems.Vision;
-import org.mort11.commands.actions.endeffector.manual.MoveClimber;
-import org.mort11.commands.actions.endeffector.manual.MoveFeeder;
-import org.mort11.commands.actions.endeffector.manual.MoveFeederOuttake;
-import org.mort11.commands.actions.endeffector.manual.MoveFloor;
-import org.mort11.commands.actions.endeffector.manual.MoveHood;
-import org.mort11.commands.actions.endeffector.manual.PercentShoot;
-import org.mort11.subsystems.Feeder;
-import org.mort11.subsystems.Floor;
+
+import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
+import com.ctre.phoenix6.swerve.SwerveRequest;
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.path.PathPlannerPath;
+import com.pathplanner.lib.util.PathPlannerLogging;
+
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 
 public class RobotContainer {
     private double MaxSpeed = 1.0 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
@@ -218,10 +215,16 @@ public class RobotContainer {
     autoChooser.addOption("Right Close Sweep", new PathPlannerAuto("Closer Right Sweep"));
 
     try {
-        autoChooser.addOption("Left In-out x 2 (mirrored right)", AutoGenerator.generateMirrored("Left In-out x 2"));
-    } catch (ClassNotFoundException e) {
-        DriverStation.reportError("Mirrored auto load failed: " + e.getMessage(), false);
-    }
+    PathPlannerPath path = PathPlannerPath.fromPathFile("Left In-out x 2 (mirrored right)");
+    
+    PathPlannerPath mirroredPath = path.mirrorPath();
+
+    autoChooser.addOption("Left In-out x 2 (mirrored right)", 
+                        AutoBuilder.followPath(mirroredPath));
+                          
+} catch (Exception e) { // Catching Exception is safer than ClassNotFoundException
+    DriverStation.reportError("Mirrored auto load failed: " + e.getMessage(), false);
+}
 
     SmartDashboard.putData("Auto Chooser", autoChooser);
     SmartDashboard.putData("Field", m_field);

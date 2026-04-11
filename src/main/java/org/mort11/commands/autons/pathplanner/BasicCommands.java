@@ -58,7 +58,10 @@ public class BasicCommands {
         //     )
         // );
 
-       NamedCommands.registerCommand("PrepareAndShoot", prepareShot); //delete this after test
+        NamedCommands.registerCommand("PrepareAndShoot", prepareShot); //delete this after test
+        NamedCommands.registerCommand("PrepareShot", prepareShot); 
+                
+
         NamedCommands.registerCommand("PrepareAndShootTest", new ParallelCommandGroup(new ParallelDeadlineGroup(
                 //wait until ready, then feed 
                 new WaitUntilCommand(prepareShot::isReadyToShoot)
