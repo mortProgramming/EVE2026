@@ -293,12 +293,12 @@ public class Vision extends SubsystemBase {
             // Set the Limelight green LEDs to show throttle status visually:
             //   Throttled (disabled)  → Force Blink  — steady uniform blink, "I am throttled"
             //   Not throttled (enabled) → Pipeline Control — normal detection behavior
-            if (throttled) {
-                // LimelightHelpers.setLEDMode_ForceBlink(name);
-                LimelightHelpers.setLEDMode_ForceOn(name);
-            } else {
-                LimelightHelpers.setLEDMode_PipelineControl(name);
-            }
+            // if (throttled) {
+            //     // LimelightHelpers.setLEDMode_ForceBlink(name);
+            //     LimelightHelpers.setLEDMode_ForceOn(name);
+            // } else {
+            //     LimelightHelpers.setLEDMode_PipelineControl(name);
+            // }
         }
     }
 
