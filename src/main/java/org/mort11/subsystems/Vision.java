@@ -97,7 +97,7 @@ public class Vision extends SubsystemBase {
             18.0 * 0.0254,   // up — (about 25 inches off the floor)
             0.0,             // roll degrees: (should be 0)
             -24.90,             // pitch degrees: (rotating up) ==> negative rotation around Y-axis). Measured from onboard IMU (http://limelight-back.local:5801/)
-            180
+            180.0
         );
     }
 
