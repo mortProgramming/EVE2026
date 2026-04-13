@@ -61,5 +61,6 @@ public final class PIDConstants {
         public static final double KD = 0.0;
 
         public static final double KV = 0.13;
+        public static final double KA = 0.193;
     }
 }

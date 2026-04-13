@@ -69,7 +69,8 @@ public class Feeder extends SubsystemBase {
                     .withKP(PIDConstants.Feeder.KP)
                     .withKI(PIDConstants.Feeder.KI)
                     .withKD(PIDConstants.Feeder.KD)
-                    .withKV(PIDConstants.Feeder.KV) 
+                    .withKV(PIDConstants.Feeder.KV)
+                    .withKA(PIDConstants.Feeder.KA) 
             );
 
         motor.getConfigurator().apply(config);
