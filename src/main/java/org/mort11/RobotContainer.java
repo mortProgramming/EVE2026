@@ -219,7 +219,8 @@ public class RobotContainer {
     //     autoChooser.addOption("Left In-out x 2 (mirrored right)", AutoGenerator.generateMirrored("Left In-out x 2"));
     // } catch (ClassNotFoundException e) {
     //     DriverStation.reportError("Mirrored auto load failed: " + e.getMessage(), false);
-    // }                
+    // }
+
     try { // Havent tested this hope it shows up in autochooser 
     PathPlannerPath originalPath = PathPlannerPath.fromPathFile("Left In-out x 2");
 
