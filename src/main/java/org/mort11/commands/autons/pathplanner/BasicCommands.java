@@ -59,7 +59,7 @@ public class BasicCommands {
         // );
 
         NamedCommands.registerCommand("PrepareAndShoot", prepareShot); //delete this after test
-        NamedCommands.registerCommand("PrepareShot", prepareShot); 
+        NamedCommands.registerCommand("PrepareToShoot", prepareShot); 
                 
 
         NamedCommands.registerCommand("PrepareAndShootTest", new ParallelCommandGroup(new ParallelDeadlineGroup(
@@ -68,7 +68,7 @@ public class BasicCommands {
                     .withTimeout(1)
                     .andThen(new SetFeeder(5500).withTimeout(4)),
                 prepareShot  //shooter + hood active the entire time including during the feed
-            ), new AgitateArm(intake).withTimeout(3))); //that time might not be correct
+            ))); //that time might not be correct
 
             // NamedCommands.registerCommand("PrepareAndShootIntakeAgitate", new ParallelCommandGroup(new ParallelDeadlineGroup(
             //     //wait until ready, then feed 

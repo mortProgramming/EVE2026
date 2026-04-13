@@ -10,8 +10,10 @@ import org.mort11.subsystems.LimelightRewindManager;
 import com.ctre.phoenix6.HootAutoReplay;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj.DriverStation;
 
 public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
@@ -35,6 +37,7 @@ public class Robot extends TimedRobot {
         m_timeAndJoystickReplay.update();
         m_limelightRewind.periodic();
         CommandScheduler.getInstance().run(); 
+        SmartDashboard.putNumber("Match Time", DriverStation.getMatchTime());
     }
 
     @Override
