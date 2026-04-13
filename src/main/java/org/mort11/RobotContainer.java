@@ -20,6 +20,7 @@ import org.mort11.commands.actions.endeffector.pid.PrepareShotCommand;
 import org.mort11.commands.actions.endeffector.pid.SetFeeder;
 import org.mort11.commands.actions.endeffector.pid.ShootFar;
 import org.mort11.commands.autons.apriltag.RotateToHub;
+import org.mort11.commands.autons.pathplanner.AutoGenerator;
 import org.mort11.commands.autons.pathplanner.BasicCommands;
 // import org.mort11.commands.autons.timed.TaxiCenterDepot;
 // import org.mort11.commands.autons.timed.TaxiLSide;
@@ -216,17 +217,26 @@ public class RobotContainer {
     autoChooser.addOption("Left Close Sweep", new PathPlannerAuto("Closer Left Sweep"));
     autoChooser.addOption("Right Close Sweep", new PathPlannerAuto("Closer Right Sweep"));
 
-    try {
-    PathPlannerPath path = PathPlannerPath.fromPathFile("Left In-out x 2 (mirrored right)");
-    
-    PathPlannerPath mirroredPath = path.mirrorPath();
+    //  try {
+    //     autoChooser.addOption("Left In-out x 2 (mirrored right)", AutoGenerator.generateMirrored("Left In-out x 2"));
+    // } catch (ClassNotFoundException e) {
+    //     DriverStation.reportError("Mirrored auto load failed: " + e.getMessage(), false);
+    // }                
+    try { // Havent tested this hope it shows up in autochooser 
+    PathPlannerPath originalPath = PathPlannerPath.fromPathFile("Left In-out x 2");
 
-    autoChooser.addOption("Left In-out x 2 (mirrored right)", 
-                        AutoBuilder.followPath(mirroredPath));
-                          
-} catch (Exception e) { // Catching Exception is safer than ClassNotFoundException
-    DriverStation.reportError("Mirrored auto load failed: " + e.getMessage(), false);
+    PathPlannerPath mirroredPath = originalPath.mirrorPath();
+
+    Command mirroredCommand = AutoBuilder.followPath(mirroredPath);
+
+    autoChooser.addOption("Left In-out x 2 (mirrored right)", mirroredCommand);
+
+} catch (Exception e) {
+    DriverStation.reportError("Mirrored auto load failed: " + e.getMessage(), e.getStackTrace());
 }
+
+
+
 
     SmartDashboard.putData("Auto Chooser", autoChooser);
     SmartDashboard.putData("Field", m_field);
