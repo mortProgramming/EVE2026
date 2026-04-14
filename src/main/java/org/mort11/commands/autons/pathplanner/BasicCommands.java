@@ -65,7 +65,7 @@ public class BasicCommands {
         NamedCommands.registerCommand("PrepareAndShootTest", new ParallelCommandGroup(new ParallelDeadlineGroup(
                 //wait until ready, then feed 
                 new WaitUntilCommand(prepareShot::isReadyToShoot)
-                    .withTimeout(1)
+                    .withTimeout(2)
                     .andThen(new SetFeeder(5500).withTimeout(4)),
                 prepareShot  //shooter + hood active the entire time including during the feed
             ))); //that time might not be correct

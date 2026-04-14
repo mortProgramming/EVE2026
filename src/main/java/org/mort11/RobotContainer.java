@@ -50,7 +50,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
@@ -178,14 +180,11 @@ public class RobotContainer {
         endeffectorController.b().whileTrue(new MoveFeederOuttake(feeder, floor));
         endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new SetFeeder(5800));
 
-        //shooter
-        //endeffectorController.leftTrigger().whileTrue(new PercentShoot(shooter, 0.8));
-        //endeffectorController.y().whileTrue(new SetShooter(4000));
-
         //hood
         endeffectorController.povLeft().whileTrue(new MoveHood(hood, 1.0));
         endeffectorController.povRight().whileTrue(new MoveHood(hood, -1.0));
 
+        //shooter
         endeffectorController.leftTrigger().whileTrue(new PrepareShotCommand(shooter, hood, odometry));   
         endeffectorController.y().whileTrue(new ShootFar(hood, 5000, 0.30));
     }
@@ -210,6 +209,8 @@ public class RobotContainer {
     autoChooser.setDefaultOption("nothing", null);
 
     autoChooser.addOption("Hps", new PathPlannerAuto("Hps"));
+    autoChooser.addOption("Depot", new PathPlannerAuto("Depot"));
+
 
     autoChooser.addOption("Left Sweep", new PathPlannerAuto("Blue Left Right Sweep"));
     autoChooser.addOption("Left In-out", new PathPlannerAuto("Left In-out"));
@@ -221,13 +222,7 @@ public class RobotContainer {
     autoChooser.addOption("Left Close Sweep", new PathPlannerAuto("Closer Left Sweep"));
     autoChooser.addOption("Right Close Sweep", new PathPlannerAuto("Closer Right Sweep"));
 
-    //  try {
-    //     autoChooser.addOption("Left In-out x 2 (mirrored right)", AutoGenerator.generateMirrored("Left In-out x 2"));
-    // } catch (ClassNotFoundException e) {
-    //     DriverStation.reportError("Mirrored auto load failed: " + e.getMessage(), false);
-    // }
-
-try {
+try {//Working mirror 
     PathPlannerPath Inout = PathPlannerPath.fromPathFile("Left In-out");
     PathPlannerPath Inoutx2 = PathPlannerPath.fromPathFile("Left In-out x 2");
 
@@ -237,7 +232,22 @@ try {
     Command follow1 = AutoBuilder.followPath(mirroredInout);
     Command follow2 = AutoBuilder.followPath(mirroredInoutx2);
 
-    Command combinedAuto = new SequentialCommandGroup(follow1, follow2);
+    PrepareShotCommand prepareShot = new PrepareShotCommand(shooter, hood, odometry);
+
+    Command RightInoutx2 = new SequentialCommandGroup(
+
+    follow1,
+    new RotateToHub(odometry).withTimeout(2.5),
+    new ParallelDeadlineGroup(
+        new SequentialCommandGroup(
+            new WaitUntilCommand(prepareShot::isReadyToShoot).withTimeout(1.0),
+            new SetFeeder(5500).withTimeout(4.0),
+            new AgitateArm(intakeArm).withTimeout(3.5)
+        ),
+        prepareShot 
+    ),
+    follow2
+);
 
     autoChooser.addOption("Left In-out x 2 (mirrored)", combinedAuto);
     
