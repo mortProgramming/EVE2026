@@ -128,11 +128,15 @@ public class RobotContainer {
         }));
         driveController.L1().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
         driveController.R1().whileTrue(new RotateToHub(odometry));
-        driveController.L2().whileTrue(new ShootFar(hood, 5000, 0.20));
+        driveController.L2().whileTrue(new ShootFar(hood, 5000, 0.70));
         drivetrain.registerTelemetry(logger::telemeterize);
 
         driveController.povUp().whileTrue(new MoveClimber(0.3));
         driveController.povDown().whileTrue(new MoveClimber(-0.3));
+
+        driveController.square().whileTrue(new SetFeeder(5800));
+
+
 
         
 
