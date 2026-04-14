@@ -20,7 +20,6 @@ import org.mort11.commands.actions.endeffector.pid.PrepareShotCommand;
 import org.mort11.commands.actions.endeffector.pid.SetFeeder;
 import org.mort11.commands.actions.endeffector.pid.ShootFar;
 import org.mort11.commands.autons.apriltag.RotateToHub;
-import org.mort11.commands.autons.pathplanner.AutoGenerator;
 import org.mort11.commands.autons.pathplanner.BasicCommands;
 // import org.mort11.commands.autons.timed.TaxiCenterDepot;
 // import org.mort11.commands.autons.timed.TaxiLSide;
@@ -51,6 +50,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
@@ -223,15 +223,20 @@ public class RobotContainer {
     //     DriverStation.reportError("Mirrored auto load failed: " + e.getMessage(), false);
     // }
 
-    try { // Havent tested this hope it shows up in autochooser 
-    PathPlannerPath originalPath = PathPlannerPath.fromPathFile("Left In-out x 2");
+try {
+    PathPlannerPath Inout = PathPlannerPath.fromPathFile("Left In-out");
+    PathPlannerPath Inoutx2 = PathPlannerPath.fromPathFile("Left In-out x 2");
 
-    PathPlannerPath mirroredPath = originalPath.mirrorPath();
+    PathPlannerPath mirroredInout = Inout.mirrorPath();
+    PathPlannerPath mirroredInoutx2 = Inoutx2.mirrorPath();
 
-    Command mirroredCommand = AutoBuilder.followPath(mirroredPath);
+    Command follow1 = AutoBuilder.followPath(mirroredInout);
+    Command follow2 = AutoBuilder.followPath(mirroredInoutx2);
 
-    autoChooser.addOption("Left In-out x 2 (mirrored right)", mirroredCommand);
+    Command combinedAuto = new SequentialCommandGroup(follow1, follow2);
 
+    autoChooser.addOption("Left In-out x 2 (mirrored)", combinedAuto);
+    
 } catch (Exception e) {
     DriverStation.reportError("Mirrored auto load failed: " + e.getMessage(), e.getStackTrace());
 }

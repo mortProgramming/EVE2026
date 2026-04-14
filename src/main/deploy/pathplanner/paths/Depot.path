@@ -8,7 +8,7 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.484794768423418,
+        "x": 3.810328102710413,
         "y": 5.270641940085593
       },
       "isLocked": false,
@@ -16,101 +16,88 @@
     },
     {
       "anchor": {
-        "x": 6.157985714284588,
-        "y": 5.810128571426552
+        "x": 2.3581084337349396,
+        "y": 5.991060240963854
       },
       "prevControl": {
-        "x": 5.460075330753948,
-        "y": 5.501351568173538
+        "x": 2.8741327534416476,
+        "y": 5.780828110712972
       },
       "nextControl": {
-        "x": 6.563825053866968,
-        "y": 5.989684368324834
+        "x": 1.7680120481927712,
+        "y": 6.231469879518072
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 8.4,
-        "y": 7.314950071326677
+        "x": 0.9593614457831328,
+        "y": 6.548373493975904
       },
       "prevControl": {
-        "x": 8.022761176838825,
-        "y": 8.05675844358311
+        "x": 1.1260846476736812,
+        "y": 6.984418791228109
       },
       "nextControl": {
-        "x": 8.748730385164052,
-        "y": 6.629201141226819
+        "x": 0.8173012048192771,
+        "y": 6.176831325301205
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 8.4,
-        "y": 3.0322539229671905
+        "x": 0.9593614457831328,
+        "y": 5.379108433734939
       },
       "prevControl": {
-        "x": 8.800485021398002,
-        "y": 3.420413694721826
+        "x": 0.9047228915662651,
+        "y": 5.652301204819277
       },
       "nextControl": {
-        "x": 7.207892310852787,
-        "y": 1.876834309741582
+        "x": 1.0473069340221177,
+        "y": 4.939380992540016
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.05944365192582,
-        "y": 2.7605420827389446
+        "x": 2.1941927710843374,
+        "y": 4.887361445783132
       },
       "prevControl": {
-        "x": 2.589928673323822,
-        "y": 2.4370756062767476
+        "x": 1.5822409638554213,
+        "y": 4.887361445783132
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "LeftRightEnd"
+      "linkedName": null
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 2.05,
-      "rotationDegrees": -90.0
+      "waypointRelativePos": 2.0149377593360756,
+      "rotationDegrees": -130.0
     },
     {
-      "waypointRelativePos": 3.1215351812366694,
-      "rotationDegrees": -90.0
+      "waypointRelativePos": 2.439834024896241,
+      "rotationDegrees": -130.0
     },
     {
-      "waypointRelativePos": 3.488272921108698,
-      "rotationDegrees": 135.77159254312198
+      "waypointRelativePos": 2.851452282157659,
+      "rotationDegrees": -130.0
     }
   ],
   "constraintZones": [
     {
-      "name": "First Bump",
-      "minWaypointRelativePos": 0,
-      "maxWaypointRelativePos": 0.8642808912896622,
+      "name": "Intaking",
+      "minWaypointRelativePos": 0.2,
+      "maxWaypointRelativePos": 0.55,
       "constraints": {
         "maxVelocity": 4.0,
-        "maxAcceleration": 4.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0,
-        "nominalVoltage": 12.0,
-        "unlimited": false
-      }
-    },
-    {
-      "name": "Intaking",
-      "minWaypointRelativePos": 1.4800810263335618,
-      "maxWaypointRelativePos": 3.221507890122753,
-      "constraints": {
-        "maxVelocity": 2.0,
-        "maxAcceleration": 2.0,
+        "maxAcceleration": 3.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -122,7 +109,7 @@
   "eventMarkers": [
     {
       "name": "IntakeDown",
-      "waypointRelativePos": 0.9939230249831219,
+      "waypointRelativePos": 0.6570719602977466,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -133,8 +120,8 @@
     },
     {
       "name": "IntakeRollerIntake",
-      "waypointRelativePos": 1.447670492910211,
-      "endWaypointRelativePos": 3.489534098582027,
+      "waypointRelativePos": 1.0679900744416906,
+      "endWaypointRelativePos": 4.0,
       "command": {
         "type": "named",
         "data": {
@@ -144,8 +131,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 2.0,
+    "maxVelocity": 6.0,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -153,7 +140,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 26.10018689881653
+    "rotation": -25.989233583833002
   },
   "reversed": false,
   "folder": "Blue Side Paths",
