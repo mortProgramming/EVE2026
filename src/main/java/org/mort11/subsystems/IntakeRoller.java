@@ -46,8 +46,8 @@ public class IntakeRoller extends SubsystemBase {
     private final VoltageOut followerVoltageRequest = new VoltageOut(0).withEnableFOC(false);
 
     public IntakeRoller() {
-        rollerMotorLeader   = new TalonFX(PortConstants.Intake.INTAKE_ROLLER_LEADER);
-        rollerMotorFollower = new TalonFX(PortConstants.Intake.INTAKE_ROLLER_FOLLOWER);
+        rollerMotorLeader   = new TalonFX(PortConstants.Intake.INTAKE_ROLLER_LEFT);
+        rollerMotorFollower = new TalonFX(PortConstants.Intake.INTAKE_ROLLER_RIGHT);
 
         configureRollerMotors();
         SmartDashboard.putData(this);
