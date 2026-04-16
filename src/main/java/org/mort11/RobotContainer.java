@@ -50,6 +50,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
@@ -208,22 +209,16 @@ public class RobotContainer {
     SmartDashboard.putData("autoChooser", autoChooser);
     autoChooser.setDefaultOption("nothing", null);
 
-    autoChooser.addOption("Hps", new PathPlannerAuto("Hps"));
     autoChooser.addOption("Depot", new PathPlannerAuto("Depot"));
 
 
-    autoChooser.addOption("Left Sweep", new PathPlannerAuto("Blue Left Right Sweep"));
     autoChooser.addOption("Left In-out", new PathPlannerAuto("Left In-out"));
     autoChooser.addOption("Left In-Out-In", new PathPlannerAuto("Left In-Out-In"));
     autoChooser.addOption("Left In-out x 2", new PathPlannerAuto("Left In-out x 2"));
-    autoChooser.addOption("Right In-out", new PathPlannerAuto("Right In-out"));
-    autoChooser.addOption("Right In-out x 2", new PathPlannerAuto("Right In-out x 2"));
-    autoChooser.addOption("Right Sweep", new PathPlannerAuto("Right Left Sweep"));
-    autoChooser.addOption("Left Close Sweep", new PathPlannerAuto("Closer Left Sweep"));
-    autoChooser.addOption("Right Close Sweep", new PathPlannerAuto("Closer Right Sweep"));
 
-try {//Working mirror 
-    PathPlannerPath Inout = PathPlannerPath.fromPathFile("Left In-out");
+
+try {
+    PathPlannerPath Inout = PathPlannerPath.fromPathFile("Left In-outV3");
     PathPlannerPath Inoutx2 = PathPlannerPath.fromPathFile("Left In-out x 2");
 
     PathPlannerPath mirroredInout = Inout.mirrorPath();
@@ -232,25 +227,21 @@ try {//Working mirror
     Command follow1 = AutoBuilder.followPath(mirroredInout);
     Command follow2 = AutoBuilder.followPath(mirroredInoutx2);
 
-    PrepareShotCommand prepareShot = new PrepareShotCommand(shooter, hood, odometry);
-
     Command RightInoutx2 = new SequentialCommandGroup(
-
-    follow1,
-    new RotateToHub(odometry).withTimeout(2.5),
-    new ParallelDeadlineGroup(
-        new SequentialCommandGroup(
-            new WaitUntilCommand(prepareShot::isReadyToShoot).withTimeout(1.0),
-            new SetFeeder(5500).withTimeout(4.0),
-            new AgitateArm(intakeArm).withTimeout(3.5)
+        follow1,
+        new RotateToHub(odometry).withTimeout(2.5),
+        new ParallelDeadlineGroup(
+            new SequentialCommandGroup(
+                new SetFeeder(5500).withTimeout(4.0),
+                new AgitateArm(intakeArm).withTimeout(3.5)
+            ),
+            new ShootFar(hood, 2500, 0.23)
         ),
-        prepareShot 
-    ),
-    follow2
-);
+        follow2
+    );
 
-    autoChooser.addOption("Left In-out x 2 (mirrored)", combinedAuto);
-    
+    autoChooser.addOption("Left In-out x 2 (mirrored)", RightInoutx2);
+
 } catch (Exception e) {
     DriverStation.reportError("Mirrored auto load failed: " + e.getMessage(), e.getStackTrace());
 }
