@@ -118,11 +118,15 @@ public class RobotContainer {
 
         //---------------------DRIVE CONTROLLER---------------------------
         driveController.cross().whileTrue(drivetrain.applyRequest(() -> brake));
-        driveController.circle().whileTrue(drivetrain.applyRequest(() ->
-            point.withModuleDirection(new Rotation2d(-driveController.getLeftY(), -driveController.getLeftX()))
-        ));
+        // driveController.circle().whileTrue(drivetrain.applyRequest(() ->
+        //     point.withModuleDirection(new Rotation2d(-driveController.getLeftY(), -driveController.getLeftX()))
+        // ));
         driveController.R2().whileTrue(Commands.runOnce(() -> {
             currentSpeed = 0.5 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
+            currentAngularRate = RotationsPerSecond.of(1).in(RadiansPerSecond);
+        }));
+        driveController.circle().whileTrue(Commands.runOnce(() -> {
+            currentSpeed = 0.2 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
             currentAngularRate = RotationsPerSecond.of(1).in(RadiansPerSecond);
         }));
         driveController.triangle().onTrue(Commands.runOnce(() -> {
@@ -131,7 +135,7 @@ public class RobotContainer {
         }));
         driveController.L1().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
         driveController.R1().whileTrue(new RotateToHub(odometry));
-        driveController.L2().whileTrue(new ShootFar(hood, 5000, 0.70));
+        driveController.L2().whileTrue(new ShootFar(hood, 5000, 0.7));
         drivetrain.registerTelemetry(logger::telemeterize);
 
         driveController.povUp().whileTrue(new MoveClimber(0.3));
