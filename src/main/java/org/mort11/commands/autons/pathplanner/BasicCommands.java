@@ -7,11 +7,11 @@ import org.mort11.commands.actions.endeffector.pid.PrepareShotCommand;
 import org.mort11.commands.actions.endeffector.pid.SetArm;
 import org.mort11.commands.actions.endeffector.pid.SetFeeder;
 import org.mort11.commands.actions.endeffector.pid.SetShooter;
+import org.mort11.commands.actions.endeffector.pid.ShootFar;
 import org.mort11.commands.autons.apriltag.RotateToHub;
 import org.mort11.subsystems.Feeder;
 import org.mort11.subsystems.Floor;
 import org.mort11.subsystems.Hood;
-//import org.mort11.commands.actions.endeffector.pid.SetShooter;
 import org.mort11.subsystems.IntakeArm;
 import org.mort11.subsystems.IntakeRoller;
 import org.mort11.subsystems.OdometryHelper;
@@ -19,68 +19,73 @@ import org.mort11.subsystems.Shooter;
 
 import com.pathplanner.lib.auto.NamedCommands;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
+
+import java.util.Set;
 
 public class BasicCommands {
 
     public static void setCommands(OdometryHelper odometry, Shooter shooter, IntakeArm intake, IntakeRoller intakeRoller, Floor floor, Feeder feeder, Hood hood) {
-        // NamedCommands.registerCommand("Taxi", new Taxi());
-        //IntakeArm commands
-        PrepareShotCommand prepareShot = new PrepareShotCommand(shooter, hood, odometry); 
 
+        // intakeArm commands
         NamedCommands.registerCommand("IntakeUp", new SetArm(intake, IntakeArm.Position.HOMED));
         NamedCommands.registerCommand("IntakeDown", new SetArm(intake, IntakeArm.Position.INTAKE));
         NamedCommands.registerCommand("IntakeAgitate", new AgitateArm(intake));
         NamedCommands.registerCommand("IntakeAgitateShort", new AgitateArm(intake).withTimeout(3.5));
-        NamedCommands.registerCommand("WaitIntakeAgitate", new AgitateArm(intake).until(prepareShot::isReadyToShoot)); 
-        
 
-        //IntakeRoller/Feeder commands
+        // intakeRoller/feeder commands
         NamedCommands.registerCommand("IntakeRollerIntake", new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
         NamedCommands.registerCommand("IntakeRollerOuttake", new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.OUTTAKE));
-        
-        //Climber commands
+
+        // climber commands
         NamedCommands.registerCommand("Climb", new MoveClimber(-1));
-        //Shooter commands
-        NamedCommands.registerCommand("WindUp" , new SetShooter(3400).withTimeout(2));
-        NamedCommands.registerCommand("SetShooter" , new SetShooter(3200));//was 3400
+
+        // shooter commands
+        NamedCommands.registerCommand("WindUp", new SetShooter(3400).withTimeout(2));
+        NamedCommands.registerCommand("SetShooter", new SetShooter(3200));
         NamedCommands.registerCommand("FeederIntake", new SetFeeder(4000));
+        NamedCommands.registerCommand("ShooterManual", new ShootFar(hood, 2500, 0.23));
 
-        // NamedCommands.registerCommand("PrepareAndShoot",
-        //     new ParallelDeadlineGroup(
-        //         //wait until ready, then feed 
-        //         new WaitUntilCommand(prepareShot::isReadyToShoot)
-        //             .withTimeout(1)
-        //             .andThen(new SetFeeder(5500).withTimeout(3)),
-        //         prepareShot  //shooter + hood active the entire time including during the feed
-        //     )
-        // );
+        // drive commands
+        NamedCommands.registerCommand("LockOn", new RotateToHub(odometry).withTimeout(2.5));
 
-        NamedCommands.registerCommand("PrepareAndShoot", prepareShot); //delete this after test
-        NamedCommands.registerCommand("PrepareToShoot", prepareShot); 
-                
+        NamedCommands.registerCommand("WaitIntakeAgitate",
+            Commands.defer(() -> {
+                PrepareShotCommand fresh = new PrepareShotCommand(shooter, hood, odometry);
+                return new AgitateArm(intake).until(fresh::isReadyToShoot);
+            }, Set.of(shooter, hood, intake))
+        );
 
-        NamedCommands.registerCommand("PrepareAndShootTest", new ParallelCommandGroup(new ParallelDeadlineGroup(
-                //wait until ready, then feed 
-                new WaitUntilCommand(prepareShot::isReadyToShoot)
-                    .withTimeout(1)
-                    .andThen(new SetFeeder(5500).withTimeout(4)),
-                prepareShot  //shooter + hood active the entire time including during the feed
-            ))); //that time might not be correct
+        NamedCommands.registerCommand("PrepareAndShoot",
+            Commands.defer(() -> new PrepareShotCommand(shooter, hood, odometry),
+                Set.of(shooter, hood))
+        );
 
-            // NamedCommands.registerCommand("PrepareAndShootIntakeAgitate", new ParallelCommandGroup(new ParallelDeadlineGroup(
-            //     //wait until ready, then feed 
-            //     new WaitUntilCommand(prepareShot::isReadyToShoot)
-            //         .withTimeout(1)
-            //         .andThen(new SetFeeder(5500).withTimeout(3)),
-            //     prepareShot.andThen(new AgitateArm(intake).withTimeout(4.5))))  //shooter + hood active the entire time including during the feed
-            // ); //that time might not be correct and ignore naming same as two methods above
+        NamedCommands.registerCommand("PrepareToShoot",
+            Commands.defer(() -> new PrepareShotCommand(shooter, hood, odometry),
+                Set.of(shooter, hood))
+        );
 
-        //drive commands
-        NamedCommands.registerCommand("LockOn",(new RotateToHub(odometry)).withTimeout(2.5));
+        NamedCommands.registerCommand("PrepareShot",
+            Commands.defer(() -> new PrepareShotCommand(shooter, hood, odometry),
+                Set.of(shooter, hood))
+        );
 
-
+        // PrepareAndShootTest — the one you actually use in paths
+        NamedCommands.registerCommand("PrepareAndShootTest",
+            Commands.defer(() -> {
+                PrepareShotCommand fresh = new PrepareShotCommand(shooter, hood, odometry);
+                return new ParallelDeadlineGroup(
+                    new SequentialCommandGroup(
+                        new WaitUntilCommand(fresh::isReadyToShoot).withTimeout(1),
+                        new SetFeeder(5500).withTimeout(4)
+                    ),
+                    fresh
+                );
+            }, Set.of(shooter, hood))
+        );
     }
 }

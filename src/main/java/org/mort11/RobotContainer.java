@@ -20,7 +20,6 @@ import org.mort11.commands.actions.endeffector.pid.PrepareShotCommand;
 import org.mort11.commands.actions.endeffector.pid.SetFeeder;
 import org.mort11.commands.actions.endeffector.pid.ShootFar;
 import org.mort11.commands.autons.apriltag.RotateToHub;
-import org.mort11.commands.autons.pathplanner.AutoGenerator;
 import org.mort11.commands.autons.pathplanner.BasicCommands;
 // import org.mort11.commands.autons.timed.TaxiCenterDepot;
 // import org.mort11.commands.autons.timed.TaxiLSide;
@@ -51,6 +50,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
@@ -115,11 +118,15 @@ public class RobotContainer {
 
         //---------------------DRIVE CONTROLLER---------------------------
         driveController.cross().whileTrue(drivetrain.applyRequest(() -> brake));
-        driveController.circle().whileTrue(drivetrain.applyRequest(() ->
-            point.withModuleDirection(new Rotation2d(-driveController.getLeftY(), -driveController.getLeftX()))
-        ));
+        // driveController.circle().whileTrue(drivetrain.applyRequest(() ->
+        //     point.withModuleDirection(new Rotation2d(-driveController.getLeftY(), -driveController.getLeftX()))
+        // ));
         driveController.R2().whileTrue(Commands.runOnce(() -> {
             currentSpeed = 0.5 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
+            currentAngularRate = RotationsPerSecond.of(1).in(RadiansPerSecond);
+        }));
+        driveController.circle().whileTrue(Commands.runOnce(() -> {
+            currentSpeed = 0.2 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
             currentAngularRate = RotationsPerSecond.of(1).in(RadiansPerSecond);
         }));
         driveController.triangle().onTrue(Commands.runOnce(() -> {
@@ -128,11 +135,15 @@ public class RobotContainer {
         }));
         driveController.L1().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
         driveController.R1().whileTrue(new RotateToHub(odometry));
-        driveController.L2().whileTrue(new ShootFar(hood, 5000, 0.20));
+        driveController.L2().whileTrue(new ShootFar(hood, 5000, 0.7));
         drivetrain.registerTelemetry(logger::telemeterize);
 
         driveController.povUp().whileTrue(new MoveClimber(0.3));
         driveController.povDown().whileTrue(new MoveClimber(-0.3));
+
+        driveController.square().whileTrue(new SetFeeder(5800));
+
+
 
         
 
@@ -174,14 +185,11 @@ public class RobotContainer {
         endeffectorController.b().whileTrue(new MoveFeederOuttake(feeder, floor));
         endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new SetFeeder(5800));
 
-        //shooter
-        //endeffectorController.leftTrigger().whileTrue(new PercentShoot(shooter, 0.8));
-        //endeffectorController.y().whileTrue(new SetShooter(4000));
-
         //hood
         endeffectorController.povLeft().whileTrue(new MoveHood(hood, 1.0));
         endeffectorController.povRight().whileTrue(new MoveHood(hood, -1.0));
 
+        //shooter
         endeffectorController.leftTrigger().whileTrue(new PrepareShotCommand(shooter, hood, odometry));   
         endeffectorController.y().whileTrue(new ShootFar(hood, 5000, 0.30));
     }
@@ -205,32 +213,38 @@ public class RobotContainer {
     SmartDashboard.putData("autoChooser", autoChooser);
     autoChooser.setDefaultOption("nothing", null);
 
-    autoChooser.addOption("Hps", new PathPlannerAuto("Hps"));
+    autoChooser.addOption("Depot", new PathPlannerAuto("Depot"));
 
-    autoChooser.addOption("Left Sweep", new PathPlannerAuto("Blue Left Right Sweep"));
+
     autoChooser.addOption("Left In-out", new PathPlannerAuto("Left In-out"));
     autoChooser.addOption("Left In-Out-In", new PathPlannerAuto("Left In-Out-In"));
     autoChooser.addOption("Left In-out x 2", new PathPlannerAuto("Left In-out x 2"));
-    autoChooser.addOption("Right In-out", new PathPlannerAuto("Right In-out"));
-    autoChooser.addOption("Right In-out x 2", new PathPlannerAuto("Right In-out x 2"));
-    autoChooser.addOption("Right Sweep", new PathPlannerAuto("Right Left Sweep"));
-    autoChooser.addOption("Left Close Sweep", new PathPlannerAuto("Closer Left Sweep"));
-    autoChooser.addOption("Right Close Sweep", new PathPlannerAuto("Closer Right Sweep"));
 
-    //  try {
-    //     autoChooser.addOption("Left In-out x 2 (mirrored right)", AutoGenerator.generateMirrored("Left In-out x 2"));
-    // } catch (ClassNotFoundException e) {
-    //     DriverStation.reportError("Mirrored auto load failed: " + e.getMessage(), false);
-    // }
 
-    try { // Havent tested this hope it shows up in autochooser 
-    PathPlannerPath originalPath = PathPlannerPath.fromPathFile("Left In-out x 2");
+try {
+    PathPlannerPath Inout = PathPlannerPath.fromPathFile("Left In-outV3");
+    PathPlannerPath Inoutx2 = PathPlannerPath.fromPathFile("Left In-out x 2");
 
-    PathPlannerPath mirroredPath = originalPath.mirrorPath();
+    PathPlannerPath mirroredInout = Inout.mirrorPath();
+    PathPlannerPath mirroredInoutx2 = Inoutx2.mirrorPath();
 
-    Command mirroredCommand = AutoBuilder.followPath(mirroredPath);
+    Command follow1 = AutoBuilder.followPath(mirroredInout);
+    Command follow2 = AutoBuilder.followPath(mirroredInoutx2);
 
-    autoChooser.addOption("Left In-out x 2 (mirrored right)", mirroredCommand);
+    Command RightInoutx2 = new SequentialCommandGroup(
+        follow1,
+        new RotateToHub(odometry).withTimeout(2.5),
+        new ParallelDeadlineGroup(
+            new SequentialCommandGroup(
+                new SetFeeder(5500).withTimeout(4.0),
+                new AgitateArm(intakeArm).withTimeout(3.5)
+            ),
+            new ShootFar(hood, 2500, 0.23)
+        ),
+        follow2
+    );
+
+    autoChooser.addOption("Left In-out x 2 (mirrored)", RightInoutx2);
 
 } catch (Exception e) {
     DriverStation.reportError("Mirrored auto load failed: " + e.getMessage(), e.getStackTrace());

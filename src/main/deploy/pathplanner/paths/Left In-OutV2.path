@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.560328102710413,
-        "y": 5.270641940085593
+        "x": 3.5929397590361445,
+        "y": 5.4228192771084345
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.560328102710413,
-        "y": 5.270641940085593
+        "x": 4.5929397590361445,
+        "y": 5.4228192771084345
       },
       "isLocked": false,
       "linkedName": "BlueTopStart"
     },
     {
       "anchor": {
-        "x": 2.8228245363766047,
-        "y": 5.270641940085593
+        "x": 2.7969472182596284,
+        "y": 5.4228192771084345
       },
       "prevControl": {
-        "x": 3.0728245363766047,
-        "y": 5.270641940085593
+        "x": 3.0469472182596284,
+        "y": 5.4228192771084345
       },
       "nextControl": {
-        "x": 2.5728245363766047,
-        "y": 5.270641940085593
+        "x": 2.5469472182596284,
+        "y": 5.4228192771084345
       },
       "isLocked": false,
       "linkedName": null
@@ -196,8 +196,8 @@
     },
     {
       "name": "PrepareShot",
-      "waypointRelativePos": 5.407832545577341,
-      "endWaypointRelativePos": 6.0,
+      "waypointRelativePos": 5.27344913151365,
+      "endWaypointRelativePos": 6.9548387096773645,
       "command": {
         "type": "named",
         "data": {
@@ -222,7 +222,7 @@
   "folder": "Blue Side Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -1.332219853869732
+    "rotation": 0.0
   },
   "useDefaultConstraints": false
 }

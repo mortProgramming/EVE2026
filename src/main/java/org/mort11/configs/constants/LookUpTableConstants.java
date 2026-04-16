@@ -10,7 +10,7 @@ public final class LookUpTableConstants {
         {1, 3100, 0.07},//up against the hub
         {1.5, 3250, 0.09},
         {2, 3450, 0.20}, 
-        {2.5, 3600, 0.35},
+        {2.5, 3650, 0.35},
         {3, 3830, 0.33}, // distance the robot is when it is at the trench
         {3.5, 3850, 0.33},
         {4, 4400, 0.35},
