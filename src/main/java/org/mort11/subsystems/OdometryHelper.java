@@ -57,7 +57,21 @@ public class OdometryHelper extends SubsystemBase {
                 m.standardDeviations
             );
             SmartDashboard.putString("Active Limelight", "Front");
-        } 
+            SmartDashboard.putString("OdoH - pose", m.poseEstimate.pose.toString());
+        // } 
+        } else if (backMeasurement.isPresent()) {
+            Limelight.Measurement m = backMeasurement.get();
+            drivetrain.addVisionMeasurement(
+                m.poseEstimate.pose,
+                m.poseEstimate.timestampSeconds,
+                m.standardDeviations
+            );
+            SmartDashboard.putString("Active Limelight", "Back (fallback)");
+            SmartDashboard.putString("OdoH - pose", m.poseEstimate.pose.toString());
+        } else {
+            SmartDashboard.putString("Active Limelight", "None");
+            SmartDashboard.putString("OdoH - pose", "No vision measurement");
+        }
         // else {
         //     Limelight.Measurement m = backMeasurement.get();
         //     drivetrain.addVisionMeasurement(

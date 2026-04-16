@@ -17,17 +17,17 @@ public final class LimelightRewindManager {
 
     private final NetworkTable controlTable = NetworkTableInstance.getDefault().getTable("Rewind");
     private final NetworkTableEntry manualSaveNowEntry = controlTable.getEntry("SaveNow");
-    private final NetworkTableEntry practiceAutoSaveEnabledEntry = controlTable.getEntry("PracticeAutoSaveEnabled");
+    private final NetworkTableEntry practiceAutoSaveEnabledEntry = controlTable.getEntry("PracticeAutoSaveEnabled"); //y
     private final NetworkTableEntry clipLengthSecondsEntry = controlTable.getEntry("ClipLengthSeconds");
-    private final NetworkTableEntry armedEntry = controlTable.getEntry("Armed");
-    private final NetworkTableEntry statusEntry = controlTable.getEntry("Status");
-    private final NetworkTableEntry lastReasonEntry = controlTable.getEntry("LastReason");
+    private final NetworkTableEntry armedEntry = controlTable.getEntry("Armed");                                    //y
+    private final NetworkTableEntry statusEntry = controlTable.getEntry("Status");                                  //y
+    private final NetworkTableEntry lastReasonEntry = controlTable.getEntry("LastReason");                          //y
     private final NetworkTableEntry lastSaveTimestampEntry = controlTable.getEntry("LastSaveTimestampSec");
 
     private boolean wasEnabled = false;
     private boolean previousManualSaveRequest = false;
     private boolean sawFmsWhileEnabled = false;
-    private boolean practiceAutoSaveArmed = false;
+    private boolean practiceAutoSaveArmed = true;
 
     private double enabledStartTimeSec = 0.0;
     private double lastCaptureTimeSec = -1e9;
