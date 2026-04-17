@@ -57,7 +57,57 @@ public class OdometryHelper extends SubsystemBase {
                 m.standardDeviations
             );
             SmartDashboard.putString("Active Limelight", "Front");
-        } 
+            // SmartDashboard.putString("OdoH - pose", m.poseEstimate.pose.toString());
+            SmartDashboard.putString(
+                "OH - pose by limelight-three ",
+                String.format(
+                    "x=%.3f, y=%.3f, deg=%.1f",
+                    m.poseEstimate.pose.getX(),
+                    m.poseEstimate.pose.getY(),
+                    m.poseEstimate.pose.getRotation().getDegrees()
+                )
+            );
+            SmartDashboard.putString(
+                "OH - pose by drivetrain ",
+                String.format(
+                    "x=%.3f, y=%.3f, deg=%.1f",
+                    robotPose.getX(),
+                    robotPose.getY(),
+                    robotPose.getRotation().getDegrees()
+                )
+            );
+        // } 
+        } else if (backMeasurement.isPresent()) {
+            Limelight.Measurement m = backMeasurement.get();
+            // drivetrain.addVisionMeasurement(
+            //     m.poseEstimate.pose,
+            //     m.poseEstimate.timestampSeconds,
+            //     m.standardDeviations
+            // );
+            SmartDashboard.putString("Active Limelight", "Back (fallback)");
+            // SmartDashboard.putString("OdoH - pose", m.poseEstimate.pose.toString());
+            SmartDashboard.putString(
+                "OH - pose by limelight-back ",
+                String.format(
+                    "x=%.3f, y=%.3f, deg=%.1f",
+                    m.poseEstimate.pose.getX(),
+                    m.poseEstimate.pose.getY(),
+                    m.poseEstimate.pose.getRotation().getDegrees()
+                )
+            );
+            SmartDashboard.putString(
+                "OH - pose by drivetrain ",
+                String.format(
+                    "x=%.3f, y=%.3f, deg=%.1f",
+                    robotPose.getX(),
+                    robotPose.getY(),
+                    robotPose.getRotation().getDegrees()
+                )
+            );
+        } else {
+            SmartDashboard.putString("Active Limelight", "None");
+            SmartDashboard.putString("OdoH - pose", "No vision measurement");
+        }
         // else {
         //     Limelight.Measurement m = backMeasurement.get();
         //     drivetrain.addVisionMeasurement(

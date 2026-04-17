@@ -23,18 +23,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Vision extends SubsystemBase {
     private static Vision instance;
 
-    private HttpCamera limelightOneFeed;
-    private HttpCamera limelightTwoFeed;
+    // private HttpCamera limelightOneFeed;
+    // private HttpCamera limelightTwoFeed;
     private HttpCamera limelightThreeFeed;
-    private HttpCamera limelightFourFeed;
+    // private HttpCamera limelightFourFeed;
     private HttpCamera limelightBackFeed;
 
     private AprilTagFieldLayout fieldLayout;
 
-    private NetworkTable cameraTableOne;
-    private NetworkTable cameraTableTwo;
+    // private NetworkTable cameraTableOne;
+    // private NetworkTable cameraTableTwo;
     private NetworkTable cameraTableThree;
-    private NetworkTable cameraTableFour;
+    // private NetworkTable cameraTableFour;
     private NetworkTable cameraTableBack;
 
     // Schmitt trigger state and thresholds for thermal throttling
@@ -45,11 +45,15 @@ public class Vision extends SubsystemBase {
 
     private static final String LL3_NAME = "limelight-three";
 
+    // private static final String[] LIMELIGHTS = {
+    //     "limelight-one",
+    //     "limelight-two",
+    //     "limelight-three",
+    //     "limelight-four",
+    //     "limelight-back"
+    // };
     private static final String[] LIMELIGHTS = {
-        "limelight-one",
-        "limelight-two",
         "limelight-three",
-        "limelight-four",
         "limelight-back"
     };
 
@@ -60,22 +64,22 @@ public class Vision extends SubsystemBase {
     public Vision() {
         fieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2026RebuiltAndymark);
 
-        cameraTableOne   = NetworkTableInstance.getDefault().getTable("limelight-one");
-        cameraTableTwo   = NetworkTableInstance.getDefault().getTable("limelight-two");
+        // cameraTableOne   = NetworkTableInstance.getDefault().getTable("limelight-one");
+        // cameraTableTwo   = NetworkTableInstance.getDefault().getTable("limelight-two");
         cameraTableThree = NetworkTableInstance.getDefault().getTable("limelight-three");
-        cameraTableFour  = NetworkTableInstance.getDefault().getTable("limelight-four");
+        // cameraTableFour  = NetworkTableInstance.getDefault().getTable("limelight-four");
         cameraTableBack  = NetworkTableInstance.getDefault().getTable("limelight-back");
 
-        limelightOneFeed   = new HttpCamera("limelight-one",   "http://limelight-one.local:5800/stream.mjpeg");
-        limelightTwoFeed   = new HttpCamera("limelight-two",   "http://limelight-two.local:5800/stream.mjpeg");
+        // limelightOneFeed   = new HttpCamera("limelight-one",   "http://limelight-one.local:5800/stream.mjpeg");
+        // limelightTwoFeed   = new HttpCamera("limelight-two",   "http://limelight-two.local:5800/stream.mjpeg");
         limelightThreeFeed = new HttpCamera("limelight-three", "http://limelight-three.local:5800/stream.mjpeg");
-        limelightFourFeed  = new HttpCamera("limelight-four",  "http://limelight-four.local:5800/stream.mjpeg");
+        // limelightFourFeed  = new HttpCamera("limelight-four",  "http://limelight-four.local:5800/stream.mjpeg");
         limelightBackFeed  = new HttpCamera("limelight-back", "http://limelight-back.local:5800/stream.mjpeg");
 
-        CameraServer.addCamera(limelightOneFeed);
-        CameraServer.addCamera(limelightTwoFeed);
+        // CameraServer.addCamera(limelightOneFeed);
+        // CameraServer.addCamera(limelightTwoFeed);
         CameraServer.addCamera(limelightThreeFeed);
-        CameraServer.addCamera(limelightFourFeed);
+        // CameraServer.addCamera(limelightFourFeed);
         CameraServer.addCamera(limelightBackFeed);
 
         // In the Vision constructor, after camera setup:
@@ -105,7 +109,7 @@ public class Vision extends SubsystemBase {
     public void periodic() {
         SmartDashboard.putNumber("Tag ID", getTagId());
         SmartDashboard.putNumber("X Degrees", getTX());
-            SmartDashboard.putBoolean("Tag Detected?", hasTag());
+        SmartDashboard.putBoolean("Tag Detected?", hasTag());
         
         // Only push telemetry as "not throttled" when the robot is actually enabled.
         // When disabled, disabledPeriodic() handles this with throttled=true.
@@ -119,22 +123,29 @@ public class Vision extends SubsystemBase {
     // ---------- Camera / Limelight Methods ----------
 
     public boolean hasTag() {
-        return cameraTableOne.getEntry("tv").getDouble(0) == 1
-            || cameraTableTwo.getEntry("tv").getDouble(0) == 1
-            || cameraTableThree.getEntry("tv").getDouble(0) == 1
-            || cameraTableFour.getEntry("tv").getDouble(0) == 1
-            || cameraTableBack.getEntry("tv").getDouble(0) == 1;
+        // return cameraTableOne.getEntry("tv").getDouble(0) == 1
+        //     || cameraTableTwo.getEntry("tv").getDouble(0) == 1
+        //     || cameraTableThree.getEntry("tv").getDouble(0) == 1
+        //     || cameraTableFour.getEntry("tv").getDouble(0) == 1
+        //     || cameraTableBack.getEntry("tv").getDouble(0) == 1;
+        return cameraTableThree.getEntry("tv").getDouble(0) == 1
+        || cameraTableBack.getEntry("tv").getDouble(0) == 1;
     }
 
     public int getTagId() {
-        if (cameraTableOne.getEntry("tv").getDouble(0) == 1) {
-            return (int) cameraTableOne.getEntry("tid").getInteger(-1);
-        } else if (cameraTableTwo.getEntry("tv").getDouble(0) == 1) {
-            return (int) cameraTableTwo.getEntry("tid").getInteger(-1);
-        } else if (cameraTableThree.getEntry("tv").getDouble(0) == 1) {
+        // if (cameraTableOne.getEntry("tv").getDouble(0) == 1) {
+        //     return (int) cameraTableOne.getEntry("tid").getInteger(-1);
+        // } else if (cameraTableTwo.getEntry("tv").getDouble(0) == 1) {
+        //     return (int) cameraTableTwo.getEntry("tid").getInteger(-1);
+        // } else if (cameraTableThree.getEntry("tv").getDouble(0) == 1) {
+        //     return (int) cameraTableThree.getEntry("tid").getInteger(-1);
+        // } else if (cameraTableFour.getEntry("tv").getDouble(0) == 1) {
+        //     return (int) cameraTableFour.getEntry("tid").getInteger(-1);
+        // } else if (cameraTableBack.getEntry("tv").getDouble(0) == 1) {
+        //     return (int) cameraTableBack.getEntry("tid").getInteger(-1);
+        // }
+        if (cameraTableThree.getEntry("tv").getDouble(0) == 1) {
             return (int) cameraTableThree.getEntry("tid").getInteger(-1);
-        } else if (cameraTableFour.getEntry("tv").getDouble(0) == 1) {
-            return (int) cameraTableFour.getEntry("tid").getInteger(-1);
         } else if (cameraTableBack.getEntry("tv").getDouble(0) == 1) {
             return (int) cameraTableBack.getEntry("tid").getInteger(-1);
         }
@@ -142,14 +153,19 @@ public class Vision extends SubsystemBase {
     }
 
     public double getTX() {
-        if (cameraTableOne.getEntry("tv").getDouble(0) == 1) {
-            return cameraTableOne.getEntry("tx").getDouble(0);
-        } else if (cameraTableTwo.getEntry("tv").getDouble(0) == 1) {
-            return cameraTableTwo.getEntry("tx").getDouble(0);
-        } else if (cameraTableThree.getEntry("tv").getDouble(0) == 1) {
+        // if (cameraTableOne.getEntry("tv").getDouble(0) == 1) {
+        //     return cameraTableOne.getEntry("tx").getDouble(0);
+        // } else if (cameraTableTwo.getEntry("tv").getDouble(0) == 1) {
+        //     return cameraTableTwo.getEntry("tx").getDouble(0);
+        // } else if (cameraTableThree.getEntry("tv").getDouble(0) == 1) {
+        //     return cameraTableThree.getEntry("tx").getDouble(0);
+        // } else if (cameraTableFour.getEntry("tv").getDouble(0) == 1) {
+        //     return cameraTableFour.getEntry("tx").getDouble(0);
+        // } else if (cameraTableBack.getEntry("tv").getDouble(0) == 1) {
+        //     return cameraTableBack.getEntry("tx").getDouble(0);
+        // }
+        if (cameraTableThree.getEntry("tv").getDouble(0) == 1) {
             return cameraTableThree.getEntry("tx").getDouble(0);
-        } else if (cameraTableFour.getEntry("tv").getDouble(0) == 1) {
-            return cameraTableFour.getEntry("tx").getDouble(0);
         } else if (cameraTableBack.getEntry("tv").getDouble(0) == 1) {
             return cameraTableBack.getEntry("tx").getDouble(0);
         }
@@ -157,14 +173,19 @@ public class Vision extends SubsystemBase {
     }
 
     public double getTY() {
-        if (cameraTableOne.getEntry("tv").getDouble(0) == 1) {
-            return cameraTableOne.getEntry("ty").getDouble(0);
-        } else if (cameraTableTwo.getEntry("tv").getDouble(0) == 1) {
-            return cameraTableTwo.getEntry("ty").getDouble(0);
-        } else if (cameraTableThree.getEntry("tv").getDouble(0) == 1) {
+        // if (cameraTableOne.getEntry("tv").getDouble(0) == 1) {
+        //     return cameraTableOne.getEntry("ty").getDouble(0);
+        // } else if (cameraTableTwo.getEntry("tv").getDouble(0) == 1) {
+        //     return cameraTableTwo.getEntry("ty").getDouble(0);
+        // } else if (cameraTableThree.getEntry("tv").getDouble(0) == 1) {
+        //     return cameraTableThree.getEntry("ty").getDouble(0);
+        // } else if (cameraTableFour.getEntry("tv").getDouble(0) == 1) {
+        //     return cameraTableFour.getEntry("ty").getDouble(0);
+        // } else if (cameraTableBack.getEntry("tv").getDouble(0) == 1) {
+        //     return cameraTableBack.getEntry("ty").getDouble(0);
+        // }
+        if (cameraTableThree.getEntry("tv").getDouble(0) == 1) {
             return cameraTableThree.getEntry("ty").getDouble(0);
-        } else if (cameraTableFour.getEntry("tv").getDouble(0) == 1) {
-            return cameraTableFour.getEntry("ty").getDouble(0);
         } else if (cameraTableBack.getEntry("tv").getDouble(0) == 1) {
             return cameraTableBack.getEntry("ty").getDouble(0);
         }
@@ -172,14 +193,19 @@ public class Vision extends SubsystemBase {
     }
 
     public double getTA() {
-        if (cameraTableOne.getEntry("tv").getDouble(0) == 1) {
-            return cameraTableOne.getEntry("ta").getDouble(0);
-        } else if (cameraTableTwo.getEntry("tv").getDouble(0) == 1) {
-            return cameraTableTwo.getEntry("ta").getDouble(0);
-        } else if (cameraTableThree.getEntry("tv").getDouble(0) == 1) {
+        // if (cameraTableOne.getEntry("tv").getDouble(0) == 1) {
+        //     return cameraTableOne.getEntry("ta").getDouble(0);
+        // } else if (cameraTableTwo.getEntry("tv").getDouble(0) == 1) {
+        //     return cameraTableTwo.getEntry("ta").getDouble(0);
+        // } else if (cameraTableThree.getEntry("tv").getDouble(0) == 1) {
+        //     return cameraTableThree.getEntry("ta").getDouble(0);
+        // } else if (cameraTableFour.getEntry("tv").getDouble(0) == 1) {
+        //     return cameraTableFour.getEntry("ta").getDouble(0);
+        // } else if (cameraTableBack.getEntry("tv").getDouble(0) == 1) {
+        //     return cameraTableBack.getEntry("ta").getDouble(0);
+        // }
+        if (cameraTableThree.getEntry("tv").getDouble(0) == 1) {
             return cameraTableThree.getEntry("ta").getDouble(0);
-        } else if (cameraTableFour.getEntry("tv").getDouble(0) == 1) {
-            return cameraTableFour.getEntry("ta").getDouble(0);
         } else if (cameraTableBack.getEntry("tv").getDouble(0) == 1) {
             return cameraTableBack.getEntry("ta").getDouble(0);
         }
@@ -195,10 +221,10 @@ public class Vision extends SubsystemBase {
     }
 
     private NetworkTable getFirstActiveTable() {
-        if (cameraTableOne.getEntry("tv").getDouble(0) == 1)   return cameraTableOne;
-        if (cameraTableTwo.getEntry("tv").getDouble(0) == 1)   return cameraTableTwo;
+        // if (cameraTableOne.getEntry("tv").getDouble(0) == 1)   return cameraTableOne;
+        // if (cameraTableTwo.getEntry("tv").getDouble(0) == 1)   return cameraTableTwo;
         if (cameraTableThree.getEntry("tv").getDouble(0) == 1) return cameraTableThree;
-        if (cameraTableFour.getEntry("tv").getDouble(0) == 1)  return cameraTableFour;
+        // if (cameraTableFour.getEntry("tv").getDouble(0) == 1)  return cameraTableFour;
         if (cameraTableBack.getEntry("tv").getDouble(0) == 1)  return cameraTableBack;
         return cameraTableThree; // default fallback
     }
@@ -241,19 +267,19 @@ public class Vision extends SubsystemBase {
     }
 
     public void setLEDMode(int mode) {
-        cameraTableOne.getEntry("ledMode").setNumber(mode);
-        cameraTableTwo.getEntry("ledMode").setNumber(mode);
+        // cameraTableOne.getEntry("ledMode").setNumber(mode);
+        // cameraTableTwo.getEntry("ledMode").setNumber(mode);
         cameraTableThree.getEntry("ledMode").setNumber(mode);
-        cameraTableFour.getEntry("ledMode").setNumber(mode);
+        // cameraTableFour.getEntry("ledMode").setNumber(mode);
         cameraTableBack.getEntry("ledMode").setNumber(mode);
     }
 
     public void setRobotOrientation(double yaw, double yawRate) {
         double[] orientation = {yaw, yawRate, 0, 0, 0, 0};
-        cameraTableOne.getEntry("robot_orientation_set").setDoubleArray(orientation);
-        cameraTableTwo.getEntry("robot_orientation_set").setDoubleArray(orientation);
+        // cameraTableOne.getEntry("robot_orientation_set").setDoubleArray(orientation);
+        // cameraTableTwo.getEntry("robot_orientation_set").setDoubleArray(orientation);
         cameraTableThree.getEntry("robot_orientation_set").setDoubleArray(orientation);
-        cameraTableFour.getEntry("robot_orientation_set").setDoubleArray(orientation);
+        // cameraTableFour.getEntry("robot_orientation_set").setDoubleArray(orientation);
         cameraTableBack.getEntry("robot_orientation_set").setDoubleArray(orientation);
     }
 
