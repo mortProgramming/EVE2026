@@ -43,17 +43,14 @@ import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.PathPlannerLogging;
 
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
@@ -219,7 +216,8 @@ public class RobotContainer {
     autoChooser.addOption("Left In-out", new PathPlannerAuto("Left In-out"));
     autoChooser.addOption("Left In-Out-In", new PathPlannerAuto("Left In-Out-In"));
     autoChooser.addOption("Left In-out x 2", new PathPlannerAuto("Left In-out x 2"));
-
+    autoChooser.addOption("Left In-out x 2 Wait", new PathPlannerAuto("Left In-out x 2 Wait"));
+    autoChooser.addOption("Center Shoot", new PathPlannerAuto("Center Shoot"));
 
 try {
     PathPlannerPath Inout = PathPlannerPath.fromPathFile("Left In-outV3");
@@ -245,6 +243,8 @@ try {
     );
 
     autoChooser.addOption("Left In-out x 2 (mirrored)", RightInoutx2);
+    
+    
 
 } catch (Exception e) {
     DriverStation.reportError("Mirrored auto load failed: " + e.getMessage(), e.getStackTrace());

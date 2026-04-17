@@ -1,0 +1,62 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 2.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Left In-outV3"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "LockOn"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "IntakeAgitateShort"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "PrepareAndShootTest"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Left In-out x 2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "LockOn"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "Lehigh Autos",
+  "choreoAuto": false
+}
