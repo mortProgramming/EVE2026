@@ -66,7 +66,7 @@ public class OdometryHelper extends SubsystemBase {
                 m.poseEstimate.timestampSeconds,
                 m.standardDeviations
             );
-            SmartDashboard.putString("Active Limelight", "Front");
+            SmartDashboard.putString("OH - Active Limelight", "Front");
             SmartDashboard.putString(
                 "OH - pose by limelight",
                 String.format(
@@ -84,7 +84,7 @@ public class OdometryHelper extends SubsystemBase {
             //     m.poseEstimate.timestampSeconds,
             //     m.standardDeviations
             // );
-            SmartDashboard.putString("Active Limelight", "Back (fallback)");
+            SmartDashboard.putString("OH - Active Limelight", "Back (fallback)");
             SmartDashboard.putString(
                 "OH - pose by limelight",
                 String.format(
@@ -95,7 +95,7 @@ public class OdometryHelper extends SubsystemBase {
                 )
             );
         } else {
-            SmartDashboard.putString("Active Limelight", "None");
+            SmartDashboard.putString("OH - Active Limelight", "None");
             SmartDashboard.putString("OH - pose by limelight", "No vision measurement");
         }
         // else {
