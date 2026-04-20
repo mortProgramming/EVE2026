@@ -6,18 +6,18 @@ public final class LookUpTableConstants {
     //distance in meters, shooter rpm, hood angle degrees 
     public static final double[][] SHOOTER_SUPERSYSTEM = {
         {0, 2900, 0.0}, //lower placeholder 
-        {0.5, 3000, 0.05},
-        {1, 3100, 0.07},//up against the hub
-        {1.5, 3250, 0.09},
-        {2, 3450, 0.20}, 
-        {2.5, 3650, 0.35},
-        {3, 3830, 0.33}, // distance the robot is when it is at the trench
+        {0.5, 2950, 0.05},
+        {1, 3000, 0.07},//up against the hub
+        {1.5, 3200, 0.09},
+        {2, 3350, 0.20},  
+        {2.5, 3730, 0.35},
+        {3, 3800, 0.33}, // dis 0/nce the robot is when it is at the trench
         {3.5, 3850, 0.33},
-        {4, 4400, 0.35},
-        {4.5, 4750, 0.45}, 
-        {5, 4800, 0.45}, //up against the drive station
-        {5.5, 4850, 0.45}, 
-        {6, 4850, 0.46} //upper placholder
+        {4, 4300, 0.35},  
+        {4.5, 4700, 0.45}, 
+        {5, 4730, 0.45}, //up against the drive station
+        {5.5, 4730, 0.45},
+        {6, 4800, 0.46} //upper placholder
 
         //old look up table
 
