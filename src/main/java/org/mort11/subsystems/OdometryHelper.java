@@ -50,7 +50,7 @@ public class OdometryHelper extends SubsystemBase {
         Optional<Limelight.Measurement> backMeasurement = limelightBack.getMeasurement(robotPose);
 
         SmartDashboard.putString(
-            "OH - pose by drivetrain",
+            "OdoH - pose by drivetrain",
             String.format(
                 "x=%.3f, y=%.3f, deg=%.1f",
                 robotPose.getX(),
@@ -66,9 +66,9 @@ public class OdometryHelper extends SubsystemBase {
                 m.poseEstimate.timestampSeconds,
                 m.standardDeviations
             );
-            SmartDashboard.putString("Active Limelight", "Front");
+            SmartDashboard.putString("OdoH - Active Limelight", "Front");
             SmartDashboard.putString(
-                "OH - pose by limelight",
+                "OdoH - pose by limelight",
                 String.format(
                     "x=%.3f, y=%.3f, deg=%.1f",
                     m.poseEstimate.pose.getX(),
@@ -84,9 +84,9 @@ public class OdometryHelper extends SubsystemBase {
             //     m.poseEstimate.timestampSeconds,
             //     m.standardDeviations
             // );
-            SmartDashboard.putString("Active Limelight", "Back (fallback)");
+            SmartDashboard.putString("OdoH - Active Limelight", "Back (fallback)");
             SmartDashboard.putString(
-                "OH - pose by limelight",
+                "OdoH - pose by limelight",
                 String.format(
                     "x=%.3f, y=%.3f, deg=%.1f",
                     m.poseEstimate.pose.getX(),
@@ -95,8 +95,8 @@ public class OdometryHelper extends SubsystemBase {
                 )
             );
         } else {
-            SmartDashboard.putString("Active Limelight", "None");
-            SmartDashboard.putString("OH - pose by limelight", "No vision measurement");
+            SmartDashboard.putString("OdoH - Active Limelight", "None");
+            SmartDashboard.putString("OdoH - pose by limelight", "No vision measurement");
         }
         // else {
         //     Limelight.Measurement m = backMeasurement.get();
