@@ -51,6 +51,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
@@ -218,18 +219,22 @@ public class RobotContainer {
     autoChooser.addOption("Left In-out x 2", new PathPlannerAuto("Left In-out x 2"));
     autoChooser.addOption("Left In-out x 2 Wait", new PathPlannerAuto("Left In-out x 2 Wait"));
     autoChooser.addOption("Center Shoot", new PathPlannerAuto("Center Shoot"));
+    autoChooser.addOption("Left In-out x 2 V2", new PathPlannerAuto("Left In-out x 2 V2"));
+    //In-out but with no backup, Test it at huston practice field bump.
+
 
 try {
-    PathPlannerPath Inout = PathPlannerPath.fromPathFile("Left In-outV3");
+    PathPlannerPath Inout = PathPlannerPath.fromPathFile("L00eft In-outV3");
     PathPlannerPath Inoutx2 = PathPlannerPath.fromPathFile("Left In-out x 2");
 
     PathPlannerPath mirroredInout = Inout.mirrorPath();
     PathPlannerPath mirroredInoutx2 = Inoutx2.mirrorPath();
-
+    
     Command follow1 = AutoBuilder.followPath(mirroredInout);
     Command follow2 = AutoBuilder.followPath(mirroredInoutx2);
 
     Command RightInoutx2 = new SequentialCommandGroup(
+        new WaitCommand(2.0),
         follow1,
         new RotateToHub(odometry).withTimeout(2.5),
         new ParallelDeadlineGroup(
@@ -243,6 +248,33 @@ try {
     );
 
     autoChooser.addOption("Left In-out x 2 (mirrored)", RightInoutx2);
+
+    PathPlannerPath Inoutwait = PathPlannerPath.fromPathFile("Left In-outV3");
+    PathPlannerPath Inoutx2wait = PathPlannerPath.fromPathFile("Left In-out x 2");
+
+    PathPlannerPath mirroredInoutwait = Inoutwait.mirrorPath();
+    PathPlannerPath mirroredInoutx2wait = Inoutx2wait.mirrorPath();
+    
+    Command follow1wait = AutoBuilder.followPath(mirroredInoutwait);
+    Command follow2wait = AutoBuilder.followPath(mirroredInoutx2wait);
+
+    Command RightInoutx2wait = new SequentialCommandGroup(
+        new WaitCommand(2.5),
+        follow1wait,
+        new RotateToHub(odometry).withTimeout(2.5),
+        new ParallelDeadlineGroup(
+            new SequentialCommandGroup(
+                new SetFeeder(5500).withTimeout(4.0),
+                new AgitateArm(intakeArm).withTimeout(3.5)
+            ),
+            new ShootFar(hood, 2500, 0.23)
+        ),
+        follow2wait
+    );
+
+    autoChooser.addOption("Left In-out x 2 (mirrored)", RightInoutx2);
+    autoChooser.addOption("Left In-out x 2 Wait (mirrored)", RightInoutx2wait);
+
     
     
 

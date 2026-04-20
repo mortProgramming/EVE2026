@@ -16,22 +16,6 @@
     },
     {
       "anchor": {
-        "x": 2.729650602409638,
-        "y": 5.4228192771084345
-      },
-      "prevControl": {
-        "x": 2.979650602409638,
-        "y": 5.4228192771084345
-      },
-      "nextControl": {
-        "x": 2.479650602409638,
-        "y": 5.4228192771084345
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
         "x": 6.251569186875892,
         "y": 5.529415121255349
       },
@@ -126,43 +110,30 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1.4925373134328317,
+      "waypointRelativePos": 0.75,
       "rotationDegrees": 36.27924330591283
     },
     {
-      "waypointRelativePos": 4.05,
+      "waypointRelativePos": 3.05,
       "rotationDegrees": -90.34167503352386
     },
     {
-      "waypointRelativePos": 5.25,
+      "waypointRelativePos": 4.25,
       "rotationDegrees": 165.20901449431082
     },
     {
-      "waypointRelativePos": 6.0,
+      "waypointRelativePos": 5.0,
       "rotationDegrees": 135.77159254312198
     }
   ],
   "constraintZones": [
     {
       "name": "Intaking",
-      "minWaypointRelativePos": 3.4800810263335618,
-      "maxWaypointRelativePos": 5.1,
+      "minWaypointRelativePos": 2.4800810263335618,
+      "maxWaypointRelativePos": 4.1,
       "constraints": {
         "maxVelocity": 5.0,
         "maxAcceleration": 4.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0,
-        "nominalVoltage": 12.0,
-        "unlimited": false
-      }
-    },
-    {
-      "name": "Bump",
-      "minWaypointRelativePos": 0,
-      "maxWaypointRelativePos": 3.4449696151248896,
-      "constraints": {
-        "maxVelocity": 7.0,
-        "maxAcceleration": 7.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -174,7 +145,7 @@
   "eventMarkers": [
     {
       "name": "IntakeRollerIntake",
-      "waypointRelativePos": 1.45,
+      "waypointRelativePos": 0.75,
       "endWaypointRelativePos": 6.768399729912176,
       "command": {
         "type": "named",
@@ -185,7 +156,7 @@
     },
     {
       "name": "IntakeDown",
-      "waypointRelativePos": 2.1885856079404507,
+      "waypointRelativePos": 1.4584740040513626,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -196,7 +167,7 @@
     },
     {
       "name": "PrepareShot",
-      "waypointRelativePos": 5.27344913151365,
+      "waypointRelativePos": 4.27344913151365,
       "endWaypointRelativePos": 6.9548387096773645,
       "command": {
         "type": "named",
