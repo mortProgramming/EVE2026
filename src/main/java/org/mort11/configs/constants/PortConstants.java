@@ -26,9 +26,9 @@ public final class PortConstants {
 
     public static final class Intake {
         public static final int INTAKE_PIVOT = 42;  
-        public static final int INTAKE_ROLLER_RIGHT = 44; // IntakeRollerRight
-        public static final int INTAKE_ROLLER_LEFT = 41; // IntakeRollerLeft // was 50
-    }
+        public static final int INTAKE_ROLLER_RIGHT = 41; // IntakeRollerRight
+        public static final int INTAKE_ROLLER_LEFT = 44; // IntakeRollerLeft // was 50
+    }//prev 44 right and left 41
 
     public static final class Feeder {
         public static final int FEEDER_MOTOR = 13;   
