@@ -84,23 +84,24 @@ public class Vision extends SubsystemBase {
 
         // In the Vision constructor, after camera setup:
         // Forward, side, up in meters (converted from inches).
+        //(rotating up) ==> negative rotation around Y-axis). Read from onboard IMU (http://limelight-three.local:5801/)
         LimelightHelpers.setCameraPose_RobotSpace(
-            "limelight-three",
-            -3.0 * 0.0254,   // forward — (measured about -3 inches)
-            0.0  * 0.0254,   // side — (should be at 0 inches)
-            25.0 * 0.0254,   // up — (about 25 inches off the floor)
-            0.0,             // roll degrees: (should be 0)
-            -27.30,               // pitch degrees: (rotating up) ==> negative rotation around Y-axis). Read from onboard IMU (http://limelight-three.local:5801/)
+            "limelight-three",           // Measured ...by tape: | ...by CAD:
+            -0.027,          // forward — (measured about -3 inches) -0.0762 m | -0.027 m (-1.063 inches)
+            0.0,        // side — (should be at 0 inches)        0.0    m |  0.0   m
+            0.714,        // up — (about 25 inches off the floor)  0.635  m |  0.714 m (28.110 inches)
+            0.0,            // roll degrees: (should be 0)
+            -28.10,              // pitch degrees              IMU: -26.64 deg | CAD: -28.1 deg.
             0.0              // yaw degrees: (should be 0)
         );
 
         LimelightHelpers.setCameraPose_RobotSpace(
-            "limelight-back",
-            -15.0 * 0.0254,
-            0.0  * 0.0254,   // side — (should be at 0 inches)
-            18.0 * 0.0254,   // up — (about 18 inches off the floor)
-            0.0,             // roll degrees: (should be 0)
-            -24.90,             // pitch degrees: (rotating up) ==> negative rotation around Y-axis). Measured from onboard IMU (http://limelight-back.local:5801/)
+            "limelight-back",            // Measured ...by tape: | ...by CAD:
+            -0.293,          // forward                              -0.381  m | -0.293 m (-11.535 inches)
+            0.0,        // side — (should be at 0 inches)        0.0    m |  0.0   m 
+            0.465,        // up — (about 25 inches off the floor)  0.4572 m |  0.465 m (18.307 inches)
+            0.0,        // roll degrees: (should be 0)
+            -28.10,          // pitch degrees                      IMU: -24.90 -> -29.61 | CAD: -28.1 (deg.)
             180.0
         );
     }
@@ -235,7 +236,7 @@ public class Vision extends SubsystemBase {
         return new Pose2d(
             poseNums[0],
             poseNums[1],
-            new Rotation2d(Math.toRadians(poseNums[4]))
+            new Rotation2d(Math.toRadians(poseNums[5])) // 5: yaw
         );
     }
 
@@ -315,16 +316,6 @@ public class Vision extends SubsystemBase {
 
             // Actually send the throttle command to the camera
             LimelightHelpers.SetThrottle(name, throttled ? LIMELIGHT_THROTTLE_VALUE : 0);
-
-            // Set the Limelight green LEDs to show throttle status visually:
-            //   Throttled (disabled)  → Force Blink  — steady uniform blink, "I am throttled"
-            //   Not throttled (enabled) → Pipeline Control — normal detection behavior
-            // if (throttled) {
-            //     // LimelightHelpers.setLEDMode_ForceBlink(name);
-            //     LimelightHelpers.setLEDMode_ForceOn(name);
-            // } else {
-            //     LimelightHelpers.setLEDMode_PipelineControl(name);
-            // }
         }
     }
 

@@ -219,9 +219,12 @@ public class RobotContainer {
     autoChooser.addOption("Left In-out x 2", new PathPlannerAuto("Left In-out x 2"));
     autoChooser.addOption("Left In-out x 2 Wait", new PathPlannerAuto("Left In-out x 2 Wait"));
     autoChooser.addOption("Center Shoot", new PathPlannerAuto("Center Shoot"));
+    autoChooser.addOption("Left In-out x 2 V2", new PathPlannerAuto("Left In-out x 2 V2"));
+    //In-out but with no backup, Test it at huston practice field bump.
+
 
 try {
-    PathPlannerPath Inout = PathPlannerPath.fromPathFile("Left In-outV3");
+    PathPlannerPath Inout = PathPlannerPath.fromPathFile("L00eft In-outV3");
     PathPlannerPath Inoutx2 = PathPlannerPath.fromPathFile("Left In-out x 2");
 
     PathPlannerPath mirroredInout = Inout.mirrorPath();
