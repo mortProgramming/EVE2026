@@ -71,12 +71,11 @@ public class RobotContainer {
 
     private final Telemetry logger = new Telemetry(MaxSpeed);
     private final Limelight limelightThree = new Limelight("limelight-three");
-   private final Limelight limelightBack = new Limelight("limelight-back");
-
-
+    private final Limelight limelightBack = new Limelight("limelight-back");
 
     private static final CommandPS5Controller driveController = new CommandPS5Controller(DRIVE_CONTROLLER);
-    private static final CommandXboxController endeffectorController = new CommandXboxController(ENDEFFECTOR_CONTROLLER);
+    private static final CommandXboxController endeffectorController = new CommandXboxController(
+            ENDEFFECTOR_CONTROLLER);
     private static final CommandXboxController manualController = new CommandXboxController(MANUAL_CONTROLLER);
 
     public final static CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
@@ -102,22 +101,19 @@ public class RobotContainer {
 
     private void configureBindings() {
         drivetrain.setDefaultCommand(
-            drivetrain.applyRequest(() ->
-                drive.withVelocityX(-driveController.getLeftY() * currentSpeed)
-                    .withVelocityY(-driveController.getLeftX() * currentSpeed)
-                    .withRotationalRate(-driveController.getRightX() * currentAngularRate)
-            )
-        );
+                drivetrain.applyRequest(() -> drive.withVelocityX(-driveController.getLeftY() * currentSpeed)
+                        .withVelocityY(-driveController.getLeftX() * currentSpeed)
+                        .withRotationalRate(-driveController.getRightX() * currentAngularRate)));
 
         final var idle = new SwerveRequest.Idle();
         RobotModeTriggers.disabled().whileTrue(
-            drivetrain.applyRequest(() -> idle).ignoringDisable(true)
-        );
+                drivetrain.applyRequest(() -> idle).ignoringDisable(true));
 
-        //---------------------DRIVE CONTROLLER---------------------------
+        // ---------------------DRIVE CONTROLLER---------------------------
         driveController.cross().whileTrue(drivetrain.applyRequest(() -> brake));
         // driveController.circle().whileTrue(drivetrain.applyRequest(() ->
-        //     point.withModuleDirection(new Rotation2d(-driveController.getLeftY(), -driveController.getLeftX()))
+        // point.withModuleDirection(new Rotation2d(-driveController.getLeftY(),
+        // -driveController.getLeftX()))
         // ));
         driveController.R2().whileTrue(Commands.runOnce(() -> {
             currentSpeed = 0.5 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
@@ -141,54 +137,53 @@ public class RobotContainer {
 
         driveController.square().whileTrue(new SetFeeder(5800));
 
+        // -----------------------------MANUAL CONTROLLER-------------------------------
 
-
-        
-
-        //-----------------------------MANUAL CONTROLLER------------------------------- 
-
-        //roller
+        // roller
         manualController.rightBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
         manualController.rightBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
-        //feeder + floor
+        // feeder + floor
         manualController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder(feeder, floor));
-      
-        //shooter
-        //manualController.y().whileTrue(new SetShooter(shooter, 4000));
+
+        // shooter
+        // manualController.y().whileTrue(new SetShooter(shooter, 4000));
         manualController.a().whileTrue(new PercentShoot(shooter, 0.6));
-        //hood
+        // hood
         manualController.povUp().whileTrue(new MoveIntakeArm(intakeArm, () -> 0.3));
         manualController.povDown().whileTrue(new MoveIntakeArm(intakeArm, () -> -0.3));
 
-        //floor and feeder tied together 9same as old spindexer feeder)
-        //michale climb button (30%)
+        // floor and feeder tied together 9same as old spindexer feeder)
+        // michale climb button (30%)
         manualController.povRight().whileTrue(new MoveClimber(1));
         manualController.povLeft().whileTrue(new MoveClimber(-1));
 
-        //-----------------------END EFFECTOR CONTROLLER------------------------------------
+        // -----------------------END EFFECTOR
+        // CONTROLLER------------------------------------
 
-        //arm
+        // arm
         endeffectorController.a().whileTrue(new AgitateArm(intakeArm));
 
-        endeffectorController.povUp().onTrue(Commands.runOnce(() -> intakeArm.setPivot(IntakeArm.Position.HOMED), intakeArm));
-        endeffectorController.povDown().onTrue(Commands.runOnce(() -> intakeArm.setPivot(IntakeArm.Position.INTAKE), intakeArm));
+        endeffectorController.povUp()
+                .onTrue(Commands.runOnce(() -> intakeArm.setPivot(IntakeArm.Position.HOMED), intakeArm));
+        endeffectorController.povDown()
+                .onTrue(Commands.runOnce(() -> intakeArm.setPivot(IntakeArm.Position.INTAKE), intakeArm));
 
-
-        //roller
+        // roller
         endeffectorController.leftBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.INTAKE));
         endeffectorController.rightBumper().whileTrue(new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.OUTTAKE));
 
-        //feeder + floor
-        //endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new MoveFeeder(feeder, floor));
+        // feeder + floor
+        // endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new
+        // MoveFeeder(feeder, floor));
         endeffectorController.b().whileTrue(new MoveFeederOuttake(feeder, floor));
         endeffectorController.rightTrigger(TRIGGER_THRESHOLD).whileTrue(new SetFeeder(5800));
 
-        //hood
+        // hood
         endeffectorController.povLeft().whileTrue(new MoveHood(hood, 1.0));
         endeffectorController.povRight().whileTrue(new MoveHood(hood, -1.0));
 
-        //shooter
-        endeffectorController.leftTrigger().whileTrue(new PrepareShotCommand(shooter, hood, odometry));   
+        // shooter
+        endeffectorController.leftTrigger().whileTrue(new PrepareShotCommand(shooter, hood, odometry));
         endeffectorController.y().whileTrue(new ShootFar(hood, 5000, 0.30));
     }
 
@@ -206,101 +201,79 @@ public class RobotContainer {
         return autoChooser.getSelected();
     }
 
-   public void configureAuto() {
-    autoChooser = new SendableChooser<Command>();
-    SmartDashboard.putData("autoChooser", autoChooser);
-    autoChooser.setDefaultOption("nothing", null);
+    public void configureAuto() {
+        autoChooser = new SendableChooser<Command>();
+        SmartDashboard.putData("autoChooser", autoChooser);
+        autoChooser.setDefaultOption("nothing", null);
 
-    autoChooser.addOption("Depot", new PathPlannerAuto("Depot"));
+        autoChooser.addOption("Depot", new PathPlannerAuto("Depot"));
 
+        autoChooser.addOption("Left In-out", new PathPlannerAuto("Left In-out"));
+        autoChooser.addOption("Left In-Out-In", new PathPlannerAuto("Left In-Out-In"));
+        autoChooser.addOption("Left In-out x 2", new PathPlannerAuto("Left In-out x 2"));
+        autoChooser.addOption("Left In-out x 2 Wait", new PathPlannerAuto("Left In-out x 2 Wait"));
+        autoChooser.addOption("CenterShoot", new PathPlannerAuto("CenterShoot"));
+        // TESTING CENTER SHOOT CLIMB
+        autoChooser.addOption("CenterShootClimb", new PathPlannerAuto("CenterShootClimb"));
+        // In-out but with no backup, Test it at huston practice field bump.
+        autoChooser.addOption("Left In-out x 2 V2", new PathPlannerAuto("Left In-out x 2 V2"));
 
-    autoChooser.addOption("Left In-out", new PathPlannerAuto("Left In-out"));
-    autoChooser.addOption("Left In-Out-In", new PathPlannerAuto("Left In-Out-In"));
-    autoChooser.addOption("Left In-out x 2", new PathPlannerAuto("Left In-out x 2"));
-    autoChooser.addOption("Left In-out x 2 Wait", new PathPlannerAuto("Left In-out x 2 Wait"));
-    autoChooser.addOption("CenterShoot", new PathPlannerAuto("CenterShoot"));
-    // TESTING CENTER SHOOT CLIMB
-    autoChooser.addOption("CenterShootClimb", new PathPlannerAuto("CenterShootClimb"));
-    autoChooser.addOption("Left CenterShootClimb", new PathPlannerAuto("Left CenterShootClimb"));
-    autoChooser.addOption("Right CenterShootClimb", new PathPlannerAuto("Right CenterShootClimb"));
-    //In-out but with no backup, Test it at huston practice field bump.
-    autoChooser.addOption("Left In-out x 2 V2", new PathPlannerAuto("Left In-out x 2 V2"));
-    autoChooser.addOption("Close Left In-out x 2 V2", new PathPlannerAuto("Close Left In-out x 2 V2"));
-    autoChooser.addOption("Very Close Left In-out x 2 V2", new PathPlannerAuto("Very Close Left In-out x 2 V2"));
-    autoChooser.addOption("Far Left In-out x 2 V2", new PathPlannerAuto("Far Left In-out x 2 V2"));
-    autoChooser.addOption("Very Far Left In-out x 2 V2", new PathPlannerAuto("Very Far Left In-out x 2 V2"));
+        try {
+            PathPlannerPath Inout = PathPlannerPath.fromPathFile("Left In-OutV4");
+            PathPlannerPath Inoutx2 = PathPlannerPath.fromPathFile("Left In-out x 2");
 
-    
+            PathPlannerPath mirroredInout = Inout.mirrorPath();
+            PathPlannerPath mirroredInoutx2 = Inoutx2.mirrorPath();
 
+            Command follow1 = AutoBuilder.followPath(mirroredInout);
+            Command follow2 = AutoBuilder.followPath(mirroredInoutx2);
 
-try {
-    PathPlannerPath Inout = PathPlannerPath.fromPathFile("Left In-outV3");
-    PathPlannerPath Inoutx2 = PathPlannerPath.fromPathFile("Left In-out x 2");
+            Command RightInoutx2 = new SequentialCommandGroup(
+                    // new WaitCommand(2.0),
+                    follow1,
+                    new RotateToHub(odometry).withTimeout(2.5),
+                    new ParallelDeadlineGroup(
+                            new SequentialCommandGroup(
+                                    new SetFeeder(5500).withTimeout(4.0),
+                                    new AgitateArm(intakeArm).withTimeout(3.5)),
+                            new ShootFar(hood, 2500, 0.23)),
+                    follow2);
 
-    PathPlannerPath mirroredInout = Inout.mirrorPath();
-    PathPlannerPath mirroredInoutx2 = Inoutx2.mirrorPath();
-    
-    Command follow1 = AutoBuilder.followPath(mirroredInout);
-    Command follow2 = AutoBuilder.followPath(mirroredInoutx2);
+            autoChooser.addOption("Right side (mirrored)", RightInoutx2);
 
-    Command RightInoutx2 = new SequentialCommandGroup(
-        new WaitCommand(2.0),
-        follow1,
-        new RotateToHub(odometry).withTimeout(2.5),
-        new ParallelDeadlineGroup(
-            new SequentialCommandGroup(
-                new SetFeeder(5500).withTimeout(4.0),
-                new AgitateArm(intakeArm).withTimeout(3.5)
-            ),
-            new ShootFar(hood, 2500, 0.23)
-        ),
-        follow2
-    );
+            // PathPlannerPath Inoutwait = PathPlannerPath.fromPathFile("Left In-outV4");
+            // PathPlannerPath Inoutx2wait = PathPlannerPath.fromPathFile("Left In-out x 2");
 
-    autoChooser.addOption("Left In-out x 2 (mirrored)", RightInoutx2);
+            // PathPlannerPath mirroredInoutwait = Inoutwait.mirrorPath();
+            // PathPlannerPath mirroredInoutx2wait = Inoutx2wait.mirrorPath();
 
-    PathPlannerPath Inoutwait = PathPlannerPath.fromPathFile("Left In-outV3");
-    PathPlannerPath Inoutx2wait = PathPlannerPath.fromPathFile("Left In-out x 2");
+            // Command follow1wait = AutoBuilder.followPath(mirroredInoutwait);
+            // Command follow2wait = AutoBuilder.followPath(mirroredInoutx2wait);
 
-    PathPlannerPath mirroredInoutwait = Inoutwait.mirrorPath();
-    PathPlannerPath mirroredInoutx2wait = Inoutx2wait.mirrorPath();
-    
-    Command follow1wait = AutoBuilder.followPath(mirroredInoutwait);
-    Command follow2wait = AutoBuilder.followPath(mirroredInoutx2wait);
+            // Command RightInoutx2wait = new SequentialCommandGroup(
+            //         new WaitCommand(2.5),
+            //         follow1wait,
+            //         new RotateToHub(odometry).withTimeout(2.5),
+            //         new ParallelDeadlineGroup(
+            //                 new SequentialCommandGroup(
+            //                         new SetFeeder(5500).withTimeout(4.0),
+            //                         new AgitateArm(intakeArm).withTimeout(3.5)),
+            //                 new ShootFar(hood, 2500, 0.23)),
+            //         follow2wait);
 
-    Command RightInoutx2wait = new SequentialCommandGroup(
-        new WaitCommand(2.5),
-        follow1wait,
-        new RotateToHub(odometry).withTimeout(2.5),
-        new ParallelDeadlineGroup(
-            new SequentialCommandGroup(
-                new SetFeeder(5500).withTimeout(4.0),
-                new AgitateArm(intakeArm).withTimeout(3.5)
-            ),
-            new ShootFar(hood, 2500, 0.23)
-        ),
-        follow2wait
-    );
+            // autoChooser.addOption("Left In-out x 2 (mirrored)", RightInoutx2);
+            // autoChooser.addOption("Left In-out x 2 Wait (mirrored)", RightInoutx2wait);
 
-    autoChooser.addOption("Left In-out x 2 (mirrored)", RightInoutx2);
-    autoChooser.addOption("Left In-out x 2 Wait (mirrored)", RightInoutx2wait);
+        } catch (Exception e) {
+            DriverStation.reportError("Mirrored auto load failed: " + e.getMessage(), e.getStackTrace());
+        }
 
-    
-    
+        SmartDashboard.putData("Auto Chooser", autoChooser);
+        SmartDashboard.putData("Field", m_field);
 
-} catch (Exception e) {
-    DriverStation.reportError("Mirrored auto load failed: " + e.getMessage(), e.getStackTrace());
-}
-
-
-
-
-    SmartDashboard.putData("Auto Chooser", autoChooser);
-    SmartDashboard.putData("Field", m_field);
-
-    PathPlannerLogging.setLogCurrentPoseCallback((pose) -> m_field.setRobotPose(pose));
-    PathPlannerLogging.setLogTargetPoseCallback((pose) -> m_field.getObject("target pose").setPose(pose));
-    PathPlannerLogging.setLogActivePathCallback((poses) -> m_field.getObject("path").setPoses(poses));
+        PathPlannerLogging.setLogCurrentPoseCallback((pose) -> m_field.setRobotPose(pose));
+        PathPlannerLogging.setLogTargetPoseCallback((pose) -> m_field.getObject("target pose").setPose(pose));
+        PathPlannerLogging.setLogActivePathCallback((poses) -> m_field.getObject("path").setPoses(poses));
     }
 
     public static CommandPS5Controller getDriverController() {
@@ -319,3 +292,4 @@ try {
         return drivetrain;
     }
 }
+
