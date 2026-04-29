@@ -5,11 +5,13 @@
   "pathFolders": [
     "1.5 Autos",
     "Blue Side Paths",
-    "Chaos"
+    "Chaos",
+    "Testing Autos"
   ],
   "autoFolders": [
     "Blue Side",
     "Lehigh Autos",
+    "Testing Autos",
     "Red Side"
   ],
   "defaultMaxVel": 3.0,

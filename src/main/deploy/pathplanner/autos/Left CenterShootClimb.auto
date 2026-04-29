@@ -5,15 +5,9 @@
     "data": {
       "commands": [
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.5
-          }
-        },
-        {
           "type": "path",
           "data": {
-            "pathName": "Left In-OutV3"
+            "pathName": "Left CenterShoot"
           }
         },
         {
@@ -29,12 +23,6 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "IntakeAgitateShort"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
                   "name": "PrepareAndShootTest"
                 }
               }
@@ -44,19 +32,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Left In-out x 2"
+            "pathName": "Left CenterClimb"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "LockOn"
+            "name": "Climb"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "Lehigh Autos",
+  "folder": "Testing Autos",
   "choreoAuto": false
 }

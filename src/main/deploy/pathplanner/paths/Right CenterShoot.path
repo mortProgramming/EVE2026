@@ -17,15 +17,15 @@
     {
       "anchor": {
         "x": 2.5,
-        "y": 4.170056039024515
+        "y": 4.1
       },
       "prevControl": {
         "x": 3.0810884164509904,
-        "y": 4.170056039024515
+        "y": 4.1
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "CenterShootEnd"
+      "linkedName": "CenterShootEndRight"
     }
   ],
   "rotationTargets": [
@@ -57,19 +57,20 @@
       }
     }
   ],
-  "pointTowardsZones": [
+  "pointTowardsZones": [],
+  "eventMarkers": [
     {
-      "fieldPosition": {
-        "x": 4.0,
-        "y": 4.18
-      },
-      "rotationOffset": 0.0,
-      "minWaypointRelativePos": 0.7751519243754208,
-      "maxWaypointRelativePos": 1.0,
-      "name": "Point Towards Zone"
+      "name": "LockOn",
+      "waypointRelativePos": 0.010803511141122173,
+      "endWaypointRelativePos": 1.0,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "LockOn"
+        }
+      }
     }
   ],
-  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 2.0,

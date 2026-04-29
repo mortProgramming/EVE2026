@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "CenterShoot"
+            "pathName": "Right CenterShoot"
           }
         },
         {
@@ -23,22 +23,28 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "IntakeAgitateShort"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
                   "name": "PrepareAndShootTest"
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Right CenterClimb"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Climb"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "Lehigh Autos",
+  "folder": "Testing Autos",
   "choreoAuto": false
 }

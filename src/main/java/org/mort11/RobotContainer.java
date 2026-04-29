@@ -218,13 +218,18 @@ public class RobotContainer {
     autoChooser.addOption("Left In-Out-In", new PathPlannerAuto("Left In-Out-In"));
     autoChooser.addOption("Left In-out x 2", new PathPlannerAuto("Left In-out x 2"));
     autoChooser.addOption("Left In-out x 2 Wait", new PathPlannerAuto("Left In-out x 2 Wait"));
-    autoChooser.addOption("Center Shoot", new PathPlannerAuto("Center Shoot"));
-    autoChooser.addOption("Left In-out x 2 V2", new PathPlannerAuto("Left In-out x 2 V2"));
+    autoChooser.addOption("CenterShoot", new PathPlannerAuto("CenterShoot"));
+    // TESTING CENTER SHOOT CLIMB
+    autoChooser.addOption("CenterShootClimb", new PathPlannerAuto("CenterShootClimb"));
+    autoChooser.addOption("Left CenterShootClimb", new PathPlannerAuto("Left CenterShootClimb"));
+    autoChooser.addOption("Right CenterShootClimb", new PathPlannerAuto("Right CenterShootClimb"));
     //In-out but with no backup, Test it at huston practice field bump.
+    autoChooser.addOption("Left In-out x 2 V2", new PathPlannerAuto("Left In-out x 2 V2"));
+    
 
 
 try {
-    PathPlannerPath Inout = PathPlannerPath.fromPathFile("L00eft In-outV3");
+    PathPlannerPath Inout = PathPlannerPath.fromPathFile("Left In-outV3");
     PathPlannerPath Inoutx2 = PathPlannerPath.fromPathFile("Left In-out x 2");
 
     PathPlannerPath mirroredInout = Inout.mirrorPath();
