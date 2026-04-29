@@ -23,13 +23,13 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "IntakeAgitateShort"
+                  "name": "PrepareAndShootTest"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "PrepareAndShootTest"
+                  "name": "IntakeAgitateShort"
                 }
               }
             ]
