@@ -6,13 +6,15 @@
     "1.5 Autos",
     "Blue Side Paths",
     "Chaos",
+    "Left Variations",
     "Testing Autos"
   ],
   "autoFolders": [
     "Blue Side",
     "Lehigh Autos",
-    "Testing Autos",
-    "Red Side"
+    "Left Variations",
+    "Red Side",
+    "Testing Autos"
   ],
   "defaultMaxVel": 3.0,
   "defaultMaxAccel": 1.0,

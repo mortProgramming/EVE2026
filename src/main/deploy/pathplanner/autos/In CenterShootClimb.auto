@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Left In-OutV4"
+            "pathName": "CenterShoot"
           }
         },
         {
@@ -23,12 +23,6 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "IntakeAgitateShort"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
                   "name": "PrepareAndShootTest"
                 }
               }
@@ -38,19 +32,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Left In-out x 2"
+            "pathName": "In CenterClimb"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "LockOn"
+            "name": "Climb"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "Left Variations",
+  "folder": "Testing Autos",
   "choreoAuto": false
 }

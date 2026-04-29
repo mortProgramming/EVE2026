@@ -225,6 +225,11 @@ public class RobotContainer {
     autoChooser.addOption("Right CenterShootClimb", new PathPlannerAuto("Right CenterShootClimb"));
     //In-out but with no backup, Test it at huston practice field bump.
     autoChooser.addOption("Left In-out x 2 V2", new PathPlannerAuto("Left In-out x 2 V2"));
+    autoChooser.addOption("Close Left In-out x 2 V2", new PathPlannerAuto("Close Left In-out x 2 V2"));
+    autoChooser.addOption("Very Close Left In-out x 2 V2", new PathPlannerAuto("Very Close Left In-out x 2 V2"));
+    autoChooser.addOption("Far Left In-out x 2 V2", new PathPlannerAuto("Far Left In-out x 2 V2"));
+    autoChooser.addOption("Very Far Left In-out x 2 V2", new PathPlannerAuto("Very Far Left In-out x 2 V2"));
+
     
 
 
