@@ -41,7 +41,7 @@ public class BasicCommands {
         NamedCommands.registerCommand("IntakeRollerOuttake", new MoveIntakeRoller(intakeRoller, IntakeRoller.Speed.OUTTAKE));
 
         // climber commands
-        NamedCommands.registerCommand("Climb", new MoveClimber(-0.3));
+        NamedCommands.registerCommand("Climb", new MoveClimber(-1));
 
         // shooter commands
         NamedCommands.registerCommand("WindUp", new SetShooter(3400).withTimeout(2));

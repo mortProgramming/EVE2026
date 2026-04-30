@@ -132,8 +132,8 @@ public class RobotContainer {
         driveController.L2().whileTrue(new ShootFar(hood, 5000, 0.7));
         drivetrain.registerTelemetry(logger::telemeterize);
 
-        driveController.povUp().whileTrue(new MoveClimber(0.3));
-        driveController.povDown().whileTrue(new MoveClimber(-0.3));
+        driveController.povUp().whileTrue(new MoveClimber(1));
+        driveController.povDown().whileTrue(new MoveClimber(-1));
 
         driveController.square().whileTrue(new SetFeeder(5800));
 
