@@ -110,32 +110,44 @@ public class RobotContainer {
                 drivetrain.applyRequest(() -> idle).ignoringDisable(true));
 
         // ---------------------DRIVE CONTROLLER---------------------------
+        //brake (cross)
         driveController.cross().whileTrue(drivetrain.applyRequest(() -> brake));
-        // driveController.circle().whileTrue(drivetrain.applyRequest(() ->
-        // point.withModuleDirection(new Rotation2d(-driveController.getLeftY(),
-        // -driveController.getLeftX()))
-        // ));
+
+        //slow speed (right trigger)
         driveController.R2().whileTrue(Commands.runOnce(() -> {
             currentSpeed = 0.5 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
             currentAngularRate = RotationsPerSecond.of(1).in(RadiansPerSecond);
         }));
+
+        //slower speed (circle)
         driveController.circle().whileTrue(Commands.runOnce(() -> {
             currentSpeed = 0.2 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
             currentAngularRate = RotationsPerSecond.of(1).in(RadiansPerSecond);
         }));
+
+        //max speed (triangle)
         driveController.triangle().onTrue(Commands.runOnce(() -> {
             currentSpeed = MaxSpeed;
             currentAngularRate = MaxAngularRate;
         }));
+
+        //field orient (left bumper)
         driveController.L1().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
+
+        //hub lock (right bumper)
         driveController.R1().whileTrue(new RotateToHub(odometry));
-        driveController.L2().whileTrue(new ShootFar(hood, 5000, 0.7));
         drivetrain.registerTelemetry(logger::telemeterize);
 
+        //climber (pov up for up and left trigger for down)
         driveController.povUp().whileTrue(new MoveClimber(1));
-        driveController.povDown().whileTrue(new MoveClimber(-1));
+        driveController.L2().whileTrue(new MoveClimber(-1));
 
+
+        //feeder (square)
         driveController.square().whileTrue(new SetFeeder(5800));
+
+        driveController.povDown().whileTrue(new ShootFar(hood, 6600, 0.70));
+
 
         // -----------------------------MANUAL CONTROLLER-------------------------------
 
@@ -157,8 +169,7 @@ public class RobotContainer {
         manualController.povRight().whileTrue(new MoveClimber(1));
         manualController.povLeft().whileTrue(new MoveClimber(-1));
 
-        // -----------------------END EFFECTOR
-        // CONTROLLER------------------------------------
+        // -----------------------END EFFECTOR CONTROLLER------------------------------------
 
         // arm
         endeffectorController.a().whileTrue(new AgitateArm(intakeArm));
